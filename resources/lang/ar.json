@@ -1,0 +1,167 @@
+{
+    "//NavBar Start": "NavBar Start",
+    "The First Home Hospital in Egypt": "أول مستشفى منزلي في مصر",
+    "Home": "الرئيسية",
+    "Sign up": "انشاء حساب",
+    "Logout": "تسجيل خروج",
+    "": "",
+    "//NavBar End": "NavBar End",
+
+    "//Home Start": "Home Start",
+    "Emergency Call": "مكالمة طوارئ",
+    "Home Visit": "زيارة منزلية",
+    "Book Integrated Medical Services": "احجز خدمات طبية متكاملة",
+    "Specialty": "التخصص",
+    "Add your Phone": "ادخل رقم الهاتف",
+    "Call me": "اتصل",
+    "Our Serves": "خدمة",
+    "Please Complete your Profile": "الرجاء استكمال ملف التعريف الخاص بك",
+    "Day": "",
+    "Available From": "",
+    "Available To": "",
+    "": "",
+    "": "",
+    "//Home End": "Home End",
+
+    "//Login Start": "Login Start",
+    "Login": "تسجيل الدخول",
+    "Phone": "هاتف",
+    "Password": "كلمه السر",
+    "Remember Me": "تذكرنى",
+    "Forgot Your Password?": "نسيت رقمك السري؟",
+    "Create New Account": "انشاء حساب جديد",
+    "//Login End": "Login End",
+
+    "//Signup Start": "Signup Start",
+    "Register": "تسجيل دخول",
+    "Frist Name": "الاسم الأول",
+    "Last Name": "الكنية",
+    "Title": "اللقب",
+    "Mr": "ا",
+    "Mrs": "",
+    "Dr": "د",
+    "UserName": "اسم االمستخدم",
+    "E-Mail Address": "عنوان البريد الإلكتروني",
+    "Gender": "جنس",
+    "Male": "ذكر",
+    "Female": "أنثى",
+    "Birth Date": "تاريخ الولادة",
+    "Confirm Password": "تأكيد كلمة المرور",
+    "Already Have Account": "لديك حساب بالفعل",
+    "I Am": "انا",
+    "Need Doctor": "احتاج طبيب",
+    "Doctor": "طبيب",
+    "": "",
+    "//Signup End": "Signup End",
+
+    "//User Info Start": "User Info Start",
+    "General Info": "المعلومات الشخصيه",
+    "Update": "تحديث",
+    "Times Of Work": "مواعيد العمل",
+    "Friday": "جمعة",
+    "Saturday": "السبت",
+    "Sunday": "الأحد",
+    "Monday": "الاثنين",
+    "Tuesday": "الثلاثاء",
+    "Wednesday": "الأربعاء",
+    "Thursday": "الخميس",
+    "If Available all day don't choose a time": "إذا كان متاحًا طوال اليوم ، فلا تختر وقتًا",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "//User Info End": "User Info End",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "//Admin Start": "Admin Start",
+
+    "//Admin SideBar Start": "Admin SideBar Start",
+    "All User": "كل العملاء",
+    "All Patent": "كل المرضي",
+    "All Doctor": "كل الاطباء",
+    "All Partner": "كل الشركاء",
+    "All Request": "كل الطلبات",
+    "All Emergency": "كل الطواريء",
+    "All Visit": "كل الحجزات ",
+    "All Book": "كل الزيارات",
+    "//Admin SideBar End": "Admin SideBar End",
+
+    "//Admin user view Start": "Admin user view Start",
+    "Organization Name": "اسم النظمه",
+    "Organization Email": "ايميل المنظمه",
+    "Organization Phone": "رقم التليفون للمنظمه",
+    "Organization Website": "الموقع الالكتروني للمنظمه",
+    "Contact Person Name": "اسم ممثل المنظمه",
+    "Registration Number": "رقم السجل التجاري",
+    "Tax Certificate Number": "رقم التسجيل الضريبي",
+    "Account Settings": "بيانات الحساب",
+    "Contact Info": "بيانات التواصل",
+    "Edit Password": "تعديل كلمه المرور",
+    "Account Receiver": "حساب الاسترداد",
+    "Mobile": "تليفون",
+    "Nationality": "الجنسيه",
+    "Governorate": "المحافظة",
+    "City": "المدينة",
+    "Address": "العنوان",
+    "Account Owner Name": "اسم صاحب الحساب",
+    "Account Number": "رقم الحساب",
+    "Bank Name": "اسم البنك",
+    "Identity ID": "رقم البطاقة",
+    "Passport ID": "رقم البسبور",
+    "Doctor Info": "بيانات الطبيب",
+    "Company Info": "بيانات الشركاء",
+    "": "",
+    "//Admin user view End": "Admin user view End",
+
+    "//Admin Request Start": "Admin Request Start",
+    "Guest": "زائر",
+    "Call": "اتصال",
+    "Call Done": "تم التواصل",
+    "": "",
+    "//Admin Request End": "Admin Request End",
+
+    "//Admin Order Start": "Admin Order Start",
+    "Patient Name": "اسم المريض",
+    "Doctor Name": "اسم الدكتور",
+    "Emergency": "الطواريء",
+    "Visit Day": "يوم الزيارة",
+    "Visit Time From": "ميعاد الوصول من",
+    "Visit Time To": "ميعاد الوصول الي",
+    "Full Name": "الاسم كامل",
+    "Choose Doctor Name": "اختار اسم الدكتور",
+    "Patient Rate": "تقيم المريض",
+    "Doctor Rate": "تقيم الدكتور",
+    "Coming": "جاري التنفيز",
+    "Medical assessment": "مساعده طبية",
+    "Finish": "انهاء",
+    "Draft": "مهمل",
+    "Cancel": "الغاء",
+    "": "",
+    "": "",
+    "//Admin Order End": "Admin Order End",
+
+
+    "//Admin End": "Admin End",
+
+
+
+
+    "": ""
+
+}
