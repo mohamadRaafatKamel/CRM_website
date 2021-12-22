@@ -84,7 +84,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="doctor_id">{{ __('Doctor Name') }}</label>
-                                                            <select class="select2 form-control" name="doctor_id" id="doctor_id">
+                                                            <select class="select2 form-control" name="doctor_id" id="doctor_id" required>
                                                                 <option value="">{{ __('Choose Doctor Name') }}</option>
                                                                 @foreach($doctors as $doctor)
                                                                     <option value="{{ $doctor->id }}"

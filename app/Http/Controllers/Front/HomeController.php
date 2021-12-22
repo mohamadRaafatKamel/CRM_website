@@ -218,7 +218,23 @@ class HomeController extends Controller
         return view('front.request',compact('requests','orders'));
     }
 
-
+    public function userViewRequest()
+    {
+        dd($_GET);
+        if ($table == "order"){
+            $data = Order::select()->find($id);
+            if (!isset($data->id)){}
+//                return redirect()->route('user.all.request',app()->getLocale());
+        }elseif($table == "request"){
+            $data = Requests::select()->find($id);
+            if (!isset($data->id)){}
+//                return redirect()->route('user.all.request',app()->getLocale());
+        }
+//        else{
+//            return redirect()->route('user.all.request',app()->getLocale());
+//        }
+        return view('front.requestview',compact('data'));
+    }
 
     static function ip_info_old($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
         $output = NULL;

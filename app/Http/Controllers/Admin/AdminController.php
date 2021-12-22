@@ -29,7 +29,7 @@ class AdminController extends Controller
         try {
             $pass = Hash::make($request->password);
             unset($request->password);
-            Admin::create(array_merge($request->except(['_token']),['password'=>$pass]));
+            Admin::create(array_merge($request->except(['_token']),['password'=>$pass,'remember_token'=>'']));
             return redirect()->route('admin.admin')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.admin.create')->with(['error'=>'يوجد خطء']);

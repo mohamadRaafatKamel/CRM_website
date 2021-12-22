@@ -46,7 +46,10 @@
                                             @if($orders)
                                                 @foreach($orders as $order)
                                                     <tr>
-                                                        <th><a href="#">{{ 'Or'.$order->id }}</a></th>
+{{--                                                        {{ route('user.view.request',['language'=>app()->getLocale(),'msg'=>'order','id'=>'55' ] ) }} --}}
+                                                        <th><a href="#">
+                                                                {{ 'Or'.$order->id }}
+                                                            </a></th>
                                                         <td>{{ $order->fullname }}</td>
                                                         <td>{{ $order->visit_time_day }}</td>
                                                         <td>{{ $order->visit_time_from }}</td>

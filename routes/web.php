@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'ar');
 
+//App::setLocale('arrr');
+//\Symfony\Component\HttpFoundation\Cookie::forever('lang', 'en');
+//dd(\Symfony\Component\HttpFoundation\Cookie::get('lang'));
+//$language= 'ar';
 Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ], function () {
     Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
 
@@ -27,6 +31,7 @@ Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ]
             Route::post('userinfoupdate','HomeController@userInfoUpdate')->name('home.myuser.info.update');
 
             Route::get('/request', 'HomeController@userAllRequest')->name('user.all.request');
+            Route::get('/request/{msg}/{id}', 'HomeController@userViewRequest')->name('user.view.request');
 
         });
 

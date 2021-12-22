@@ -26,8 +26,8 @@
                                 style="border-radius:50px" data-target="#tab_1">{{ __('General Info') }}</li>
                             <li class="tab-nav d-flex justify-content-center align-items-center"
                                 style="border-radius:50px" data-target="#tab_2">{{ __('Contact Info') }}</li>
-                            <li class="tab-nav d-flex justify-content-center align-items-center"
-                                style="border-radius:50px" data-target="#tab_3">{{ __('Edit Password') }}</li>
+{{--                            <li class="tab-nav d-flex justify-content-center align-items-center"--}}
+{{--                                style="border-radius:50px" data-target="#tab_3">{{ __('Edit Password') }}</li>--}}
                             <li class="tab-nav d-flex justify-content-center align-items-center"
                                 style="border-radius:50px" data-target="#tab_4">{{ __('Account Receiver') }}</li>
                             @if($user->type == '2')

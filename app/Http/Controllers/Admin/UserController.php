@@ -129,21 +129,6 @@ class UserController extends Controller
                 }
             }
 
-//
-//            if(isset($request->permission)){
-//                $pass = Hash::make($request->password);
-//                unset($request->password);
-//                $admins->update(['password'=>$pass]);
-//            }
-//
-//            if(isset($request->name)){
-//                $admins->update(['name'=>$request->name]);
-//            }
-//
-//            if(isset($request->email)){
-//                $admins->update(['email'=>$request->email]);
-//            }
-
             return redirect()->route('admin.user.view',$id)->with(['success' => 'تم التحديث بنجاح']);
 
         } catch (\Exception $ex) {
