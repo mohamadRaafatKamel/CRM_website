@@ -50,7 +50,10 @@ class Requests extends Model
                 return "Waiting";
                 break;
             case 1:
-                return "Finish";
+                return "Order";
+                break;
+            case 2:
+                return "Draft";
                 break;
         }
         return 0;

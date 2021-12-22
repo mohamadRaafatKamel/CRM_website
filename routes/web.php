@@ -25,6 +25,9 @@ Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ]
 
             Route::get('/userinfo', 'HomeController@userinfo')->name('home.user.info');
             Route::post('userinfoupdate','HomeController@userInfoUpdate')->name('home.myuser.info.update');
+
+            Route::get('/request', 'HomeController@userAllRequest')->name('user.all.request');
+
         });
 
     });

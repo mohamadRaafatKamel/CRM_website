@@ -11,6 +11,7 @@ use App\Models\Country;
 use App\Models\DoctorInfo;
 use App\Models\DoctorWorkDay;
 use App\Models\Governorate;
+use App\Models\Order;
 use App\Models\Requests;
 use App\Models\Service;
 use App\Models\Setting;
@@ -208,6 +209,13 @@ class HomeController extends Controller
         } catch (\Exception $ex) {
             return redirect()->route('home.user.info',app()->getLocale())->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
         }
+    }
+
+    public function userAllRequest()
+    {
+        $requests = Requests::select()->where('user_id',Auth::user()->id )->Where('state','0')->get();
+        $orders = Order::select()->where('user_id',Auth::user()->id )->get();
+        return view('front.request',compact('requests','orders'));
     }
 
 

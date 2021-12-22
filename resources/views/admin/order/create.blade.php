@@ -51,15 +51,26 @@
                                                 <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
 
                                                 <div class="row">
-                                                    <input type="hidden" @if(isset($_GET['order'])) value="{{ $_GET['order'] }}" @endif name="order_id">
+                                                    @if(isset($_GET['order']))
+                                                        <input type="hidden" value="{{ $_GET['order'] }}" name="order_id">
+                                                    @endif
+                                                    @if(isset($myorder->id))
+                                                        <input type="hidden" value="{{ $myorder->id }}" name="order_id">
+                                                    @endif
+                                                    @if(isset($_GET['req']))
+                                                        <input type="hidden" value="{{ $_GET['req'] }}" name="request_id">
+                                                    @endif
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="user_id">{{ __('Patient Name') }}</label>
-                                                            <select class="select2 form-control" name="user_id">
+                                                            <select class="select2 form-control" name="user_id" id="user_id">
                                                                 <option value=""></option>
                                                                 @foreach($users as $user)
                                                                     <option value="{{ $user->id }}"
-                                                                    @if($myorder->user_id == $user->id) selected @endif>
+                                                                            @if(isset($myorder->user_id))
+                                                                                @if($myorder->user_id == $user->id) selected @endif @endif
+                                                                    >
                                                                         {{ $user->fname." ".$user->lname." [ ".$user->phone." ]"}}
                                                                     </option>
                                                                 @endforeach
@@ -73,11 +84,13 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="doctor_id">{{ __('Doctor Name') }}</label>
-                                                            <select class="select2 form-control" name="doctor_id" id="doctor_id" required>
+                                                            <select class="select2 form-control" name="doctor_id" id="doctor_id">
                                                                 <option value="">{{ __('Choose Doctor Name') }}</option>
                                                                 @foreach($doctors as $doctor)
                                                                     <option value="{{ $doctor->id }}"
-                                                                            @if($myorder->doctor_id == $doctor->id) selected @endif>
+                                                                            @if(isset($myorder->doctor_id))
+                                                                            @if($myorder->doctor_id == $doctor->id) selected @endif @endif
+                                                                    >
                                                                         {{ $doctor->fname." ".$doctor->lname }}</option>
                                                                 @endforeach
                                                             </select>
@@ -105,6 +118,44 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="gender"> {{ __('Gender') }} </label>
+                                                            <select name="gender" id="gender" required
+                                                                    class="form-control @error('gender') is-invalid @enderror">
+                                                                <option value=""></option>
+                                                                @if(isset($myorder -> gender))
+                                                                <option value="1"
+                                                                        @if($myorder -> gender == "1") selected @endif>{{ __('Male') }}</option>
+                                                                <option value="2"
+                                                                        @if($myorder -> gender == "2") selected @endif>{{ __('Female') }}</option>
+                                                                @else
+                                                                    <option value="1">{{ __('Male') }}</option>
+                                                                    <option value="2">{{ __('Female') }}</option>
+                                                                @endif
+                                                            </select>
+                                                            @error('gender')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="birth_date"> {{ __('Birth Date') }} </label>
+                                                            <input type="date" id="birth_date"  required
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->birth_date))
+                                                                        value="{{ $myorder->birth_date }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Birth Date') }}"
+                                                                   name="birth_date" required>
+                                                            @error('birth_date')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="governorate_id"> {{ __('Governorate') }} </label>
                                                             <select name="governorate_id" id="governorate_id" required
                                                                     class="select2 form-control ">
@@ -112,7 +163,8 @@
                                                                 @if($governorates)
                                                                     @foreach($governorates as $governorate)
                                                                         <option value="{{$governorate->id}}"
-                                                                                @if($myorder->governorate_id == $governorate->id) selected @endif>
+                                                                                @if(isset($myorder->governorate_id))
+                                                                                @if($myorder->governorate_id == $governorate->id) selected @endif @endif>
                                                                             @if(app()->getLocale() == 'ar')
                                                                                 {{$governorate->governorate_name_ar}}
                                                                             @else
@@ -134,7 +186,8 @@
                                                                 @if($citys)
                                                                     @foreach($citys as $city)
                                                                         <option value="{{$city->id}}"
-                                                                                @if($myorder->city_id == $city->id) selected @endif>
+                                                                                @if(isset($myorder->city_id))
+                                                                                @if($myorder->city_id == $city->id) selected @endif @endif>
                                                                             @if(app()->getLocale() == 'ar')
                                                                                 {{$city->city_name_ar}}
                                                                             @else
@@ -356,4 +409,39 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('#user_id').change(function () {
+                $.ajax({
+                    url: 'getUserInfo/' + $('#user_id').val(),
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        // console.log(response)
+                        if(response == null){
+                            console.log('Not Found');
+                        }else {
+                            $('#fullname').val(response.fname+' '+response.lname);
+                            $('#governorate_id').val(response.governorate_id).change();
+                            $('#city_id').val(response.city_id).change();
+                            $('#adress').val(response.address);
+                            $('#adress2').val(response.address2);
+                            $('#phone').val(response.phone);
+                            $('#phone2').val(response.mobile);
+                            $('#birth_date').val(response.birth_date);
+                            $('#gender').val(response.gender);
+                        }
+                    }
+                    // error: function (xhr, ajaxOptions, thrownError) {
+                    //     input.val(0);
+                    // }
+                });
+                // console.log($('#user_id').val())
+            });
+        });
+    </script>
 @endsection

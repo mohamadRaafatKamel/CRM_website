@@ -55,6 +55,7 @@
                                                     class="table display nowrap table-striped table-bordered ">
                                                     <thead>
                                                     <tr>
+                                                        <th> id</th>
                                                         <th>العميل</th>
                                                         <th> موبيل</th>
                                                         <th></th>
@@ -65,13 +66,24 @@
                                                     @isset($requests)
                                                         @foreach($requests as $request)
                                                             <tr>
-                                                                <td>@if($request -> user_id == null) {{__('Guest')}} @else {{ \App\Models\User::getUserName($request -> user_id) }} @endif</td>
+                                                                <td>
+                                                                    <a href="{{route('admin.order.create',['req'=>$request -> id])}}">
+                                                                        {{$request -> id}}</a></td>
+                                                                <td>
+                                                                    @if($request -> user_id == null )
+                                                                        {{__('Guest')}}
+                                                                    @else
+                                                                        <a href="{{route('admin.user.view',$request -> user_id)}}">
+                                                                            {{\App\Models\User::getUserName($request -> user_id) }}
+                                                                        </a>
+                                                                    @endif
+                                                                </td>
                                                                 <td>{{$request -> phone}}</td>
                                                                 <td>
-                                                                    <a href="tel:{{$request -> phone}}"
-                                                                       class="btn btn-outline-success btn-min-width box-shadow-3 mr-1 mb-1">{{ __('Call') }}</a>
-                                                                    <a href="{{route('admin.user.call.him',['id'=> $request->id ])}}"
-                                                                       class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{ __('Call Done') }}</a>
+{{--                                                                    <a href="tel:{{$request -> phone}}"--}}
+{{--                                                                       class="btn btn-outline-success btn-min-width box-shadow-3 mr-1 mb-1">{{ __('Call') }}</a>--}}
+{{--                                                                    <a href="{{route('admin.user.call.him',['id'=> $request->id ])}}"--}}
+{{--                                                                       class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{ __('Call Done') }}</a>--}}
                                                                 </td>
                                                                 <td>
                                                                     <div class="btn-group" role="group"
@@ -122,7 +134,7 @@
                                                         @foreach($requests as $request)
                                                             <tr>
                                                                 <td>
-                                                                    <a href="{{route('admin.order.create',$request -> id)}}">
+                                                                    <a href="{{route('admin.order.create',['req'=>$request -> id])}}">
                                                                         {{$request -> id}}</a></td>
                                                                 <td>
                                                                     @if($request -> user_id == null )

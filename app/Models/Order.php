@@ -18,7 +18,7 @@ class Order extends Model
      */
     protected $fillable = [
         'id', 'user_id', 'doctor_id', 'governorate_id', 'city_id', 'adress', 'adress2', 'request_id', 'phone', 'phone2', 'type',
-        'emergency', 'specialty_id', 'service_id', 'visit_time_day', 'visit_time_from', 'fullname', 'admin_id',
+        'emergency', 'specialty_id', 'service_id', 'visit_time_day', 'visit_time_from', 'fullname', 'admin_id', 'birth_date', 'gender',
         'visit_time_to', 'arrive_on', 'doc_states', 'user_states', 'states', 'doc_rate', 'user_rate', 'updated_at','created_at'
     ];
 
@@ -26,8 +26,9 @@ class Order extends Model
         $query -> where('id','!=','0');
         return $query -> select(
             'id', 'user_id', 'doctor_id', 'governorate_id', 'city_id', 'adress', 'adress2', 'request_id', 'phone', 'phone2', 'type',
-            'emergency', 'specialty_id', 'service_id', 'visit_time_day', 'visit_time_from', 'fullname', 'admin_id',
-            'visit_time_to', 'arrive_on', 'doc_states', 'user_states', 'states', 'doc_rate', 'user_rate', 'updated_at','created_at'        );
+            'emergency', 'specialty_id', 'service_id', 'visit_time_day', 'visit_time_from', 'fullname', 'admin_id', 'birth_date', 'gender',
+            'visit_time_to', 'arrive_on', 'doc_states', 'user_states', 'states', 'doc_rate', 'user_rate', 'updated_at','created_at'
+        );
     }
 
     static public function getOrderType($type)

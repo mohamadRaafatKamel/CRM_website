@@ -29,9 +29,11 @@
                                     {{ __('Sign up') }}</a>
                             </li>
                         @else
+                            <li><a href="{{ route('user.all.request', app()->getLocale()) }}">{{ __('All Request') }}</a></li>
+
                             <li><a href=" {{ route('logout', app()->getLocale()) }}"
                                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                   document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a></li>
                             <form id="logout-form" action=" {{ route('logout', app()->getLocale()) }}" method="POST" class="d-none">

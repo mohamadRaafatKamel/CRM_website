@@ -43,6 +43,7 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
+                                        <a class="btn btn-primary mb-2" href="{{ route('admin.order.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a>
                                         <table
                                             class="table display nowrap table-striped table-bordered ">
                                             <thead>
@@ -72,7 +73,7 @@
                                                                  aria-label="Basic example">
 {{--                                                                <a href="{{route('admin.order.create',['id'=> $order->id ])}}"--}}
 {{--                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>--}}
-                                                                
+
 {{--                                                                <a href="{{route('admin.service.delete',$data -> id)}}"--}}
 {{--                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>--}}
 
