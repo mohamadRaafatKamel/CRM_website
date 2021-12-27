@@ -392,8 +392,8 @@
                                     </div>
 
                                     <?php
-                                    $input = '2021-12-14';
-                                    echo date("D", strtotime($input));
+//                                    $input = '2021-12-14';
+//                                    echo date("D", strtotime($input));
                                     ?>
 
 

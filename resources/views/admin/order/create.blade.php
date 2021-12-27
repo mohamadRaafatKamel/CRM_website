@@ -60,7 +60,8 @@
                                                     @if(isset($_GET['req']))
                                                         <input type="hidden" value="{{ $_GET['req'] }}" name="request_id">
                                                     @endif
-
+                                                        <input type="hidden" name="type" @if(isset($myorder->type)) value="{{ $myorder->type }}" @endif>
+                                                        <input type="hidden" name="admin_id">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="user_id">{{ __('Patient Name') }}</label>

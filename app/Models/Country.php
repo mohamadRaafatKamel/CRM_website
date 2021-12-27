@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Country extends Model
 {
@@ -25,6 +26,17 @@ class Country extends Model
         return $query -> select(
             'country_code', 'country_enName', 'country_arName', 'country_enNationality', 'country_arNationality'
         );
+    }
+
+    public static function getName($id)
+    {
+        $data = Country::select()->find($id);
+        if (App::getLocale() == 'ar')
+            return $data['country_arName'];
+        elseif (App::getLocale() == 'en')
+            return $data['country_enName'];
+        else
+            return $data['country_enName'];
     }
 
 }

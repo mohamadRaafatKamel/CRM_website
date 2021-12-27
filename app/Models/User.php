@@ -80,9 +80,29 @@ class User extends Authenticatable
         return 0;
     }
 
+    static public function getGenderType($gender)
+    {
+        switch ($gender){
+            case 1:
+                return "Male";
+                break;
+            case 2:
+                return "Female";
+                break;
+        }
+        return 0;
+    }
+
     public static function getUserName($id)
     {
         $user = User::select('title','fname','lname')->find($id);
         return $user['title']." ".$user['fname']." ".$user['lname'];
     }
+
+    public static function getDocName($id)
+    {
+        $user = User::select('title','fname','lname')->find($id);
+        return "Dr ".$user['fname']." ".$user['lname'];
+    }
+
 }

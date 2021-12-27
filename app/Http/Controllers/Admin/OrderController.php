@@ -91,9 +91,7 @@ class OrderController extends Controller
 //                $request->request->add(['emergency' => 0]);
 //            if(isset())
 
-            $request->request->add(['admin_id' =>  Auth::user()->id ]);
-//            $request->admin_id = Auth::user()->id;
-//            print_r($request->all());die();
+            $request->request->add(['admin_id' =>Auth::user()->id]);
             if (isset($request->order_id) and $request->order_id != 0){
                 $dataOrder = Order::find($request->order_id);
                 if(isset($dataOrder->id)) {

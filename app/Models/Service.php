@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Service extends Model
 {
@@ -33,6 +34,17 @@ class Service extends Model
 
     public function getActive(){
         return   $this -> disabled == 0 ? 'مفعل'  : 'غير مفعل';
+    }
+
+    public static function getName($id)
+    {
+        $data = Service::select()->find($id);
+        if (App::getLocale() == 'ar')
+            return $data['name_ar'];
+        elseif (App::getLocale() == 'en')
+            return $data['name_en'];
+        else
+            return $data['name_en'];
     }
 
 }

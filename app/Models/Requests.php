@@ -31,13 +31,13 @@ class Requests extends Model
     {
         switch ($type){
             case 1:
-                return "Emergency Call";
+                return __("Emergency Call");
                 break;
             case 2:
-                return "Home Visit";
+                return __("Home Visit");
                 break;
             case 3:
-                return "Book Integrated Medical Services";
+                return __("Book Integrated Medical Services");
                 break;
         }
         return 0;
@@ -47,13 +47,16 @@ class Requests extends Model
     {
         switch ($state){
             case 0:
-                return "Waiting";
+                return __("Waiting");
                 break;
             case 1:
-                return "Order";
+                return __("Order");
                 break;
             case 2:
-                return "Draft";
+                return __("Draft");
+                break;
+            case 5:
+                return __("Cancel");
                 break;
         }
         return 0;

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,13 +13,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+if (isset($_COOKIE['lang'])){
+    Route::redirect('/', $_COOKIE['lang']);
+}else{
+    Route::redirect('/', 'ar');
+}
 
-Route::redirect('/', 'ar');
-
-//App::setLocale('arrr');
-//\Symfony\Component\HttpFoundation\Cookie::forever('lang', 'en');
-//dd(\Symfony\Component\HttpFoundation\Cookie::get('lang'));
-//$language= 'ar';
 Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ], function () {
     Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
 
@@ -33,22 +33,15 @@ Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ]
             Route::get('/request', 'HomeController@userAllRequest')->name('user.all.request');
             Route::get('/request/{msg}/{id}', 'HomeController@userViewRequest')->name('user.view.request');
 
+            Route::get('reqstate/{id}/{state}', 'HomeController@RequestState')->name('user.request.state');
+
+            Route::get('/doctorrequest', 'HomeController@DoctorRequest')->name('user.doc.request');
+            Route::get('docstate/{id}/{state}', 'HomeController@DocOrderState')->name('doc.order.state');
+
         });
 
     });
 
     Auth::routes();
 
-//    Route::group(['namespace' => 'App\Http\Controllers\Front', 'middleware'=>'auth'], function () {
-//
-//        Route::get('/userinfo', 'HomeController@userinfo')->name('home.user.info');
-//        Route::post('userinfoupdate','HomeController@userInfoUpdate')->name('home.myuser.info.update');
-//    });
 });
-
-//Route::get('/', function () {
-//    return view('welcome');
-//})->name('home');
-
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

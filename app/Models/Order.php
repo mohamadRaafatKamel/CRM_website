@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Order extends Model
 {
@@ -35,13 +36,13 @@ class Order extends Model
     {
         switch ($type){
             case 1:
-                return "Emergency Call";
+                return __("Emergency Call");
                 break;
             case 2:
-                return "Home Visit";
+                return __("Home Visit");
                 break;
             case 3:
-                return "Book Integrated Medical Services";
+                return __("Book Integrated Medical Services");
                 break;
         }
         return 0;
@@ -51,22 +52,46 @@ class Order extends Model
     {
         switch ($states){
             case 1:
-                return "Coming";
+                return __("Waiting");
                 break;
             case 2:
-                return "Medical assessment";
+                return __("Coming");
                 break;
             case 3:
-                return "Finish";
+                return __("Medical assessment");
+                break;
+            case 4:
+                return __("Finish");
                 break;
             case 8:
-                return "Draft";
+                return __("Draft");
                 break;
             case 9:
-                return "Cancel";
+                return __("Cancel");
+                break;
+
+            case 29:
+                return __("Doctor Cancel");
                 break;
         }
         return 0;
+    }
+
+    public static function getAddress($id)
+    {
+        $address = "";
+        $data = Order::select()->find($id);
+        if(isset($data->id)){
+            $address .= Governorate::getName($data->governorate_id).",<br>";
+            $address .= City::getName($data->city_id ).", <br/> ";
+            $address .= $data->adress;
+            if ($data->adress2 != ""){
+                $address .= ",<br/>".$data->adress.".";
+            }else{
+                $address .= '.';
+            }
+        }
+        return $address;
     }
 
 }

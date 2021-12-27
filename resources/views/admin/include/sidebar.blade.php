@@ -20,6 +20,14 @@
                             </span>
                         </a>
                     </li>
+                    <li><a class="menu-item" href="{{route('admin.order')}}"   class="active"
+                           data-i18n="nav.dash.ecommerce">
+                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Order') }}</span>
+                            <span class="badge badge badge-info badge-pill float-right mr-2">
+                                {{App\Models\Order::count()}}
+                            </span>
+                        </a>
+                    </li>
                     <li><a class="menu-item" href="{{route('admin.request.emergency')}}"   class="active"
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Emergency') }}</span>
@@ -44,46 +52,6 @@
                             </span>
                         </a>
                     </li>
-                </ul>
-            </li>
-
-            <li class="nav-item">
-                <a href=""><i class="la la-certificate"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Order') }} </span>
-                </a>
-                <ul class="menu-content">
-                    <li><a class="menu-item" href="{{route('admin.order')}}"   class="active"
-                           data-i18n="nav.dash.ecommerce">
-                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Order') }}</span>
-                            <span class="badge badge badge-info badge-pill float-right mr-2">
-                                {{App\Models\Order::count()}}
-                            </span>
-                        </a>
-                    </li>
-{{--                    <li><a class="menu-item" href="{{route('admin.request.emergency')}}"   class="active"--}}
-{{--                           data-i18n="nav.dash.ecommerce">--}}
-{{--                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Emergency') }}</span>--}}
-{{--                            <span class="badge badge badge-info badge-pill float-right mr-2">--}}
-{{--                                {{App\Models\Requests::where('type',1)->count()}}--}}
-{{--                            </span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li><a class="menu-item" href="{{route('admin.request.visit')}}"   class="active"--}}
-{{--                           data-i18n="nav.dash.ecommerce">--}}
-{{--                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Visit') }}</span>--}}
-{{--                            <span class="badge badge badge-info badge-pill float-right mr-2">--}}
-{{--                                {{App\Models\Requests::where('type',2)->count()}}--}}
-{{--                            </span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li><a class="menu-item" href="{{route('admin.request.book')}}"   class="active"--}}
-{{--                           data-i18n="nav.dash.ecommerce">--}}
-{{--                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Book') }}</span>--}}
-{{--                            <span class="badge badge badge-info badge-pill float-right mr-2">--}}
-{{--                                {{App\Models\Requests::where('type',3)->count()}}--}}
-{{--                            </span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
                 </ul>
             </li>
 
