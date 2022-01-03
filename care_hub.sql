@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2021 at 11:18 AM
+-- Generation Time: Dec 27, 2021 at 01:24 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -955,7 +955,7 @@ CREATE TABLE `orders` (
   `arrive_on` time DEFAULT NULL,
   `doc_states` int(1) DEFAULT NULL,
   `user_states` int(1) DEFAULT NULL,
-  `states` int(1) DEFAULT 1,
+  `states` int(2) DEFAULT 1,
   `doc_rate` int(1) DEFAULT NULL,
   `user_rate` int(1) DEFAULT NULL,
   `admin_id` int(20) DEFAULT NULL,
@@ -969,12 +969,14 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `user_id`, `doctor_id`, `fullname`, `governorate_id`, `city_id`, `adress`, `adress2`, `request_id`, `phone`, `phone2`, `birth_date`, `gender`, `type`, `emergency`, `specialty_id`, `service_id`, `visit_time_day`, `visit_time_from`, `visit_time_to`, `arrive_on`, `doc_states`, `user_states`, `states`, `doc_rate`, `user_rate`, `admin_id`, `created_at`, `updated_at`) VALUES
 (0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL),
-(7, 3, 5, 'qqqqqqq', '2', 2, 'qqwqwqwqqqqwqwq', 'cvcvcvccv', NULL, '01121426196', '1111111111111111111112222', NULL, NULL, NULL, 0, 1, 1, '2021-12-20', '15:29:00', '20:29:00', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-12-20 17:11:33', '2021-12-20 17:32:30'),
-(9, 2, 5, 'Mohamed Rafaat Mohamed Mohamed Kamel', '2', 2, 'شرخ 45', 'cvcvcvccv', NULL, '01121426196', '222222', NULL, NULL, NULL, 0, 1, 1, '2021-12-22', '21:19:00', '21:19:00', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-12-20 17:18:04', '2021-12-20 17:18:04'),
-(11, 2, 5, 'modd1 ra144444', '3', 110, 'qqwweerrtt', '11115qqwwqqw', 3, '01121426196', '000000007878787', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-18', '15:42:00', '16:42:00', NULL, NULL, NULL, 1, NULL, NULL, 1, '2021-12-21 15:28:23', '2021-12-22 16:22:42'),
-(12, 2, 5, 'modd1 ra1', '3', 110, 'qqwweerrtt', NULL, NULL, '01121426196', '00000000', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-15', '22:16:00', '20:19:00', NULL, NULL, NULL, 1, NULL, NULL, 1, '2021-12-22 16:24:26', '2021-12-22 16:24:26'),
-(14, 3, 5, 'aa bb', '2', 3, 'qqwqwqwqqqqwqwq', 'cvcvcvccv', NULL, '011214261961', NULL, '2015-02-25', 1, NULL, 0, 1, NULL, '2021-12-20', '22:26:00', '12:26:00', NULL, NULL, NULL, 1, NULL, NULL, 1, '2021-12-22 16:26:45', '2021-12-22 16:26:45'),
-(15, 2, 5, 'modd1 ra1', '3', 110, 'qqwweerrtt', NULL, 7, '01121426196', '00000000', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-28', '20:31:00', '20:31:00', NULL, NULL, NULL, 1, NULL, NULL, 1, '2021-12-22 16:27:18', '2021-12-22 16:27:18');
+(7, 3, 5, 'qqqqqqq', '2', 2, 'qqwqwqwqqqqwqwq', 'cvcvcvccv', NULL, '01121426196', '1111111111111111111112222', NULL, NULL, NULL, 0, 1, 1, '2021-12-20', '15:29:00', '20:29:00', NULL, NULL, NULL, 29, NULL, NULL, NULL, '2021-12-20 17:11:33', '2021-12-26 15:33:32'),
+(9, 2, 5, 'Mohamed Rafaat Mohamed Mohamed Kamel', '2', 2, 'شرخ 45', 'cvcvcvccv', NULL, '01121426196', '222222', NULL, NULL, NULL, 0, 1, 1, '2021-12-22', '21:19:00', '21:19:00', NULL, NULL, NULL, 4, NULL, NULL, NULL, '2021-12-20 17:18:04', '2021-12-26 15:47:05'),
+(11, 2, 5, 'modd1 ra144444', '3', 110, 'qqwweerrtt', '11115qqwwqqw', 3, '01121426196', '000000007878787', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-18', '15:42:00', '16:42:00', NULL, NULL, NULL, 2, NULL, NULL, 1, '2021-12-21 15:28:23', '2021-12-26 15:50:38'),
+(12, 2, 5, 'modd1 ra1', '3', 110, 'qqwweerrtt', NULL, NULL, '01121426196', '00000000', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-15', '22:16:00', '20:19:00', NULL, NULL, NULL, 29, NULL, NULL, 1, '2021-12-22 16:24:26', '2021-12-26 15:41:33'),
+(14, 3, 5, 'aa bb', '2', 3, 'qqwqwqwqqqqwqwq', 'cvcvcvccv', NULL, '011214261961', NULL, '2015-02-25', 1, NULL, 0, 1, NULL, '2021-12-20', '22:26:00', '12:26:00', NULL, NULL, NULL, 3, NULL, NULL, 1, '2021-12-22 16:26:45', '2021-12-26 15:53:51'),
+(15, 2, 5, 'modd1 ra1', '3', 110, 'qqwweerrtt', NULL, 7, '01121426196', '00000000', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-28', '20:31:00', '20:31:00', NULL, NULL, NULL, 1, NULL, NULL, 1, '2021-12-22 16:27:18', '2021-12-22 16:27:18'),
+(16, 2, 5, 'Mohamed Rafaat Mohamed Mohamed Kamel', '3', 110, '10 Intersection 455 with 534', '5', NULL, '01121426196', '00000000', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-14', '20:47:00', '18:47:00', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-12-26 14:47:45', '2021-12-26 14:47:45'),
+(17, 2, 5, 'modd1 ra1', '3', 110, 'qqwweerrtt', NULL, 1, '01121426196', '00000000', '1996-10-01', 2, 1, 0, 1, NULL, '2021-11-28', '12:56:00', '20:56:00', NULL, NULL, NULL, 1, NULL, NULL, 1, '2021-12-26 14:57:50', '2021-12-26 14:57:50');
 
 -- --------------------------------------------------------
 
@@ -1054,13 +1056,16 @@ CREATE TABLE `request` (
 --
 
 INSERT INTO `request` (`id`, `user_id`, `phone`, `specialty_id`, `service_id`, `type`, `emergency`, `call_him`, `call_him_time`, `visit_time_day`, `visit_time_from`, `visit_time_to`, `state`, `created_at`, `updated_at`) VALUES
-(1, 5, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, 0, '2021-12-18 10:58:49', '2021-12-18 10:58:49'),
-(2, 5, '01121426196', NULL, 1, 2, 0, 0, NULL, '2021-12-08', '15:08:00', '15:11:00', 0, '2021-12-18 11:05:26', '2021-12-18 11:05:26'),
+(1, 5, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, 1, '2021-12-18 10:58:49', '2021-12-26 14:57:50'),
+(2, 5, '01121426196', NULL, 1, 2, 0, 0, NULL, '2021-12-08', '15:08:00', '15:11:00', 5, '2021-12-18 11:05:26', '2021-12-26 14:07:01'),
 (3, 2, '01121426196', 1, NULL, 3, 0, 0, NULL, '2021-12-18', '15:42:00', '16:42:00', 1, '2021-12-18 11:42:10', '2021-12-21 15:28:22'),
 (4, NULL, '11111111111111111111111', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, 0, '2021-12-18 16:09:47', '2021-12-18 16:09:47'),
 (5, NULL, '01121426196', NULL, 1, 2, 0, 0, NULL, '2021-12-17', '20:27:00', '20:29:00', 0, '2021-12-18 16:27:11', '2021-12-18 16:27:11'),
 (6, NULL, '01121426196', 1, NULL, 3, 0, 0, NULL, '2021-12-05', '23:27:00', '20:29:00', 0, '2021-12-18 16:27:42', '2021-12-18 16:27:42'),
-(7, 2, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, 1, '2021-12-22 13:50:50', '2021-12-22 16:27:18');
+(7, 2, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, 1, '2021-12-22 13:50:50', '2021-12-22 16:27:18'),
+(8, 2, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, 5, '2021-12-26 10:19:58', '2021-12-26 13:59:00'),
+(9, 2, '01121426196', 1, NULL, 3, 0, 0, NULL, '2021-12-14', '18:20:00', '22:20:00', 5, '2021-12-26 13:20:23', '2021-12-26 13:54:49'),
+(10, 2, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, 5, '2021-12-26 14:01:46', '2021-12-26 14:01:57');
 
 -- --------------------------------------------------------
 
@@ -1199,10 +1204,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `username`, `birth_date`, `email`, `phone`, `type`, `verification`, `mobile`, `gender`, `title`, `nationality_code`, `governorate_id`, `city_id`, `address`, `adress2`, `account_owner_name`, `account_num`, `bank_name`, `identity_id`, `passport_id`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'modd1', 'ra1', 'mo ra1', '1996-10-01', 'fffff@fff.com', '01121426196', 1, 0, '00000000', 2, 'Mrs', 'EG', 3, 110, 'qqwweerrtt', NULL, 'fddffff', '1000', 'ddfdfdfdf', '11111111111111', '101010', NULL, '$2y$10$qETIE2sIIwGNHe4j/3cd8.N740nIfeq6pmbnrutKcz0O200..O9vC', 'oeYjNo4loM2gLIh3jxQJHZmlp4RHWDxErBTlrcPlwfJMSFMSta2HxdbHBCFO', '2021-12-14 13:37:47', '2021-12-14 15:05:20'),
+(2, 'modd1', 'ra1', 'mo ra1', '1996-10-01', 'fffff@fff.com', '01121426196', 1, 0, '00000000', 2, 'Mrs', 'EG', 3, 110, 'qqwweerrtt', NULL, 'fddffff', '1000', 'ddfdfdfdf', '11111111111111', '101010', NULL, '$2y$10$qETIE2sIIwGNHe4j/3cd8.N740nIfeq6pmbnrutKcz0O200..O9vC', 'rdgF0SCYvJIGlD8HeMEmb9a4ofbucZ0GB6BqzCR5rjSCPoDsPkQSGImMsqnd', '2021-12-14 13:37:47', '2021-12-14 15:05:20'),
 (3, 'aa', 'bb', 'aaaaammmmm', '2015-02-25', 'devmrm01@gmail.com', '011214261961', 3, 0, NULL, 1, 'Mr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$wAFcbpOFxl164EN90mFSQeGyvLWGuIox/3qV20aeEHY3aOmyOBdOW', NULL, '2021-12-15 10:19:48', '2021-12-15 10:24:43'),
 (4, 'aa', 'bb', 'aabb', '2021-12-16', 'bb@aa.aa', '1111111111', 1, 0, NULL, 1, 'Mr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$dRhBuT8pQvna.H8hruNnyuKr0a/RXgvleYDjfRxxQBkvrhgplvqHW', 'u1OH8WrDA2PB4vv3uXLvtgb4RSQoVahutBLemJvEAXtEiwq7h4rKcE0VrdNa', '2021-12-18 10:03:01', '2021-12-18 10:03:01'),
-(5, 'dd', 'dd', 'ddDD', '2021-12-01', 'dd@dd.dd', '2222222222', 2, 1, NULL, 1, 'Mr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$8B2P9xvOFxu.cQUKhTzGB.DF5iuvKpLQLUnoNTIjn14y4niH1q.pS', 'l1z28fy3CvqU5mWFyZd3GwpI8ZAHcL2m4nauWU0R6XfuINnKtLTMr1DB9FlU', '2021-12-18 10:05:47', '2021-12-18 14:56:02');
+(5, 'dd', 'dd', 'ddDD', '2021-12-01', 'dd@dd.dd', '2222222222', 2, 1, NULL, 1, 'Mr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$8B2P9xvOFxu.cQUKhTzGB.DF5iuvKpLQLUnoNTIjn14y4niH1q.pS', 'aeJpmvBAyVm8e5nYU4rLUazeJaK645mRYX90AptmFjKiGtrEIu45Q3Sh6KkN', '2021-12-18 10:05:47', '2021-12-18 14:56:02');
 
 --
 -- Indexes for dumped tables
@@ -1435,7 +1440,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1453,7 +1458,7 @@ ALTER TABLE `protfolio_service`
 -- AUTO_INCREMENT for table `request`
 --
 ALTER TABLE `request`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `role`

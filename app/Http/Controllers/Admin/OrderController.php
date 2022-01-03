@@ -4,22 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AreaRequest;
-use App\Models\Area;
 use App\Models\City;
-use App\Models\Emarh;
 use App\Models\Governorate;
 use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Orders;
-use App\Models\Product;
-use App\Models\PromoCode;
 use App\Models\Requests;
 use App\Models\Service;
 use App\Models\Specialty;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Twilio\Rest\Client;
 
 class OrderController extends Controller
 {

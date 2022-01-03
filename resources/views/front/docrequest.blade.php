@@ -21,7 +21,9 @@
 {{--                @include('admin.include.alerts.errors')--}}
                 <div class="services-tabs">
                     <div class="tabs">
-
+                        <form method="POST" action="{{ route('user.doc.request',app()->getLocale()) }}">
+                            <input name="day" type="date"/>
+                        </form>
                         <div class="tabs-container">
                             <div id="tab_1" class="tab-content">
                                 <div class="row justify-content-center">
@@ -31,6 +33,7 @@
                                             <tr>
                                                 <th scope="col">{{ __('Code') }}</th>
                                                 <th scope="col">{{ __('Patient Name') }}</th>
+                                                <th scope="col">{{ __('Address') }}</th>
                                                 <th scope="col">{{ __('Day') }}</th>
                                                 <th scope="col">{{ __('Time From') }}</th>
                                                 <th scope="col">{{ __('Time To') }}</th>
@@ -44,6 +47,7 @@
                                                         <th><a href="{{ route('user.view.request',['language'=>app()->getLocale(),'msg'=>'order','id'=>$order->id ] ) }}">
                                                                 {{ 'Or'.$order->id }}
                                                             </a></th>
+                                                        <td>{{ $order->fullname }}</td>
                                                         <td>{{ $order->fullname }}</td>
                                                         <td>{{ $order->visit_time_day }}</td>
                                                         <td>{{ $order->visit_time_from }}</td>

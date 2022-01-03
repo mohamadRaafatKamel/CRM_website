@@ -22,18 +22,21 @@ class SetLanguage
 //            redirect(route('admin.getlogin'));
 //        }
 
-
+//        dd($request->route()->getPrefix());
+//dd(strpos($request->route()->getPrefix(), 'ss'));
         if($request->language == 'ar' or $request->language == 'en'){
             \App::setLocale($request->language);
             unset($_COOKIE['lang']);
             setcookie('lang',$request->language, time() + (86400 * 30 * 30), "/");
-        }elseif ($request->language == 'admin') {
-            redirect(route('admin.getlogin'));
-        }elseif(!isset($request->language) and $request->route()->getPrefix() != 'admin'){
+        }elseif(!isset($request->language) and strpos($request->route()->getPrefix(), 'admin') !== false ){
             if(isset($_COOKIE['lang'])){
                 \App::setLocale($_COOKIE['lang']);
             }
         }
+
+//        elseif ($request->language == 'admin') {
+//            redirect(route('admin.getlogin'));
+//        }
 
         return $next($request);
     }
