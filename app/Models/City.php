@@ -39,4 +39,10 @@ class City extends Model
             return $data['city_name_en'];
     }
 
+    public static function getNameEN($id)
+    {
+        $data = City::select()->find($id);
+        return $data['city_name_en'];
+    }
+
 }

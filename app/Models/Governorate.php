@@ -39,4 +39,10 @@ class Governorate extends Model
             return $data['governorate_name_en'];
     }
 
+    public static function getNameEN($id)
+    {
+        $data = Governorate::select()->find($id);
+        return $data['governorate_name_en'];
+    }
+
 }

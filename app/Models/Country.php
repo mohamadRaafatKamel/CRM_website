@@ -39,4 +39,10 @@ class Country extends Model
             return $data['country_enName'];
     }
 
+    public static function getNameEN($id)
+    {
+        $data = Country::select()->find($id);
+        return $data['country_enName'];
+    }
+
 }

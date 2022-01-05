@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EmergancyRequest;
 use App\Http\Requests\BookServicesRequest;
 use App\Http\Requests\VisitHomeRequest;
+use App\Http\Resources\RequestResource;
+use App\Http\Resources\UserResource;
 use App\Models\City;
 use App\Models\CompanyInfo;
 use App\Models\Country;
@@ -138,47 +140,40 @@ class HomeController extends Controller
         }
     }
 
-    public function user(Request $request)
+    public function userinfo(Request $request)
     {
-        return response()->json( $request->user() );
+        return new UserResource($request);
     }
+
+    public function doctorTimeWork($doctor_id)
+    {
+        $timeWork = [];
+        $doctor = DoctorInfo::select()->where('user_id', $doctor_id)->first();
+        if (isset($doctor->id)) {
+            $docWorks = DoctorWorkDay::select()->where('user_id', $doctor_id)->get();
+            if (isset($docWorks)) {
+                foreach ($docWorks as $docWork) {
+                    $timeWork[$docWork->day] = 1;
+                    $timeWork[$docWork->day . '_from'] = $docWork->time_from;
+                    $timeWork[$docWork->day . '_to'] = $docWork->time_to;
+                }
+                $timeWork = [ 'data'=>['success' => "1", 'time' => $timeWork] ];
+            }else
+                $timeWork = [ 'data'=>['success' => "0", 'error' => "No any Doctor Work Time"] ];
+        }else
+            $timeWork = [ 'data'=>['success' => "0", 'error' => "No any Doctor profile"] ];
+
+        return response()->json($timeWork);
+    }
+
+//    public function userAllRequest()
+//    {
+//        $requests = Requests::select()->where('user_id', Auth::user()->id)->Where('state', '0')->get();
+//        $orders = Order::select()->where('user_id', Auth::user()->id)->get();
+//        return view('front.request', compact('requests', 'orders'));
+//    }
 
     // Not for API /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    public function userinfo()
-    {
-        $specialtis = Specialty::select()->get();
-        $countrys = Country::select()->get();
-        $governorates = Governorate::select()->get();
-        $citys = City::select()->get();
-        $id = Auth::user()->id;
-        $user = User::select()->find($id);
-        if (!$user) {
-            return redirect()->route('home', app()->getLocale())->with(['error' => "غير موجود"]);
-        }
-        $id = Auth::user()->id;
-        // get doctor data
-        $doctor = DoctorInfo::select()->where('user_id', $id)->first();
-        if (!isset($doctor->id)) {
-            $doctor = DoctorInfo::select()->find(0);
-        }
-        // get partner data
-        $partner = CompanyInfo::select()->where('user_id', $id)->first();
-        if (!isset($partner->id)) {
-            $partner = CompanyInfo::select()->find(0);
-        }
-        $specialtys = Specialty::select()->active()->get();
-        // time work
-        $timeWork = [];
-        $docWorks = DoctorWorkDay::select()->where('user_id', Auth::user()->id)->get();
-        foreach ($docWorks as $docWork) {
-            $timeWork[$docWork->day] = 1;
-            $timeWork[$docWork->day . 'f'] = $docWork->time_from;
-            $timeWork[$docWork->day . 't'] = $docWork->time_to;
-        }
-        return view('front.userinfo', compact('user', 'specialtis', 'doctor', 'partner', 'countrys', 'governorates', 'citys', 'timeWork'));
-    }
 
 
     public function userInfoUpdate(Request $request)
@@ -228,8 +223,8 @@ class HomeController extends Controller
                     DoctorWorkDay::where('user_id', Auth::user()->id)->delete();
                     $days = $request->day;
                     foreach ($days as $thisday) {
-                        $dayFrom = $request->post(strtolower($thisday . 'f'));
-                        $dayTo = $request->post(strtolower($thisday . 't'));
+                        $dayFrom = $request->post(strtolower($thisday . '_from'));
+                        $dayTo = $request->post(strtolower($thisday . '_to'));
                         $docDay = new DoctorWorkDay();
                         $docDay->user_id = Auth::user()->id;
                         $docDay->day = $thisday;
@@ -263,30 +258,8 @@ class HomeController extends Controller
         }
     }
 
-    public function userAllRequest()
-    {
-        $requests = Requests::select()->where('user_id', Auth::user()->id)->Where('state', '0')->get();
-        $orders = Order::select()->where('user_id', Auth::user()->id)->get();
-        return view('front.request', compact('requests', 'orders'));
-    }
 
-    public function userViewRequest($lang, $msg, $id)
-    {
-        if ($msg == "order") {
-            $data = Order::select()->find($id);
-            if (!isset($data->id)) {
-                return redirect()->route('user.all.request', app()->getLocale());
-            }
-        } elseif ($msg == "request") {
-            $data = Requests::select()->find($id);
-            if (!isset($data->id)) {
-                return redirect()->route('user.all.request', app()->getLocale());
-            }
-        } else {
-            return redirect()->route('user.all.request', app()->getLocale());
-        }
-        return view('front.requestview', compact('data', 'msg'));
-    }
+
 
     public function RequestState($lang, $id, $state)
     {
@@ -315,134 +288,6 @@ class HomeController extends Controller
             return redirect()->route('user.doc.request', app()->getLocale());
         else
             return redirect()->route('user.view.request', ['language'=>app()->getLocale(),'msg'=>'order','id'=>$id]);
-    }
-
-//    public function lang($lang)
-//    {
-//        if(!isset($_COOKIE['lang'])){
-//            setcookie('lang',$lang, time() + (86400 * 30 * 30), "/");
-//        }
-//
-//        if (in_array($lang, ['en', 'ar'])) {
-////            session()->put('lang',$lang);
-//            $_COOKIE['lang'] = $lang;
-//        }else{
-//            $_COOKIE['lang'] = 'ar';
-//        }
-//        App::setLocale($_COOKIE['lang']);
-//        return redirect()->route('home');
-//    }
-
-    static function ip_info_old($ip = NULL, $purpose = "location", $deep_detect = TRUE)
-    {
-        $output = NULL;
-        if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
-            $ip = $_SERVER["REMOTE_ADDR"];
-            if ($deep_detect) {
-                if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))
-                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-                if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP))
-                    $ip = $_SERVER['HTTP_CLIENT_IP'];
-            }
-        }
-        $purpose = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));
-        $support = array("country", "countrycode", "state", "region", "city", "location", "address");
-        $continents = array(
-            "AF" => "Africa",
-            "AN" => "Antarctica",
-            "AS" => "Asia",
-            "EU" => "Europe",
-            "OC" => "Australia (Oceania)",
-            "NA" => "North America",
-            "SA" => "South America"
-        );
-        if (filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
-            $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
-            if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
-                switch ($purpose) {
-                    case "location":
-                        $output = array(
-                            "city" => @$ipdat->geoplugin_city,
-                            "state" => @$ipdat->geoplugin_regionName,
-                            "country" => @$ipdat->geoplugin_countryName,
-                            "country_code" => @$ipdat->geoplugin_countryCode,
-                            "continent" => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
-                            "continent_code" => @$ipdat->geoplugin_continentCode
-                        );
-                        break;
-                    case "address":
-                        $address = array($ipdat->geoplugin_countryName);
-                        if (@strlen($ipdat->geoplugin_regionName) >= 1)
-                            $address[] = $ipdat->geoplugin_regionName;
-                        if (@strlen($ipdat->geoplugin_city) >= 1)
-                            $address[] = $ipdat->geoplugin_city;
-                        $output = implode(", ", array_reverse($address));
-                        break;
-                    case "city":
-                        $output = @$ipdat->geoplugin_city;
-                        break;
-                    case "state":
-                        $output = @$ipdat->geoplugin_regionName;
-                        break;
-                    case "region":
-                        $output = @$ipdat->geoplugin_regionName;
-                        break;
-                    case "country":
-                        $output = @$ipdat->geoplugin_countryName;
-                        break;
-                    case "countrycode":
-                        $output = @$ipdat->geoplugin_countryCode;
-                        break;
-                }
-            }
-        }
-        return $output;
-    }
-//    print_r( \App\Http\Controllers\Front\HomeController::ip_info("156.192.135.186", "Location") );
-//    $clientIP = request()->ip();
-
-    static function ip_info($purpose = null)
-    {
-        // IP address
-        $userIP = '156.192.135.186';
-        // $userIP = request()->ip();
-        // API end URL
-        $apiURL = 'https://freegeoip.app/json/' . $userIP;
-        // Create a new cURL resource with URL
-        $ch = curl_init($apiURL);
-        // Return response instead of outputting
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // Execute API request
-        $apiResponse = curl_exec($ch);
-        // Close cURL resource
-        curl_close($ch);
-        // Retrieve IP data from API response
-        $ipData = json_decode($apiResponse, true);
-
-        if (!empty($ipData)) {
-            switch ($purpose) {
-                case "code":
-                    $output = $ipData['country_code'];
-                    break;
-                case "cname":
-                    $output = $ipData['country_name'];
-                    break;
-                case "rcode":
-                    $output = $ipData['region_code'];
-                    break;
-                case "rname":
-                    $output = $ipData['region_name'];
-                    break;
-                case "city":
-                    $output = $ipData['city'];
-                    break;
-            }
-
-            return $output;
-//            print_r($ipData);
-        } else {
-//            echo 'IP data is not found!';
-        }
     }
 
 

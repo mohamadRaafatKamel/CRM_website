@@ -39,6 +39,10 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/governorate', 'GovernorateController@index');
         Route::get('/governorate/{governorate}', 'GovernorateController@show');
 
+        // show Country
+        Route::get('/country', 'CountryController@index');
+        Route::get('/country/{country}', 'CountryController@show');
+
         // login
         // logout
         // registration
@@ -56,7 +60,13 @@ Route::group(['prefix' => 'v1'], function () {
 
             // Route::apiResource('/services', ServicesController::class);
 
-            Route::get('/user', 'HomeController@user');
+            Route::get('/userinfo', 'HomeController@userinfo');
+            Route::get('/doctortimework/{id}', 'HomeController@doctorTimeWork');
+
+            // show Requests
+            Route::get('/requests', 'RequestsController@userRequest');
+            Route::get('/requests/{requests}', 'RequestsController@show');
+
 //            Route::get('/userinfo', 'HomeController@userinfo')->name('home.user.info');
 //            Route::post('userinfoupdate','HomeController@userInfoUpdate')->name('home.myuser.info.update');
 //

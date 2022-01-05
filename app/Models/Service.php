@@ -47,4 +47,10 @@ class Service extends Model
             return $data['name_en'];
     }
 
+    public static function getNameEN($id)
+    {
+        $data = Service::select()->find($id);
+        return $data['name_en'];
+    }
+
 }
