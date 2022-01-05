@@ -55,14 +55,20 @@ class OrderController extends Controller
                 $myorder->visit_time_to = $myreq->visit_time_to;
                 $myorder->req_id = $myreq->id;
                 $myorder->request_id = $myreq->type;
+                $myorder->governorate_id = $myreq->governorate_id;
+                $myorder->city_id  = $myreq->city_id ;
+                $myorder->adress = $myreq->address;
+                $myorder->adress2 = $myreq->address2;
                 if (isset($myreq->user_id) and $myreq->user_id != null){
                     $patient = User::select()->find($myreq->user_id);
                     if (isset($patient->id)){
                         $myorder->fullname = $patient->fname. " ".$patient->lname;
-                        $myorder->governorate_id = $patient->governorate_id;
-                        $myorder->city_id  = $patient->city_id ;
-                        $myorder->adress = $patient->address;
-                        $myorder->adress2 = $patient->address2;
+                        if ($myreq->governorate_id == null){
+                            $myorder->governorate_id = $patient->governorate_id;
+                            $myorder->city_id  = $patient->city_id ;
+                            $myorder->adress = $patient->address;
+                            $myorder->adress2 = $patient->address2;
+                        }
                         $myorder->gender = $patient->gender;
                         $myorder->phone2 = $patient->mobile;
                         $myorder->birth_date = $patient->birth_date;

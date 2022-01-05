@@ -97,8 +97,12 @@ class HomeController extends Controller
             if (isset($request->user_id)) {
                 $req->user_id = $request->user_id;
             }
+            $req->governorate_id = $request->governorate_id;
+            $req->city_id = $request->city_id;
+            $req->adress = $request->adress;
+            $req->adress2 = $request->adress2;
             $req->phone = $request->phone;
-            $req->service_id = $request->service_id;
+            $req->specialty_id = $request->specialty_id;
             $req->visit_time_day = $request->visit_time_day;
             $req->visit_time_from = $request->visit_time_from;
             $req->visit_time_to = $request->visit_time_to;
@@ -117,8 +121,12 @@ class HomeController extends Controller
             if (isset($request->user_id)) {
                 $req->user_id = $request->user_id;
             }
+            $req->governorate_id = $request->governorate_id;
+            $req->city_id = $request->city_id;
+            $req->adress = $request->adress;
+            $req->adress2 = $request->adress2;
             $req->phone = $request->phone;
-            $req->specialty_id = $request->specialty_id;
+            $req->service_id = $request->service_id;
             $req->visit_time_day = $request->visit_time_day;
             $req->visit_time_from = $request->visit_time_from;
             $req->visit_time_to = $request->visit_time_to;
