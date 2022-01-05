@@ -14,30 +14,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-//Route::middleware('auth:api')->prefix('v1')->group(function (){
-//    Route::get('/user',function(Request $request){
-//        return $request->user();
-//    });
-//});
-
 Route::group(['prefix' => 'v1'], function () {
     Route::group(['namespace' => '\App\Http\Controllers\Api'], function () {
 
-//        Route::get('/', 'HomeController@index')->name('home');
-//        Route::post('callme', 'HomeController@callme')->name('home.callme');
 
-//        Route::get('/user',function(Request $request){
-//            return 'gggggg';
-//        });
+        // send Social Media link
+        Route::get('/socialLinks', 'HomeController@SocialLinks');
+        // send Slider Image link
+        Route::get('/sliderImg', 'HomeController@SliderImg');
 
-//        Route::get('/services/{service}', 'ServicesController@show');
+        // show Specialty
+        Route::get('/specialty', 'SpecialtyController@index');
+        Route::get('/specialty/{specialty}', 'SpecialtyController@show');
 
+        // show services
+        Route::get('/services', 'ServicesController@index');
+        Route::get('/services/{service}', 'ServicesController@show');
+
+        // show City
+        Route::get('/city', 'CityController@index');
+        Route::get('/city/{city}', 'CityController@show');
+
+        // show Governorate
+        Route::get('/governorate', 'GovernorateController@index');
+        Route::get('/governorate/{governorate}', 'GovernorateController@show');
+
+        // login
+        // logout
+        // registration
+
+        Route::group(['middleware'=>'checkPassword'], function () {
+            // request Emergency
+            Route::post('/callme/emergency', 'HomeController@callmeEmergency');
+            // request Home Visit
+            Route::post('/callme/homevisit', 'HomeController@callmeHomeVisit');
+            // request Book Integrated Medical Services
+            Route::post('/callme/bookservices', 'HomeController@BookServices');
+        });
 
         Route::group(['middleware'=>'auth:api'], function () {
 
-            Route::apiResource('/services', ServicesController::class);
+            // Route::apiResource('/services', ServicesController::class);
 
+            Route::get('/user', 'HomeController@user');
 //            Route::get('/userinfo', 'HomeController@userinfo')->name('home.user.info');
 //            Route::post('userinfoupdate','HomeController@userInfoUpdate')->name('home.myuser.info.update');
 //

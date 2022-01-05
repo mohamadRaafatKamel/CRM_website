@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceRequest;
-use App\Models\Service;
 use App\Http\Resources\ServicesResource;
+use App\Models\Specialty;
 use Illuminate\Http\Request;
 
-class ServicesController extends Controller
+class SpecialtyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        return ServicesResource::collection(Service::all());
+        return ServicesResource::collection(Specialty::all());
     }
 
     /**
@@ -38,33 +38,27 @@ class ServicesController extends Controller
      */
     public function store(ServiceRequest $request)
     {
-//        $myServe = new Service();
-//        $myServe->name_ar = $request->name_ar;
-//        $myServe->name_en = $request->name_en;
-//        $myServe->admin_id = $request->admin_id;
-//        $myServe->disabled = '0';
-//        $myServe->save();
-//        return new ServicesResource($myServe);
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Specialty  $specialty
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(Specialty $specialty)
     {
-        return new ServicesResource($service);
+        return new ServicesResource($specialty);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Specialty  $specialty
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit(Specialty $specialty)
     {
         //
     }
@@ -73,29 +67,20 @@ class ServicesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\ServiceRequest  $request
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Specialty  $specialty
      * @return \Illuminate\Http\Response
      */
-    public function update(ServiceRequest $request, Service $service)
+    public function update(ServiceRequest $request,Specialty  $specialty)
     {
-//        $service->update([
-//            'name_ar'=>$request->input('name_ar'),
-//            'name_en'=>$request->input('name_en'),
-//            'admin_id'=>$request->input('admin_id'),
-//            'disabled'=>$request->input('disabled'),
-//        ]);
-//
-//        return new ServicesResource($service);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Specialty  $specialty
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(Specialty  $specialty)
     {
-//        $service->delete();
     }
 }
