@@ -31,7 +31,7 @@ class ServiceController extends Controller
 
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
             $image = $request->file('img');
-            $imageName = "serv_".$request->name_en . ".". $image->extension();
+            $imageName = "serv_".str_replace(' ', '_', $request->name_en) . ".". $image->extension();
             $image->move(public_path('service'),$imageName);
             $request->request->add(['image' =>  "public/service/".$imageName ]);
             Service::create($request->except(['_token']));
@@ -67,7 +67,7 @@ class ServiceController extends Controller
 
             if ($request->has('img')){
                 $image = $request->file('img');
-                $imageName = "serv_".$request->name_en . ".". $image->extension();
+                $imageName = "serv_".str_replace(' ', '_', $request->name_en) . ".". $image->extension();
                 $image->move(public_path('service'),$imageName);
                 $imgPath = "public/service/".$imageName;
             }else{

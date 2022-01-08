@@ -30,7 +30,7 @@ class SpecialtyController extends Controller
                 $request->request->add(['disabled' => 1]);
 
             $image = $request->file('img');
-            $imageName = "spc_".$request->name_en . ".". $image->extension();
+            $imageName = "spc_".str_replace(' ', '_', $request->name_en) . ".". $image->extension();
             $image->move(public_path('specialty'),$imageName);
             $request->request->add(['image' =>  "public/specialty/".$imageName ]);
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
@@ -67,7 +67,7 @@ class SpecialtyController extends Controller
 
             if ($request->has('img')){
                 $image = $request->file('img');
-                $imageName = "spc_".$request->name_en . ".". $image->extension();
+                $imageName = "spc_".str_replace(' ', '_', $request->name_en). ".". $image->extension();
                 $image->move(public_path('specialty'),$imageName);
                 $imgPath = "public/specialty/".$imageName;
             }else{
