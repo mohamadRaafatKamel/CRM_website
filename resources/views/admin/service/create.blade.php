@@ -78,6 +78,19 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="img">  اضف صوره </label>
+                                                            <input type="file" id="img"
+                                                                   class="form-control"
+                                                                   accept="image/*"
+                                                                   name="img" required>
+                                                            @error('img')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="row">

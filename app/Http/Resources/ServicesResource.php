@@ -19,6 +19,7 @@ class ServicesResource extends JsonResource
             "name_ar" => $this->name_ar,
             "name_en" => $this->name_en,
             "disabled" => (string)$this->disabled,
+            "image" => $this->image,
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
         ];

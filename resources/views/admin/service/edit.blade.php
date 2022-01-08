@@ -76,6 +76,25 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="img">  اضف صوره </label>
+                                                            <input type="file" id="img"
+                                                                   class="form-control"
+                                                                   accept="image/*"
+                                                                   name="img">
+                                                            @error('img')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        @if($datas -> image != null)
+                                                            <img width="50px" height="50px" src="../../../{{$datas -> image}}">
+                                                        @endif
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="row">

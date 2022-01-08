@@ -22,10 +22,17 @@ class SpecialtyController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name_en'=>"unique:specialty,name_en",
+        ]);
         try {
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
 
+            $image = $request->file('img');
+            $imageName = "spc_".$request->name_en . ".". $image->extension();
+            $image->move(public_path('specialty'),$imageName);
+            $request->request->add(['image' =>  "public/specialty/".$imageName ]);
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
             Specialty::create($request->except(['_token']));
             return redirect()->route('admin.specialty')->with(['success'=>'تم الحفظ']);
@@ -45,6 +52,9 @@ class SpecialtyController extends Controller
 
     public function update($id, Request $request)
     {
+        $request->validate([
+            'name_en'=>"unique:specialty,name_en",
+        ]);
         try {
 
             $data = Specialty::find($id);
@@ -54,6 +64,15 @@ class SpecialtyController extends Controller
 
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
+
+            if ($request->has('img')){
+                $image = $request->file('img');
+                $imageName = "spc_".$request->name_en . ".". $image->extension();
+                $image->move(public_path('specialty'),$imageName);
+                $imgPath = "public/specialty/".$imageName;
+            }else{
+                $imgPath = $data->img;
+            }
 
             $data->update($request->except(['_token']));
 

@@ -22,11 +22,18 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name_en'=>"unique:service,name_en",
+        ]);
         try {
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
 
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
+            $image = $request->file('img');
+            $imageName = "serv_".$request->name_en . ".". $image->extension();
+            $image->move(public_path('service'),$imageName);
+            $request->request->add(['image' =>  "public/service/".$imageName ]);
             Service::create($request->except(['_token']));
             return redirect()->route('admin.service')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
@@ -45,6 +52,9 @@ class ServiceController extends Controller
 
     public function update($id, Request $request)
     {
+        $request->validate([
+            'name_en'=>"unique:service,name_en",
+        ]);
         try {
 
             $data = Service::find($id);
@@ -54,6 +64,15 @@ class ServiceController extends Controller
 
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
+
+            if ($request->has('img')){
+                $image = $request->file('img');
+                $imageName = "serv_".$request->name_en . ".". $image->extension();
+                $image->move(public_path('service'),$imageName);
+                $imgPath = "public/service/".$imageName;
+            }else{
+                $imgPath = $data->img;
+            }
 
             $data->update($request->except(['_token']));
 
