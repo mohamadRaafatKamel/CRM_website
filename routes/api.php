@@ -43,9 +43,11 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/country', 'CountryController@index');
         Route::get('/country/{country}', 'CountryController@show');
 
-        // login
-        // logout
         // registration
+        Route::post('/registration', 'AuthController@registration');
+        // login
+        Route::post('/login', 'AuthController@login');
+
 
         Route::group(['middleware'=>'checkPassword'], function () {
             // request Emergency
@@ -59,6 +61,8 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(['middleware'=>'auth:api'], function () {
 
             // Route::apiResource('/services', ServicesController::class);
+            // logout
+            Route::post('/logout', 'AuthController@logout');
 
             Route::get('/userinfo', 'HomeController@userinfo');
             Route::get('/doctortimework/{id}', 'HomeController@doctorTimeWork');
