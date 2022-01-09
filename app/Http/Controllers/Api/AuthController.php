@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -73,7 +74,6 @@ class AuthController extends Controller
                 'token_type' => 'Bearer',
                 'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateString(),
                 'access_token' => $tokenResult->accessToken,
-                'user' => Auth::user(),
             ]]);
         } catch (\Exception $ex) {
             return response()->json(['data' => ['success' => "0", 'error' => "Something Error"]]);
