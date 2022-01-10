@@ -25,7 +25,7 @@ class EmergancyRequest extends FormRequest
     {
         return [
             'user_id'=>'exists:users,id',
-            'specialty_id'=>'required|exists:specialty,id',
+            'specialty_id'=>'exists:specialty,id',
             'phone' => 'required|max:50',
             'fullname' => 'max:250',
         ];

@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Requests;
+use App\Http\Resources\OrderResource;
+use App\Models\Order;
 use Illuminate\Http\Request;
-use App\Http\Resources\RequestResource;
 
-class RequestsController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function userRequest(Request $request)
+    public function doctorRequest(Request $request)
     {
-        $myRequests = Requests::select()->where('user_id', $request->user()->id )->Where('state', '0')->get();
-        return RequestResource::collection($myRequests);
+        $myOrders = Order::select()->where('user_id', $request->user()->id )->whereIn('states',['1','2','3'])->get();
+        return OrderResource::collection($myOrders);
     }
 
     /**
@@ -44,13 +44,13 @@ class RequestsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Requests  $requests
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Requests $requests, Request $request)
+    public function show(Order $order, Request $request)
     {
-        if ($requests->user_id == $request->user()->id)
-            return new RequestResource($requests);
+        if ($order->user_id == $request->user()->id or $order->doctor_id == $request->user()->id)
+            return new OrderResource($order);
         else
             return response()->json([ 'data'=>['success' => "0", 'error' => "Not Owner"] ]);
     }
@@ -58,10 +58,10 @@ class RequestsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Requests  $requests
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Requests $requests)
+    public function edit(Order $order)
     {
         //
     }
@@ -70,20 +70,20 @@ class RequestsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Requests  $requests
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Requests $requests)
+    public function update(Request $request, Order $order)
     {
         //
     }
 
-    public function cancelState(Request $request, Requests $requests){
-        if ($requests->user_id == $request->user()->id) {
-            if ($requests->state != '0'){
+    public function cancelState(Request $request, Order $order){
+        if ( $order->user_id == $request->user()->id or $order->doctor_id == $request->user()->id ) {
+            if ($order->state != '0'){
                 return response()->json([ 'data'=>['success' => "0", 'massage' => "can't Updated"] ]);
             }
-            $requests->update(['state' => '5']);
+            $order->update(['state' => '5']);
             return response()->json(['data' => ['success' => "1", 'massage' => "Success Updated"]]);
         }else
             return response()->json([ 'data'=>['success' => "0", 'massage' => "Not Owner"] ]);
@@ -92,10 +92,10 @@ class RequestsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Requests  $requests
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Requests $requests)
+    public function destroy(Order $order)
     {
         //
     }

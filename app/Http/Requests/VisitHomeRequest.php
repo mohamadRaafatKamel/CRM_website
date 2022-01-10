@@ -26,14 +26,12 @@ class VisitHomeRequest extends FormRequest
         date_default_timezone_set("Africa/Cairo");
         return [
             'user_id'=>'exists:users,id',
-            'specialty_id'=>'required|exists:specialty,id',
-            'governorate_id'=>'required|exists:governorates,id',
-            'city_id'=>'required|exists:cities,id',
-            'adress'=>'required|max:250',
-            'adress2'=>'required|max:250',
-            'visit_time_day' => 'required|after_or_equal:'.date("Y/m/d"),
-            'visit_time_from' => 'required',
-            'visit_time_to' => 'required',
+            'specialty_id'=>'exists:specialty,id',
+            'governorate_id'=>'exists:governorates,id',
+            'city_id'=>'exists:cities,id',
+            'adress'=>'max:250',
+            'adress2'=>'max:250',
+            'visit_time_day' => 'after_or_equal:'.date("Y/m/d"),
             'phone' => 'required|max:50',
         ];
     }

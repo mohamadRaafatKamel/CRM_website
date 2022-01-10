@@ -169,13 +169,6 @@ class HomeController extends Controller
         return response()->json($timeWork);
     }
 
-//    public function userAllRequest()
-//    {
-//        $requests = Requests::select()->where('user_id', Auth::user()->id)->Where('state', '0')->get();
-//        $orders = Order::select()->where('user_id', Auth::user()->id)->get();
-//        return view('front.request', compact('requests', 'orders'));
-//    }
-
     // Not for API /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -262,17 +255,6 @@ class HomeController extends Controller
     }
 
 
-
-
-    public function RequestState($lang, $id, $state)
-    {
-        $data = Requests::select()->find($id);
-        if (!isset($data->id)) {
-            return redirect()->route('user.all.request', app()->getLocale());
-        }
-        $data->update(['state'=>$state]);
-        return redirect()->route('user.all.request', app()->getLocale());
-    }
 
     public function DoctorRequest()
     {

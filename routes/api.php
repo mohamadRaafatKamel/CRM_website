@@ -71,17 +71,17 @@ Route::group(['prefix' => 'v1'], function () {
             // show Requests
             Route::get('/requests', 'RequestsController@userRequest');
             Route::get('/requests/{requests}', 'RequestsController@show');
+            // change state
+            Route::get('/cancel_requests/{requests}', 'RequestsController@cancelState');
+
+            // show Doctor Requests
+            Route::get('/doctor/order', 'OrderController@doctorRequest');
+            Route::get('/doctor/order/{order}', 'OrderController@show');
+            // change state
+            Route::get('/doctor/cancel_order/{order}', 'OrderController@cancelState');
 
 //            Route::get('/userinfo', 'HomeController@userinfo')->name('home.user.info');
 //            Route::post('userinfoupdate','HomeController@userInfoUpdate')->name('home.myuser.info.update');
-//
-//            Route::get('/request', 'HomeController@userAllRequest')->name('user.all.request');
-//            Route::get('/request/{msg}/{id}', 'HomeController@userViewRequest')->name('user.view.request');
-//
-//            Route::get('reqstate/{id}/{state}', 'HomeController@RequestState')->name('user.request.state');
-//
-//            Route::get('/doctorrequest', 'HomeController@DoctorRequest')->name('user.doc.request');
-//            Route::get('docstate/{id}/{state}', 'HomeController@DocOrderState')->name('doc.order.state');
 
         });
     });
