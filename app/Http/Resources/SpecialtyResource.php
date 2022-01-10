@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Service;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CityResource extends JsonResource
+class SpecialtyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +17,12 @@ class CityResource extends JsonResource
     {
         return [
             "id" => (string)$this->id,
-            "governorate_id" => (string)$this->governorate_id,
-            "city_name_ar" => $this->city_name_ar,
-            "city_name_en" => $this->city_name_en,
+            "name_ar" => $this->name_ar,
+            "name_en" => $this->name_en,
+            "disabled" => (string)$this->disabled,
+            "image" => $this->image,
+            "created_at" => $this->created_at,
+            "updated_at" => $this->updated_at,
         ];
     }
 }

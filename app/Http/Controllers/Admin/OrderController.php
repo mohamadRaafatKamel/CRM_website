@@ -59,10 +59,13 @@ class OrderController extends Controller
                 $myorder->city_id  = $myreq->city_id ;
                 $myorder->adress = $myreq->address;
                 $myorder->adress2 = $myreq->address2;
+                $myorder->fullname = $myreq->fullname;
                 if (isset($myreq->user_id) and $myreq->user_id != null){
                     $patient = User::select()->find($myreq->user_id);
                     if (isset($patient->id)){
-                        $myorder->fullname = $patient->fname. " ".$patient->lname;
+                        if ($myreq->fullname == null) {
+                            $myorder->fullname = $patient->fname . " " . $patient->lname;
+                        }
                         if ($myreq->governorate_id == null){
                             $myorder->governorate_id = $patient->governorate_id;
                             $myorder->city_id  = $patient->city_id ;

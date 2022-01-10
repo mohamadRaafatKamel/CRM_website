@@ -64,6 +64,7 @@ Route::group(['prefix' => 'v1'], function () {
             // logout
             Route::post('/logout', 'AuthController@logout');
 
+            // show user info
             Route::get('/userinfo', 'HomeController@userinfo');
             Route::get('/doctortimework/{id}', 'HomeController@doctorTimeWork');
 

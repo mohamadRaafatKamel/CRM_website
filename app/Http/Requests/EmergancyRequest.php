@@ -27,6 +27,7 @@ class EmergancyRequest extends FormRequest
             'user_id'=>'exists:users,id',
             'specialty_id'=>'required|exists:specialty,id',
             'phone' => 'required|max:50',
+            'fullname' => 'max:250',
         ];
     }
 }

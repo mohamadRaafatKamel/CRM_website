@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceRequest;
-use App\Http\Resources\ServicesResource;
+use App\Http\Resources\SpecialtyResource;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class SpecialtyController extends Controller
      */
     public function index()
     {
-        return ServicesResource::collection(Specialty::all());
+        return SpecialtyResource::collection(Specialty::all());
     }
 
     /**
@@ -49,7 +49,7 @@ class SpecialtyController extends Controller
      */
     public function show(Specialty $specialty)
     {
-        return new ServicesResource($specialty);
+        return new SpecialtyResource($specialty);
     }
 
     /**

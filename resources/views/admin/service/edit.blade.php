@@ -78,9 +78,22 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="type"> {{ __('Type') }} </label>
+                                                            <select name="type" class="form-control" id="type" required>
+                                                                <option value="1" @if($datas -> type == '1') selected @endif>{{ __("Inpatient") }}</option>
+                                                                <option value="2" @if($datas -> type == '2') selected @endif>{{ __("Outpatient") }}</option>
+                                                            </select>
+                                                            @error('type')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="img">  اضف صوره </label>
                                                             <input type="file" id="img"
-                                                                   class="form-control"
+                                                                   class="form-control" value=""
                                                                    accept="image/*"
                                                                    name="img">
                                                             @error('img')

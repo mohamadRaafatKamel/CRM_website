@@ -28,6 +28,7 @@ class ServiceRequest extends FormRequest
             'name_en'=>'required|string|max:250',
             'admin_id' => 'required',
             'disabled' => 'required',
+            'fullname' => 'max:250',
         ];
     }
 

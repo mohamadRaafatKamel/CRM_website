@@ -18,7 +18,7 @@ class Requests extends Model
      */
     protected $fillable = [
         'id', 'user_id', 'phone', 'type', 'emergency', 'state', 'specialty_id', 'service_id', 'call_him', 'call_him_time',
-        'governorate_id', 'city_id', 'adress', 'adress2',
+        'governorate_id', 'city_id', 'adress', 'adress2', 'fullname',
         'visit_time_day', 'visit_time_from', 'visit_time_to', 'updated_at','created_at'
     ];
 
@@ -26,7 +26,7 @@ class Requests extends Model
 
         return $query -> select(
             'id', 'user_id', 'phone', 'type', 'emergency', 'state', 'specialty_id', 'service_id', 'call_him', 'call_him_time',
-            'governorate_id', 'city_id', 'adress', 'adress2',
+            'governorate_id', 'city_id', 'adress', 'adress2', 'fullname',
             'visit_time_day', 'visit_time_from', 'visit_time_to', 'updated_at','created_at'
         );
     }

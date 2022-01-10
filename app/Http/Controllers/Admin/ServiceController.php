@@ -52,11 +52,13 @@ class ServiceController extends Controller
 
     public function update($id, Request $request)
     {
-        $request->validate([
-            'name_en'=>"unique:service,name_en",
-        ]);
+        $vdata = Service::find($id);
+        if ($request->name_en != $vdata->name_en ){
+            $request->validate([
+                'name_en'=>"unique:service,name_en",
+            ]);
+        }
         try {
-
             $data = Service::find($id);
             if (!$data) {
                 return redirect()->route('admin.service.edit', $id)->with(['error' => '  غير موجوده']);
@@ -71,8 +73,9 @@ class ServiceController extends Controller
                 $image->move(public_path('service'),$imageName);
                 $imgPath = "public/service/".$imageName;
             }else{
-                $imgPath = $data->img;
+                $imgPath = $data->image;
             }
+            $request->request->add(['image' => $imgPath]);
 
             $data->update($request->except(['_token']));
 

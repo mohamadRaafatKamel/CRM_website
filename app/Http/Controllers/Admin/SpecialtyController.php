@@ -71,8 +71,9 @@ class SpecialtyController extends Controller
                 $image->move(public_path('specialty'),$imageName);
                 $imgPath = "public/specialty/".$imageName;
             }else{
-                $imgPath = $data->img;
+                $imgPath = $data->image;
             }
+            $request->request->add(['image' => $imgPath]);
 
             $data->update($request->except(['_token']));
 

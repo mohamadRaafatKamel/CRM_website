@@ -80,6 +80,19 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="type"> {{ __('Type') }} </label>
+                                                            <select name="type" class="form-control" id="type" required>
+                                                                <option value="1">{{ __("Inpatient") }}</option>
+                                                                <option value="2">{{ __("Outpatient") }}</option>
+                                                            </select>
+                                                            @error('type')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="img">  اضف صوره </label>
                                                             <input type="file" id="img"
                                                                    class="form-control"

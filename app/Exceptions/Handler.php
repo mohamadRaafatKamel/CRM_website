@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-use Exception;
+//use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Handler extends ExceptionHandler
@@ -36,18 +36,23 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+//        $this->reportable(function (Throwable $e) {
+//            //
+//        });
     }
 
-//    public function render($request, Exception $e)
-//    {
-//        // "message": "No query results for model ID" in API
-//        if ($e instanceof ModelNotFoundException) {
-//            return response()->json(['error' => 'Data not found.']);
-//        }
-//
+    public function report(Throwable $exception)
+    {
+        parent::report($exception);
+    }
+
+    public function render($request, Throwable $e)
+    {
+        // "message": "No query results for model ID" in API
+        if ($e instanceof ModelNotFoundException) {
+            return response()->json(['error' => 'Data not found.']);
+        }
+
 //        if($this->isHttpException($e))
 //        {
 //            switch ($e->getStatusCode())
@@ -71,5 +76,6 @@ class Handler extends ExceptionHandler
 //        {
 //            return parent::render($request, $e);
 //        }
-//    }
+        return parent::render($request, $e);
+    }
 }

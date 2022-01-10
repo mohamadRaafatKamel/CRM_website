@@ -49,6 +49,7 @@
                                             <tr>
                                                 <th>اسم عربي</th>
                                                 <th> اسم انجليزي</th>
+                                                <th> {{ __('Type') }}</th>
                                                 <th> صوره</th>
                                                 <th>الحالة</th>
                                                 <th></th>
@@ -61,6 +62,7 @@
                                                     <tr>
                                                         <td>{{$data -> name_ar}}</td>
                                                         <td>{{$data -> name_en}}</td>
+                                                        <td>{{\App\Models\Service::getServiceType($data -> type)}}</td>
                                                         <td>
                                                             @if($data -> image != null)
                                                                 <img width="50px" height="50px" src="../{{$data -> image}}">

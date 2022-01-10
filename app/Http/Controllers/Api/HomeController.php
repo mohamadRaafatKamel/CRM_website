@@ -82,6 +82,7 @@ class HomeController extends Controller
             }
             $req->phone = $request->phone;
             $req->specialty_id = $request->specialty_id;
+            $req->fullname = $request->fullname;
             $req->emergency = '1';
             $req->call_him = '0';
             $req->type = '1';
@@ -108,6 +109,7 @@ class HomeController extends Controller
             $req->visit_time_day = $request->visit_time_day;
             $req->visit_time_from = $request->visit_time_from;
             $req->visit_time_to = $request->visit_time_to;
+            $req->fullname = $request->fullname;
             $req->type = '2';
             $req->save();
             return response()->json([ 'data'=>['success' => "1"] ]);
@@ -132,6 +134,7 @@ class HomeController extends Controller
             $req->visit_time_day = $request->visit_time_day;
             $req->visit_time_from = $request->visit_time_from;
             $req->visit_time_to = $request->visit_time_to;
+            $req->fullname = $request->fullname;
             $req->type = '3';
             $req->save();
             return response()->json([ 'data'=>['success' => "1"] ]);

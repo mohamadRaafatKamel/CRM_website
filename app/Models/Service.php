@@ -18,13 +18,13 @@ class Service extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name_ar', 'name_en', 'image', 'admin_id', 'disabled', 'created_at', 'updated_at'
+        'id', 'name_ar', 'name_en', 'image', 'type', 'admin_id', 'disabled', 'created_at', 'updated_at'
     ];
 
     public function  scopeSelection($query){
 
         return $query -> select(
-            'id', 'name_ar', 'name_en', 'image', 'admin_id', 'disabled', 'created_at', 'updated_at'
+            'id', 'name_ar', 'name_en', 'image', 'type', 'admin_id', 'disabled', 'created_at', 'updated_at'
         );
     }
 
@@ -51,6 +51,19 @@ class Service extends Model
     {
         $data = Service::select()->find($id);
         return $data['name_en'];
+    }
+
+    static public function getServiceType($type)
+    {
+        switch ($type){
+            case 1:
+                return "Inpatient";
+                break;
+            case 2:
+                return "Outpatient";
+                break;
+        }
+//        return 0;
     }
 
 }

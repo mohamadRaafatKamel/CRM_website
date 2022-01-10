@@ -35,6 +35,7 @@ class BookServicesRequest extends FormRequest
             'visit_time_from' => 'required',
             'visit_time_to' => 'required',
             'phone' => 'required|max:50',
+            'fullname' => 'max:250',
         ];
     }
 }
