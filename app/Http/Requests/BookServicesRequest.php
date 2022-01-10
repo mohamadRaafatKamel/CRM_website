@@ -33,7 +33,7 @@ class BookServicesRequest extends FormRequest
             'adress2'=>'max:250',
             'visit_time_day' => 'after_or_equal:'.date("Y/m/d"),
             'phone' => 'required|max:50',
-            'fullname' => 'required|max:250',
+            'fullname' => 'max:250',
         ];
     }
 }
