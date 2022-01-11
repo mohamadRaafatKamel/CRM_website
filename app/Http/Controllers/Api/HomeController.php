@@ -93,7 +93,7 @@ class HomeController extends Controller
         }
     }
 
-    public function callmeHomeVisit(VisitHomeRequest $request)
+    public function callmeHomeVisit(VisitHomeRequest $request)  // inPatient Serves
     {
         try {
             $req = new Requests();
@@ -105,7 +105,7 @@ class HomeController extends Controller
             $req->adress = $request->adress;
             $req->adress2 = $request->adress2;
             $req->phone = $request->phone;
-            $req->specialty_id = $request->specialty_id;
+            $req->service_id = $request->service_id;
             $req->visit_time_day = $request->visit_time_day;
             $req->visit_time_from = $request->visit_time_from;
             $req->visit_time_to = $request->visit_time_to;
@@ -118,7 +118,7 @@ class HomeController extends Controller
         }
     }
 
-    public function BookServices(BookServicesRequest $request)
+    public function BookServices(BookServicesRequest $request)  // outPatient Serves
     {
         try {
             $req = new Requests();

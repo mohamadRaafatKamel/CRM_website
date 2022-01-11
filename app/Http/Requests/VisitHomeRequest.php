@@ -26,7 +26,7 @@ class VisitHomeRequest extends FormRequest
         date_default_timezone_set("Africa/Cairo");
         return [
             'user_id'=>'exists:users,id',
-            'specialty_id'=>'exists:specialty,id',
+            'service_id'=>'required|exists:service,id',
             'governorate_id'=>'exists:governorates,id',
             'city_id'=>'exists:cities,id',
             'adress'=>'max:250',
