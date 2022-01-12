@@ -56,6 +56,9 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/callme/homevisit', 'HomeController@callmeHomeVisit');
             // request Book Integrated Medical Services
             Route::post('/callme/bookservices', 'HomeController@BookServices');
+
+            // JoinUs
+            Route::post('/joinus', 'HomeController@joinUs');
         });
 
         Route::group(['middleware'=>'auth:api'], function () {

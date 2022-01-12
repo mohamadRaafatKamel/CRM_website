@@ -5,25 +5,22 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmergancyRequest;
 use App\Http\Requests\BookServicesRequest;
+use App\Http\Requests\JoinUsRequest;
 use App\Http\Requests\VisitHomeRequest;
-use App\Http\Resources\RequestResource;
 use App\Http\Resources\UserResource;
-use App\Models\City;
+use App\Mail\joinus;
 use App\Models\CompanyInfo;
-use App\Models\Country;
 use App\Models\DoctorInfo;
 use App\Models\DoctorWorkDay;
-use App\Models\Governorate;
 use App\Models\Order;
 use App\Models\Requests;
-use App\Models\Service;
 use App\Models\Setting;
-use App\Models\Specialty;
 use App\Models\User;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -141,6 +138,17 @@ class HomeController extends Controller
         } catch (\Exception $ex) {
             return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
         }
+    }
+
+    public function joinUs(JoinUsRequest $request)  // join us
+    {
+//        try {
+//            Mail::To($request->email)->send(new joinus($request->post()));
+//            return "pass";
+//            return response()->json([ 'data'=>['success' => "1"] ]);
+//        } catch (\Exception $ex) {
+//            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
+//        }
     }
 
     public function userinfo(Request $request)

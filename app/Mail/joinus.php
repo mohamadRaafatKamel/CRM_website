@@ -10,15 +10,17 @@ use Illuminate\Queue\SerializesModels;
 class joinus extends Mailable
 {
     use Queueable, SerializesModels;
+    protected $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -28,6 +30,17 @@ class joinus extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.joinus');
+//        $data = $this->data;
+        $mail = $this->view('mail.joinus')->from('devmrm01@gmail.com');
+
+//        if (isset($this->data['cv'])){
+//            $v = $this->data['cv'];
+//            $mail = $mail->attach($v["path"], [
+//                'as' => $v["as"],
+//                'mime' => $v["mime"],
+//            ]);
+//        }
+
+        return $mail;
     }
 }
