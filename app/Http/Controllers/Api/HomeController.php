@@ -142,13 +142,19 @@ class HomeController extends Controller
 
     public function joinUs(JoinUsRequest $request)  // join us
     {
-//        try {
-//            Mail::To($request->email)->send(new joinus($request->post()));
-//            return "pass";
-//            return response()->json([ 'data'=>['success' => "1"] ]);
-//        } catch (\Exception $ex) {
-//            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
-//        }
+        try {
+            if(isset($request['attachment'])){
+                $request->request->add(['Real_Path' => $request['attachment']->getRealPath() ]);
+                $request->request->add(['att_as' =>  $request['attachment']->getClientOriginalName() ]);
+                $request->request->add(['att_mime' =>  $request['attachment']->getClientMimeType() ]);
+            }
+                        
+            Mail::To($request->email)->send(new joinus($request->post()));
+            
+            return response()->json([ 'data'=>['success' => "1"] ]);
+        } catch (\Exception $ex) {
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
+        }
     }
 
     public function userinfo(Request $request)

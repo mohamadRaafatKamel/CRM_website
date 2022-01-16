@@ -103,6 +103,17 @@
                                                     </div>
 
                                                     <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1"> وصف </label>
+                                                            <textarea id="description" class="form-control" placeholder="وصف" 
+                                                                name="description">{{$datas -> description}}</textarea>
+                                                            @error('description')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
                                                         @if($datas -> image != null)
                                                             <img width="50px" height="50px" src="../../../{{$datas -> image}}">
                                                         @endif

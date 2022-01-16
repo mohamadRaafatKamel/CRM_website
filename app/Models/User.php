@@ -32,6 +32,8 @@ class User extends Authenticatable
         'nationality_code',
         'mobile',
         'address',
+        'adress2',
+        'code_zone_patient_id',
         'governorate_id',
         'city_id',
         'account_owner_name',
@@ -68,13 +70,13 @@ class User extends Authenticatable
     {
         switch ($type){
             case 1:
-                return "Patient ";
+                return "Patient";
                 break;
             case 2:
-                return "Doctors ";
+                return "Doctors";
                 break;
             case 3:
-                return "Partners ";
+                return "Partners";
                 break;
         }
         return 0;

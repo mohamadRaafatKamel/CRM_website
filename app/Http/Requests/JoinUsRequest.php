@@ -38,7 +38,7 @@ class JoinUsRequest extends FormRequest
             // doctor
             'specialty_id'=>'exists:specialty,id',
             // other
-            'cv'=>'max:250',
+            'attachment'=>'mimes:pdf|max:1000',
             // company
             'comp_name'=>'max:250',
             'comp_work_on'=>'max:250',

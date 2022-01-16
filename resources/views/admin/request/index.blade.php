@@ -52,7 +52,7 @@
                                         <div class="table-responsive">
                                             @if($info['type'] == '1')
                                                 <table
-                                                    class="table display nowrap table-striped table-bordered ">
+                                                    class="table table-striped table-bordered zero-configuration">
                                                     <thead>
                                                     <tr>
                                                         <th> id</th>
@@ -85,29 +85,7 @@
 {{--                                                                    <a href="{{route('admin.user.call.him',['id'=> $request->id ])}}"--}}
 {{--                                                                       class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{ __('Call Done') }}</a>--}}
                                                                 </td>
-                                                                <td>
-                                                                    <div class="btn-group" role="group"
-                                                                         aria-label="Basic example">
-
-
-                                                                        {{--                                                                    @if($user->type != 2)--}}
-                                                                        {{--                                                                        <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'2' ])}}"--}}
-                                                                        {{--                                                                           class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">دكتور</a>--}}
-                                                                        {{--                                                                    @endif--}}
-
-                                                                        {{--                                                                    @if($user->type != 1)--}}
-                                                                        {{--                                                                        <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'1' ])}}"--}}
-                                                                        {{--                                                                           class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">مريض</a>--}}
-                                                                        {{--                                                                    @endif--}}
-
-                                                                        {{--                                                                    @if($user->type != 3)--}}
-                                                                        {{--                                                                        <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'3' ])}}"--}}
-                                                                        {{--                                                                           class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">شريك</a>--}}
-                                                                        {{--                                                                    @endif--}}
-
-
-                                                                    </div>
-                                                                </td>
+                                                            
                                                             </tr>
                                                         @endforeach
                                                     @endisset
@@ -117,7 +95,7 @@
                                                 </table>
                                             @else
                                                 <table
-                                                    class="table display nowrap table-striped table-bordered ">
+                                                    class="table table-striped table-bordered zero-configuration">
                                                     <thead>
                                                     <tr>
                                                         <th> id</th>
@@ -149,11 +127,7 @@
                                                                 <td>{{$request -> call_him }}</td>
                                                                 <td>{{ __(\App\Models\Requests::getRequestType($request -> type)) }}</td>
                                                                 <td>{{ __(\App\Models\Requests::getRequestState($request -> state)) }}</td>
-                                                                <td>
-                                                                    <div class="btn-group" role="group"
-                                                                         aria-label="Basic example">
-                                                                    </div>
-                                                                </td>
+                                                            
                                                             </tr>
                                                         @endforeach
                                                     @endisset

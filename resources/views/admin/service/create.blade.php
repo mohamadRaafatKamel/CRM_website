@@ -104,6 +104,18 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1"> وصف </label>
+                                                            <textarea id="description" class="form-control" placeholder="وصف" 
+                                                                name="description"></textarea>
+                                                            @error('description')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
 
                                                 <div class="row">

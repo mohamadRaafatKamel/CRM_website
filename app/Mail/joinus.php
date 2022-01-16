@@ -30,16 +30,27 @@ class joinus extends Mailable
      */
     public function build()
     {
-//        $data = $this->data;
-        $mail = $this->view('mail.joinus')->from('devmrm01@gmail.com');
+        $data = $this->data;
+        $mail = $this->view('mail.joinus',compact('data'))
+                    ->from('devmrm01@gmail.com')
+                    ->subject('Join App');
+                    
+        if(isset($this->data['Real_Path'])){
+            $mail ->attach($this->data['Real_Path'],
+            [
+                'as' => $this->data['att_as'],
+                'mime' => $this->data['att_mime'],
+            ]);
+        }
+                    
 
-//        if (isset($this->data['cv'])){
-//            $v = $this->data['cv'];
-//            $mail = $mail->attach($v["path"], [
-//                'as' => $v["as"],
-//                'mime' => $v["mime"],
-//            ]);
-//        }
+    //    if (isset($this->data['attachments'])){
+    //        $v = $this->data['attachments'];
+    //        $mail = $mail->attach($v["path"], [
+    //            'as' => $v["as"],
+    //            'mime' => $v["mime"],
+    //        ]);
+    //    }
 
         return $mail;
     }

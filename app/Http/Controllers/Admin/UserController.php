@@ -82,6 +82,7 @@ class UserController extends Controller
     public function update($id, UserRequest $request)
     {
         try {
+            // dd($request);
             $user = User::select()->find($id);
             if (!$user) {
                 return redirect()->route('admin.user')->with(['error' => '  غير موجوده']);

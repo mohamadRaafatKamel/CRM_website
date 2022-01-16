@@ -149,6 +149,19 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="code_zone_patient_id"> {{ __('Zone Patient ID') }} </label>
+                                                            <input type="text" value="{{$user -> code_zone_patient_id}}" id="code_zone_patient_id"
+                                                                   class="form-control"
+                                                                   placeholder="{{ __('Zone Patient ID') }}"
+                                                                   name="code_zone_patient_id" required>
+                                                            @error('code_zone_patient_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="birth_date"> {{ __('Birth Date') }} </label>
                                                             <input type="date" value="{{$user -> birth_date}}" id="birth_date"
                                                                    class="form-control"
@@ -513,8 +526,8 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="specialty"> {{ __('Specialty') }} </label>
-                                                            <select name="specialty" id="specialty"
-                                                                    class="form-control @error('title') is-invalid @enderror" >
+                                                            <select name="specialty" id="specialty" multiple="multiple"
+                                                                    class="form-control select2  @error('title') is-invalid @enderror" >
                                                                 <option></option>
                                                                 @if($specialtis)
                                                                     @foreach($specialtis as $specialty)

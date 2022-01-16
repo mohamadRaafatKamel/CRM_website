@@ -43,12 +43,15 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
+                                        <a class="btn btn-primary mb-2" href="{{ route('admin.service.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Service') }}</a>
+                                        <div class="table-responsive">
                                         <table
-                                            class="table display nowrap table-striped table-bordered ">
+                                            class="table table-striped table-bordered zero-configuration ">
                                             <thead>
                                             <tr>
                                                 <th>اسم عربي</th>
                                                 <th> اسم انجليزي</th>
+                                                <th>  وصف </th>
                                                 <th> {{ __('Type') }}</th>
                                                 <th> صوره</th>
                                                 <th>الحالة</th>
@@ -62,6 +65,7 @@
                                                     <tr>
                                                         <td>{{$data -> name_ar}}</td>
                                                         <td>{{$data -> name_en}}</td>
+                                                        <td>{{$data -> description}}</td>
                                                         <td>{{\App\Models\Service::getServiceType($data -> type)}}</td>
                                                         <td>
                                                             @if($data -> image != null)
@@ -91,6 +95,7 @@
 
                                             </tbody>
                                         </table>
+                                        </div>
                                         <div class="justify-content-center d-flex">
 
                                         </div>

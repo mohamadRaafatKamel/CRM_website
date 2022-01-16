@@ -48,8 +48,9 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
+                                        <a class="btn btn-primary mb-2" href="{{ route('admin.service.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('New') }}</a>
                                         <table
-                                            class="table display nowrap table-striped table-bordered ">
+                                            class="table table-striped table-bordered zero-configuration">
                                             <thead>
                                             <tr>
                                                 <th>{{ __('Name') }} </th>
@@ -69,15 +70,7 @@
                                                         <td>{{$user -> username}}</td>
                                                         <td>{{$user -> phone }}</td>
                                                         <td>{{\App\Models\User::getUserType($user -> type) }}</td>
-                                                        <td>
-                                                            <div class="btn-group" role="group"
-                                                                 aria-label="Basic example">
-
-{{--                                                                <a href="{{route('admin.user.view',$user -> id)}}"--}}
-{{--                                                                   class="btn btn-outline-success btn-min-width box-shadow-3 mr-1 mb-1">عرض</a>--}}
-
-                                                            </div>
-                                                        </td>
+                                                        
                                                     </tr>
                                                 @endforeach
                                             @endisset
@@ -97,4 +90,5 @@
             </div>
         </div>
     </div>
+
 @endsection
