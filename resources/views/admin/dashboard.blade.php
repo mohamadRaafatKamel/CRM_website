@@ -14,10 +14,10 @@
                                     <div class="row">
 
                                         <div class="col-5 pl-2">
-                                            <h4>طلبات جديده</h4>
+                                            <h4>{{ __('All Emergency') }} </h4>
                                         </div>
                                         <div class="col-5 text-right">
-{{--                                            <h4>{{App\Models\Orders::where('state','2')->count()}}</h4>--}}
+                                           <h4>{{App\Models\Requests::where('type',1)->count()}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -35,10 +35,10 @@
                                 <div class="card-body pb-0">
                                     <div class="row">
                                         <div class="col-5 pl-2">
-                                            <h4>تم ارسال مندوب</h4>
+                                            <h4>{{ __('All Visit') }}</h4>
                                         </div>
                                         <div class="col-5 text-right">
-{{--                                            <h4>{{App\Models\Orders::where('state','3')->count()}}</h4>--}}
+                                           <h4>{{App\Models\Requests::where('type',2)->count()}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -57,10 +57,10 @@
                                     <div class="row">
 
                                         <div class="col-5 pl-2">
-                                            <h4>تم التسليم</h4>
+                                            <h4>{{ __('All Book') }}</h4>
                                         </div>
                                         <div class="col-5 text-right">
-{{--                                            <h4>{{App\Models\Orders::where('state','4')->count()}}</h4>--}}
+                                           <h4>{{App\Models\Requests::where('type',3)->count()}}</h4>
                                         </div>
                                     </div>
                                 </div>

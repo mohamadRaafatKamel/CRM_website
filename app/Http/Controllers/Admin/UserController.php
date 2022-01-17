@@ -155,6 +155,36 @@ class UserController extends Controller
         }
     }
 
+    public function create()
+    {
+        return view('admin.user.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'username' => ['required', 'string', 'max:255'],
+            'email' => ['string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:255', 'unique:users'],
+        ]);
+        try {
+
+            $user = new User([
+                'username' => $request->username,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'type' => $request->btn,
+                'password' => Hash::make(rand(1000000000,9999999999)),
+            ]);
+
+            $user->save();
+           
+            return redirect()->route('admin.user.view',$user -> id)->with(['success'=>'تم الحفظ']);
+        }catch (\Exception $ex){
+            return redirect()->route('admin.user.create')->with(['error'=>'يوجد خطء']);
+        }
+    }
+
 /*
     public function destroy($id)
     {

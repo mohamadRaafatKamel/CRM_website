@@ -48,15 +48,15 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-primary mb-2" href="{{ route('admin.service.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('New') }}</a>
+                                        <a class="btn btn-primary mb-2" href="{{ route('admin.user.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('New') }}</a>
                                         <table
                                             class="table table-striped table-bordered zero-configuration">
                                             <thead>
                                             <tr>
                                                 <th>{{ __('Name') }} </th>
-                                                <th> {{ __('UserName') }} </th>
+                                                {{-- <th> {{ __('UserName') }} </th> --}}
                                                 <th> موبيل  </th>
-                                                <th> Acquisition  </th>
+                                                <th>{{ __('Acquisition') }}   </th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -65,9 +65,9 @@
                                                 @foreach($users as $user)
                                                     <tr>
                                                         <td><a href="{{route('admin.user.view',$user -> id)}}">
-                                                            {{$user -> title}} {{$user -> fname}} {{$user -> lname}}
+                                                            {{$user -> username}}
                                                             </a></td>
-                                                        <td>{{$user -> username}}</td>
+                                                        {{-- <td>{{$user -> username}}</td> --}}
                                                         <td>{{$user -> phone }}</td>
                                                         <td>{{\App\Models\User::getUserType($user -> type) }}</td>
                                                         

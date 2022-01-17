@@ -102,8 +102,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('/patent','UserController@indexPatent')->name('admin.user.patent');
         Route::get('/doctor','UserController@indexDoctor')->name('admin.user.doctor');
         Route::get('/partner','UserController@indexPartner')->name('admin.user.partner');
-//        Route::get('create','AdminController@create')->name('admin.user.create');
-//        Route::post('store','AdminController@store')->name('admin.user.store');
+        
+       Route::get('create','UserController@create')->name('admin.user.create');
+       Route::post('store','UserController@store')->name('admin.user.store');
 
         Route::get('view/{id}','UserController@view')->name('admin.user.view');
         Route::post('update/{id}','UserController@update')->name('admin.user.update');

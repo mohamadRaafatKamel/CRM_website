@@ -16,7 +16,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'gender' => ['integer'],
@@ -24,6 +24,14 @@ class AuthController extends Controller
         ]);
         try {
 
+            if(isset($request->type)){
+                if($request->type > 3 or $request->type < 1 ){
+                    $request->type = 1;
+                }
+            }else{
+                $request->request->add(['type' => '1' ]);
+            }
+            
             $user = new User([
                 'username' => $request->username,
                 'email' => $request->email,
