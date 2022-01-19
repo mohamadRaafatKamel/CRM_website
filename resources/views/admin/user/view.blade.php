@@ -525,14 +525,32 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="specialty"> {{ __('Specialty') }} </label>
-                                                            <select name="specialty" id="specialty" multiple="multiple"
-                                                                    class="form-control select2  @error('title') is-invalid @enderror" >
+                                                            <label for="specialty"> تخصص عام </label>
+                                                            <select name="specialty" id="specialty"
+                                                                    class="form-control  @error('title') is-invalid @enderror" >
                                                                 <option></option>
                                                                 @if($specialtis)
                                                                     @foreach($specialtis as $specialty)
                                                                 <option value="{{$specialty->id}}"
                                                                         @if($specialty->id == $doctor->specialty) selected @endif>{{$specialty->name_ar}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="mainspecialty"> تخصص رئيسي </label>
+                                                            <select name="mainspecialty[]" id="mainspecialty" multiple="multiple"
+                                                                    class="form-control select2 " >
+                                                                
+                                                                @if($mainSpecialtis)
+                                                                    @foreach($mainSpecialtis as $mainSpecialty)
+                                                                <option value="{{$mainSpecialty->id}}"
+                                                                    @if( in_array( $mainSpecialty->id , $mainSpecial) ) selected @endif
+                                                                    >{{$mainSpecialty->name_ar}}</option>
+                                                                {{-- @if($mainSpecialty->id == $doctor->specialty) selected @endif --}}
                                                                     @endforeach
                                                                 @endif
                                                             </select>

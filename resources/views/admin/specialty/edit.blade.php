@@ -78,6 +78,29 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="parent_id">{{ __('Parent') }}</label>
+                                                            <select class="select2 form-control" name="parent_id" required>
+                                                                <option value=""></option>
+                                                                @foreach($generals as $general)
+                                                                    <option @if ($datas -> parent_id == $general->id) selected @endif 
+                                                                        value="{{ $general->id }}">
+                                                                        @if (App::getLocale() == 'ar')
+                                                                            {{ $general->name_ar}}
+                                                                        @else
+                                                                            {{ $general->name_en}}
+                                                                        @endif
+                                                                        
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('specialty_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="img">  اضف صوره </label>
                                                             <input type="file" id="img"
                                                                    class="form-control"

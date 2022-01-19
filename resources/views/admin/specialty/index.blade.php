@@ -50,6 +50,7 @@
                                             <tr>
                                                 <th>اسم عربي</th>
                                                 <th> اسم انجليزي</th>
+                                                <th>{{ __('Parent') }}</th>
                                                 <th>الحالة</th>
                                                 <th></th>
                                             </tr>
@@ -61,6 +62,7 @@
                                                     <tr>
                                                         <td>{{$data -> name_ar}}</td>
                                                         <td>{{$data -> name_en}}</td>
+                                                        <td>{{\App\Models\Specialty::getName($data->parent_id) }}</td>
                                                         <td>
                                                             @if($data -> image != null)
                                                                 <img width="50px" height="50px" src="../{{$data -> image}}">
@@ -74,12 +76,6 @@
                                                                  aria-label="Basic example">
                                                                 <a href="{{route('admin.specialty.edit',['id'=> $data->id ])}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
-
-
-{{--                                                                <a href="{{route('admin.specialty.delete',$promo -> id)}}"--}}
-{{--                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>--}}
-
-
                                                             </div>
                                                         </td>
                                                     </tr>

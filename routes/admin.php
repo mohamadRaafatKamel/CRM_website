@@ -79,6 +79,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::post('store','OrderController@store')->name('admin.order.store');
 
         Route::get('/getUserInfo/{id}', 'OrderController@getUserInfo');
+        Route::get('/getDocSpecialty/{id}', 'OrderController@getDocSpecialty');
 
 //        Route::get('edit/{id}','OrderController@edit')->name('admin.order.edit');
 //        Route::post('update/{id}','OrderController@update')->name('admin.order.update');

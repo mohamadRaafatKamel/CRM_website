@@ -15,6 +15,7 @@ use App\Models\Governorate;
 use App\Models\Role;
 use App\Models\Specialty;
 use App\Models\User;
+use App\Models\DocSpecialty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -49,7 +50,8 @@ class UserController extends Controller
 
     public function view($id)
     {
-        $specialtis = Specialty::select()->get();
+        $specialtis = Specialty::select()->General()->get();
+        $mainSpecialtis = Specialty::select()->Main()->get();
         $countrys = Country::select()->get();
         $governorates = Governorate::select()->get();
         $citys = City::select()->get();
@@ -75,13 +77,18 @@ class UserController extends Controller
             $timeWork[$docWork->day.'f'] = $docWork->time_from;
             $timeWork[$docWork->day.'t'] = $docWork->time_to;
         }
-
-        return view('admin.user.view',compact('user','specialtis','doctor','partner','countrys','governorates','citys','timeWork'));
+        // Main Spec
+        $mainSpecial = [];
+        $docSpes = DocSpecialty::select('specialty_id')->where('user_id',$id)->get();
+        foreach($docSpes as $dd){
+            $mainSpecial[] = $dd['specialty_id'];
+        }
+        return view('admin.user.view',compact('user','specialtis','mainSpecial','mainSpecialtis','doctor','partner','countrys','governorates','citys','timeWork'));
     }
 
     public function update($id, UserRequest $request)
     {
-        try {
+        // try {
             // dd($request);
             $user = User::select()->find($id);
             if (!$user) {
@@ -109,6 +116,18 @@ class UserController extends Controller
                         $path = "public/doctorphoto/" . $imageName;
                         $mydoctor['photo'] = $path;
                     }
+                    // main specialty
+                    if (isset($request->mainspecialty)) {
+                        DocSpecialty::select()->where('user_id',$id)->delete();
+                        foreach ($request->mainspecialty as $main){
+                            $docSpc = new DocSpecialty();
+                            $docSpc->user_id = $id;
+                            $docSpc->specialty_id = $main;
+                            $docSpc->save();
+                        }
+                    }else{
+                        DocSpecialty::select()->where('user_id',$id)->delete();
+                    }
 //                    update or create doctor
 //                    DoctorInfo::updateOrCreate
                     $doctor = DoctorInfo::select()->where('user_id',$id)->first();
@@ -132,9 +151,9 @@ class UserController extends Controller
 
             return redirect()->route('admin.user.view',$id)->with(['success' => 'تم التحديث بنجاح']);
 
-        } catch (\Exception $ex) {
-            return redirect()->route('admin.user.view')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
-        }
+        // } catch (\Exception $ex) {
+        //     return redirect()->route('admin.user.view',$id)->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        // }
     }
 
     public function type($id ,$type)

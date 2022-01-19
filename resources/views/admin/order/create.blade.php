@@ -72,7 +72,7 @@
                                                                             @if(isset($myorder->user_id))
                                                                                 @if($myorder->user_id == $user->id) selected @endif @endif
                                                                     >
-                                                                        {{ $user->fname." ".$user->lname." [ ".$user->phone." ]"}}
+                                                                        {{ $user->username." [ ".$user->phone." ]"}}
                                                                     </option>
                                                                 @endforeach
                                                             </select>
@@ -92,7 +92,7 @@
                                                                             @if(isset($myorder->doctor_id))
                                                                             @if($myorder->doctor_id == $doctor->id) selected @endif @endif
                                                                     >
-                                                                        {{ $doctor->fname." ".$doctor->lname }}</option>
+                                                                        {{ $doctor->username }}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('doctor_id')
@@ -268,8 +268,9 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="specialty_id">{{ __('Specialty') }}</label>
-                                                            <select class="select2 form-control" name="specialty_id">
+                                                            <select class="select2 form-control" id="specialty_id" name="specialty_id">
                                                                 <option value=""></option>
+                                                                {{-- <option value="2">222</option> --}}
                                                                 @foreach($specialtys as $specialty)
                                                                     <option value="{{ $specialty->id }}"
                                                                         @if(isset($myorder->specialty_id))
@@ -279,7 +280,7 @@
                                                                 @endforeach
                                                             </select>
                                                             @error('specialty_id')
-                                                            <span class="text-danger">{{$message}}</span>--}}
+                                                            <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -299,6 +300,69 @@
                                                             </select>
                                                             @error('service_id')
                                                             <span class="text-danger">{{$message}}</span>--}}
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="code_zone_patient_id"> {{ __('Code Zone Patient ID') }} </label>
+                                                            <input type="text" id="code_zone_patient_id"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->code_zone_patient_id))
+                                                                    value="{{ $myorder->code_zone_patient_id }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Code Zone Patient ID') }}"
+                                                                   name="code_zone_patient_id">
+                                                            @error('code_zone_patient_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="symptoms"> {{ __('Symptoms') }} </label>
+                                                            <textarea id="symptoms" placeholder="{{ __('Symptoms') }}" 
+                                                                    class="form-control" name="symptoms"
+                                                                    >@if(isset($myorder->symptoms)){{ $myorder->symptoms }}@endif</textarea>
+                                                            @error('code_zone_patient_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="expectation_cost"> {{ __('Expectation Cost') }} </label>
+                                                            <input type="number" id="expectation_cost"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->expectation_cost))
+                                                                   value="{{ $myorder->expectation_cost }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Expectation Cost') }}"
+                                                                   name="expectation_cost">
+                                                            @error('expectation_cost')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="real_cost"> {{ __('Real Cost') }} </label>
+                                                            <input type="number" id="real_cost"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->real_cost))
+                                                                   value="{{ $myorder->real_cost }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Real Cost') }}"
+                                                                   name="real_cost">
+                                                            @error('real_cost')
+                                                            <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -435,6 +499,34 @@
                             $('#phone2').val(response.mobile);
                             $('#birth_date').val(response.birth_date);
                             $('#gender').val(response.gender);
+                            $('#code_zone_patient_id').val(response.code_zone_patient_id);
+                        }
+                    }
+                    // error: function (xhr, ajaxOptions, thrownError) {
+                    //     input.val(0);
+                    // }
+                });
+                // console.log($('#user_id').val())
+            });
+
+            $('#doctor_id').change(function () {
+                $.ajax({
+                    url: 'getDocSpecialty/' + $('#doctor_id').val(),
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response.length)
+                        if(response == null){
+                            console.log('Not Found');
+                        }else {
+                            if(response.length > 0){
+                                for (let i = 0; i < response.length; i++) { 
+                                    $('#specialty_id').append($('<option>', {
+                                        value: response[i].id,
+                                        text: response[i].name_ar
+                                    }));
+                                }
+                            }
                         }
                     }
                     // error: function (xhr, ajaxOptions, thrownError) {

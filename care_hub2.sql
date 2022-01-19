@@ -1,7 +1,9 @@
--- ALTER TABLE `service` CHANGE `name_en` `description` VARCHAR(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
--- ALTER TABLE `service` DROP INDEX `name_en`;
+ALTER TABLE `orders` ADD COLUMN `expectation_cost` int(20) NULL DEFAULT 0 AFTER `arrive_on`;
+ALTER TABLE `orders` ADD COLUMN `real_cost` int(20) NULL DEFAULT 0 AFTER `expectation_cost`;
+ALTER TABLE `orders` ADD COLUMN `code_zone_patient_id` VARCHAR(250) NULL AFTER `real_cost`;
+ALTER TABLE `orders` ADD COLUMN `symptoms` VARCHAR(250) NULL AFTER `code_zone_patient_id`;
 
--- ALTER TABLE `service` ADD COLUMN `name_en` VARCHAR(250) NULL AFTER `name_ar`;
--- ALTER TABLE `service` ADD UNIQUE(`name_en`);
 
--- ALTER TABLE `users` ADD COLUMN `code_zone_patient_id` VARCHAR(250) NULL AFTER `adress2`;
+ALTER TABLE `specialty` ADD COLUMN `parent_id` int(20) NULL AFTER `name_en`;
+ALTER TABLE `specialty` ADD FOREIGN KEY (`parent_id`) REFERENCES `specialty`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+

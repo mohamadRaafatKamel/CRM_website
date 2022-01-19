@@ -18,14 +18,22 @@ class Specialty extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name_ar', 'name_en', 'image', 'admin_id', 'disabled', 'created_at', 'updated_at'
+        'id', 'name_ar', 'name_en', 'parent_id', 'image', 'admin_id', 'disabled', 'created_at', 'updated_at'
     ];
 
     public function  scopeSelection($query){
 
         return $query -> select(
-            'id', 'name_ar', 'name_en', 'image', 'admin_id', 'disabled', 'created_at', 'updated_at'
+            'id', 'name_ar', 'name_en', 'parent_id', 'image', 'admin_id', 'disabled', 'created_at', 'updated_at'
         );
+    }
+
+    public function scopeGeneral($query){
+        return $query -> where('parent_id',null);
+    }
+
+    public function scopeMain($query){
+        return $query -> where('parent_id','!=',null);
     }
 
     public function scopeActive($query){
@@ -39,12 +47,15 @@ class Specialty extends Model
     public static function getName($id)
     {
         $data = Specialty::select()->find($id);
-        if (App::getLocale() == 'ar')
-            return $data['name_ar'];
-        elseif (App::getLocale() == 'en')
-            return $data['name_en'];
-        else
-            return $data['name_en'];
+        if(isset($data->id)){
+            if (App::getLocale() == 'ar')
+                return $data['name_ar'];
+            elseif (App::getLocale() == 'en')
+                return $data['name_en'];
+            else
+                return $data['name_en'];
+        }
+        return "";
     }
 
     public static function getNameEN($id)

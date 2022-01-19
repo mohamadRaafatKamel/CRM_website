@@ -20,6 +20,18 @@ class SpecialtyController extends Controller
         return SpecialtyResource::collection(Specialty::all());
     }
 
+    // General Specialty
+    public function indexGeneral()
+    {
+        return SpecialtyResource::collection(Specialty::General()->get());
+    }
+
+    // Main Specialty
+    public function indexMain()
+    {
+        return SpecialtyResource::collection(Specialty::Main()->get());
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AreaRequest;
 use App\Models\City;
+use App\Models\DocSpecialty;
 use App\Models\Governorate;
 use App\Models\Order;
 use App\Models\Requests;
@@ -25,8 +26,8 @@ class OrderController extends Controller
     public function create()
     {
         $serves = Service::select()->active()->get();
-        $specialtys = Specialty::select()->active()->get();
-        $doctors = User::select()->doctor()->get();
+        $specialtys = [];
+        $doctors = User::select()->doctor()->Verification()->get();
         $users = User::select()->get();
         $governorates = Governorate::select()->get();
         $citys = City::select()->get();
@@ -35,6 +36,10 @@ class OrderController extends Controller
             $myorder = Order::select()->find($_GET['order']);
             if(!isset($myorder->id))
                 return redirect()->route('admin.order');
+
+            $specialtys = DocSpecialty::join('specialty', 'doc_specialty.specialty_id', '=', 'specialty.id')
+                ->select('specialty.id','specialty.name_ar')
+                ->where('user_id',$myorder->doctor_id )->get();
 
         } elseif (isset($_GET['req'])) {
             $myreq = Requests::select()->find($_GET['req']);
@@ -53,8 +58,7 @@ class OrderController extends Controller
                 $myorder->visit_time_day = $myreq->visit_time_day;
                 $myorder->visit_time_from = $myreq->visit_time_from;
                 $myorder->visit_time_to = $myreq->visit_time_to;
-                $myorder->req_id = $myreq->id;
-                $myorder->request_id = $myreq->type;
+                $myorder->request_id = $myreq->id;
                 $myorder->governorate_id = $myreq->governorate_id;
                 $myorder->city_id  = $myreq->city_id ;
                 $myorder->adress = $myreq->address;
@@ -75,6 +79,7 @@ class OrderController extends Controller
                         $myorder->gender = $patient->gender;
                         $myorder->phone2 = $patient->mobile;
                         $myorder->birth_date = $patient->birth_date;
+                        $myorder->code_zone_patient_id = $patient->code_zone_patient_id;
                     }
                 }
             }
@@ -126,6 +131,19 @@ class OrderController extends Controller
         // get records from database
         if($id!=0){
             $arr = User::select()->find($id);
+        }else{
+            $arr['price'] = 0;
+        }
+        echo json_encode($arr);
+        exit;
+    }
+
+    public function getDocSpecialty($id = 0){
+        // get records from database
+        if($id!=0){
+            $arr = DocSpecialty::join('specialty', 'doc_specialty.specialty_id', '=', 'specialty.id')
+                    ->select('specialty.id','specialty.name_ar')
+                    ->where('user_id',$id)->get();
         }else{
             $arr['price'] = 0;
         }

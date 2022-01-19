@@ -66,6 +66,10 @@ class User extends Authenticatable
         return $query -> where('type',2);
     }
 
+    public function scopeVerification($query){
+        return $query -> where('verification',1);
+    }
+
     static public function getUserType($type)
     {
         switch ($type){
@@ -97,14 +101,15 @@ class User extends Authenticatable
 
     public static function getUserName($id)
     {
-        $user = User::select('title','fname','lname')->find($id);
-        return $user['title']." ".$user['fname']." ".$user['lname'];
+        $user = User::select('title','username')->find($id);
+        return $user['title']." ".$user['username'];
     }
 
     public static function getDocName($id)
     {
-        $user = User::select('title','fname','lname')->find($id);
-        return "Dr ".$user['fname']." ".$user['lname'];
+        // $user = User::select('title','fname','lname')->find($id);
+        $user = User::select('username')->find($id);
+        return "Dr ".$user['username'];
     }
 
 }

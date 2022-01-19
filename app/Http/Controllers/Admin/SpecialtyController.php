@@ -17,7 +17,8 @@ class SpecialtyController extends Controller
 
     public function create()
     {
-        return view('admin.specialty.create');
+        $generals = Specialty::select()->General()->get();
+        return view('admin.specialty.create',compact('generals'));
     }
 
     public function store(Request $request)
@@ -43,18 +44,19 @@ class SpecialtyController extends Controller
 
     public function edit($id)
     {
+        $generals = Specialty::select()->General()->get();
         $datas = Specialty::select()->find($id);
         if(!$datas){
             return redirect()->route('admin.specialty')->with(['error'=>"غير موجود"]);
         }
-        return view('admin.specialty.edit',compact('datas'));
+        return view('admin.specialty.edit',compact('datas','generals'));
     }
 
     public function update($id, Request $request)
     {
-        $request->validate([
-            'name_en'=>"unique:specialty,name_en",
-        ]);
+        // $request->validate([
+        //     'name_en'=>"unique:specialty,name_en",
+        // ]);
         try {
 
             $data = Specialty::find($id);

@@ -19,8 +19,10 @@ class Order extends Model
      */
     protected $fillable = [
         'id', 'user_id', 'doctor_id', 'governorate_id', 'city_id', 'adress', 'adress2', 'request_id', 'phone', 'phone2', 'type',
-        'emergency', 'specialty_id', 'service_id', 'visit_time_day', 'visit_time_from', 'fullname', 'admin_id', 'birth_date', 'gender',
-        'visit_time_to', 'arrive_on', 'doc_states', 'user_states', 'states', 'doc_rate', 'user_rate', 'updated_at','created_at'
+        'emergency', 'specialty_id', 'service_id', 'visit_time_day', 'visit_time_from', 'fullname', 'admin_id', 
+        'birth_date', 'gender', 'visit_time_to', 'arrive_on', 
+        'expectation_cost', 'real_cost', 'code_zone_patient_id', 'symptoms',
+        'doc_states', 'user_states', 'states', 'doc_rate', 'user_rate', 'updated_at','created_at'
     ];
 
     public function  scopeSelection($query){
@@ -28,6 +30,7 @@ class Order extends Model
         return $query -> select(
             'id', 'user_id', 'doctor_id', 'governorate_id', 'city_id', 'adress', 'adress2', 'request_id', 'phone', 'phone2', 'type',
             'emergency', 'specialty_id', 'service_id', 'visit_time_day', 'visit_time_from', 'fullname', 'admin_id', 'birth_date', 'gender',
+            'expectation_cost', 'real_cost', 'code_zone_patient_id', 'symptoms',
             'visit_time_to', 'arrive_on', 'doc_states', 'user_states', 'states', 'doc_rate', 'user_rate', 'updated_at','created_at'
         );
     }
