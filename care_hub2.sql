@@ -1,9 +1,20 @@
-ALTER TABLE `orders` ADD COLUMN `expectation_cost` int(20) NULL DEFAULT 0 AFTER `arrive_on`;
-ALTER TABLE `orders` ADD COLUMN `real_cost` int(20) NULL DEFAULT 0 AFTER `expectation_cost`;
-ALTER TABLE `orders` ADD COLUMN `code_zone_patient_id` VARCHAR(250) NULL AFTER `real_cost`;
-ALTER TABLE `orders` ADD COLUMN `symptoms` VARCHAR(250) NULL AFTER `code_zone_patient_id`;
+CREATE TABLE `doc_specialty` (
+  `id` int(20) NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `specialty_id` int(20) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+ALTER TABLE `doc_specialty`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `specialty_id` (`specialty_id`);
 
-ALTER TABLE `specialty` ADD COLUMN `parent_id` int(20) NULL AFTER `name_en`;
-ALTER TABLE `specialty` ADD FOREIGN KEY (`parent_id`) REFERENCES `specialty`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `doc_specialty`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
+ALTER TABLE `doc_specialty`
+  ADD CONSTRAINT `doc_specialty_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `doc_specialty_ibfk_2` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`);
+COMMIT;
