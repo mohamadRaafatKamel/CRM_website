@@ -88,8 +88,7 @@ class UserController extends Controller
 
     public function update($id, UserRequest $request)
     {
-        // try {
-            // dd($request);
+        try {
             $user = User::select()->find($id);
             if (!$user) {
                 return redirect()->route('admin.user')->with(['error' => '  غير موجوده']);
@@ -151,9 +150,9 @@ class UserController extends Controller
 
             return redirect()->route('admin.user.view',$id)->with(['success' => 'تم التحديث بنجاح']);
 
-        // } catch (\Exception $ex) {
-        //     return redirect()->route('admin.user.view',$id)->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
-        // }
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.user.view',$id)->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        }
     }
 
     public function type($id ,$type)
