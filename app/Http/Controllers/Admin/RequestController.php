@@ -20,6 +20,7 @@ class RequestController extends Controller
 {
     public function index()
     {
+        // ->orderBy('created_at', 'DESC')
         $requests = Requests::select()->paginate(PAGINATION_COUNT);
         $info = ['name' => "All Request", 'type' => '0'];
         return view('admin.request.index', compact('requests','info'));

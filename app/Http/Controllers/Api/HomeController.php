@@ -103,6 +103,7 @@ class HomeController extends Controller
             $req->adress2 = $request->adress2;
             $req->phone = $request->phone;
             $req->service_id = $request->service_id;
+            $req->specialty_id = $request->specialty_id ;
             $req->visit_time_day = $request->visit_time_day;
             $req->visit_time_from = $request->visit_time_from;
             $req->visit_time_to = $request->visit_time_to;

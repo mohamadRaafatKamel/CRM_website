@@ -93,6 +93,50 @@
 
                                                     </tbody>
                                                 </table>
+                                                @elseif ($info['type'] == '2')
+                                                <table
+                                                    class="table table-striped table-bordered zero-configuration">
+                                                    <thead>
+                                                    <tr>
+                                                        <th> id</th>
+                                                        <th>العميل</th>
+                                                        <th> موبيل</th>
+                                                        <th> تواصل معه</th>
+                                                        <th> نوع الخدمه</th>
+                                                        <th> التخصص</th>
+                                                        <th> الحاله</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    @isset($requests)
+                                                        @foreach($requests as $request)
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="{{route('admin.order.create',['req'=>$request -> id])}}">
+                                                                        {{$request -> id}}</a></td>
+                                                                <td>
+                                                                    @if($request -> user_id == null )
+                                                                        {{__('Guest')}}
+                                                                    @else
+                                                                        <a href="{{route('admin.user.view',$request -> user_id)}}">
+                                                                            {{\App\Models\User::getUserName($request -> user_id) }}
+                                                                        </a>
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{$request -> phone}}</td>
+                                                                <td>{{$request -> call_him }}</td>
+                                                                <td>{{ __(\App\Models\Service::getName($request -> service_id)) }}</td>
+                                                                <td>{{ __(\App\Models\Specialty::getName($request -> specialty_id)) }}</td>
+                                                                <td>{{ __(\App\Models\Requests::getRequestState($request -> state)) }}</td>
+                                                            
+                                                            </tr>
+                                                        @endforeach
+                                                    @endisset
+
+
+                                                    </tbody>
+                                                </table>
                                             @else
                                                 <table
                                                     class="table table-striped table-bordered zero-configuration">

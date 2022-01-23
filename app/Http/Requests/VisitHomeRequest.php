@@ -27,6 +27,7 @@ class VisitHomeRequest extends FormRequest
         return [
             'user_id'=>'exists:users,id',
             'service_id'=>'required|exists:service,id',
+            'specialty_id'=>'exists:specialty,id',
             'governorate_id'=>'exists:governorates,id',
             'city_id'=>'exists:cities,id',
             'adress'=>'max:250',
