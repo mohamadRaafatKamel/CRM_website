@@ -93,7 +93,7 @@
 
                                                     </tbody>
                                                 </table>
-                                                @elseif ($info['type'] == '2')
+                                                @elseif ($info['type'] == '2' or $info['type'] == '3')
                                                 <table
                                                     class="table table-striped table-bordered zero-configuration">
                                                     <thead>
