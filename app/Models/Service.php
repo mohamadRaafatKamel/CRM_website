@@ -39,18 +39,24 @@ class Service extends Model
     public static function getName($id)
     {
         $data = Service::select()->find($id);
-        if (App::getLocale() == 'ar')
-            return $data['name_ar'];
-        elseif (App::getLocale() == 'en')
-            return $data['name_en'];
-        else
-            return $data['name_en'];
+        if(isset($data->id)){
+            if (App::getLocale() == 'ar')
+                return $data['name_ar'];
+            elseif (App::getLocale() == 'en')
+                return $data['name_en'];
+            else
+                return $data['name_en'];
+        }
+        return "";
     }
 
     public static function getNameEN($id)
     {
         $data = Service::select()->find($id);
-        return $data['name_en'];
+        if(isset($data->id)){
+            return $data['name_en'];
+        }
+        return "";
     }
 
     static public function getServiceType($type)

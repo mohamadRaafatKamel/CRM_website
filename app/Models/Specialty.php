@@ -61,7 +61,10 @@ class Specialty extends Model
     public static function getNameEN($id)
     {
         $data = Specialty::select()->find($id);
+        if(isset($data->id)){
         return $data['name_en'];
+        }
+        return "";
     }
 
 }
