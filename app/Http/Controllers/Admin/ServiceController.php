@@ -35,6 +35,10 @@ class ServiceController extends Controller
             $image->move(public_path('service'),$imageName);
             $request->request->add(['image' =>  "public/service/".$imageName ]);
             Service::create($request->except(['_token']));
+            if(isset($request->btn))
+                if($request->btn =="saveAndNew")
+                    return redirect()->route('admin.service.create')->with(['success'=>'تم الحفظ']);
+
             return redirect()->route('admin.service')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.service.create')->with(['error'=>'يوجد خطء']);

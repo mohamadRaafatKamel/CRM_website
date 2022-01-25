@@ -197,7 +197,7 @@ class UserController extends Controller
 
             $user->save();
            
-            return redirect()->route('admin.user.view',$user -> id)->with(['success'=>'تم الحفظ']);
+            return redirect()->route('admin.user.create',$user -> id)->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.user.create')->with(['error'=>'يوجد خطء']);
         }

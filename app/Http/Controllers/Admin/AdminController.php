@@ -30,6 +30,10 @@ class AdminController extends Controller
             $pass = Hash::make($request->password);
             unset($request->password);
             Admin::create(array_merge($request->except(['_token']),['password'=>$pass,'remember_token'=>'']));
+            if(isset($request->btn))
+                if($request->btn =="saveAndNew")
+                    return redirect()->route('admin.admin.create')->with(['success'=>'تم الحفظ']);
+
             return redirect()->route('admin.admin')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.admin.create')->with(['error'=>'يوجد خطء']);

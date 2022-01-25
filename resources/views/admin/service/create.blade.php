@@ -138,10 +138,15 @@
 
 
                                             <div class="form-actions">
-                                                <button type="button" class="btn btn-warning mr-1"
-                                                        onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
+                                                
+                                                <a href="{{ route('admin.service') }}" class="btn btn-warning">
+                                                    <i class="la la-check-square-o"></i> تراجع
+                                                </a>
+                                                
+                                                <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
+                                                    <i class="la la-check-square-o"></i> حفظ و جديد
                                                 </button>
+
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="la la-check-square-o"></i> حفظ
                                                 </button>

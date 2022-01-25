@@ -36,6 +36,10 @@ class SpecialtyController extends Controller
             $request->request->add(['image' =>  "public/specialty/".$imageName ]);
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
             Specialty::create($request->except(['_token']));
+            if(isset($request->btn))
+                if($request->btn =="saveAndNew")
+                    return redirect()->route('admin.specialty.create')->with(['success'=>'تم الحفظ']);
+        
             return redirect()->route('admin.specialty')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.specialty.create')->with(['error'=>'يوجد خطء']);

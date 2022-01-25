@@ -81,7 +81,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="parent_id">{{ __('Parent') }}</label>
-                                                            <select class="select2 form-control" name="parent_id" required>
+                                                            <select class="select2 form-control" name="parent_id">
                                                                 <option value=""></option>
                                                                 @foreach($generals as $general)
                                                                     <option value="{{ $general->id }}">
@@ -135,13 +135,19 @@
 
 
                                             <div class="form-actions">
-                                                <button type="button" class="btn btn-warning mr-1"
-                                                        onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
+                                                
+                                                <a href="{{ route('admin.specialty') }}" class="btn btn-warning">
+                                                    <i class="la la-check-square-o"></i> تراجع
+                                                </a>
+                                                
+                                                <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
+                                                    <i class="la la-check-square-o"></i> حفظ و جديد
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="la la-check-square-o"></i> حفظ
                                                 </button>
+
+                                                
                                             </div>
                                         </form>
                                     </div>
