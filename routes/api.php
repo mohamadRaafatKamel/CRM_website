@@ -63,15 +63,18 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/joinus', 'HomeController@joinUs');
         });
 
-        Route::group(['middleware'=>'auth:api'], function () {
+        Route::group(['middleware'=>['auth:api','verified'] ], function () {
 
             // Route::apiResource('/services', ServicesController::class);
             // logout
             Route::post('/logout', 'AuthController@logout');
 
             // show user info
-            Route::get('/userinfo', 'HomeController@userinfo');
-            Route::get('/doctortimework/{id}', 'HomeController@doctorTimeWork');
+            Route::get('/userinfo', 'UserController@userinfo');
+            Route::get('/doctortimework/{id}', 'UserController@doctorTimeWork');
+
+            // user edit
+            Route::post('/user/update/info', 'UserController@updateInfo');
 
             // show Requests
             Route::get('/requests', 'RequestsController@userRequest');

@@ -116,7 +116,6 @@
                                                 <a href="{{ route('admin.admin') }}" class="btn btn-warning">
                                                     <i class="la la-check-square-o"></i> تراجع
                                                 </a>
-                                                
                                                 <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
                                                     <i class="la la-check-square-o"></i> حفظ و جديد
                                                 </button>

@@ -7,7 +7,6 @@ use App\Http\Requests\EmergancyRequest;
 use App\Http\Requests\BookServicesRequest;
 use App\Http\Requests\JoinUsRequest;
 use App\Http\Requests\VisitHomeRequest;
-use App\Http\Resources\UserResource;
 use App\Mail\joinus;
 use App\Models\CompanyInfo;
 use App\Models\DoctorInfo;
@@ -158,31 +157,7 @@ class HomeController extends Controller
         }
     }
 
-    public function userinfo(Request $request)
-    {
-        return new UserResource($request);
-    }
-
-    public function doctorTimeWork($doctor_id)
-    {
-        $timeWork = [];
-        $doctor = DoctorInfo::select()->where('user_id', $doctor_id)->first();
-        if (isset($doctor->id)) {
-            $docWorks = DoctorWorkDay::select()->where('user_id', $doctor_id)->get();
-            if (isset($docWorks)) {
-                foreach ($docWorks as $docWork) {
-                    $timeWork[$docWork->day] = 1;
-                    $timeWork[$docWork->day . '_from'] = $docWork->time_from;
-                    $timeWork[$docWork->day . '_to'] = $docWork->time_to;
-                }
-                $timeWork = [ 'data'=>['success' => "1", 'time' => $timeWork] ];
-            }else
-                $timeWork = [ 'data'=>['success' => "0", 'error' => "No any Doctor Work Time"] ];
-        }else
-            $timeWork = [ 'data'=>['success' => "0", 'error' => "No any Doctor profile"] ];
-
-        return response()->json($timeWork);
-    }
+    
 
     // Not for API /////////////////////////////////////////////////////////////////////////////////////////////////////
 
