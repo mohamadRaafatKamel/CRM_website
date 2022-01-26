@@ -63,7 +63,9 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/joinus', 'HomeController@joinUs');
         });
 
-        Route::group(['middleware'=>['auth:api','verified'] ], function () {
+        // Route::group(['middleware'=>['auth:api','verified'] ], function () {
+        Route::group(['middleware'=>['auth:api'] ], function () {
+
 
             // Route::apiResource('/services', ServicesController::class);
             // logout
