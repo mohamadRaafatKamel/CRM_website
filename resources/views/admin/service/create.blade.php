@@ -97,7 +97,7 @@
                                                             <input type="file" id="img"
                                                                    class="form-control"
                                                                    accept="image/*"
-                                                                   name="img" required>
+                                                                   name="img">
                                                             @error('img')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
