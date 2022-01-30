@@ -64,7 +64,7 @@ class Specialty extends Model
         if(isset($data->id)){
         return $data['name_en'];
         }
-        return "";
+        return "_";
     }
 
 }

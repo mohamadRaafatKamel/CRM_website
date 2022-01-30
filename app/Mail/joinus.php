@@ -32,7 +32,7 @@ class joinus extends Mailable
     {
         $data = $this->data;
         $mail = $this->view('mail.joinus',compact('data'))
-                    ->from('devmrm01@gmail.com')
+                    ->from('website@care-hub.net')
                     ->subject('Join App');
                     
         if(isset($this->data['Real_Path'])){

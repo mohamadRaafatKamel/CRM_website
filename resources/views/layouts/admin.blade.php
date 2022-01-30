@@ -169,6 +169,20 @@
         meridians: true,setCurrentTime: false
     });
 </script>
+
+<script>
+    // Notification 
+    $(document).ready(function() {
+
+    // setInterval(function() {
+    //     // $("#signInButton").trigger('click');
+    //     console.log("555");
+    // }, 30 * 1000);
+
+    });
+
+
+</script>
 @yield('script')
 </body>
 </html>
