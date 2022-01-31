@@ -62,7 +62,7 @@ class Specialty extends Model
     {
         $data = Specialty::select()->find($id);
         if(isset($data->id)){
-        return $data['name_en'];
+            return $data['name_en'];
         }
         return "_";
     }

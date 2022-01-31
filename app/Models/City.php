@@ -31,18 +31,24 @@ class City extends Model
     public static function getName($id)
     {
         $data = City::select()->find($id);
-        if (App::getLocale() == 'ar')
-            return $data['city_name_ar'];
-        elseif (App::getLocale() == 'en')
-            return $data['city_name_en'];
-        else
-            return $data['city_name_en'];
+        if(isset($data->id)){
+            if (App::getLocale() == 'ar')
+                return $data['city_name_ar'];
+            elseif (App::getLocale() == 'en')
+                return $data['city_name_en'];
+            else
+                return $data['city_name_en'];
+        }
+        return "";
     }
 
     public static function getNameEN($id)
     {
         $data = City::select()->find($id);
-        return $data['city_name_en'];
+        if(isset($data->id)){
+            return $data['city_name_en'];
+        }
+        return "";
     }
 
 }

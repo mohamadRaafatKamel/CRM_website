@@ -16,10 +16,8 @@ class RequestsController extends Controller
      */
     public function userRequest(Request $request)
     {
-        // return $request->user()->id;
         $myRequests = Requests::select()->where('user_id', $request->user()->id )->Where('state', '0')->get();
-        return $myRequests;
-        // return RequestResource::collection($myRequests);
+        return RequestResource::collection($myRequests);
     }
 
     /**
