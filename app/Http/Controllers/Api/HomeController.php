@@ -93,8 +93,8 @@ class HomeController extends Controller
     {
         try {
             $req = new Requests();
-            if (isset($request->user()->id)) {
-                $req->user_id = $request->user()->id;
+            if (Auth::guard('api')->check()) {
+                $req->user_id = Auth::guard('api')->user()->id;
             }
             $req->governorate_id = $request->governorate_id;
             $req->city_id = $request->city_id;
