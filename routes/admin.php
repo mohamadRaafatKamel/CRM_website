@@ -132,8 +132,17 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
     });
     ##################### End Request ##########################
 
+    ##################### Notification ##############################
+    // Route::get('/getcountreqest/{type}', 'HomeController@getCountReqest');
+
+    ##################### End Notification ##########################
+
 });
 
+##################### Notification ##############################
+Route::get('/getcountreqest/{type}', 'HomeController@getCountReqest');
+
+##################### End Notification ##########################
 
 Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'guest:admin'],function (){
 

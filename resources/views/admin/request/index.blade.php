@@ -49,7 +49,15 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
                                         <a class="btn btn-primary mb-2" href="{{ route('admin.order.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a>
+                                        @if ($info['type'] == '1')
+                                        <a class="btn btn-danger mb-2" href="{{ route('admin.request.emergency') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
+                                        @elseif ($info['type'] == '2')
+                                        <a class="btn btn-danger mb-2" href="{{ route('admin.request.visit') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
+                                        @elseif ($info['type'] == '3')
+                                        <a class="btn btn-danger mb-2" href="{{ route('admin.request.book') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
+                                        @else
                                         <a class="btn btn-danger mb-2" href="{{ route('admin.request') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
+                                        @endif
                                         <div class="table-responsive">
                                             @if($info['type'] == '1')
                                                 <table

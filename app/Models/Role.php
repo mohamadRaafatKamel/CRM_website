@@ -35,15 +35,11 @@ class Role extends Model
             $role = RoleInfo::select()->where([
                 ['name','=',$permissionName],
                 ['role_id','=',$userRole]
-            ])->get();
+            ])->first();
             if(isset($role['have_permission'])){
                 if($role['have_permission'] == '1'){
                     return true;
-                }else{
-                    return false;
                 }
-            }else{
-                return false;
             }
         }else{
             return true;

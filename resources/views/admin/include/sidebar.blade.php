@@ -7,12 +7,18 @@
             </li>
 
 
-            <li class="nav-item">
+            <li class="nav-item"> {{-- active --}}
                 <a href=""><i class="la la-certificate"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> الطلبات </span>
                 </a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="{{route('admin.request')}}"   class="active"
+                    <li 
+                    @if (isset($info['type']))
+                        @if ($info['type'] == '0')
+                            class="active"
+                        @endif
+                    @endif
+                    ><a class="menu-item" href="{{route('admin.request')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Request') }}</span>
                             <span class="badge badge badge-info badge-pill float-right mr-2">
@@ -28,7 +34,13 @@
                             </span>
                         </a>
                     </li>
-                    <li><a class="menu-item" href="{{route('admin.request.emergency')}}"   class="active"
+                    <li
+                    @if (isset($info['type']))
+                        @if ($info['type'] == '1')
+                            class="active"
+                        @endif
+                    @endif
+                    ><a class="menu-item" href="{{route('admin.request.emergency')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Emergency') }}</span>
                             <span class="badge badge badge-info badge-pill float-right mr-2">
@@ -36,7 +48,13 @@
                             </span>
                         </a>
                     </li>
-                    <li><a class="menu-item" href="{{route('admin.request.visit')}}"   class="active"
+                    <li
+                    @if (isset($info['type']))
+                        @if ($info['type'] == '2')
+                            class="active"
+                        @endif
+                    @endif
+                    ><a class="menu-item" href="{{route('admin.request.visit')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Visit') }}</span>
                             <span class="badge badge badge-info badge-pill float-right mr-2">
@@ -44,7 +62,13 @@
                             </span>
                         </a>
                     </li>
-                    <li><a class="menu-item" href="{{route('admin.request.book')}}"   class="active"
+                    <li
+                    @if (isset($info['type']))
+                        @if ($info['type'] == '3')
+                            class="active"
+                        @endif
+                    @endif
+                    ><a class="menu-item" href="{{route('admin.request.book')}}"  
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Book') }}</span>
                             <span class="badge badge badge-info badge-pill float-right mr-2">
@@ -75,20 +99,25 @@
                 </ul>
             </li>
 
-            <li class="nav-item">
-                <a href=""><i class="la la-map-signs"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main"> التخصصات </span>
-                </a>
-                <ul class="menu-content">
-                    <li><a class="menu-item" href="{{route('admin.specialty')}}"
-                        data-i18n="nav.dash.ecommerce"> عرض الكل </a>
-                    </li>
-                    <li><a class="menu-item" href="{{route('admin.specialty.create')}}" data-i18n="nav.dash.crypto">
-                            أضافه جديد </a>
-                    </li>
-                </ul>
-            </li>
             @if(\App\Models\Role::havePremission('specialty_view'))
+                <li class="nav-item">
+                    <a href=""><i class="la la-map-signs"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main"> التخصصات </span>
+                    </a>
+                    <ul class="menu-content">
+                        <li><a class="menu-item" href="{{route('admin.specialty')}}"
+                            data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                        </li>
+                        @if(\App\Models\Role::havePremission('specialty_cr'))
+                            <li><a class="menu-item" href="{{route('admin.specialty.create')}}" data-i18n="nav.dash.crypto">
+                                    أضافه جديد </a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            @endif
+
+            @if(\App\Models\Role::havePremission('serves_view'))
                 <li class="nav-item">
                     <a href=""><i class="la la-map-signs"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> الخدمات </span>
@@ -97,7 +126,7 @@
                         <li><a class="menu-item" href="{{route('admin.service')}}"
                                data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                         </li>
-                        @if(\App\Models\Role::havePremission('specialty_cr'))
+                        @if(\App\Models\Role::havePremission('serves_cr'))
                             <li><a class="menu-item" href="{{route('admin.service.create')}}" data-i18n="nav.dash.crypto">
                                     أضافه جديد </a>
                             </li>
@@ -117,23 +146,23 @@
                     <li><a class="menu-item" href="{{route('admin.admin.create')}}" data-i18n="nav.dash.crypto">
                             أضافه جديد </a>
                     </li>
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="">--}}
-{{--                            <i class="la la-map-marker"></i>--}}
-{{--                            <span class="menu-title" data-i18n="nav.dash.main"> الصلاحيات </span>--}}
-{{--                            <span class="badge badge badge-info badge-pill float-right mr-2">--}}
-{{--                        {{App\Models\Role::count()}}--}}
-{{--                    </span>--}}
-{{--                        </a>--}}
-{{--                        <ul class="menu-content">--}}
-{{--                            <li><a class="menu-item" href="{{route('admin.role')}}"   class="active"--}}
-{{--                                   data-i18n="nav.dash.ecommerce"> عرض الكل </a>--}}
-{{--                            </li>--}}
-{{--                            <li><a class="menu-item" href="{{route('admin.role.create')}}" data-i18n="nav.dash.crypto">--}}
-{{--                                    أضافه جديد </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
+                   <li class="nav-item">
+                       <a href="">
+                           <i class="la la-map-marker"></i>
+                           <span class="menu-title" data-i18n="nav.dash.main"> الصلاحيات </span>
+                           {{-- <span class="badge badge badge-info badge-pill float-right mr-2"> --}}
+                       {{-- {{App\Models\Role::count()}} --}}
+                   {{-- </span> --}}
+                       </a>
+                       <ul class="menu-content">
+                           <li><a class="menu-item" href="{{route('admin.role')}}"   class="active"
+                                  data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                           </li>
+                           <li><a class="menu-item" href="{{route('admin.role.create')}}" data-i18n="nav.dash.crypto">
+                                   أضافه جديد </a>
+                           </li>
+                       </ul>
+                    </li>
                 </ul>
             </li>
 

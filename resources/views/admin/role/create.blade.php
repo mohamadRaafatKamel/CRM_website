@@ -94,8 +94,39 @@
                                                                    class="card-title ml-1">تعديل </label>
                                                         </div>
                                                     </div>
-
                                                 </div>
+
+                                                <h4>{{ __('Serves') }}</h4>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="serves_view" name="role_info[]"
+                                                                   id="serves_view"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="serves_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="serves_cr" name="role_info[]"
+                                                                   id="serves_cr"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="serves_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="serves_idt" name="role_info[]"
+                                                                   id="serves_idt"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="serves_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
 
 
 

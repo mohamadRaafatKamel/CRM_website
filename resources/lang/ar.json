@@ -14,8 +14,8 @@
     "Specialty": "التخصص",
     "Add your Phone": "ادخل رقم الهاتف",
     "Call me": "اتصل",
-    "Our Serves": "خدمة",
-    "Serves": "خدمة",
+    "Our Serves": "خدماتنا",
+    "Serves": "الخدمات",
     "Please Complete your Profile": "الرجاء استكمال ملف التعريف الخاص بك",
     "Day": "",
     "Available From": "",
@@ -160,6 +160,15 @@
     "": "",
     "": "",
     "//Admin Order End": "Admin Order End",
+
+    "//Admin Role Start": "Admin Role Start",
+    "View": "عرض",
+    "Create": "انشاء",
+    "Edit": "تعديل",
+    "": "",
+    "": "",
+    "": "",
+    "//Admin Role End": "Admin Role End",
 
 
     "//Admin End": "Admin End",

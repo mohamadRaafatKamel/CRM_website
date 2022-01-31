@@ -61,4 +61,12 @@ class RequestController extends Controller
             return redirect()->route('admin.request')->with(['error'=>'يوجد خطء']);
         }
     }
+
+    public function getCountReqest($type = 0){
+        // get records from database
+        $arr['count'] = Requests::where('type',$type)->count();
+        echo json_encode($arr);
+        exit;
+    }
+
 }

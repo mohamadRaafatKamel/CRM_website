@@ -11,8 +11,8 @@
 @if(isset($data['name']))
 <p>Name :  {{ $data['name'] }} </p>
 @endif 
-@if(isset($data['email']))
-<p>Email :  {{ $data['email'] }} </p>
+@if(isset($data['email2']))
+<p>Email :  {{ $data['email2'] }} </p>
 @endif 
 @if(isset($data['birth_date']))
 <p>Birth Date :  {{ $data['birth_date'] }} </p>

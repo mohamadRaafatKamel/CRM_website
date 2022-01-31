@@ -27,6 +27,7 @@ class JoinUsRequest extends FormRequest
         return [
             'name'=>'required|max:250',
             'email'=>'required|email|max:250',
+            'email2'=>'email|max:250',
             'birth_date'=>'max:250',
             'phone' => 'max:50',
             'phone2' => 'max:50',

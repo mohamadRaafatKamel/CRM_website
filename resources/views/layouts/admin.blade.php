@@ -174,6 +174,23 @@
     // Notification 
     $(document).ready(function() {
 
+        function CountEmergency() {
+            $.ajax({
+                url: window.location.hostname.'/carehome/admin/getcountreqest/1',
+                type: 'get',
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                    console.log('oo');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // input.val(0);
+                    console.log('ff');
+                }
+            });
+        }
+        CountEmergency();
+
     // setInterval(function() {
     //     // $("#signInButton").trigger('click');
     //     console.log("555");
