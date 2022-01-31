@@ -73,8 +73,8 @@ class HomeController extends Controller
     {
         try {
             $req = new Requests();
-            if (Auth::check()) {
-                $req->user_id = Auth::user()->id;
+            if (isset($request->user()->id)) {
+                $req->user_id = $request->user()->id;
             }
             $req->phone = $request->phone;
             $req->specialty_id = $request->specialty_id;
@@ -93,8 +93,8 @@ class HomeController extends Controller
     {
         try {
             $req = new Requests();
-            if (Auth::check()) {
-                $req->user_id = Auth::user()->id;
+            if (isset($request->user()->id)) {
+                $req->user_id = $request->user()->id;
             }
             $req->governorate_id = $request->governorate_id;
             $req->city_id = $request->city_id;
@@ -119,8 +119,8 @@ class HomeController extends Controller
     {
         try {
             $req = new Requests();
-            if (Auth::check()) {
-                $req->user_id = Auth::user()->id;
+            if (isset($request->user()->id)) {
+                $req->user_id = $request->user()->id;
             }
             $req->governorate_id = $request->governorate_id;
             $req->city_id = $request->city_id;
