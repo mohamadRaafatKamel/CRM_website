@@ -56,7 +56,7 @@
                     @endif
                     ><a class="menu-item" href="{{route('admin.request.visit')}}"   
                            data-i18n="nav.dash.ecommerce">
-                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Visit') }}</span>
+                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('All OutPatient') }}</span>
                             <span class="badge badge badge-info badge-pill float-right mr-2">
                                 {{App\Models\Requests::where('type',2)->count()}}
                             </span>
@@ -70,7 +70,7 @@
                     @endif
                     ><a class="menu-item" href="{{route('admin.request.book')}}"  
                            data-i18n="nav.dash.ecommerce">
-                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Book') }}</span>
+                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('All InPatient') }}</span>
                             <span class="badge badge badge-info badge-pill float-right mr-2">
                                 {{App\Models\Requests::where('type',3)->count()}}
                             </span>

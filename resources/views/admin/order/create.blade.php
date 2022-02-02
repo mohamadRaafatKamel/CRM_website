@@ -203,7 +203,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="adress"> {{ __('Address') }} 1</label>
+                                                            <label for="adress"> {{ __('Address') }}</label>
                                                             <input type="text" id="adress" required
                                                                    class="form-control"
                                                                    @if(isset($myorder->adress))
@@ -217,22 +217,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="adress2"> {{ __('Address') }} 2</label>
-                                                            <input type="text" id="adress2"
-                                                                   class="form-control"
-                                                                   @if(isset($myorder->adress2))
-                                                                   value="{{ $myorder->adress2 }}"
-                                                                   @endif
-                                                                   placeholder="{{ __('Address') }}"
-                                                                   name="adress2">
-                                                            @error('adress2')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
+                                                  
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="phone"> {{ __('Phone') }} 1</label>

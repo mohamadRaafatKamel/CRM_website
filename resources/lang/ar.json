@@ -99,8 +99,8 @@
     "All Partner": "كل الشركاء",
     "All Request": "كل الطلبات",
     "All Emergency": "كل الطواريء",
-    "All Visit": "كل الحجزات ",
-    "All Book": "كل الزيارات",
+    "All InPatient": "مريض داخلي  ",
+    "All OutPatient": "خدمات خارجي ",
     "//Admin SideBar End": "Admin SideBar End",
 
     "//Admin user view Start": "Admin user view Start",
