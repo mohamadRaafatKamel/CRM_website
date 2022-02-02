@@ -1,2 +1,24 @@
-INSERT INTO `orders` (`id`, `user_id`, `doctor_id`, `fullname`, `governorate_id`, `city_id`, `adress`, `adress2`, `request_id`, `phone`, `phone2`, `birth_date`, `gender`, `type`, `emergency`, `specialty_id`, `service_id`, `visit_time_day`, `visit_time_from`, `visit_time_to`, `arrive_on`, `expectation_cost`, `real_cost`, `code_zone_patient_id`, `symptoms`, `doc_states`, `user_states`, `states`, `doc_rate`, `user_rate`, `admin_id`, `created_at`, `updated_at`) 
-VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL, NULL, NULL);
+
+CREATE TABLE `web_survey` (
+  `id` int(20) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `age` int(2) DEFAULT 0,
+  `opinion_carehub` int(2) DEFAULT 0,
+  `know_carehub` int(2) DEFAULT 0,
+  `try_carehub` int(2) DEFAULT 0,
+  `note` varchar(250) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `web_survey`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+ALTER TABLE `web_survey`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE `web_survey`
+  ADD CONSTRAINT `web_survey_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);

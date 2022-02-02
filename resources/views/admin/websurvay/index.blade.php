@@ -1,17 +1,17 @@
 @extends('layouts.admin')
-
+@section('title','التقييم')
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title"> التصنيفات </h3>
+                    <h3 class="content-header-title">  التقييم </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active"> التصنيفات
+                                <li class="breadcrumb-item active">  التقييم
                                 </li>
                             </ol>
                         </div>
@@ -25,7 +25,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> كل التصنيفات </h4>
+                                    <h4 class="card-title"> كل  التقييم </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -43,38 +43,42 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
+                                        <div class="table-responsive">
                                         <table
-                                            class="table display nowrap table-striped table-bordered ">
+                                            class="table table-striped table-bordered zero-configuration ">
                                             <thead>
                                             <tr>
-                                                <th> الاسم عربي</th>
-                                                <th>الاسم انجليزي</th>
-                                                <th>الترتيب</th>
-                                                <th>الحالة</th>
+                                                <th>User </th>
+                                                <th>اسم </th>
+                                                <th> {{ __('Phone') }}</th>
+                                                <th>  {{ __('Age') }} </th>
+                                                <th> رائيك </th>
+                                                <th> تعرف </th>
+                                                <th> جربت </th>
+                                                <th> {{ __('Note') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            @isset($categories)
-                                                @foreach($categories as $category)
+                                            @isset($datas)
+                                                @foreach($datas as $data)
                                                     <tr>
-                                                        <td>{{$category -> name_ar}}</td>
-                                                        <td>{{$category -> name_en}}</td>
-                                                        <td>{{$category -> position}}</td>
-                                                        <td>{{$category -> getActive()}}</td>
                                                         <td>
-                                                            <div class="btn-group" role="group"
-                                                                 aria-label="Basic example">
-                                                                <a href="{{route('admin.category.edit',['id'=> $category->id ])}}"
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
-
-
-{{--                                                                <a href="{{route('admin.category.delete',$category -> id)}}"--}}
-{{--                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>--}}
-
-
-                                                            </div>
+                                                            @if($data -> user_id == null )
+                                                                {{__('Guest')}}
+                                                            @else
+                                                                <a href="{{route('admin.user.view',$data -> user_id)}}">
+                                                                    {{\App\Models\User::getUserName($data -> user_id) }}
+                                                                </a>
+                                                            @endif
                                                         </td>
+                                                        <td>{{$data -> name}}</td>
+                                                        <td>{{$data -> phone}}</td>
+                                                        <td>{{\App\Models\WebSurvay::getAge($data -> age)}}</td>
+                                                        <td>{{\App\Models\WebSurvay::getOpinion($data -> opinion_carehub)}}</td>
+                                                        <td>{{\App\Models\WebSurvay::getYesorNo($data -> know_carehub)}}</td>
+                                                        <td>{{\App\Models\WebSurvay::getYesorNo($data -> try_carehub)}}</td>
+                                                        <td>{{$data -> note}}</td>
                                                     </tr>
                                                 @endforeach
                                             @endisset
@@ -82,6 +86,7 @@
 
                                             </tbody>
                                         </table>
+                                        </div>
                                         <div class="justify-content-center d-flex">
 
                                         </div>

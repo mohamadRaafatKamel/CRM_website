@@ -61,6 +61,9 @@ Route::group(['prefix' => 'v1'], function () {
 
             // JoinUs
             Route::post('/joinus', 'HomeController@joinUs');
+
+            // Web survey
+            Route::post('/survey', 'WebSurvayController@store');
         });
 
         // Route::group(['middleware'=>['auth:api','verified'] ], function () {

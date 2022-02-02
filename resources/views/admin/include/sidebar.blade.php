@@ -135,6 +135,22 @@
                 </li>
             @endif
 
+            @if(\App\Models\Role::havePremission('survay_view'))
+                <li class="nav-item">
+                    <a href=""><i class="la la-map-signs"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Survey') }} </span>
+                    </a>
+                    <ul class="menu-content">
+                        <li><a class="menu-item" href="{{route('admin.survay')}}"
+                               data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                        </li>
+                        <li><a class="menu-item" href="{{route('admin.survay')}}"
+                            data-i18n="nav.dash.ecommerce"> الاحصائيات </a>
+                     </li>
+                    </ul>
+                </li>
+            @endif
+
             <li class="nav-item">
                 <a href=""><i class="la la-user"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> الادمن </span>

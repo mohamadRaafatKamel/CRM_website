@@ -97,6 +97,14 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
     });
     ##################### End Setting ###########################
 
+    ##################### Survay ###############################
+    Route::group(['prefix'=>'survey'],function (){
+
+        Route::get('/','WebSurvayController@index')->name('admin.survay');
+
+    });
+    ##################### End Survay ###########################
+
     ##################### Users ##############################
     Route::group(['prefix'=>'user'],function (){
         Route::get('/','UserController@index')->name('admin.user');
