@@ -144,7 +144,7 @@
                         <li><a class="menu-item" href="{{route('admin.survay')}}"
                                data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                         </li>
-                        <li><a class="menu-item" href="{{route('admin.survay')}}"
+                        <li><a class="menu-item" href="{{route('admin.statistics')}}"
                             data-i18n="nav.dash.ecommerce"> الاحصائيات </a>
                      </li>
                     </ul>

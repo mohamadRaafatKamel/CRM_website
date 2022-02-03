@@ -101,6 +101,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
     Route::group(['prefix'=>'survey'],function (){
 
         Route::get('/','WebSurvayController@index')->name('admin.survay');
+        Route::get('/statistics','WebSurvayController@statistics')->name('admin.statistics');
 
     });
     ##################### End Survay ###########################
