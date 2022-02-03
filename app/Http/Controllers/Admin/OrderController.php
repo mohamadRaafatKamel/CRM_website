@@ -7,7 +7,6 @@ use App\Http\Requests\AreaRequest;
 use App\Models\City;
 use App\Models\DocSpecialty;
 use App\Models\Governorate;
-use App\Models\Order;
 use App\Models\Requests;
 use App\Models\Service;
 use App\Models\Specialty;
@@ -127,16 +126,7 @@ class OrderController extends Controller
         }
     }
 
-    public function getUserInfo($id = 0){
-        // get records from database
-        if($id!=0){
-            $arr = User::select()->find($id);
-        }else{
-            $arr['price'] = 0;
-        }
-        echo json_encode($arr);
-        exit;
-    }
+    
 
     public function getDocSpecialty($id = 0){
         // get records from database

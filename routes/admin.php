@@ -71,23 +71,6 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
     });
     ##################### End Role ###########################
 
-    ##################### Order ##############################
-    Route::group(['prefix'=>'order'],function (){
-        Route::get('/','OrderController@index')->name('admin.order');
-
-        Route::get('create','OrderController@create')->name('admin.order.create');
-        Route::post('store','OrderController@store')->name('admin.order.store');
-
-        Route::get('/getUserInfo/{id}', 'OrderController@getUserInfo');
-        Route::get('/getDocSpecialty/{id}', 'OrderController@getDocSpecialty');
-
-//        Route::get('edit/{id}','OrderController@edit')->name('admin.order.edit');
-//        Route::post('update/{id}','OrderController@update')->name('admin.order.update');
-//
-//        Route::get('delete/{id}','OrderController@destroy') -> name('admin.order.delete');
-    });
-    ##################### End Order ##########################
-
     ##################### Setting ###############################
     Route::group(['prefix'=>'setting'],function (){
 
@@ -127,19 +110,47 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
 
     ##################### Request ##############################
     Route::group(['prefix'=>'request'],function (){
-        Route::get('/','RequestController@index')->name('admin.request');
+        // cc
+        Route::get('/','RequestController@indexCC')->name('admin.request.cc');
+        Route::get('/cc/create','RequestController@createCC')->name('admin.request.create.cc');
+        Route::get('/cc/status/{id}/{status}','RequestController@statusCC')->name('admin.request.status.cc');
+
         Route::get('/emergency','RequestController@indexEmergency')->name('admin.request.emergency');
         Route::get('/visit','RequestController@indexVisit')->name('admin.request.visit');
         Route::get('/book','RequestController@indexBook')->name('admin.request.book');
 
+        Route::get('create','RequestController@create')->name('admin.request.create');
+
+        Route::post('store','RequestController@store')->name('admin.request.store');
+        Route::post('update/{id}','RequestController@update')->name('admin.request.update');
+
 //        Route::get('view/{id}','RequestController@view')->name('admin.user.view');
 //        Route::post('update/{id}','RequestController@update')->name('admin.user.update');
+
+        // ajax
+        Route::get('/getUserInfo/{id}', 'RequestController@getUserInfo');
 //
         Route::get('call/{id}','RequestController@callhim')->name('admin.user.call.him');
 
 //        Route::get('delete/{id}','RequestController@destroy') -> name('admin.user.delete');
     });
     ##################### End Request ##########################
+
+     ##################### Order ##############################
+    //  Route::group(['prefix'=>'order'],function (){
+    //     Route::get('/','OrderController@index')->name('admin.order');
+
+        
+
+        
+    //     Route::get('/getDocSpecialty/{id}', 'OrderController@getDocSpecialty');
+
+//        Route::get('edit/{id}','OrderController@edit')->name('admin.order.edit');
+//        Route::post('update/{id}','OrderController@update')->name('admin.order.update');
+//
+//        Route::get('delete/{id}','OrderController@destroy') -> name('admin.order.delete');
+    // });
+    ##################### End Order ##########################
 
     ##################### Notification ##############################
     // Route::get('/getcountreqest/{type}', 'HomeController@getCountReqest');

@@ -18,19 +18,11 @@
                             class="active"
                         @endif
                     @endif
-                    ><a class="menu-item" href="{{route('admin.request')}}"   
+                    ><a class="menu-item" href="{{route('admin.request.cc')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Request') }}</span>
                             <span class="badge badge badge-info badge-pill float-right mr-2">
                                 {{App\Models\Requests::count()}}
-                            </span>
-                        </a>
-                    </li>
-                    <li><a class="menu-item" href="{{route('admin.order')}}"   class="active"
-                           data-i18n="nav.dash.ecommerce">
-                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Order') }}</span>
-                            <span class="badge badge badge-info badge-pill float-right mr-2">
-                                {{App\Models\Order::count()}}
                             </span>
                         </a>
                     </li>
