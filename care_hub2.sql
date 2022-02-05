@@ -1,76 +1,76 @@
-DROP TABLE `care_hub`.`orders_service`;
-DROP TABLE `care_hub`.`orders_profile`;
-DROP TABLE `care_hub`.`orders`;
-DROP TABLE `care_hub`.`request`;
+-- DROP TABLE `care_hub`.`orders_service`;
+-- DROP TABLE `care_hub`.`orders_profile`;
+-- DROP TABLE `care_hub`.`orders`;
+-- DROP TABLE `care_hub`.`request`;
 
-CREATE TABLE `request` (
-  `id` int(20) NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `doctor_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `nurse_id` bigint(20) UNSIGNED DEFAULT NULL,
+-- CREATE TABLE `request` (
+--   `id` int(20) NOT NULL,
+--   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+--   `doctor_id` bigint(20) UNSIGNED DEFAULT NULL,
+--   `nurse_id` bigint(20) UNSIGNED DEFAULT NULL,
 
-  `fullname` varchar(250) DEFAULT NULL,
-  `name_caregiver` varchar(250) DEFAULT NULL,
-  `gender` int(1) DEFAULT NULL,
+--   `fullname` varchar(250) DEFAULT NULL,
+--   `name_caregiver` varchar(250) DEFAULT NULL,
+--   `gender` int(1) DEFAULT NULL,
 
-  `location` varchar(250) DEFAULT NULL,
-  `governorate_id` varchar(2) DEFAULT NULL,
-  `city_id` int(20) DEFAULT NULL,
-  `adress` varchar(250) DEFAULT NULL,
-  `land_mark` varchar(250) DEFAULT NULL,
-  `floor` varchar(250) DEFAULT NULL,
-  `apartment` varchar(250) DEFAULT NULL,
+--   `location` varchar(250) DEFAULT NULL,
+--   `governorate_id` varchar(2) DEFAULT NULL,
+--   `city_id` int(20) DEFAULT NULL,
+--   `adress` varchar(250) DEFAULT NULL,
+--   `land_mark` varchar(250) DEFAULT NULL,
+--   `floor` varchar(250) DEFAULT NULL,
+--   `apartment` varchar(250) DEFAULT NULL,
 
-  `phone` varchar(20) DEFAULT NULL,
-  `phone2` varchar(250) DEFAULT NULL,
-  `whatapp` int(1) NOT NULL DEFAULT 0,
-  `whatapp2` int(1) NOT NULL DEFAULT 0,
-  `whatsApp_group` varchar(250) DEFAULT NULL,
+--   `phone` varchar(20) DEFAULT NULL,
+--   `phone2` varchar(250) DEFAULT NULL,
+--   `whatapp` int(1) NOT NULL DEFAULT 0,
+--   `whatapp2` int(1) NOT NULL DEFAULT 0,
+--   `whatsApp_group` varchar(250) DEFAULT NULL,
 
-  `age`  varchar(20) DEFAULT NULL,
-  `referral`  varchar(250) DEFAULT NULL,
-  `corporate`  varchar(250) DEFAULT NULL,
-  `physician` varchar(250) DEFAULT NULL,
+--   `age`  varchar(20) DEFAULT NULL,
+--   `referral`  varchar(250) DEFAULT NULL,
+--   `corporate`  varchar(250) DEFAULT NULL,
+--   `physician` varchar(250) DEFAULT NULL,
   
-  `type` int(1) DEFAULT NULL, 
-  `covid19` int(1) DEFAULT 0,
+--   `type` int(1) DEFAULT NULL, 
+--   `covid19` int(1) DEFAULT 0,
 
-  `specialty_id` int(20) DEFAULT NULL,
-  `service_id` int(20) DEFAULT NULL,
-  `package_id` int(20) DEFAULT NULL,
+--   `specialty_id` int(20) DEFAULT NULL,
+--   `service_id` int(20) DEFAULT NULL,
+--   `package_id` int(20) DEFAULT NULL,
 
-  `visit_time_day` date DEFAULT NULL,
-  `visit_time_from` time DEFAULT NULL,
-  `visit_time_to` time DEFAULT NULL,
+--   `visit_time_day` date DEFAULT NULL,
+--   `visit_time_from` time DEFAULT NULL,
+--   `visit_time_to` time DEFAULT NULL,
 
-  `expectation_cost` int(20) DEFAULT 0,
-  `real_cost` int(20) DEFAULT 0,
-  `bill_serial`  varchar(250) DEFAULT NULL,
-  `pay_or_not` int(1) DEFAULT 0,
+--   `expectation_cost` int(20) DEFAULT 0,
+--   `real_cost` int(20) DEFAULT 0,
+--   `bill_serial`  varchar(250) DEFAULT NULL,
+--   `pay_or_not` int(1) DEFAULT 0,
 
-  `code_zone_patient_id` varchar(250) DEFAULT NULL,
-  `bed_number` varchar(250) DEFAULT NULL,
+--   `code_zone_patient_id` varchar(250) DEFAULT NULL,
+--   `bed_number` varchar(250) DEFAULT NULL,
 
-  `symptoms` varchar(250) DEFAULT NULL,
-  `doc_note`  varchar(250) DEFAULT NULL,
-  `Feedback`  varchar(250) DEFAULT NULL,
+--   `symptoms` varchar(250) DEFAULT NULL,
+--   `doc_note`  varchar(250) DEFAULT NULL,
+--   `Feedback`  varchar(250) DEFAULT NULL,
   
-  `doc_rate` int(1) DEFAULT NULL,
-  `user_rate` int(1) DEFAULT NULL,
+--   `doc_rate` int(1) DEFAULT NULL,
+--   `user_rate` int(1) DEFAULT NULL,
 
-  `opd_admin_id` int(20) DEFAULT NULL,
-  `cc_admin_id` int(20) DEFAULT NULL,
-  `admin_id_in_out` int(20) DEFAULT NULL,
-  `redirect_to_admin_id` int(20) DEFAULT NULL,
+--   `opd_admin_id` int(20) DEFAULT NULL,
+--   `cc_admin_id` int(20) DEFAULT NULL,
+--   `admin_id_in_out` int(20) DEFAULT NULL,
+--   `redirect_to_admin_id` int(20) DEFAULT NULL,
 
-  `status_doc` int(1) DEFAULT NULL,
-  `status_user` int(1) DEFAULT NULL,
-  `status_cc` int(1) DEFAULT 1,
-  `status_in_out` int(1) DEFAULT 1,
+--   `status_doc` int(1) DEFAULT NULL,
+--   `status_user` int(1) DEFAULT NULL,
+--   `status_cc` int(1) DEFAULT 1,
+--   `status_in_out` int(1) DEFAULT 1,
 
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+--   `created_at` timestamp NULL DEFAULT NULL,
+--   `updated_at` timestamp NULL DEFAULT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 ALTER TABLE `request`
