@@ -103,7 +103,7 @@ ALTER TABLE `request`
 --
 -- Constraints for table `orders`
 --
-ALTER TABLE `request`
+-- ALTER TABLE `request`
   -- ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
   -- ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
   -- ADD CONSTRAINT `request_ibfk_21` FOREIGN KEY (`nurse_id`) REFERENCES `users` (`id`),
