@@ -125,7 +125,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('/in','RequestController@indexIN')->name('admin.request.in');
         Route::get('/in/create/{id}','RequestController@createIN')->name('admin.request.create.in');
         Route::post('/in/update/{id}','RequestController@updateIN')->name('admin.request.update.in');
-        Route::get('/in/status/{id}/{status}','RequestController@statusIN')->name('admin.request.status.in');
+        // Route::get('/in/status/{id}/{status}','RequestController@statusIN')->name('admin.request.status.in');
 
         // out
         Route::get('/out','RequestController@indexOut')->name('admin.request.out');
@@ -133,16 +133,6 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::post('/out/update/{id}','RequestController@updateOut')->name('admin.request.update.out');
         // Route::get('/out/status/{id}/{status}','RequestController@statusIN')->name('admin.request.status.in');
         
-        // Route::get('/cc/status/{id}/{status}','RequestController@statusCC')->name('admin.request.status.cc');
-
-        // Route::get('/emergency','RequestController@indexEmergency')->name('admin.request.emergency');
-        Route::get('/visit','RequestController@indexVisit')->name('admin.request.visit');
-        Route::get('/book','RequestController@indexBook')->name('admin.request.book');
-
-        Route::get('create','RequestController@create')->name('admin.request.create');
-
-        
-
 //        Route::get('view/{id}','RequestController@view')->name('admin.user.view');
 //        Route::post('update/{id}','RequestController@update')->name('admin.user.update');
 

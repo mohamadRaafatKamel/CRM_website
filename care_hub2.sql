@@ -124,6 +124,7 @@ VALUES ('0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N
 CREATE TABLE `request_call` (
   `id` int(20) NOT NULL,
   `admin_id` int(20) DEFAULT NULL,
+  `request_id` int(20) DEFAULT NULL,
   `department` int(1) DEFAULT NULL,
   `call_time` datetime DEFAULT NULL,
   `note` varchar(250) DEFAULT NULL,
@@ -133,13 +134,16 @@ CREATE TABLE `request_call` (
 
 ALTER TABLE `request_call`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `admin_id` (`admin_id`);
+  ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `request_id` (`request_id`);
 
 ALTER TABLE `request_call`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 ALTER TABLE `request_call`
-  ADD CONSTRAINT `request_call_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`);
+  ADD CONSTRAINT `request_call_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`),
+  ADD CONSTRAINT `request_call_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`);
+
 
 
 
