@@ -110,10 +110,10 @@ ALTER TABLE `request`
   -- ADD CONSTRAINT `request_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   -- ADD CONSTRAINT `request_ibfk_4` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`),
   -- ADD CONSTRAINT `request_ibfk_5` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`),
-  ADD CONSTRAINT `request_ibfk_7` FOREIGN KEY (`cc_admin_id`) REFERENCES `admin` (`id`),
-  ADD CONSTRAINT `request_ibfk_72` FOREIGN KEY (`admin_id_in_out`) REFERENCES `admin` (`id`),
-  ADD CONSTRAINT `request_ibfk_71` FOREIGN KEY (`opd_admin_id`) REFERENCES `admin` (`id`),
-  ADD CONSTRAINT `request_ibfk_8` FOREIGN KEY (`redirect_to_admin_id`) REFERENCES `admin` (`id`);
+  -- ADD CONSTRAINT `request_ibfk_7` FOREIGN KEY (`cc_admin_id`) REFERENCES `admin` (`id`),
+  -- ADD CONSTRAINT `request_ibfk_72` FOREIGN KEY (`admin_id_in_out`) REFERENCES `admin` (`id`),
+  -- ADD CONSTRAINT `request_ibfk_71` FOREIGN KEY (`opd_admin_id`) REFERENCES `admin` (`id`),
+  -- ADD CONSTRAINT `request_ibfk_8` FOREIGN KEY (`redirect_to_admin_id`) REFERENCES `admin` (`id`);
 
 
 INSERT INTO `request` (`id`, `user_id`, `doctor_id`, `nurse_id`, `fullname`, `name_caregiver`, `gender`, `location`, `governorate_id`, `city_id`, `adress`, `land_mark`, `floor`, `apartment`, `phone`, `phone2`, `whatapp`, `whatapp2`, `whatsApp_group`, `age`, `referral`, `corporate`, `physician`, `type`, `covid19`, `specialty_id`, `service_id`, `package_id`, `visit_time_day`, `visit_time_from`, `visit_time_to`, `expectation_cost`, `real_cost`, `bill_serial`, `pay_or_not`, `code_zone_patient_id`, `bed_number`, `symptoms`, `doc_note`, `Feedback`, `doc_rate`, `user_rate`, `opd_admin_id`, `cc_admin_id`, `redirect_to_admin_id`, `status_doc`, `status_user`, `status_cc`, `status_in_out`, `created_at`, `updated_at`) 
