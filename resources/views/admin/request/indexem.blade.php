@@ -1,17 +1,17 @@
 @extends('layouts.admin')
-@section('title', __('All Request') )
+@section('title', __('Emergency') )
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">  {{ __('All Request') }} </h3>
+                    <h3 class="content-header-title">  {{ __('Emergency') }} </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.request.cc')}}">{{ __('All Request') }}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.request.emergency')}}">{{ __('Emergency') }}</a>
                                 </li>
                             </ol>
                         </div>
@@ -25,7 +25,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> {{ __('All Request') }} </h4>
+                                    <h4 class="card-title"> {{ __('Emergency') }} </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -43,8 +43,8 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-primary mb-2" href="{{ route('admin.request.create.cc') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a>
-                                        <a class="btn btn-danger mb-2" href="{{ route('admin.request.cc') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
+                                        {{-- <a class="btn btn-primary mb-2" href="{{ route('admin.request.create.cc') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a> --}}
+                                        <a class="btn btn-danger mb-2" href="{{ route('admin.request.emergency') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
                                         <div class="table-responsive">
                                             
                                                 <table

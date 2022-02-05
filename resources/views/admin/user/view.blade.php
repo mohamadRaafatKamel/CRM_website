@@ -479,6 +479,11 @@
                                                            class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">شريك</a>
                                                     @endif
 
+                                                    @if($user->type != 4)
+                                                        <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'4' ])}}"
+                                                           class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{ __('Nurse') }}</a>
+                                                    @endif
+
                                                         @if($user->verification != 1)
                                                             <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'1001' ])}}"
                                                                class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">تم التحقق</a>

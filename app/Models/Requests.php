@@ -19,10 +19,10 @@ class Requests extends Model
     protected $fillable = [
         'id', 'user_id', 'doctor_id', 'nurse_id', 'fullname', 'name_caregiver', 'gender', 'location', 'governorate_id', 
         'city_id', 'adress', 'land_mark', 'floor', 'apartment', 'phone', 'phone2', 'whatapp', 'whatapp2', 'whatsApp_group',
-        'age', 'referral', 'corporate', 'consultant', 'physician', 'type', 'covid19', 'specialty_id', 'service_id', 
+        'age', 'referral', 'corporate', 'physician', 'type', 'covid19', 'specialty_id', 'service_id', 
         'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to', 'expectation_cost', 'real_cost', 'bill_serial', 
         'pay_or_not', 'code_zone_patient_id', 'bed_number', 'symptoms', 'doc_note', 'Feedback', 'doc_rate', 'user_rate', 
-        'opd_admin_id', 'cc_admin_id', 'redirect_to_admin_id', 'status_doc', 'status_user', 'status_cc', 'status_in_out', 
+        'opd_admin_id', 'cc_admin_id', 'admin_id_in_out', 'redirect_to_admin_id', 'status_doc', 'status_user', 'status_cc', 'status_in_out', 
         'created_at', 'updated_at'
     ];
 
@@ -31,10 +31,10 @@ class Requests extends Model
         return $query -> select(
             'id', 'user_id', 'doctor_id', 'nurse_id', 'fullname', 'name_caregiver', 'gender', 'location', 'governorate_id', 
             'city_id', 'adress', 'land_mark', 'floor', 'apartment', 'phone', 'phone2', 'whatapp', 'whatapp2', 'whatsApp_group',
-            'age', 'referral', 'corporate', 'consultant', 'physician', 'type', 'covid19', 'specialty_id', 'service_id', 
+            'age', 'referral', 'corporate', 'physician', 'type', 'covid19', 'specialty_id', 'service_id', 
             'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to', 'expectation_cost', 'real_cost', 'bill_serial', 
             'pay_or_not', 'code_zone_patient_id', 'bed_number', 'symptoms', 'doc_note', 'Feedback', 'doc_rate', 'user_rate', 
-            'opd_admin_id', 'cc_admin_id', 'redirect_to_admin_id', 'status_doc', 'status_user', 'status_cc', 'status_in_out', 
+            'opd_admin_id', 'cc_admin_id', 'admin_id_in_out', 'redirect_to_admin_id', 'status_doc', 'status_user', 'status_cc', 'status_in_out', 
             'created_at', 'updated_at'
         );
     }
@@ -58,6 +58,25 @@ class Requests extends Model
     static public function getRequestStateCC($state_cc)
     {
         switch ($state_cc){
+            case 1:
+                return __("Waiting");
+                break;
+            case 2:
+                return __("Hold");
+                break;
+            case 4:
+                return __("DONE");
+                break;
+            case 5:
+                return __("Cancel");
+                break;
+        }
+        return "";
+    }
+
+    static public function getRequestStateInOut($state_in_out)
+    {
+        switch ($state_in_out){
             case 1:
                 return __("Waiting");
                 break;

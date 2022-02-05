@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Request CC')
+@section('title','Out Patient')
 @section('content')
 
     <div class="app-content content">
@@ -11,9 +11,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.request.cc')}}">  {{ __('Request') }} </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.request.out')}}">  {{ __('Out Patient') }} </a>
                                 </li>
-                                <li class="breadcrumb-item active">إضافة
+                                <li class="breadcrumb-item active">{{ _('View') }}
                                 </li>
                             </ol>
                         </div>
@@ -44,12 +44,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form" 
-                                        @if (isset($myorder->id) && $myorder->id != 0)
-                                        action="{{route('admin.request.update', $myorder -> id)}}" 
-                                        @else
-                                        action="{{route('admin.request.store')}}" 
-                                        @endif
-                                        
+                                        action="{{route('admin.request.update.out', $myorder->id)}}" 
                                         method="POST" enctype="multipart/form-data">
                                             @csrf
 
@@ -92,6 +87,66 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="name_caregiver"> {{ __('Name Of Care Giver') }} </label>
+                                                            <input type="text" id="name_caregiver" 
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->name_caregiver))
+                                                                        value="{{ $myorder->name_caregiver }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Name Of Care Giver') }}"
+                                                                   name="name_caregiver">
+                                                            @error('name_caregiver')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="doctor_id">{{ __('Doctor Name') }}</label>
+                                                            <select class="select2 form-control" name="doctor_id" id="doctor_id">
+                                                                <option value="">{{ __('Choose Doctor Name') }}</option>
+                                                                @foreach($doctors as $doctor)
+                                                                    <option value="{{ $doctor->id }}"
+                                                                            @if(isset($myorder->doctor_id))
+                                                                            @if($myorder->doctor_id == $doctor->id) selected @endif @endif
+                                                                    >
+                                                                        {{ $doctor->username }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('doctor_id')
+                                                            <span class="text-danger">{{$message}}</span>--}}
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="nurse_id">{{ __('Nurse Name') }}</label>
+                                                            <select class="select2 form-control" name="nurse_id" id="nurse_id" >
+                                                                <option value="">{{ __('Choose Doctor Name') }}</option>
+                                                                @foreach($nurses as $nurse)
+                                                                    <option value="{{ $nurse->id }}"
+                                                                            @if(isset($myorder->nurse_id))
+                                                                            @if($myorder->nurse_id == $nurse->id) selected @endif @endif
+                                                                    >
+                                                                        {{ $nurse->username }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('nurse_id')
+                                                            <span class="text-danger">{{$message}}</span>--}}
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -140,7 +195,8 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-
+                                                </div>
+                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="age"> {{ __('Age') }} </label>
@@ -178,7 +234,9 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-
+                                                    
+                                                </div>
+                                                <div class="row">
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -254,33 +312,38 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="type"> {{ __('Out/In') }} </label>
-                                                            <select name="type" id="type" required
-                                                                    class="form-control @error('type') is-invalid @enderror">
-                                                                <option value=""></option>
-                                                                @if(isset($myorder -> type))
-                                                                <option value="1"
-                                                                        @if($myorder -> type == "1") selected @endif>{{ __('Emergency Call') }}</option>
-                                                                <option value="2"
-                                                                        @if($myorder -> type == "2") selected @endif>{{ __('Out Patient') }}</option>
-                                                                <option value="3"
-                                                                        @if($myorder -> type == "3") selected @endif>{{ __('In Patient') }}</option>
-                                                                @else
-                                                                    <option value="1">{{ __('Emergency Call') }}</option>
-                                                                    <option value="2">{{ __('Out Patient') }}</option>
-                                                                    <option value="3">{{ __('In Patient') }}</option>
-                                                                @endif
-                                                            </select>
-                                                            @error('type')
+                                                            <label for="physician"> {{ __('Physician') }} </label>
+                                                            <input type="text" id="physician" 
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->physician))
+                                                                        value="{{ $myorder->physician }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Physician') }}"
+                                                                   name="physician">
+                                                            @error('physician')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="1" name="covid19"
+                                                                   id="covid19"
+                                                                   class="switchery" data-color="success"
+
+                                                                   @if($myorder->covid19  == 1 ) checked @endif
+                                                            />
+                                                            <label for="covid19"
+                                                                   class="card-title ml-1">Covid-19 </label>
+
+                                                            @error('covid19')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
 
 
-
-                                                    
-                                                    
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -392,9 +455,56 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="location"> {{ __('Location') }} </label>
+                                                            <input type="text" id="location"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->location))
+                                                                    value="{{ $myorder->location }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Location') }}"
+                                                                   name="location">
+                                                            @error('location')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="ccAgent"> {{ __('CC Agent') }} </label>
+                                                            <input type="text" id="ccAgent"
+                                                                   class="form-control" readonly
+                                                                   @if(isset($myorder->cc_admin_id ))
+                                                                    value="{{ \App\Models\Admin::getAdminNamebyId($myorder->cc_admin_id) }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('CC Agent') }}"
+                                                                   >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="whatsApp_group"> {{ __('Name of whatsApp Group') }} </label>
+                                                            <input type="text" id="whatsApp_group"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->whatsApp_group))
+                                                                    value="{{ $myorder->whatsApp_group }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Name of whatsApp Group') }}"
+                                                                   name="whatsApp_group">
+                                                            @error('whatsApp_group')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="code_zone_patient_id"> {{ __('Code Zone Patient ID') }} </label>
@@ -413,17 +523,59 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="symptoms"> {{ __('Symptoms') }} </label>
-                                                            <textarea id="symptoms" placeholder="{{ __('Symptoms') }}" 
-                                                                    class="form-control" name="symptoms"
-                                                                    >@if(isset($myorder->symptoms)){{ $myorder->symptoms }}@endif</textarea>
-                                                            @error('code_zone_patient_id')
+                                                            <label for="bed_number"> {{ __('Bed Number') }} </label>
+                                                            <input type="text" id="bed_number"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->bed_number))
+                                                                    value="{{ $myorder->bed_number }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Bed Number') }}"
+                                                                   name="bed_number">
+                                                            @error('bed_number')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="symptoms"> {{ __('Symptoms') }} </label>
+                                                            <textarea id="symptoms" placeholder="{{ __('Symptoms') }}" 
+                                                                    class="form-control" name="symptoms"
+                                                                    >@if(isset($myorder->symptoms)){{ $myorder->symptoms }}@endif</textarea>
+                                                            @error('symptoms')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="feedback"> {{ __('Feedback') }} </label>
+                                                            <textarea id="feedback" placeholder="{{ __('Feedback') }}" 
+                                                                    class="form-control" name="feedback"
+                                                                    >@if(isset($myorder->feedback)){{ $myorder->feedback }}@endif</textarea>
+                                                            @error('feedback')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="doc_note"> {{ __('Doctor Notes') }} </label>
+                                                            <textarea id="doc_note" placeholder="{{ __('Doctor Notes') }}" 
+                                                                    class="form-control" name="doc_note"
+                                                                    >@if(isset($myorder->doc_note)){{ $myorder->doc_note }}@endif</textarea>
+                                                            @error('doc_note')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
+
                                                 <div class="row">
 
                                                     <div class="col-md-6">
@@ -458,22 +610,52 @@
                                                         </div>
                                                     </div>
 
-                                                </div>
-                                                
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="bill_serial"> {{ __('Bill Serial Number') }} </label>
+                                                            <input type="text" id="real_cost"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->bill_serial))
+                                                                   value="{{ $myorder->bill_serial }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Bill Serial Number') }}"
+                                                                   name="bill_serial">
+                                                            @error('bill_serial')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="1" name="pay_or_not"
+                                                                   id="pay_or_not"
+                                                                   class="switchery" data-color="success"
+
+                                                                   @if($myorder->pay_or_not  == 1 ) checked @endif
+                                                            />
+                                                            <label for="pay_or_not"
+                                                                   class="card-title ml-1">{{ __('Pay') }} </label>
+
+                                                            @error('pay_or_not')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                
                                             </div>
 
 
                                             <div class="form-actions">
-                                                @if (isset($myorder->id) && $myorder->id != 0)
+                                                
                                                     <button type="submit" class="btn btn-primary">
-                                                        <i class="la la-check-square-o"></i> Update
+                                                        <i class="la la-check-square-o"></i> {{ _('save') }}
                                                     </button>
-                                                @else
-                                                    <button type="submit" class="btn btn-primary">
-                                                        <i class="la la-check-square-o"></i> حفظ
-                                                    </button>
-                                                @endif
+
+                                                    
                                                 
                                             </div>
                                         
@@ -485,7 +667,6 @@
                 </section>
                 <!-- // Basic form layout section end -->
 
-                @if (isset($myorder->id) && $myorder->id != 0)
                 <!-- Basic form layout section start -->
                 <section id="basic-form-layouts">
                     <div class="row match-height">
@@ -590,10 +771,7 @@
                         </div>
                     </div>
                 </section>
-                @endif
                 <!-- // Basic form layout section end -->
-
-
 
             </div>
         </div>

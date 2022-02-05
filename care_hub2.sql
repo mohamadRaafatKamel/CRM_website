@@ -30,9 +30,7 @@ CREATE TABLE `request` (
   `age`  varchar(20) DEFAULT NULL,
   `referral`  varchar(250) DEFAULT NULL,
   `corporate`  varchar(250) DEFAULT NULL,
-  `consultant` varchar(250) DEFAULT NULL,
   `physician` varchar(250) DEFAULT NULL,
-  
   
   `type` int(1) DEFAULT NULL, 
   `covid19` int(1) DEFAULT 0,
@@ -62,6 +60,7 @@ CREATE TABLE `request` (
 
   `opd_admin_id` int(20) DEFAULT NULL,
   `cc_admin_id` int(20) DEFAULT NULL,
+  `admin_id_in_out` int(20) DEFAULT NULL,
   `redirect_to_admin_id` int(20) DEFAULT NULL,
 
   `status_doc` int(1) DEFAULT NULL,
@@ -84,6 +83,7 @@ ALTER TABLE `request`
   ADD KEY `specialty_id` (`specialty_id`),
   ADD KEY `opd_admin_id` (`opd_admin_id`),
   ADD KEY `cc_admin_id` (`cc_admin_id`),
+  ADD KEY `admin_id_in_out` (`admin_id_in_out`),
   ADD KEY `redirect_to_admin_id` (`redirect_to_admin_id`);
 
 --
@@ -111,15 +111,35 @@ ALTER TABLE `request`
   ADD CONSTRAINT `request_ibfk_4` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`),
   ADD CONSTRAINT `request_ibfk_5` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`),
   ADD CONSTRAINT `request_ibfk_7` FOREIGN KEY (`cc_admin_id`) REFERENCES `admin` (`id`),
+  ADD CONSTRAINT `request_ibfk_72` FOREIGN KEY (`admin_id_in_out`) REFERENCES `admin` (`id`),
   ADD CONSTRAINT `request_ibfk_71` FOREIGN KEY (`opd_admin_id`) REFERENCES `admin` (`id`),
   ADD CONSTRAINT `request_ibfk_8` FOREIGN KEY (`redirect_to_admin_id`) REFERENCES `admin` (`id`);
 
 
-INSERT INTO `request` (`id`, `user_id`, `doctor_id`, `nurse_id`, `fullname`, `name_caregiver`, `gender`, `location`, `governorate_id`, `city_id`, `adress`, `land_mark`, `floor`, `apartment`, `phone`, `phone2`, `whatapp`, `whatapp2`, `whatsApp_group`, `age`, `referral`, `corporate`, `consultant`, `physician`, `type`, `covid19`, `specialty_id`, `service_id`, `package_id`, `visit_time_day`, `visit_time_from`, `visit_time_to`, `expectation_cost`, `real_cost`, `bill_serial`, `pay_or_not`, `code_zone_patient_id`, `bed_number`, `symptoms`, `doc_note`, `Feedback`, `doc_rate`, `user_rate`, `opd_admin_id`, `cc_admin_id`, `redirect_to_admin_id`, `status_doc`, `status_user`, `status_cc`, `status_in_out`, `created_at`, `updated_at`) 
-VALUES ('0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', NULL, NULL);
+INSERT INTO `request` (`id`, `user_id`, `doctor_id`, `nurse_id`, `fullname`, `name_caregiver`, `gender`, `location`, `governorate_id`, `city_id`, `adress`, `land_mark`, `floor`, `apartment`, `phone`, `phone2`, `whatapp`, `whatapp2`, `whatsApp_group`, `age`, `referral`, `corporate`, `physician`, `type`, `covid19`, `specialty_id`, `service_id`, `package_id`, `visit_time_day`, `visit_time_from`, `visit_time_to`, `expectation_cost`, `real_cost`, `bill_serial`, `pay_or_not`, `code_zone_patient_id`, `bed_number`, `symptoms`, `doc_note`, `Feedback`, `doc_rate`, `user_rate`, `opd_admin_id`, `cc_admin_id`, `redirect_to_admin_id`, `status_doc`, `status_user`, `status_cc`, `status_in_out`, `created_at`, `updated_at`) 
+VALUES ('0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', NULL, NULL);
 
 
 
+CREATE TABLE `request_call` (
+  `id` int(20) NOT NULL,
+  `admin_id` int(20) DEFAULT NULL,
+  `department` int(1) DEFAULT NULL,
+  `call_time` datetime DEFAULT NULL,
+  `note` varchar(250) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `request_call`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_id` (`admin_id`);
+
+ALTER TABLE `request_call`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `request_call`
+  ADD CONSTRAINT `request_call_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`);
 
 
 

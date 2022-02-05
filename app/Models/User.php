@@ -66,6 +66,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $query -> where('type',2);
     }
 
+    public function scopeNurse($query){
+        return $query -> where('type',4);
+    }
+
     public function scopeVerification($query){
         return $query -> where('verification',1);
     }
@@ -81,6 +85,9 @@ class User extends Authenticatable implements MustVerifyEmail
                 break;
             case 3:
                 return "Partners";
+                break;
+            case 4:
+                return "Nurse";
                 break;
         }
         return 0;

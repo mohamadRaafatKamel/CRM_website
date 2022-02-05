@@ -95,6 +95,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('/patent','UserController@indexPatent')->name('admin.user.patent');
         Route::get('/doctor','UserController@indexDoctor')->name('admin.user.doctor');
         Route::get('/partner','UserController@indexPartner')->name('admin.user.partner');
+        Route::get('/nurse','UserController@indexNurse')->name('admin.user.nurse');
         
        Route::get('create','UserController@create')->name('admin.user.create');
        Route::post('store','UserController@store')->name('admin.user.store');
@@ -114,15 +115,33 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('/','RequestController@indexCC')->name('admin.request.cc');
         Route::get('/cc/create','RequestController@createCC')->name('admin.request.create.cc');
         Route::get('/cc/status/{id}/{status}','RequestController@statusCC')->name('admin.request.status.cc');
+        Route::post('store','RequestController@store')->name('admin.request.store');
+        Route::post('update/{id}','RequestController@update')->name('admin.request.update');
+        
+        // Emergency
+        Route::get('/emergency','RequestController@indexEm')->name('admin.request.emergency');
 
-        Route::get('/emergency','RequestController@indexEmergency')->name('admin.request.emergency');
+        // in
+        Route::get('/in','RequestController@indexIN')->name('admin.request.in');
+        Route::get('/in/create/{id}','RequestController@createIN')->name('admin.request.create.in');
+        Route::post('/in/update/{id}','RequestController@updateIN')->name('admin.request.update.in');
+        Route::get('/in/status/{id}/{status}','RequestController@statusIN')->name('admin.request.status.in');
+
+        // out
+        Route::get('/out','RequestController@indexOut')->name('admin.request.out');
+        Route::get('/out/create/{id}','RequestController@createOut')->name('admin.request.create.out');
+        Route::post('/out/update/{id}','RequestController@updateOut')->name('admin.request.update.out');
+        // Route::get('/out/status/{id}/{status}','RequestController@statusIN')->name('admin.request.status.in');
+        
+        // Route::get('/cc/status/{id}/{status}','RequestController@statusCC')->name('admin.request.status.cc');
+
+        // Route::get('/emergency','RequestController@indexEmergency')->name('admin.request.emergency');
         Route::get('/visit','RequestController@indexVisit')->name('admin.request.visit');
         Route::get('/book','RequestController@indexBook')->name('admin.request.book');
 
         Route::get('create','RequestController@create')->name('admin.request.create');
 
-        Route::post('store','RequestController@store')->name('admin.request.store');
-        Route::post('update/{id}','RequestController@update')->name('admin.request.update');
+        
 
 //        Route::get('view/{id}','RequestController@view')->name('admin.user.view');
 //        Route::post('update/{id}','RequestController@update')->name('admin.user.update');

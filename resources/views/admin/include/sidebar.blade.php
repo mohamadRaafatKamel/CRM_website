@@ -13,11 +13,7 @@
                 </a>
                 <ul class="menu-content">
                     <li 
-                    @if (isset($info['type']))
-                        @if ($info['type'] == '0')
-                            class="active"
-                        @endif
-                    @endif
+                            {{-- class="active" --}}
                     ><a class="menu-item" href="{{route('admin.request.cc')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Request') }}</span>
@@ -27,11 +23,7 @@
                         </a>
                     </li>
                     <li
-                    @if (isset($info['type']))
-                        @if ($info['type'] == '1')
-                            class="active"
-                        @endif
-                    @endif
+                            {{-- class="active" --}}
                     ><a class="menu-item" href="{{route('admin.request.emergency')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Emergency') }}</span>
@@ -41,30 +33,22 @@
                         </a>
                     </li>
                     <li
-                    @if (isset($info['type']))
-                        @if ($info['type'] == '2')
-                            class="active"
-                        @endif
-                    @endif
-                    ><a class="menu-item" href="{{route('admin.request.visit')}}"   
+                            {{-- class="active" --}}
+                    ><a class="menu-item" href="{{route('admin.request.out')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All OutPatient') }}</span>
                             <span class="badge badge badge-info badge-pill float-right mr-2">
-                                {{App\Models\Requests::where('type',2)->count()}}
+                                {{App\Models\Requests::where('type',2)->where('status_cc',4)->where('status_in_out','!=',4)->count()}}
                             </span>
                         </a>
                     </li>
                     <li
-                    @if (isset($info['type']))
-                        @if ($info['type'] == '3')
-                            class="active"
-                        @endif
-                    @endif
-                    ><a class="menu-item" href="{{route('admin.request.book')}}"  
+                            {{-- class="active" --}}
+                    ><a class="menu-item" href="{{route('admin.request.in')}}"  
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All InPatient') }}</span>
                             <span class="badge badge badge-info badge-pill float-right mr-2">
-                                {{App\Models\Requests::where('type',3)->count()}}
+                                {{App\Models\Requests::where('type',3)->where('status_cc',4)->where('status_in_out','!=',4)->count()}}
                             </span>
                         </a>
                     </li>
@@ -88,6 +72,9 @@
                     <li><a class="menu-item" href="{{route('admin.user.partner')}}"   class="active"
                            data-i18n="nav.dash.ecommerce"> {{ __('All Partner') }} </a>
                     </li>
+                    <li><a class="menu-item" href="{{route('admin.user.nurse')}}"   class="active"
+                        data-i18n="nav.dash.ecommerce"> {{ __('All Nurse') }} </a>
+                 </li>
                 </ul>
             </li>
 

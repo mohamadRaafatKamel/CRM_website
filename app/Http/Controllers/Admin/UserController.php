@@ -47,6 +47,12 @@ class UserController extends Controller
         $info = ['name' => "All Partner", 'type' => '3'];
         return view('admin.user.index', compact('users','info'));
     }
+    public function indexNurse()
+    {
+        $users = User::select()->where('type',4)->paginate(PAGINATION_COUNT);
+        $info = ['name' => "All Nurse", 'type' => '4'];
+        return view('admin.user.index', compact('users','info'));
+    }
 
     public function view($id)
     {

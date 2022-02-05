@@ -106,6 +106,9 @@
                                                 <button type="submit" class="btn btn-primary" name="btn" value="3">
                                                     <i class="la la-check-square-o"></i> {{ __('Partners') }}
                                                 </button>
+                                                <button type="submit" class="btn btn-primary" name="btn" value="4">
+                                                    <i class="la la-check-square-o"></i> {{ __('Nurse') }}
+                                                </button>
                                             </div>
                                         </form>
                                     </div>

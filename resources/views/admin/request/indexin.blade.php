@@ -1,17 +1,17 @@
 @extends('layouts.admin')
-@section('title', __('All Request') )
+@section('title', __('In Patient') )
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">  {{ __('All Request') }} </h3>
+                    <h3 class="content-header-title">  {{ __('In Patient') }} </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.request.cc')}}">{{ __('All Request') }}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.request.in')}}">{{ __('In Patient') }}</a>
                                 </li>
                             </ol>
                         </div>
@@ -25,7 +25,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> {{ __('All Request') }} </h4>
+                                    <h4 class="card-title"> {{ __('In Patient') }} </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -43,8 +43,8 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-primary mb-2" href="{{ route('admin.request.create.cc') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a>
-                                        <a class="btn btn-danger mb-2" href="{{ route('admin.request.cc') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
+                                        {{-- <a class="btn btn-primary mb-2" href="{{ route('admin.request.create.cc') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a> --}}
+                                        <a class="btn btn-danger mb-2" href="{{ route('admin.request.in') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
                                         <div class="table-responsive">
                                             
                                                 <table
@@ -55,7 +55,6 @@
                                                         <th>العميل</th>
                                                         <th> موبيل</th>
                                                         <th> موبيل</th>
-                                                        <th> نوع الزياره</th>
                                                         <th> الحاله</th>
                                                     </tr>
                                                     </thead>
@@ -65,8 +64,9 @@
                                                         @foreach($requests as $request)
                                                             <tr>
                                                                 <td>
-                                                                    <a href="{{route('admin.request.create.cc',['req'=>$request -> id])}}">
-                                                                        {{$request -> id}}</a></td>
+                                                                    <a href="{{route('admin.request.create.in',$request -> id )}}">
+                                                                        {{$request -> id}}</a>
+                                                                </td>
                                                                 <td>
                                                                     @if($request -> user_id == null )
                                                                         {{__('Guest')}}
@@ -78,8 +78,7 @@
                                                                 </td>
                                                                 <td>{{$request -> phone}}</td>
                                                                 <td>{{$request -> phone2 }}</td>
-                                                                <td>{{ __(\App\Models\Requests::getRequestType($request -> type)) }}</td>
-                                                                <td>{{ __(\App\Models\Requests::getRequestStateCC($request -> status_cc)) }}</td>
+                                                                <td>{{ __(\App\Models\Requests::getRequestStateCC($request -> status_in_out)) }}</td>
                                                             
                                                             </tr>
                                                         @endforeach
