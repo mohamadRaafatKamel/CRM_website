@@ -73,18 +73,18 @@
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-ALTER TABLE `request`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `city_id` (`city_id`),
-  ADD KEY `doctor_id` (`doctor_id`),
-  ADD KEY `nurse_id` (`nurse_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `service_id` (`service_id`),
-  ADD KEY `specialty_id` (`specialty_id`),
-  ADD KEY `opd_admin_id` (`opd_admin_id`),
-  ADD KEY `cc_admin_id` (`cc_admin_id`),
-  ADD KEY `admin_id_in_out` (`admin_id_in_out`),
-  ADD KEY `redirect_to_admin_id` (`redirect_to_admin_id`);
+-- ALTER TABLE `request`
+--   ADD PRIMARY KEY (`id`),
+--   ADD KEY `city_id` (`city_id`),
+--   ADD KEY `doctor_id` (`doctor_id`),
+--   ADD KEY `nurse_id` (`nurse_id`),
+--   ADD KEY `user_id` (`user_id`),
+--   ADD KEY `service_id` (`service_id`),
+--   ADD KEY `specialty_id` (`specialty_id`),
+--   ADD KEY `opd_admin_id` (`opd_admin_id`),
+--   ADD KEY `cc_admin_id` (`cc_admin_id`),
+--   ADD KEY `admin_id_in_out` (`admin_id_in_out`),
+--   ADD KEY `redirect_to_admin_id` (`redirect_to_admin_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -104,12 +104,12 @@ ALTER TABLE `request`
 -- Constraints for table `orders`
 --
 ALTER TABLE `request`
-  ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
-  ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `request_ibfk_21` FOREIGN KEY (`nurse_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `request_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `request_ibfk_4` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`),
-  ADD CONSTRAINT `request_ibfk_5` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`),
+  -- ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
+  -- ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  -- ADD CONSTRAINT `request_ibfk_21` FOREIGN KEY (`nurse_id`) REFERENCES `users` (`id`),
+  -- ADD CONSTRAINT `request_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  -- ADD CONSTRAINT `request_ibfk_4` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`),
+  -- ADD CONSTRAINT `request_ibfk_5` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`),
   ADD CONSTRAINT `request_ibfk_7` FOREIGN KEY (`cc_admin_id`) REFERENCES `admin` (`id`),
   ADD CONSTRAINT `request_ibfk_72` FOREIGN KEY (`admin_id_in_out`) REFERENCES `admin` (`id`),
   ADD CONSTRAINT `request_ibfk_71` FOREIGN KEY (`opd_admin_id`) REFERENCES `admin` (`id`),
