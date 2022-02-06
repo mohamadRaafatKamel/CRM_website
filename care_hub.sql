@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2022 at 01:06 PM
+-- Generation Time: Feb 06, 2022 at 12:53 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -44,7 +44,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `name`, `email`, `password`, `photo`, `permission`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@code-flex.com', '$2y$10$8myWRaTmc9L9bP4O7GQUe.pd5dzIrMddtEoCq.rQwcWogb6FuIY.a', NULL, 0, 'zFXdqwDlQB2wwoutlxgAGuMOijflFvNmjEx6eTMVegQLgUtYbE90YB3uxuKA', '2021-12-15 10:06:52', '2021-12-15 10:06:52');
+(1, 'Admin', 'admin@code-flex.com', '$2y$10$8myWRaTmc9L9bP4O7GQUe.pd5dzIrMddtEoCq.rQwcWogb6FuIY.a', NULL, 0, 'MrTLF7c47LLr7ZdcuDJ1cG4ZcPoZftqee9SOHWcj4XEoacHmxx9UqAddniLo', '2021-12-15 10:06:52', '2022-02-02 14:05:11');
 
 -- --------------------------------------------------------
 
@@ -972,10 +972,13 @@ CREATE TABLE `oauth_access_tokens` (
 
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 ('003629ebca3a126ea69e040d2aee4274afd218432169d7e5f814dc0ec45c940fd6316c6fb400a885', 2, 2, NULL, '[]', 0, '2022-01-03 12:20:04', '2022-01-03 12:20:04', '2023-01-03 14:20:04'),
+('07013e0bf18dd66396ff7e7a7bbc7f3e8c39942aff82a144e684f27e61862eba45920eb6dd884e75', 5, 2, NULL, '[]', 0, '2022-01-31 15:25:42', '2022-01-31 15:25:42', '2023-01-31 17:25:42'),
+('084f0355c05206ae026fd28535711737cd791fce29f82678212be918faf85cfc9bcf87caa3fdef57', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-26 08:59:16', '2022-01-26 08:59:16', '2022-01-27 10:59:17'),
 ('085124bdfee9ac82429d8936ee637814c263ecf658f261fcd8edfa1d24d491049a2fb1ff45626c28', 1, 2, NULL, '[]', 0, '2022-01-02 11:24:37', '2022-01-02 11:24:37', '2023-01-02 13:24:37'),
 ('0c02d59a86ca22a6d96e1feb5751602f0ba3a0d3ef80ea74f1f3631917356faed1047494ebaef908', 2, 2, NULL, '[]', 0, '2022-01-02 13:48:02', '2022-01-02 13:48:02', '2023-01-02 15:48:02'),
 ('11d52af2dea0becd170cd31fd6f4f68d33b959f9610baae6a8963bc639311cb77a978ca03a1267b7', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-09 15:40:19', '2022-01-09 15:40:19', '2022-01-10 17:40:19'),
 ('19f88e0e20af06069ff34e1b9ba1b2d7fafb4dcec4a173ba944545c2fa31bc5a7d7ea53ad0921053', 5, 2, NULL, '[]', 0, '2022-01-09 14:33:37', '2022-01-09 14:33:37', '2023-01-09 16:33:37'),
+('22fb46b2a4a5d0ad5537eb2cb59a7d9a2a813cb7447c5929ee331fadd01845b5ed846f0349260546', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-26 09:54:37', '2022-01-26 09:54:37', '2022-01-27 11:54:37'),
 ('30c05963991d2a043531d9b12139b1ad87b5f3839d24747467c09fe9f217434965fa42f089823acb', 2, 5, NULL, '[]', 0, '2022-01-09 14:33:40', '2022-01-09 14:33:40', '2023-01-09 16:33:40'),
 ('311278d2e7c66e35b700c45e522ec467314968997edbf71841102ef5c0a28445f24d3c1c78f4b76f', 2, 2, NULL, '[]', 0, '2022-01-02 13:42:46', '2022-01-02 13:42:46', '2023-01-02 15:42:46'),
 ('3516c7612c4075713f477274feffaa3ce9e95cd0b777e47e3175c45bfb48d5965d3f0e45a6033eec', 2, 6, NULL, '[]', 0, '2022-01-02 13:12:36', '2022-01-02 13:12:36', '2023-01-02 15:12:36'),
@@ -984,6 +987,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('39ecc88843f4f3602ad4f18e047d396523bdcf6c3a61750f8511267d38b5e3806955bc7bbb4b7cda', 2, 2, NULL, '[]', 0, '2022-01-04 14:54:40', '2022-01-04 14:54:40', '2023-01-04 16:54:40'),
 ('3d1edb0046e0bf11734b67dad15b612e9b19513e872ddbf99df6e487e9526a76f4840936a6c052df', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-09 15:39:07', '2022-01-09 15:39:07', '2022-01-10 17:39:07'),
 ('6873ad9a87b6eeeb846daac4f3bdb765c444382b1407aa1fe1979a93c7f5557541bbdcc86ffa27bb', 5, 2, NULL, '[]', 0, '2022-01-05 13:57:22', '2022-01-05 13:57:22', '2023-01-05 15:57:22'),
+('69089161c6010eaff02d7c59a81fdc2eb3463de2620fa9b9073c9748336306998ca97a761ed396eb', 12, 5, 'Personal Access Token', '[]', 0, '2022-01-31 15:45:09', '2022-01-31 15:45:09', '2022-02-01 17:45:09'),
 ('6bb877c38d3fc356cc1870d84fa099ce1a2b72e20d9d72dfdcae211687033f45314a08d6bc35779e', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-09 14:35:58', '2022-01-09 14:35:58', '2023-01-09 16:35:58'),
 ('768b9ec8e8652545f726f89c51ccb9a3c4daad16ceadf7b2e3e7eb5af22a1abcd600a4ae1501d2b5', 5, 5, 'Personal Access Token', '[]', 0, '2022-01-10 14:34:47', '2022-01-10 14:34:47', '2022-01-11 16:34:47'),
 ('7ab891e0ec240b35097b50032d93c805eb4d7f24a6f71812dd6d159df76db08a4994c7c0980e3a2f', 2, 5, NULL, '[]', 0, '2022-01-09 14:34:13', '2022-01-09 14:34:13', '2023-01-09 16:34:13'),
@@ -996,14 +1000,18 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('a69e3fd18ebbc10f37bf13bda4a359bebfffaa4177406211c3fd91f6e834c1fe1c7d84bd0094597b', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-09 15:40:20', '2022-01-09 15:40:20', '2022-01-10 17:40:20'),
 ('a774d60d83408cdd13345a779ec128197d1ae89b1fc4461b5d3b563ddcdaea2919724126255404cf', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-09 15:40:10', '2022-01-09 15:40:10', '2022-01-10 17:40:10'),
 ('aa3747a732a193160bb040b5460a88f7d6a143ecb376a0e999a0ff44af5490b6fb4197fc5a829d08', 1, 2, NULL, '[]', 0, '2022-01-02 11:35:21', '2022-01-02 11:35:21', '2023-01-02 13:35:21'),
+('aadae5743a5c1e4197b62400af9319a36d6c370488181e536a0b09afea44ae8c671fcd5acee7aa63', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-31 15:27:13', '2022-01-31 15:27:13', '2022-02-01 17:27:13'),
 ('aefac07d89b4a23663b74921532a7126771f94ed319580f79d02dbff8838c7d258b70ca9424848e4', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-09 14:41:12', '2022-01-09 14:41:12', '2022-01-10 16:41:12'),
 ('b1bcc1763cbaa74ff62df679b3f74182476cb1a6e78cfe32086b13bc95d98d50428e855f906374d3', 5, 2, NULL, '[]', 0, '2022-01-09 14:29:34', '2022-01-09 14:29:34', '2023-01-09 16:29:34'),
 ('b5987dbe2f9d28b46689b07f05663f8ec4f734022383009dfbb0232cc29e38f11befb7fdcf02b439', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-09 15:38:46', '2022-01-09 15:38:46', '2022-01-10 17:38:47'),
+('b5c8494bf706e4ca64ab6c7dcc4770650330d80ab285821a85b1f659e100f40add29f3b6f8244919', 12, 5, 'Personal Access Token', '[]', 0, '2022-01-31 15:29:46', '2022-01-31 15:29:46', '2022-02-01 17:29:46'),
 ('b75a54a0e2fe56e12ba9138a29d0c08dd051239702f7c91bd730da4196160824ed462f93d6f4ea84', 2, 2, NULL, '[]', 0, '2022-01-02 13:39:46', '2022-01-02 13:39:46', '2023-01-02 15:39:46'),
 ('bf1efbc6d3a2073953859ca0c2206b03d88a0d2958d4721ffb9636ca2a687526c529eb25d8355582', 2, 2, NULL, '[]', 0, '2022-01-03 11:53:47', '2022-01-03 11:53:47', '2023-01-03 13:53:47'),
 ('d36aa9bc818388aca27292fa135f591b8d34b9df2e3c69abbc2870868fb38db5a949bcd05043c264', 2, 2, NULL, '[]', 0, '2022-01-02 13:06:57', '2022-01-02 13:06:57', '2023-01-02 15:06:57'),
 ('d7a208fd1929af2d596eadd2ad36f5a07a374682098b0938a52b66a02af60c28ebf129ae9f9eac28', 1, 2, NULL, '[]', 0, '2022-01-02 11:25:02', '2022-01-02 11:25:02', '2023-01-02 13:25:02'),
 ('d7de950eb4903b1dd09c92ffe60c025f177c7848f36fa134f6bd860062cd9d1f2840770205848f53', 1, 2, NULL, '[]', 0, '2022-01-02 11:25:00', '2022-01-02 11:25:00', '2023-01-02 13:25:00'),
+('dee72fe3e52a882adf0539f6907b55aa7678f35e7a68aec4595859dc8016af5aa3a7b0f0a537dab5', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-31 12:21:07', '2022-01-31 12:21:07', '2022-02-01 14:21:07'),
+('df2674fb91ece654c6ea3ee54e140b9120acede22979e7609ebd7702020f864a8934b7238e7c0b61', 12, 5, 'Personal Access Token', '[]', 0, '2022-02-02 14:41:10', '2022-02-02 14:41:10', '2022-02-03 16:41:10'),
 ('e514c78157805f4e93cb7866b9ed4ce6c1afc2636d6b97d9dacf1cc97e0515aec29339bfac5a97f8', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-10 14:06:41', '2022-01-10 14:06:41', '2022-01-11 16:06:42'),
 ('f514093a5dc948d87ca7852bc3d3e1f60380b3a680f8d670b7165e6bceb35fff693255094fc65a5a', 2, 2, NULL, '[]', 0, '2022-01-04 14:56:24', '2022-01-04 14:56:24', '2023-01-04 16:56:24'),
 ('f64438afc49075aa54afcaa77746e36ffb709629b529719a6d0b99a284ab85bb0f67cd881d573a2c', 2, 5, 'Personal Access Token', '[]', 0, '2022-01-09 15:39:43', '2022-01-09 15:39:43', '2022-01-10 17:39:43'),
@@ -1117,99 +1125,12 @@ INSERT INTO `oauth_refresh_tokens` (`id`, `access_token_id`, `revoked`, `expires
 ('b3937dfd3f7ac9636512b70f5389abc28fa7e49e132a9e7b982f7473ad5c8e06414839383821f316', 'd36aa9bc818388aca27292fa135f591b8d34b9df2e3c69abbc2870868fb38db5a949bcd05043c264', 0, '2023-01-02 15:06:57'),
 ('b43a762878ec2f0446dd1e0065ba81a160232123a7bfffaa3dcdfb6373e5d9fe8c4610fa3c2ba789', 'f514093a5dc948d87ca7852bc3d3e1f60380b3a680f8d670b7165e6bceb35fff693255094fc65a5a', 0, '2023-01-04 16:56:24'),
 ('b678d33315eeb2319bfebb99e280f80289c951051d9d0e5b52e62a5973b9cfb2d0900219e74e1a56', 'd7a208fd1929af2d596eadd2ad36f5a07a374682098b0938a52b66a02af60c28ebf129ae9f9eac28', 0, '2023-01-02 13:25:02'),
+('d3adce0873144f172e32a76beb0004406bce432d6e3ac96234356826ff70a89a1fb21a782ad0fa7a', '07013e0bf18dd66396ff7e7a7bbc7f3e8c39942aff82a144e684f27e61862eba45920eb6dd884e75', 0, '2023-01-31 17:25:42'),
 ('ee3eb4dc11693d384031de2cb34d096553222b666e21ad000bf0be905577d61e99ecb1eb1f529204', 'aa3747a732a193160bb040b5460a88f7d6a143ecb376a0e999a0ff44af5490b6fb4197fc5a829d08', 0, '2023-01-02 13:35:22'),
 ('f7143645e7ac3d3fa11df683932b930531e180508d64b8a5198afa4d43bbbbd38f8cb174f61620ea', 'bf1efbc6d3a2073953859ca0c2206b03d88a0d2958d4721ffb9636ca2a687526c529eb25d8355582', 0, '2023-01-03 13:53:47'),
 ('fb9c31180dc7d050ea29cf710a622995b0dd2f91a9506bd910f3595aa9bafdfc3f609b38892d76d3', '003629ebca3a126ea69e040d2aee4274afd218432169d7e5f814dc0ec45c940fd6316c6fb400a885', 0, '2023-01-03 14:20:04'),
 ('fef43f174617877b24e2fc874e66ebbb9f7e51eb86a58af060c9e64e4132125e6fefd54cbef11a9a', '311278d2e7c66e35b700c45e522ec467314968997edbf71841102ef5c0a28445f24d3c1c78f4b76f', 0, '2023-01-02 15:42:46'),
 ('ffe8a246ad31efc8bd94bda35cbeaf0f846016973e3ac63f1cecb9b39fe7e754f15beb97702eeae4', '98cc59bda18c5603ef2d65589a0357296932d7da9e6df79c066e43a762a7492937824ed6bf10677d', 0, '2023-01-05 16:21:58');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
-
-CREATE TABLE `orders` (
-  `id` int(20) NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `doctor_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `fullname` varchar(250) DEFAULT NULL,
-  `governorate_id` varchar(2) DEFAULT NULL,
-  `city_id` int(20) DEFAULT NULL,
-  `adress` varchar(250) DEFAULT NULL,
-  `adress2` varchar(250) DEFAULT NULL,
-  `request_id` int(20) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `phone2` varchar(250) DEFAULT NULL,
-  `birth_date` date DEFAULT NULL,
-  `gender` int(1) DEFAULT NULL,
-  `type` int(1) DEFAULT NULL,
-  `emergency` int(1) NOT NULL DEFAULT 0,
-  `specialty_id` int(20) DEFAULT NULL,
-  `service_id` int(20) DEFAULT NULL,
-  `visit_time_day` date DEFAULT NULL,
-  `visit_time_from` time DEFAULT NULL,
-  `visit_time_to` time DEFAULT NULL,
-  `arrive_on` time DEFAULT NULL,
-  `expectation_cost` int(20) DEFAULT 0,
-  `real_cost` int(20) DEFAULT 0,
-  `code_zone_patient_id` varchar(250) DEFAULT NULL,
-  `symptoms` varchar(250) DEFAULT NULL,
-  `doc_states` int(1) DEFAULT NULL,
-  `user_states` int(1) DEFAULT NULL,
-  `states` int(2) DEFAULT 1,
-  `doc_rate` int(1) DEFAULT NULL,
-  `user_rate` int(1) DEFAULT NULL,
-  `admin_id` int(20) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `user_id`, `doctor_id`, `fullname`, `governorate_id`, `city_id`, `adress`, `adress2`, `request_id`, `phone`, `phone2`, `birth_date`, `gender`, `type`, `emergency`, `specialty_id`, `service_id`, `visit_time_day`, `visit_time_from`, `visit_time_to`, `arrive_on`, `expectation_cost`, `real_cost`, `code_zone_patient_id`, `symptoms`, `doc_states`, `user_states`, `states`, `doc_rate`, `user_rate`, `admin_id`, `created_at`, `updated_at`) VALUES
-(0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL),
-(7, 3, 5, 'qqqqqqq', '2', 2, 'qqwqwqwqqqqwqwq', 'cvcvcvccv', NULL, '01121426196', '1111111111111111111112222', NULL, NULL, NULL, 0, 1, 1, '2021-12-20', '15:29:00', '20:29:00', NULL, 0, 0, NULL, NULL, NULL, NULL, 29, NULL, NULL, NULL, '2021-12-20 17:11:33', '2021-12-26 15:33:32'),
-(9, 2, 5, 'Mohamed Rafaat Mohamed Mohamed Kamel', '2', 2, 'شرخ 45', 'cvcvcvccv', NULL, '01121426196', '222222', NULL, NULL, NULL, 0, 1, 1, '2021-12-22', '21:19:00', '21:19:00', NULL, 0, 0, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, '2021-12-20 17:18:04', '2021-12-26 15:47:05'),
-(11, 2, 5, 'modd1 ra144444', '3', 110, 'qqwweerrtt', '11115qqwwqqw', 3, '01121426196', '000000007878787', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-18', '15:42:00', '16:42:00', NULL, 100, 500, 'ghghgh', 'hi hi huuuuuuuughg', NULL, NULL, 3, NULL, NULL, 1, '2021-12-21 15:28:23', '2022-01-18 10:58:27'),
-(12, 2, 5, 'modd1 ra1', '3', 110, 'qqwweerrtt', NULL, NULL, '01121426196', '00000000', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-15', '22:16:00', '20:19:00', NULL, 0, 0, NULL, NULL, NULL, NULL, 29, NULL, NULL, 1, '2021-12-22 16:24:26', '2021-12-26 15:41:33'),
-(14, 3, 5, 'aa bb', '2', 3, 'qqwqwqwqqqqwqwq', 'cvcvcvccv', NULL, '011214261961', NULL, '2015-02-25', 1, NULL, 0, 1, NULL, '2021-12-20', '22:26:00', '12:26:00', NULL, 0, 0, NULL, NULL, NULL, NULL, 3, NULL, NULL, 1, '2021-12-22 16:26:45', '2021-12-26 15:53:51'),
-(15, 2, 5, 'modd1 ra1', '3', 110, 'qqwweerrtt', NULL, 7, '01121426196', '00000000', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-28', '20:31:00', '20:31:00', NULL, 11, 500, '555', '5555555555555555555555555555555\r\n555555555555555555555', NULL, NULL, 2, NULL, NULL, 1, '2021-12-22 16:27:18', '2022-01-18 11:01:42'),
-(16, 2, 5, 'Mohamed Rafaat Mohamed Mohamed Kamel', '3', 110, '10 Intersection 455 with 534', '5', NULL, '01121426196', '00000000', '1996-10-01', 2, NULL, 0, 1, NULL, '2021-12-14', '20:47:00', '18:47:00', NULL, 0, 0, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-12-26 14:47:45', '2021-12-26 14:47:45'),
-(17, 2, 5, 'modd1 ra1', '3', 110, 'qqwweerrtt', NULL, 1, '01121426196', '00000000', '1996-10-01', 2, 1, 0, 1, NULL, '2021-11-28', '12:56:00', '20:56:00', NULL, 0, 0, NULL, NULL, NULL, NULL, 1, NULL, NULL, 1, '2021-12-26 14:57:50', '2021-12-26 14:57:50'),
-(18, 2, 5, 'modd1 ra1', '3', 110, 'qqwweerrtt', NULL, 11, '01121426196', '00000000', '1996-10-01', 2, 1, 0, 1, NULL, '2021-12-09', '21:12:00', '18:12:00', NULL, 0, 0, NULL, NULL, NULL, NULL, 4, NULL, NULL, 1, '2021-12-27 11:12:36', '2021-12-27 11:13:43'),
-(19, 2, 5, 'modd1 ra1', '3', 110, 'qqwweerrtt', NULL, 12, '01121426196', '00000000', '1996-10-01', 2, 1, 0, 1, NULL, '2021-12-08', '21:45:00', '17:45:00', NULL, 0, 0, NULL, NULL, NULL, NULL, 3, NULL, NULL, 1, '2021-12-27 11:45:48', '2021-12-27 11:47:45'),
-(20, 3, 5, 'aa bb', '4', 1, 'شرخ 45', 'cvcvcvccv', NULL, '011214261961', NULL, '2015-02-25', 1, NULL, 0, 5, NULL, '2022-01-19', '16:13:00', '20:13:00', NULL, 0, 0, 'qwe', NULL, NULL, NULL, 1, NULL, NULL, 1, '2022-01-19 10:14:43', '2022-01-19 10:14:43');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders_profile`
---
-
-CREATE TABLE `orders_profile` (
-  `id` int(20) NOT NULL,
-  `order_id` int(20) NOT NULL,
-  `doc_note` varchar(999) NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders_service`
---
-
-CREATE TABLE `orders_service` (
-  `id` int(20) NOT NULL,
-  `order_id` int(20) NOT NULL,
-  `service_id` int(20) NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1269,22 +1190,54 @@ CREATE TABLE `protfolio_service` (
 CREATE TABLE `request` (
   `id` int(20) NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `doctor_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `nurse_id` bigint(20) UNSIGNED DEFAULT NULL,
   `fullname` varchar(250) DEFAULT NULL,
-  `phone` varchar(250) NOT NULL,
-  `specialty_id` int(20) DEFAULT NULL,
-  `service_id` int(20) DEFAULT NULL,
-  `type` int(1) DEFAULT NULL,
-  `emergency` int(1) NOT NULL DEFAULT 0,
-  `call_him` int(1) NOT NULL DEFAULT 0,
-  `call_him_time` datetime DEFAULT NULL,
-  `governorate_id` int(20) DEFAULT NULL,
+  `name_caregiver` varchar(250) DEFAULT NULL,
+  `gender` int(1) DEFAULT NULL,
+  `location` varchar(250) DEFAULT NULL,
+  `governorate_id` varchar(2) DEFAULT NULL,
   `city_id` int(20) DEFAULT NULL,
   `adress` varchar(250) DEFAULT NULL,
-  `adress2` varchar(250) DEFAULT NULL,
+  `land_mark` varchar(250) DEFAULT NULL,
+  `floor` varchar(250) DEFAULT NULL,
+  `apartment` varchar(250) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `phone2` varchar(250) DEFAULT NULL,
+  `whatapp` int(1) NOT NULL DEFAULT 0,
+  `whatapp2` int(1) NOT NULL DEFAULT 0,
+  `whatsApp_group` varchar(250) DEFAULT NULL,
+  `age` varchar(20) DEFAULT NULL,
+  `referral` varchar(250) DEFAULT NULL,
+  `corporate` varchar(250) DEFAULT NULL,
+  `physician` varchar(250) DEFAULT NULL,
+  `type` int(1) DEFAULT NULL,
+  `covid19` int(1) DEFAULT 0,
+  `specialty_id` int(20) DEFAULT NULL,
+  `service_id` int(20) DEFAULT NULL,
+  `package_id` int(20) DEFAULT NULL,
   `visit_time_day` date DEFAULT NULL,
   `visit_time_from` time DEFAULT NULL,
   `visit_time_to` time DEFAULT NULL,
-  `state` int(1) DEFAULT 0,
+  `expectation_cost` int(20) DEFAULT 0,
+  `real_cost` int(20) DEFAULT 0,
+  `bill_serial` varchar(250) DEFAULT NULL,
+  `pay_or_not` int(1) DEFAULT 0,
+  `code_zone_patient_id` varchar(250) DEFAULT NULL,
+  `bed_number` varchar(250) DEFAULT NULL,
+  `symptoms` varchar(250) DEFAULT NULL,
+  `doc_note` varchar(250) DEFAULT NULL,
+  `Feedback` varchar(250) DEFAULT NULL,
+  `doc_rate` int(1) DEFAULT NULL,
+  `user_rate` int(1) DEFAULT NULL,
+  `opd_admin_id` int(20) DEFAULT NULL,
+  `cc_admin_id` int(20) DEFAULT NULL,
+  `admin_id_in_out` int(20) DEFAULT NULL,
+  `redirect_to_admin_id` int(20) DEFAULT NULL,
+  `status_doc` int(1) DEFAULT NULL,
+  `status_user` int(1) DEFAULT NULL,
+  `status_cc` int(1) DEFAULT 1,
+  `status_in_out` int(1) DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -1293,32 +1246,59 @@ CREATE TABLE `request` (
 -- Dumping data for table `request`
 --
 
-INSERT INTO `request` (`id`, `user_id`, `fullname`, `phone`, `specialty_id`, `service_id`, `type`, `emergency`, `call_him`, `call_him_time`, `governorate_id`, `city_id`, `adress`, `adress2`, `visit_time_day`, `visit_time_from`, `visit_time_to`, `state`, `created_at`, `updated_at`) VALUES
-(1, 5, NULL, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2021-12-18 10:58:49', '2021-12-26 14:57:50'),
-(2, 5, NULL, '01121426196', NULL, 1, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, '2021-12-08', '15:08:00', '15:11:00', 5, '2021-12-18 11:05:26', '2021-12-26 14:07:01'),
-(3, 2, NULL, '01121426196', 1, NULL, 3, 0, 0, NULL, NULL, NULL, NULL, NULL, '2021-12-18', '15:42:00', '16:42:00', 1, '2021-12-18 11:42:10', '2021-12-21 15:28:22'),
-(4, NULL, NULL, '11111111111111111111111', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2021-12-18 16:09:47', '2021-12-18 16:09:47'),
-(5, NULL, NULL, '01121426196', NULL, 1, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, '2021-12-17', '20:27:00', '20:29:00', 0, '2021-12-18 16:27:11', '2021-12-18 16:27:11'),
-(6, NULL, NULL, '01121426196', 1, NULL, 3, 0, 0, NULL, NULL, NULL, NULL, NULL, '2021-12-05', '23:27:00', '20:29:00', 0, '2021-12-18 16:27:42', '2021-12-18 16:27:42'),
-(7, 2, NULL, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2021-12-22 13:50:50', '2021-12-22 16:27:18'),
-(8, 2, NULL, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, '2021-12-26 10:19:58', '2021-12-26 13:59:00'),
-(9, 2, NULL, '01121426196', 1, NULL, 3, 0, 0, NULL, NULL, NULL, NULL, NULL, '2021-12-14', '18:20:00', '22:20:00', 5, '2021-12-26 13:20:23', '2021-12-26 13:54:49'),
-(10, 2, NULL, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, '2021-12-26 14:01:46', '2021-12-26 14:01:57'),
-(11, 2, NULL, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2021-12-27 11:11:40', '2021-12-27 11:12:36'),
-(12, 2, NULL, '01121426196', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2021-12-27 11:45:17', '2021-12-27 11:45:48'),
-(13, NULL, NULL, '0111111111', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-01-04 11:35:06', '2022-01-04 11:35:06'),
-(14, 2, NULL, '0111111111', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-01-04 11:35:22', '2022-01-04 11:35:22'),
-(15, NULL, NULL, '011111eeeee1111', NULL, 1, 2, 0, 0, NULL, NULL, NULL, NULL, NULL, '2022-01-05', '23:27:00', '23:30:00', 0, '2022-01-04 14:11:16', '2022-01-04 14:11:16'),
-(16, NULL, NULL, '011111eeeee1111', 1, NULL, 3, 0, 0, NULL, NULL, NULL, NULL, NULL, '2022-01-05', '23:27:00', '23:30:00', 0, '2022-01-04 16:57:46', '2022-01-04 16:57:46'),
-(17, NULL, NULL, '011111eeeee1111', 1, NULL, 3, 0, 0, NULL, NULL, NULL, NULL, NULL, '2022-01-05', '23:27:00', '23:30:00', 0, '2022-01-05 11:36:13', '2022-01-05 11:36:13'),
-(18, NULL, NULL, '011111eee333ee1111', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-01-05 11:43:07', '2022-01-05 11:43:07'),
-(19, NULL, NULL, '011111eee333ee1111', NULL, 1, 2, 0, 0, NULL, 5, 5, 'adress my address', 'adress2 my address', '2022-01-05', '23:27:00', '23:30:00', 0, '2022-01-05 13:53:18', '2022-01-05 13:53:18'),
-(20, NULL, NULL, '011111eee333ee1111', 1, NULL, 3, 0, 0, NULL, 5, 5, 'adress my address', 'adress2 my address', '2022-01-05', '23:27:00', '23:30:00', 0, '2022-01-05 13:58:22', '2022-01-05 13:58:22'),
-(21, 5, NULL, '2222222222', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-01-05 15:55:42', '2022-01-05 15:55:42'),
-(22, NULL, NULL, '012345674879', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-01-10 11:15:26', '2022-01-10 11:15:26'),
-(23, NULL, NULL, '012345674879', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-01-10 11:15:57', '2022-01-10 11:15:57'),
-(24, NULL, 'my name', '012345674879', 1, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-01-10 11:17:59', '2022-01-10 11:17:59'),
-(25, 5, NULL, '2222222222', 2, NULL, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2022-01-10 14:35:37', '2022-01-10 14:38:26');
+INSERT INTO `request` (`id`, `user_id`, `doctor_id`, `nurse_id`, `fullname`, `name_caregiver`, `gender`, `location`, `governorate_id`, `city_id`, `adress`, `land_mark`, `floor`, `apartment`, `phone`, `phone2`, `whatapp`, `whatapp2`, `whatsApp_group`, `age`, `referral`, `corporate`, `physician`, `type`, `covid19`, `specialty_id`, `service_id`, `package_id`, `visit_time_day`, `visit_time_from`, `visit_time_to`, `expectation_cost`, `real_cost`, `bill_serial`, `pay_or_not`, `code_zone_patient_id`, `bed_number`, `symptoms`, `doc_note`, `Feedback`, `doc_rate`, `user_rate`, `opd_admin_id`, `cc_admin_id`, `admin_id_in_out`, `redirect_to_admin_id`, `status_doc`, `status_user`, `status_cc`, `status_in_out`, `created_at`, `updated_at`) VALUES
+(0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL),
+(25, 2, NULL, NULL, 'Kamel', NULL, 1, NULL, '2', 110, 'sdsdsxsdassx', '525252', '5', '5252', '01121426196', '2222222222', 1, 0, NULL, '5', 'qwqwqwqw', 'wwwwww', NULL, 3, 0, 2, 4, NULL, NULL, NULL, NULL, 10, 1, NULL, 0, 'qqqqqqqqq', NULL, '\\zx\\zx\\zx', NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 5, 1, '2022-02-03 16:52:22', '2022-02-03 17:45:33'),
+(26, 2, 5, NULL, 'Mohamed Rafaat Mohamed Mohamed Kamel', 'ضصضصضصص', 1, 'wqqwqwqw', '2', 110, 'sdsdsxsdassx', '525252', '5', '5252', '01121426196', '2222222222', 0, 0, NULL, '5', 'qwqwqwqw', 'wwwwww', NULL, 3, 0, 2, 4, NULL, NULL, NULL, NULL, 10, 1, NULL, 0, 'qqqqqqqqq', 'wqwqw', '\\zx\\zx\\zx', NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, NULL, 4, 5, '2022-02-03 17:11:24', '2022-02-05 16:05:46'),
+(28, 2, 5, NULL, 'Mohamed Rafaat Mohamed Mohamed Kamel', 'qwqwqw', 1, NULL, '1', 2, '222222', NULL, NULL, NULL, '01121426196', '111111', 1, 0, NULL, '11', 'qwqwqwqw', 'wwwwww', NULL, 2, 1, 1, 7, NULL, NULL, NULL, NULL, 0, 0, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, NULL, 4, 5, '2022-02-05 10:36:50', '2022-02-05 15:10:10'),
+(29, 2, NULL, NULL, 'Mohamed Rafaat Mohamed Mohamed Kamel', NULL, 1, NULL, '1', 2, '222222', NULL, NULL, NULL, '01121426196', '111111', 1, 0, NULL, '11', 'qwqwqwqw', 'wwwwww', NULL, 3, 0, 1, 7, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 4, 1, '2022-02-05 10:38:06', '2022-02-05 12:39:59'),
+(31, 2, NULL, NULL, 'Mohamed Rafaat Mohamed Mohamed Kamel', NULL, 1, NULL, '1', 2, '222222', NULL, NULL, NULL, '01121426196', '111111', 1, 1, NULL, '11', 'qwqwqwqw', 'wwwwww', NULL, 1, 0, 1, 7, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 4, 1, '2022-02-05 12:36:04', '2022-02-05 12:36:36'),
+(33, NULL, 5, 13, 'محمد انس', NULL, 1, NULL, '3', 2, 'لورام', NULL, NULL, NULL, '01028095934', NULL, 1, 0, NULL, '23', 'خوادر دمشقية', NULL, NULL, 2, 0, 7, 9, NULL, NULL, NULL, NULL, 100, 1000, NULL, 0, '677', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, NULL, 4, 4, '2022-02-05 12:50:12', '2022-02-05 13:57:50'),
+(34, NULL, NULL, NULL, 'محمد ايمن', NULL, 1, NULL, NULL, NULL, 'ابو خاروف', NULL, NULL, NULL, '01094759522', NULL, 0, 0, NULL, '23', NULL, NULL, NULL, 3, 0, NULL, 7, NULL, NULL, NULL, NULL, 788, 788, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 4, 1, '2022-02-05 12:53:50', '2022-02-05 12:54:17'),
+(35, 4, NULL, NULL, 'ضضضضضض', NULL, NULL, NULL, NULL, NULL, '5555555555', NULL, NULL, NULL, '01121426196', NULL, 1, 0, NULL, '55', 'qwqwqwqw', NULL, NULL, 1, 0, 2, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, 1, '2022-02-05 16:37:17', '2022-02-05 16:39:13'),
+(36, NULL, NULL, NULL, 'محمد انس', NULL, 1, NULL, NULL, NULL, 'بيسش', NULL, NULL, NULL, '01097540411', NULL, 0, 0, NULL, '33', NULL, NULL, NULL, 3, 0, NULL, 9, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 5, 1, '2022-02-05 16:41:03', '2022-02-05 16:52:25'),
+(37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_call`
+--
+
+CREATE TABLE `request_call` (
+  `id` int(20) NOT NULL,
+  `admin_id` int(20) DEFAULT NULL,
+  `request_id` int(20) DEFAULT NULL,
+  `department` int(1) DEFAULT NULL,
+  `call_time` datetime DEFAULT NULL,
+  `note` varchar(250) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `request_call`
+--
+
+INSERT INTO `request_call` (`id`, `admin_id`, `request_id`, `department`, `call_time`, `note`, `created_at`, `updated_at`) VALUES
+(1, 1, NULL, 2, '2022-02-05 19:41:00', 'hi 123', '2022-02-05 15:37:11', '2022-02-05 15:37:11'),
+(2, 1, NULL, 2, '2022-02-05 19:46:00', 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqq', '2022-02-05 15:40:19', '2022-02-05 15:40:19'),
+(3, 1, NULL, 2, NULL, 'qqwqwqwqwq', '2022-02-05 15:40:33', '2022-02-05 15:40:33'),
+(4, 1, NULL, 2, '2022-03-04 19:46:00', NULL, '2022-02-05 15:40:53', '2022-02-05 15:40:53'),
+(5, 1, 28, 2, '2022-02-05 22:53:00', 'qwqwqwqwqwqqwq', '2022-02-05 15:53:51', '2022-02-05 15:53:51'),
+(6, 1, 26, 3, '2022-02-05 22:58:00', 'qqqqqqqqqqqqqqqqq', '2022-02-05 15:58:55', '2022-02-05 15:58:55'),
+(7, 1, 26, 3, NULL, NULL, '2022-02-05 15:59:24', '2022-02-05 15:59:24'),
+(8, 1, 26, 3, NULL, NULL, '2022-02-05 16:00:58', '2022-02-05 16:00:58'),
+(9, 1, 26, 3, NULL, NULL, '2022-02-05 16:03:28', '2022-02-05 16:03:28'),
+(10, 1, 26, 3, NULL, NULL, '2022-02-05 16:04:29', '2022-02-05 16:04:29'),
+(11, 1, 26, 3, NULL, NULL, '2022-02-05 16:05:33', '2022-02-05 16:05:33'),
+(12, 1, 26, 3, NULL, NULL, '2022-02-05 16:05:46', '2022-02-05 16:05:46'),
+(13, 1, 26, 3, NULL, NULL, '2022-02-05 16:07:01', '2022-02-05 16:07:01'),
+(14, 1, 28, 1, '2022-02-22 20:30:00', 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', '2022-02-05 16:30:23', '2022-02-05 16:30:23'),
+(15, 1, 28, 1, NULL, 'eeeeeeeeeeeeeeeeeeee', '2022-02-05 16:30:40', '2022-02-05 16:30:40'),
+(16, 1, 35, 1, '2022-02-05 20:42:00', 'dsdsddsds', '2022-02-05 16:39:13', '2022-02-05 16:39:13'),
+(17, 1, 36, 1, '2022-04-01 23:44:00', 'يسشيسشيسشيسش', '2022-02-05 16:42:05', '2022-02-05 16:42:05'),
+(18, 1, 36, 1, '2022-03-09 12:42:00', 'شسيءشيسشيسشيسش', '2022-02-05 16:42:43', '2022-02-05 16:42:43');
 
 -- --------------------------------------------------------
 
@@ -1338,7 +1318,8 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(0, 'Super Admin', NULL, NULL);
+(0, 'Super Admin', NULL, NULL),
+(2, 'admin 1', '2022-01-30 10:50:40', '2022-01-30 10:50:40');
 
 -- --------------------------------------------------------
 
@@ -1355,6 +1336,14 @@ CREATE TABLE `role_info` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `role_info`
+--
+
+INSERT INTO `role_info` (`id`, `role_id`, `name`, `have_permission`, `admin_id`, `created_at`, `updated_at`) VALUES
+(5, 2, 'specialty_view', 1, 1, '2022-01-30 12:07:03', '2022-01-30 12:07:03'),
+(6, 2, 'serves_view', 1, 1, '2022-01-30 12:07:03', '2022-01-30 12:07:03');
 
 -- --------------------------------------------------------
 
@@ -1384,7 +1373,9 @@ INSERT INTO `service` (`id`, `name_ar`, `name_en`, `description`, `image`, `type
 (4, 'خدمه 1', NULL, 'serve 1', NULL, NULL, 1, 0, '2022-01-03 13:33:29', '2022-01-03 13:33:29'),
 (7, 'بسكويت', NULL, 'rrrrrrrrr', 'public/service/serv_Bts777777777777.jpg', 1, 1, 0, '2022-01-08 15:28:39', '2022-01-10 12:17:57'),
 (8, '123', NULL, '123', 'public/service/serv_123.jpg', 2, 1, 0, '2022-01-10 11:44:28', '2022-01-10 12:15:31'),
-(9, 'شاشه', 'eng', 'بلبلبلبللببلبلبللب', 'public/service/serv_eng.jpg', 2, 1, 0, '2022-01-16 12:31:46', '2022-01-16 12:31:46');
+(9, 'شاشه', 'eng', 'بلبلبلبللببلبلبللب', 'public/service/serv_eng.jpg', 2, 1, 0, '2022-01-16 12:31:46', '2022-01-16 12:31:46'),
+(10, '1111', 'qqqq', 'qqqqqqqqqqqqqqqqqqqqqq', 'public/service/serv_qqqq.jpg', 1, 1, 0, '2022-01-25 13:26:39', '2022-01-25 13:26:39'),
+(11, 'q', 'qqqqqqqqqqqqqqqqqqqqqqqqqqq', 'qqq', 'public/service/serv_qqqqqqqqqqqqqqqqqqqqqqqqqqq.jpg', 1, 1, 0, '2022-01-25 13:26:51', '2022-01-25 13:26:51');
 
 -- --------------------------------------------------------
 
@@ -1438,7 +1429,11 @@ INSERT INTO `specialty` (`id`, `name_ar`, `name_en`, `parent_id`, `image`, `admi
 (2, 'شاشه', 'Biscuit', NULL, 'public/specialty/spc_Biscuit.jpg', 1, 0, '2022-01-08 15:33:48', '2022-01-08 15:33:48'),
 (3, 'شاشه2', 'eng name2', 1, 'public/specialty/spc_eng_name2.jpg', 1, 0, '2022-01-18 12:00:37', '2022-01-18 12:06:13'),
 (4, '123', 'eng123', 1, 'public/specialty/spc_eng123.jpg', 1, 0, '2022-01-18 12:53:35', '2022-01-18 12:53:35'),
-(5, 'شاشه123', 'eng123231', 2, 'public/specialty/spc_eng123231.jpg', 1, 0, '2022-01-18 12:53:57', '2022-01-18 12:53:57');
+(5, 'شاشه123', 'eng123231', 2, 'public/specialty/spc_eng123231.jpg', 1, 0, '2022-01-18 12:53:57', '2022-01-18 12:53:57'),
+(6, '12121212', '121212121212121221qqqqq', 2, 'public/specialty/spc_12121212121212122.jpg', 1, 0, '2022-01-25 13:21:50', '2022-01-25 13:21:59'),
+(7, 'wwwwww', 'wwwwwwwwwwwwwwwwww', 2, 'public/specialty/spc_wwwwwwwwwwwwwwwwww.jpg', 1, 0, '2022-01-25 13:22:23', '2022-01-25 13:22:23'),
+(8, 'شاشه', '11qqqq', 1, 'public/specialty/spc_11qqqq.jpg', 1, 0, '2022-01-25 13:24:45', '2022-01-25 13:24:45'),
+(9, 'شاشه', 'qwqwqw', 2, 'public/specialty/spc_qwqwqw.jpg', 1, 0, '2022-01-25 13:25:14', '2022-01-25 13:25:14');
 
 -- --------------------------------------------------------
 
@@ -1482,7 +1477,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `username`, `birth_date`, `email`, `phone`, `type`, `verification`, `mobile`, `gender`, `title`, `nationality_code`, `governorate_id`, `city_id`, `address`, `adress2`, `code_zone_patient_id`, `account_owner_name`, `account_num`, `bank_name`, `identity_id`, `passport_id`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'modd1', 'ra1', 'mo ra1', '1996-10-01', 'aa@aa.aa', '01121426196', 1, 0, '00000000', 2, 'Mrs', 'EG', 3, 110, 'qqwweerrtt', NULL, NULL, 'fddffff', '1000', 'ddfdfdfdf', '11111111111111', '101010', NULL, '$2y$10$qETIE2sIIwGNHe4j/3cd8.N740nIfeq6pmbnrutKcz0O200..O9vC', 'yrYfaYj5TZ2uglMlDErIQgZ8xIn7JREYx9hSkSJMIOA1ytTMUOyZ06nbO4tY', '2021-12-14 13:37:47', '2021-12-14 15:05:20'),
+(2, 'modd1', 'ra1', 'Mohamad 123', '1996-10-10', 'aa@aa.aa', '01121426196', 1, 0, '00000000', 2, 'Mrs', 'EG', 3, 110, 'qqwweerrtt', NULL, NULL, 'fddffff', '1000', 'ddfdfdfdf', '11111111111111', '101010', NULL, '$2y$10$qETIE2sIIwGNHe4j/3cd8.N740nIfeq6pmbnrutKcz0O200..O9vC', 'yrYfaYj5TZ2uglMlDErIQgZ8xIn7JREYx9hSkSJMIOA1ytTMUOyZ06nbO4tY', '2021-12-14 13:37:47', '2022-01-26 09:01:32'),
 (3, 'aa', 'bb', 'aaaaammmmm', '2015-02-25', 'devmrm01@gmail.com', '011214261961', 3, 0, NULL, 1, 'Mr', NULL, NULL, NULL, NULL, NULL, 'qwe', NULL, NULL, NULL, '11111111111111', NULL, NULL, '$2y$10$wAFcbpOFxl164EN90mFSQeGyvLWGuIox/3qV20aeEHY3aOmyOBdOW', NULL, '2021-12-15 10:19:48', '2022-01-16 16:38:39'),
 (4, 'aa', 'bb', 'aabb', '2021-12-16', 'bb@aa.aa', '1111111111', 1, 0, NULL, 1, 'Mr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$dRhBuT8pQvna.H8hruNnyuKr0a/RXgvleYDjfRxxQBkvrhgplvqHW', 'u1OH8WrDA2PB4vv3uXLvtgb4RSQoVahutBLemJvEAXtEiwq7h4rKcE0VrdNa', '2021-12-18 10:03:01', '2021-12-18 10:03:01'),
 (5, 'dd', 'dd', 'ddDD', '2021-12-01', 'dd@dd.dd', '2222222222', 2, 1, NULL, 1, 'Mr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$8B2P9xvOFxu.cQUKhTzGB.DF5iuvKpLQLUnoNTIjn14y4niH1q.pS', 'aeJpmvBAyVm8e5nYU4rLUazeJaK645mRYX90AptmFjKiGtrEIu45Q3Sh6KkN', '2021-12-18 10:05:47', '2021-12-18 14:56:02'),
@@ -1490,7 +1485,44 @@ INSERT INTO `users` (`id`, `fname`, `lname`, `username`, `birth_date`, `email`, 
 (7, NULL, NULL, 'ddd123', NULL, 'dd@dd.dd11', '01234561231', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$ucV1TcSETjYW43mfjHz5g.0bcytNRdPXZbkg7P0BrtVPc9nQPHrOG', NULL, '2022-01-17 11:35:16', '2022-01-17 11:35:16'),
 (8, NULL, NULL, 'ddd12355', NULL, NULL, '0123456123155', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$Hy7TEIQhEWZnOFziY7.PWeqAehMxoJ/qUOTwgLRfoMZJRWpmlziE.', NULL, '2022-01-17 11:55:50', '2022-01-17 11:55:50'),
 (9, NULL, NULL, 'mohamadkamel01', NULL, 'aa@aaa.aa', '123123', 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$V39XbFOwJYnYLARejIoqxucR8d3KL/it3atpHcdA36IFaU6C8IRKa', NULL, '2022-01-17 14:18:55', '2022-01-17 14:18:55'),
-(10, NULL, NULL, 'rrerererererer', NULL, 'aaaaa@a.aa', '22222222221111', 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$nqTN0YHlqaCTVZrZf.dEyO6iQGbTtEM07axggFAsAJ8w/LQU0Tthu', NULL, '2022-01-17 14:24:14', '2022-01-17 14:27:23');
+(10, NULL, NULL, 'rrerererererer', NULL, 'aaaaa@a.aa', '22222222221111', 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$nqTN0YHlqaCTVZrZf.dEyO6iQGbTtEM07axggFAsAJ8w/LQU0Tthu', NULL, '2022-01-17 14:24:14', '2022-01-17 14:27:23'),
+(11, NULL, NULL, 'mohamadkamel01888888888', NULL, 'devmrm018888888888888@gmail.com', '888888888888', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$FGeS8hTvUM2W5wiXAhl9UerijyYKfBty97534KKQK8keeYsklRPdS', NULL, '2022-01-25 14:09:48', '2022-01-25 14:09:48'),
+(12, NULL, NULL, 'qqq123456789', NULL, NULL, 'qqqqqqqqq', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$k0l8Sj5SB6P/6YfMWvjipeslGWRTLgsWbTxVUvk8O0ytFcc35N7H2', NULL, '2022-01-31 15:28:51', '2022-01-31 15:28:51'),
+(13, NULL, NULL, 'narse 1', NULL, 'dd@rr.ddd', '3444444', 4, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$z77hWkVwTP0UkuSqavF2R..sA8EGfY6qmOK.33mISm0zHxLJMgqZe', NULL, '2022-02-05 13:52:40', '2022-02-05 13:53:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `web_survey`
+--
+
+CREATE TABLE `web_survey` (
+  `id` int(20) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `age` int(2) DEFAULT 0,
+  `opinion_carehub` int(2) DEFAULT 0,
+  `know_carehub` int(2) DEFAULT 0,
+  `try_carehub` int(2) DEFAULT 0,
+  `note` varchar(250) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `web_survey`
+--
+
+INSERT INTO `web_survey` (`id`, `user_id`, `name`, `phone`, `age`, `opinion_carehub`, `know_carehub`, `try_carehub`, `note`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'mrm', '011111eee333ee1111', 4, NULL, NULL, NULL, NULL, '2022-02-02 13:31:54', '2022-02-02 13:31:54'),
+(2, 12, 'mrm', '011111eee333ee1111', 4, 3, NULL, NULL, NULL, '2022-02-02 14:42:16', '2022-02-02 14:42:16'),
+(3, 12, 'mrm', '011111eee333ee1111', 1, 1, NULL, NULL, NULL, '2022-02-03 10:02:19', '2022-02-03 10:02:19'),
+(4, 12, 'mrm', '011111eee333ee1111', 2, 1, NULL, NULL, NULL, '2022-02-03 10:02:31', '2022-02-03 10:02:31'),
+(5, 12, 'mrm', '011111eee333ee1111', 3, 1, NULL, NULL, NULL, '2022-02-03 10:02:35', '2022-02-03 10:02:35'),
+(6, 12, 'mrm', '011111eee333ee1111', 4, 1, NULL, NULL, NULL, '2022-02-03 10:02:39', '2022-02-03 10:02:39'),
+(7, 12, 'mrm', '011111eee333ee1111', 4, 1, NULL, NULL, NULL, '2022-02-03 10:02:47', '2022-02-03 10:02:47'),
+(8, 12, 'mrm', '011111eee333ee1111', 1, 4, NULL, NULL, NULL, '2022-02-03 11:22:49', '2022-02-03 11:22:49');
 
 --
 -- Indexes for dumped tables
@@ -1611,34 +1643,6 @@ ALTER TABLE `oauth_refresh_tokens`
   ADD KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
 
 --
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `city_id` (`city_id`),
-  ADD KEY `doctor_id` (`doctor_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `service_id` (`service_id`),
-  ADD KEY `specialty_id` (`specialty_id`),
-  ADD KEY `request_id` (`request_id`),
-  ADD KEY `admin_id` (`admin_id`);
-
---
--- Indexes for table `orders_profile`
---
-ALTER TABLE `orders_profile`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`);
-
---
--- Indexes for table `orders_service`
---
-ALTER TABLE `orders_service`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`),
-  ADD KEY `service_id` (`service_id`);
-
---
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -1664,11 +1668,24 @@ ALTER TABLE `protfolio_service`
 --
 ALTER TABLE `request`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `city_id` (`city_id`),
+  ADD KEY `doctor_id` (`doctor_id`),
+  ADD KEY `nurse_id` (`nurse_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `service_id` (`service_id`),
   ADD KEY `specialty_id` (`specialty_id`),
-  ADD KEY `city_id` (`city_id`),
-  ADD KEY `governorate_id` (`governorate_id`);
+  ADD KEY `opd_admin_id` (`opd_admin_id`),
+  ADD KEY `cc_admin_id` (`cc_admin_id`),
+  ADD KEY `redirect_to_admin_id` (`redirect_to_admin_id`),
+  ADD KEY `admin_id_in_out` (`admin_id_in_out`);
+
+--
+-- Indexes for table `request_call`
+--
+ALTER TABLE `request_call`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `request_id` (`request_id`);
 
 --
 -- Indexes for table `role`
@@ -1718,6 +1735,13 @@ ALTER TABLE `users`
   ADD KEY `governorate_id` (`governorate_id`);
 
 --
+-- Indexes for table `web_survey`
+--
+ALTER TABLE `web_survey`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1725,7 +1749,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -1800,24 +1824,6 @@ ALTER TABLE `oauth_personal_access_clients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `orders_profile`
---
-ALTER TABLE `orders_profile`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `orders_service`
---
-ALTER TABLE `orders_service`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
@@ -1833,25 +1839,31 @@ ALTER TABLE `protfolio_service`
 -- AUTO_INCREMENT for table `request`
 --
 ALTER TABLE `request`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `request_call`
+--
+ALTER TABLE `request_call`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `role_info`
 --
 ALTER TABLE `role_info`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `service`
 --
 ALTER TABLE `service`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `setting`
@@ -1863,13 +1875,19 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `specialty`
 --
 ALTER TABLE `specialty`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `web_survey`
+--
+ALTER TABLE `web_survey`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -1913,31 +1931,6 @@ ALTER TABLE `job_request`
   ADD CONSTRAINT `job_request_ibfk_1` FOREIGN KEY (`id_job`) REFERENCES `job` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`),
-  ADD CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`),
-  ADD CONSTRAINT `orders_ibfk_6` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`),
-  ADD CONSTRAINT `orders_ibfk_7` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`);
-
---
--- Constraints for table `orders_profile`
---
-ALTER TABLE `orders_profile`
-  ADD CONSTRAINT `orders_profile_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
-
---
--- Constraints for table `orders_service`
---
-ALTER TABLE `orders_service`
-  ADD CONSTRAINT `orders_service_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-  ADD CONSTRAINT `orders_service_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`);
-
---
 -- Constraints for table `protfolio_service`
 --
 ALTER TABLE `protfolio_service`
@@ -1947,11 +1940,23 @@ ALTER TABLE `protfolio_service`
 -- Constraints for table `request`
 --
 ALTER TABLE `request`
-  ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`),
-  ADD CONSTRAINT `request_ibfk_3` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`),
-  ADD CONSTRAINT `request_ibfk_4` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
-  ADD CONSTRAINT `request_ibfk_5` FOREIGN KEY (`governorate_id`) REFERENCES `governorates` (`id`);
+  ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
+  ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `request_ibfk_21` FOREIGN KEY (`nurse_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `request_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `request_ibfk_4` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`),
+  ADD CONSTRAINT `request_ibfk_5` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`),
+  ADD CONSTRAINT `request_ibfk_7` FOREIGN KEY (`cc_admin_id`) REFERENCES `admin` (`id`),
+  ADD CONSTRAINT `request_ibfk_71` FOREIGN KEY (`opd_admin_id`) REFERENCES `admin` (`id`),
+  ADD CONSTRAINT `request_ibfk_72` FOREIGN KEY (`admin_id_in_out`) REFERENCES `admin` (`id`),
+  ADD CONSTRAINT `request_ibfk_8` FOREIGN KEY (`redirect_to_admin_id`) REFERENCES `admin` (`id`);
+
+--
+-- Constraints for table `request_call`
+--
+ALTER TABLE `request_call`
+  ADD CONSTRAINT `request_call_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`),
+  ADD CONSTRAINT `request_call_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`);
 
 --
 -- Constraints for table `role_info`
@@ -1979,6 +1984,12 @@ ALTER TABLE `specialty`
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
   ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`governorate_id`) REFERENCES `governorates` (`id`);
+
+--
+-- Constraints for table `web_survey`
+--
+ALTER TABLE `web_survey`
+  ADD CONSTRAINT `web_survey_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
