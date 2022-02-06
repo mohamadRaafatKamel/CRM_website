@@ -8,6 +8,7 @@ use App\Http\Requests\BookServicesRequest;
 use App\Http\Requests\JoinUsRequest;
 use App\Http\Requests\VisitHomeRequest;
 use App\Mail\joinus;
+use App\Mail\requestMail;
 use App\Models\CompanyInfo;
 use App\Models\DoctorInfo;
 use App\Models\DoctorWorkDay;
@@ -79,10 +80,10 @@ class HomeController extends Controller
             $req->phone = $request->phone;
             $req->specialty_id = $request->specialty_id;
             $req->fullname = $request->fullname;
-            $req->emergency = '1';
-            $req->call_him = '0';
             $req->type = '1';
             $req->save();
+            $this->requestMail($request, "Emergency");
+
             return response()->json([ 'data'=>['success' => "1"] ]);
         } catch (\Exception $ex) {
             return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
@@ -154,6 +155,27 @@ class HomeController extends Controller
             return response()->json([ 'data'=>['success' => "1"] ]);
         } catch (\Exception $ex) {
             return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
+        }
+    }
+
+    public function requestMail(Request $request,$depart ="")  // Request Mail
+    {
+        try {
+            // $depart = "CallCenter";
+            // Check mail
+            $mailTo ="mohamadraafat100@gmail.com";
+            $setting = Setting::select()->where('name', $depart)->first();
+            if(isset($setting->value)){
+                // if (strpos($request->value, '@') !== false) {
+                    $mailTo = $setting->value ;
+                // }
+            } 
+// return $mailTo;
+            Mail::To($mailTo)->send(new requestMail($request->post()));
+            
+            return response()->json([ 'data'=>['success' => "1"] ]);
+        } catch (\Exception $ex) {
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Email Error"] ]);
         }
     }
 
@@ -248,13 +270,13 @@ class HomeController extends Controller
 
     public function DoctorRequest()
     {
-        $orders = Order::select()->where('doctor_id', Auth::user()->id)->whereIn('states',['1','2','3'])->get();
+        $orders = Requests::select()->where('doctor_id', Auth::user()->id)->whereIn('states',['1','2','3'])->get();
         return view('front.docrequest', compact('orders'));
     }
 
     public function DocOrderState($lang, $id, $state)
     {
-        $data = Order::select()->find($id);
+        $data = Requests::select()->find($id);
         if (!isset($data->id)) {
             return redirect()->route('user.doc.request', app()->getLocale());
         }

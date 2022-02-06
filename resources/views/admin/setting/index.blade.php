@@ -180,6 +180,109 @@
                     </div>
                 </section>
                 <!-- // Slider Image section end -->
+
+                <!-- Social Media section start -->
+                <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title" id="basic-layout-form"></h4>
+                                    <a class="heading-elements-toggle"><i
+                                            class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+                                        <form class="form" action="{{route('admin.setting.update')}}" method="POST"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="form-body">
+                                                <h4 class="form-section"><span>Emails</span> <i class="ft-home"></i></h4>
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="joinus"> {{ __('JoinUs') }} </label>
+                                                            <input type="email" id="joinus"
+                                                                   value="@if(isset($setting['JoinUs'])){{ $setting['JoinUs'] }}@endif"
+                                                                   class="form-control"
+                                                                   placeholder="JoinUs"
+                                                                   name="value[JoinUs]">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="callcenter"> CallCenter </label>
+                                                            <input type="email" id="callcenter"
+                                                                   value="@if(isset($setting['CallCenter'])){{ $setting['CallCenter'] }}@endif"
+                                                                   class="form-control"
+                                                                   placeholder="CallCenter"
+                                                                   name="value[CallCenter]">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="emergency"> Emergency </label>
+                                                            <input type="email" id="emergency"
+                                                                   value="@if(isset($setting['Emergency'])){{ $setting['Emergency'] }}@endif"
+                                                                   class="form-control"
+                                                                   placeholder="Emergency"
+                                                                   name="value[Emergency]">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="inpatient"> InPatient </label>
+                                                            <input type="email" id="inpatient"
+                                                                   value="@if(isset($setting['InPatient'])){{ $setting['InPatient'] }}@endif"
+                                                                   class="form-control"
+                                                                   placeholder="InPatient"
+                                                                   name="value[InPatient]">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="outpatient"> OutPatient </label>
+                                                            <input type="email" id="outpatient"
+                                                                   value="@if(isset($setting['OutPatient'])){{ $setting['OutPatient'] }}@endif"
+                                                                   class="form-control"
+                                                                   placeholder="OutPatient"
+                                                                   name="value[OutPatient]">
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="form-actions">
+                                                <button type="submit" value="Links" name="btn" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i>  تحديث
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- // Social Media section end -->
+
             </div>
         </div>
     </div>
