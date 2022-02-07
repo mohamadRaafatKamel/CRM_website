@@ -82,6 +82,7 @@ class HomeController extends Controller
             $req->fullname = $request->fullname;
             $req->type = '1';
             $req->save();
+
             $this->requestMail($request, "Emergency");
 
             return response()->json([ 'data'=>['success' => "1"] ]);
@@ -110,6 +111,8 @@ class HomeController extends Controller
             $req->fullname = $request->fullname;
             $req->type = '2';
             $req->save();
+
+            $this->requestMail($request, "CallCenter");
             return response()->json([ 'data'=>['success' => "1"] ]);
         } catch (\Exception $ex) {
             return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
@@ -135,6 +138,8 @@ class HomeController extends Controller
             $req->fullname = $request->fullname;
             $req->type = '3';
             $req->save();
+            
+            $this->requestMail($request, "CallCenter");
             return response()->json([ 'data'=>['success' => "1"] ]);
         } catch (\Exception $ex) {
             return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
@@ -144,13 +149,23 @@ class HomeController extends Controller
     public function joinUs(JoinUsRequest $request)  // join us
     {
         try {
+            // Check mail
+            $mailTo ="it@care-hub.net";
+            $setting = Setting::select()->where('name',"JoinUs")->first();
+            if(isset($setting->value)){
+                $testMail = $setting->value ;
+                if (strpos($testMail, '@') !== false) {
+                    $mailTo = $setting->value ;
+                }
+            } 
+            // Check fils
             if(isset($request['attachment'])){
                 $request->request->add(['Real_Path' => $request['attachment']->getRealPath() ]);
                 $request->request->add(['att_as' =>  $request['attachment']->getClientOriginalName() ]);
                 $request->request->add(['att_mime' =>  $request['attachment']->getClientMimeType() ]);
             }
                         
-            Mail::To($request->email)->send(new joinus($request->post()));
+            Mail::To($mailTo)->send(new joinus($request->post()));
             
             return response()->json([ 'data'=>['success' => "1"] ]);
         } catch (\Exception $ex) {
@@ -161,18 +176,16 @@ class HomeController extends Controller
     public function requestMail(Request $request,$depart ="")  // Request Mail
     {
         try {
-            // $depart = "CallCenter";
             // Check mail
-            $mailTo ="mohamadraafat100@gmail.com";
+            $mailTo ="it@care-hub.net";
             $setting = Setting::select()->where('name', $depart)->first();
             if(isset($setting->value)){
-                // if (strpos($request->value, '@') !== false) {
+                $testMail = $setting->value ;
+                if (strpos($testMail, '@') !== false) {
                     $mailTo = $setting->value ;
-                // }
+                }
             } 
-// return $mailTo;
             Mail::To($mailTo)->send(new requestMail($request->post()));
-            
             return response()->json([ 'data'=>['success' => "1"] ]);
         } catch (\Exception $ex) {
             return response()->json([ 'data'=>['success' => "0", 'error' => "Email Error"] ]);

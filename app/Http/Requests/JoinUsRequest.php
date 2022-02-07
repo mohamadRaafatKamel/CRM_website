@@ -26,7 +26,7 @@ class JoinUsRequest extends FormRequest
         date_default_timezone_set("Africa/Cairo");
         return [
             'name'=>'required|max:250',
-            'email'=>'required|email|max:250',
+            // 'email'=>'required|email|max:250',
             'email2'=>'email|max:250',
             'birth_date'=>'max:250',
             'phone' => 'max:50',
