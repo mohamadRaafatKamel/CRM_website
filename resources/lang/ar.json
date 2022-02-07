@@ -134,7 +134,7 @@
     "Guest": "زائر",
     "Call": "اتصال",
     "Call Done": "تم التواصل",
-    "": "",
+    "Request": "الطلبات",
     "//Admin Request End": "Admin Request End",
 
     "//Admin Order Start": "Admin Order Start",
@@ -165,8 +165,8 @@
     "View": "عرض",
     "Create": "انشاء",
     "Edit": "تعديل",
-    "": "",
-    "": "",
+    "Permission": "الصلاحيات",
+    "Setting": "الاعدادات",
     "": "",
     "//Admin Role End": "Admin Role End",
 

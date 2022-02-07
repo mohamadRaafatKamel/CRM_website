@@ -60,9 +60,9 @@
                     <span class="menu-title" data-i18n="nav.dash.main"> العملاء </span>
                 </a>
                 <ul class="menu-content">
-                   <li><a class="menu-item" href="{{route('admin.user')}}"   class="active"
+                   {{-- <li><a class="menu-item" href="{{route('admin.user')}}"   class="active"
                                           data-i18n="nav.dash.ecommerce"> {{ __('All User') }} </a>
-                    </li>
+                    </li> --}}
                     <li><a class="menu-item" href="{{route('admin.user.patent')}}"   class="active"
                            data-i18n="nav.dash.ecommerce"> {{ __('All Patent') }} </a>
                     </li>
@@ -132,7 +132,7 @@
 
             <li class="nav-item">
                 <a href=""><i class="la la-user"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main"> الادمن </span>
+                    <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Admin') }} </span>
                 </a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="{{route('admin.admin')}}"
@@ -144,7 +144,7 @@
                    <li class="nav-item">
                        <a href="">
                            <i class="la la-map-marker"></i>
-                           <span class="menu-title" data-i18n="nav.dash.main"> الصلاحيات </span>
+                           <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Permission') }} </span>
                            {{-- <span class="badge badge badge-info badge-pill float-right mr-2"> --}}
                        {{-- {{App\Models\Role::count()}} --}}
                    {{-- </span> --}}
@@ -164,11 +164,11 @@
             @if(\App\Models\Role::havePremission('setting_view'))
                 <li class="nav-item">
                     <a href=""><i class="la la-map-signs"></i>
-                        <span class="menu-title" data-i18n="nav.dash.main"> الاعدادات </span>
+                        <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Setting') }} </span>
                     </a>
                     <ul class="menu-content">
                         <li><a class="menu-item" href="{{route('admin.setting')}}"
-                               data-i18n="nav.dash.ecommerce"> الاعدادات </a>
+                               data-i18n="nav.dash.ecommerce"> {{ __('Setting') }} </a>
                         </li>
                     </ul>
                 </li>

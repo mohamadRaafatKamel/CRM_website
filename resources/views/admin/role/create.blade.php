@@ -65,9 +65,89 @@
                                                     </div>
                                                 </div>
 
-                                                <h4>التخصصات</h4>
+                                                <label><strong> {{ __('Request') }} </strong></label>
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="request_all" name="role_info[]"
+                                                                   id="request_all"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="request_all"
+                                                                   class="card-title ml-1">{{ __('All Request') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="request_emergency" name="role_info[]"
+                                                                   id="request_emergency"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="request_emergency"
+                                                                   class="card-title ml-1">{{ __('All Emergency') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="request_out" name="role_info[]"
+                                                                   id="request_out"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="request_out"
+                                                                   class="card-title ml-1">{{ __('All OutPatient') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="request_in" name="role_info[]"
+                                                                   id="request_in"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="request_in"
+                                                                   class="card-title ml-1">{{ __('All InPatient') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <label><strong> {{ __('Users') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_patent" name="role_info[]"
+                                                                   id="user_patent"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_patent"
+                                                                   class="card-title ml-1">{{ __('All Patent') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_doctor" name="role_info[]"
+                                                                   id="user_doctor"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_doctor"
+                                                                   class="card-title ml-1">{{ __('All Doctor') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_partner" name="role_info[]"
+                                                                   id="user_partner"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_partner"
+                                                                   class="card-title ml-1">{{ __('All Partner') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_nurse" name="role_info[]"
+                                                                   id="user_nurse"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_nurse"
+                                                                   class="card-title ml-1">{{ __('All Nurse') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <label><strong> التخصصات </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="specialty_view" name="role_info[]"
                                                                    id="specialty_view"
@@ -76,7 +156,7 @@
                                                                    class="card-title ml-1">عرض </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="specialty_cr" name="role_info[]"
                                                                    id="specialty_cr"
@@ -85,7 +165,7 @@
                                                                    class="card-title ml-1">انشاء </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="specialty_idt" name="role_info[]"
                                                                    id="specialty_idt"
@@ -96,9 +176,9 @@
                                                     </div>
                                                 </div>
 
-                                                <h4>{{ __('Serves') }}</h4>
+                                                <label><strong> {{ __('Serves') }} </strong></label>
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="serves_view" name="role_info[]"
                                                                    id="serves_view"
@@ -107,7 +187,7 @@
                                                                    class="card-title ml-1">{{ __('View') }} </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="serves_cr" name="role_info[]"
                                                                    id="serves_cr"
@@ -116,7 +196,7 @@
                                                                    class="card-title ml-1">{{ __('Create') }} </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="serves_idt" name="role_info[]"
                                                                    id="serves_idt"
@@ -127,6 +207,94 @@
                                                     </div>
                                                 </div>
 
+                                                <label><strong> {{ __('Survey') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="survey_view" name="role_info[]"
+                                                                   id="survey_view"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="survey_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                <label><strong> {{ __('Admin') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="admin_view" name="role_info[]"
+                                                                   id="admin_view"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="admin_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="admin_cr" name="role_info[]"
+                                                                   id="admin_cr"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="admin_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="admin_idt" name="role_info[]"
+                                                                   id="admin_idt"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="admin_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <label><strong> {{ __('Permission') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="role_view" name="role_info[]"
+                                                                   id="role_view"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="role_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="role_cr" name="role_info[]"
+                                                                   id="role_cr"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="role_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="role_idt" name="role_info[]"
+                                                                   id="role_idt"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="role_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <label><strong> {{ __('Setting') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="setting_view" name="role_info[]"
+                                                                   id="setting_view"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="setting_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
 
 
 
