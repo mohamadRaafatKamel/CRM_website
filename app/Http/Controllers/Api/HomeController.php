@@ -101,7 +101,6 @@ class HomeController extends Controller
             $req->governorate_id = $request->governorate_id;
             $req->city_id = $request->city_id;
             $req->adress = $request->adress;
-            $req->adress2 = $request->adress2;
             $req->phone = $request->phone;
             $req->service_id = $request->service_id;
             $req->specialty_id = $request->specialty_id ;
@@ -129,7 +128,6 @@ class HomeController extends Controller
             $req->governorate_id = $request->governorate_id;
             $req->city_id = $request->city_id;
             $req->adress = $request->adress;
-            $req->adress2 = $request->adress2;
             $req->phone = $request->phone;
             $req->service_id = $request->service_id;
             $req->visit_time_day = $request->visit_time_day;
