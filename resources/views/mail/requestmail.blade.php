@@ -8,8 +8,8 @@
 <body>
 <h1>Request Information</h1>
 
-@if(isset($data['name']))
-<p>Name :  {{ $data['name'] }} </p>
+@if(isset($data['fullname']))
+<p>Name :  {{ $data['fullname'] }} </p>
 @endif 
 @if(isset($data['phone']))
 <p>Phone :  {{ $data['phone'] }} </p>
