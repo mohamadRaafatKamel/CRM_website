@@ -17,16 +17,40 @@ class CompanyInfo extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'user_id', 'org_name', 'email', 'phone', 'website', 'contact_person_name', 'registration_num',
-         'tax_certificate_num', 'updated_at','created_at'
+        'id', 'org_name', 'email', 'phone', 'website', 'contact_person_name', 'registration_num', 'tax_certificate_num', 'type', 'pay', 'description', 'created_at', 'updated_at'
     ];
 
     public function  scopeSelection($query){
 
         return $query -> select(
-            'id', 'user_id', 'org_name', 'email', 'phone', 'website', 'contact_person_name', 'registration_num',
-            'tax_certificate_num', 'updated_at','created_at'
+            'id', 'org_name', 'email', 'phone', 'website', 'contact_person_name', 'registration_num', 'tax_certificate_num', 'type', 'pay', 'description', 'created_at', 'updated_at'
         );
+    }
+
+    static public function getType($type)
+    {
+        switch ($type){
+            case 1:
+                return "تامين";
+                break;
+            case 9:
+                return "other";
+                break;
+        }
+        return "";
+    }
+
+    static public function getPay($pay)
+    {
+        switch ($pay){
+            case 1:
+                return "later";
+                break;
+            case 2:
+                return "cash";
+                break;
+        }
+        return "";
     }
 
 }

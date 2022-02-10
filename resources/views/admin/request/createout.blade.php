@@ -130,7 +130,7 @@
                                                         <div class="form-group">
                                                             <label for="nurse_id">{{ __('Nurse Name') }}</label>
                                                             <select class="select2 form-control" name="nurse_id" id="nurse_id" >
-                                                                <option value="">{{ __('Choose Doctor Name') }}</option>
+                                                                <option value="">{{ __('Choose Nurse Name') }}</option>
                                                                 @foreach($nurses as $nurse)
                                                                     <option value="{{ $nurse->id }}"
                                                                             @if(isset($myorder->nurse_id))
@@ -140,6 +140,25 @@
                                                                 @endforeach
                                                             </select>
                                                             @error('nurse_id')
+                                                            <span class="text-danger">{{$message}}</span>--}}
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="driver_id">{{ __('Driver Name') }}</label>
+                                                            <select class="select2 form-control" name="driver_id" id="driver_id" >
+                                                                <option value="">{{ __('Choose Driver Name') }}</option>
+                                                                @foreach($drivers as $driver)
+                                                                    <option value="{{ $driver->id }}"
+                                                                            @if(isset($myorder->driver_id))
+                                                                            @if($myorder->driver_id == $driver->id) selected @endif @endif
+                                                                    >
+                                                                        {{ $driver->username }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('driver_id')
                                                             <span class="text-danger">{{$message}}</span>--}}
                                                             @enderror
                                                         </div>
@@ -240,15 +259,55 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="referral_id">{{ __('Referral') }}</label>
+                                                            <select class="select2 form-control" id="referral_id" name="referral_id">
+                                                                <option value=""></option>
+                                                                @foreach($referrals as $referral)
+                                                                    <option value="{{ $referral->id }}"
+                                                                        @if(isset($myorder->referral_id))
+                                                                            @if($myorder->referral_id == $referral->id) selected @endif
+                                                                        @endif
+                                                                        @if(old('referral_id') == $referral->id) selected @endif
+                                                                    >{{ $referral->name_ar}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('referral_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="referral"> {{ __('Referral') }} </label>
                                                             <input type="text" id="referral" 
                                                                    class="form-control"
-                                                                   @if(isset($myorder->referral))
-                                                                        value="{{ $myorder->referral }}"
-                                                                   @endif
-                                                                   placeholder="{{ __('Referral') }}"
+                                                                   placeholder="{{ __('Referral Name') }}"
                                                                    name="referral">
                                                             @error('referral')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="corporate_id">{{ __('Corporate') }}</label>
+                                                            <select class="select2 form-control" id="corporate_id" name="corporate_id">
+                                                                <option value=""></option>
+                                                                @foreach($companys as $company)
+                                                                    <option value="{{ $company->id }}"
+                                                                        @if(isset($myorder->corporate_id))
+                                                                            @if($myorder->corporate_id == $company->id) selected @endif
+                                                                        @endif
+                                                                        @if(old('corporate_id') == $company->id) selected @endif
+                                                                    >{{ $company->org_name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('corporate_id')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -259,9 +318,6 @@
                                                             <label for="corporate"> {{ __('Corporate') }} </label>
                                                             <input type="text" id="corporate" 
                                                                    class="form-control"
-                                                                   @if(isset($myorder->corporate))
-                                                                        value="{{ $myorder->corporate }}"
-                                                                   @endif
                                                                    placeholder="{{ __('Corporate') }}"
                                                                    name="corporate">
                                                             @error('corporate')
@@ -269,6 +325,9 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+
+                                                </div>
+                                                <div class="row">
 
                                                     
                                                     <div class="col-md-6">
@@ -373,19 +432,27 @@
                                                         <div class="form-group">
                                                             <label for="city_id"> {{ __('Area') }} </label>
                                                             <select name="city_id" id="city_id" 
-                                                                    class="select2 form-control @error('city_id') is-invalid @enderror" >
+                                                                    class="select2 form-control" >
                                                                 <option></option>
                                                                 @if($citys)
                                                                     @foreach($citys as $city)
-                                                                        <option value="{{$city->id}}"
+                                                                    @if(old('city_id') == $city->id)
+                                                                        <option value="{{$city->id}}" class="{{ $city->governorate_id }}" selected>{{$city->city_name_ar}}</option>
+                                                                    @endif
+                                                                    @if($myorder->city_id == $city->id)
+                                                                        <option value="{{$city->id}}" class="{{ $city->governorate_id }}" selected>{{$city->city_name_ar}}</option>
+                                                                    @endif
+                                                                        {{-- <option value="{{$city->id}}" class="{{ $city->governorate_id }}"
                                                                                 @if(isset($myorder->city_id))
-                                                                                @if($myorder->city_id == $city->id) selected @endif @endif>
+                                                                                    @if($myorder->city_id == $city->id) selected @endif 
+                                                                                @endif
+                                                                                @if(old('city_id') == $city->id) selected @endif >
                                                                             @if(app()->getLocale() == 'ar')
                                                                                 {{$city->city_name_ar}}
                                                                             @else
                                                                                 {{$city->city_name_en}}
                                                                             @endif
-                                                                        </option>
+                                                                        </option> --}}
                                                                     @endforeach
                                                                 @endif
                                                             </select>
@@ -748,21 +815,18 @@
 
                                             <div class="form-actions">
                                                
-                                                <button type="submit" name="btn" value="done" class="btn btn-primary">
+                                                <button type="submit" name="btn" value="done" class="btn btn-success">
                                                     <i class="la la-check-square-o"></i> {{ _('DONE') }}
                                                 </button>
 
                                                 <button type="submit" name="btn" value="hold" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> {{ _('Hold') }}
+                                                    <i class="la la-check-square-o"></i> {{ _('Save & Hold') }}
                                                 </button>
 
-                                                <button type="submit" name="btn" value="cancel" class="btn btn-primary">
+                                                <button type="submit" name="btn" value="cancel" class="btn btn-danger">
                                                     <i class="la la-check-square-o"></i> {{ _('Cancel') }}
                                                 </button>
                                                 
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> {{ __('Save All') }}
-                                                </button>
                                             </div>
                                         </form>
                                     </div>
@@ -783,61 +847,74 @@
     <script>
         jQuery(document).ready(function ($) {
 
-            // $('#user_id').change(function () {
-            //     $.ajax({
-            //         url: 'getUserInfo/' + $('#user_id').val(),
-            //         type: 'get',
-            //         dataType: 'json',
-            //         success: function (response) {
-            //             // console.log(response)
-            //             if(response == null){
-            //                 console.log('Not Found');
-            //             }else {
-            //                 $('#fullname').val(response.fname+' '+response.lname);
-            //                 $('#governorate_id').val(response.governorate_id).change();
-            //                 $('#city_id').val(response.city_id).change();
-            //                 $('#adress').val(response.address);
-            //                 $('#adress2').val(response.address2);
-            //                 $('#phone').val(response.phone);
-            //                 $('#phone2').val(response.mobile);
-            //                 $('#birth_date').val(response.birth_date);
-            //                 $('#gender').val(response.gender);
-            //                 $('#code_zone_patient_id').val(response.code_zone_patient_id);
-            //             }
-            //         }
-            //         // error: function (xhr, ajaxOptions, thrownError) {
-            //         //     input.val(0);
-            //         // }
-            //     });
-            //     // console.log($('#user_id').val())
-            // });
+            $('#user_id').change(function () {
+                $.ajax({
+                    url: '../../getUserInfo/' + $('#user_id').val(),
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        // console.log(response)
+                        if(response == null){
+                            console.log('Not Found');
+                        }else {
+                            $('#fullname').val(response.username);
+                            if(response.address !== null){
+                                $('#adress').val(response.address);
+                            }
+                            $('#phone').val(response.phone);
+                            $('#phone2').val(response.mobile);
+                            $('#gender').val(response.gender);
+                            $('#code_zone_patient_id').val(response.code_zone_patient_id);
+                            $('#governorate_id').val(response.governorate_id).change();
+                            if(response.governorate_id !== null){
+                                setTimeout( function() { $('#city_id').val(response.city_id).change(); }, 1000);
+                            }
+                        }
+                    }
+                    // error: function (xhr, ajaxOptions, thrownError) {
+                    //     input.val(0);
+                    // }
+                });
+            });
 
-            // $('#doctor_id').change(function () {
-            //     $.ajax({
-            //         url: 'getDocSpecialty/' + $('#doctor_id').val(),
-            //         type: 'get',
-            //         dataType: 'json',
-            //         success: function (response) {
-            //             console.log(response.length)
-            //             if(response == null){
-            //                 console.log('Not Found');
-            //             }else {
-            //                 if(response.length > 0){
-            //                     for (let i = 0; i < response.length; i++) { 
-            //                         $('#specialty_id').append($('<option>', {
-            //                             value: response[i].id,
-            //                             text: response[i].name_ar
-            //                         }));
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //         // error: function (xhr, ajaxOptions, thrownError) {
-            //         //     input.val(0);
-            //         // }
-            //     });
-            //     // console.log($('#user_id').val())
-            // });
+            $('#governorate_id').change(function () {
+                var govern = $('#governorate_id').val();
+                if(govern !== null && govern !== ""){
+                    getCitySelect(govern);
+                }
+            });
+
+            function getCitySelect(govern) {
+                $.ajax({
+                    url: "../../getCityGevern/" + govern,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        if(response == null){
+                            console.log('Not Found');
+                        }else {
+                            if(response.length > 0){
+                                for (let i = 0; i < response.length; i++) { 
+                                    if(i == 0){
+                                        $('#city_id').html($('<option>', {
+                                            value: response[i].id,
+                                            text: response[i].city_name_ar
+                                        }));
+                                    }else{
+                                        $('#city_id').append($('<option>', {
+                                            value: response[i].id,
+                                            text: response[i].city_name_ar
+                                        }));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // error: function (xhr, ajaxOptions, thrownError) {
+                    //     input.val(0);
+                    // }
+                });
+            }
         });
     </script>
 @endsection

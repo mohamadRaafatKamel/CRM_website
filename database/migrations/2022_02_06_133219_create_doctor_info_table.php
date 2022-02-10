@@ -15,7 +15,7 @@ class CreateDoctorInfoTable extends Migration
     {
         Schema::create('doctor_info', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('specialty')->nullable();
             $table->string('cv')->nullable();

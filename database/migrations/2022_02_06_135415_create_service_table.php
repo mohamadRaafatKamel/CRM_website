@@ -19,10 +19,10 @@ class CreateServiceTable extends Migration
             $table->string('name_en')->unique();
             $table->string('description')->nullable();
             $table->string('image')->nullable();
-            $table->binary('type')->nullable();
+            $table->integer('type')->nullable();
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
-            $table->binary('disabled')->default(0);
+            $table->integer('disabled')->default(0);
             $table->timestamps();
         });
     }

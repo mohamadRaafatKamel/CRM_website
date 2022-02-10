@@ -45,6 +45,45 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
     });
     ##################### End Service ########################
 
+    ##################### Company ############################
+    Route::group(['prefix'=>'company'],function (){
+        Route::get('/','CompanyController@index')->name('admin.company');
+        Route::get('create','CompanyController@create')->name('admin.company.create');
+        Route::post('store','CompanyController@store')->name('admin.company.store');
+
+        Route::get('edit/{id}','CompanyController@edit')->name('admin.company.edit');
+        Route::post('update/{id}','CompanyController@update')->name('admin.company.update');
+
+        Route::get('delete/{id}','CompanyController@destroy') -> name('admin.company.delete');
+    });
+    ##################### End Company ########################
+
+    ##################### Package ############################
+    Route::group(['prefix'=>'package'],function (){
+        Route::get('/','PackageController@index')->name('admin.package');
+        Route::get('create','PackageController@create')->name('admin.package.create');
+        Route::post('store','PackageController@store')->name('admin.package.store');
+
+        Route::get('edit/{id}','PackageController@edit')->name('admin.package.edit');
+        Route::post('update/{id}','PackageController@update')->name('admin.package.update');
+
+        Route::get('delete/{id}','PackageController@destroy') -> name('admin.package.delete');
+    });
+    ##################### End Package ########################
+
+    ##################### Referral ############################
+    Route::group(['prefix'=>'referral'],function (){
+        Route::get('/','ReferralController@index')->name('admin.referral');
+        Route::get('create','ReferralController@create')->name('admin.referral.create');
+        Route::post('store','ReferralController@store')->name('admin.referral.store');
+
+        Route::get('edit/{id}','ReferralController@edit')->name('admin.referral.edit');
+        Route::post('update/{id}','ReferralController@update')->name('admin.referral.update');
+
+        Route::get('delete/{id}','ReferralController@destroy') -> name('admin.referral.delete');
+    });
+    ##################### End Referral ########################
+
     ##################### Admin ##############################
     Route::group(['prefix'=>'admin'],function (){
         Route::get('/','AdminController@index')->name('admin.admin');
@@ -94,8 +133,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('/','UserController@index')->name('admin.user');
         Route::get('/patent','UserController@indexPatent')->name('admin.user.patent');
         Route::get('/doctor','UserController@indexDoctor')->name('admin.user.doctor');
-        Route::get('/partner','UserController@indexPartner')->name('admin.user.partner');
         Route::get('/nurse','UserController@indexNurse')->name('admin.user.nurse');
+        Route::get('/driver','UserController@indexDriver')->name('admin.user.driver');
         
        Route::get('create','UserController@create')->name('admin.user.create');
        Route::post('store','UserController@store')->name('admin.user.store');
@@ -118,6 +157,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::post('store','RequestController@store')->name('admin.request.store');
         Route::post('update/{id}','RequestController@update')->name('admin.request.update');
         
+        
         // Emergency
         Route::get('/emergency','RequestController@indexEm')->name('admin.request.emergency');
 
@@ -138,6 +178,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
 
         // ajax
         Route::get('/getUserInfo/{id}', 'RequestController@getUserInfo');
+        Route::get('/getCityGevern/{id}', 'RequestController@getCityGevern');
+        
 //
         Route::get('call/{id}','RequestController@callhim')->name('admin.user.call.him');
 

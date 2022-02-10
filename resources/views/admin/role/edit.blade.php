@@ -65,9 +65,114 @@
                                                     </div>
                                                 </div>
 
+                                                <label><strong> {{ __('Request') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="request_all" name="role_info[]"
+                                                                   id="request_all"
+                                                                   @if(isset($myRoleInfo['request_all']) and $myRoleInfo['request_all'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="request_all"
+                                                                   class="card-title ml-1">{{ __('All Request') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="request_emergency" name="role_info[]"
+                                                                   id="request_emergency"
+                                                                   @if(isset($myRoleInfo['request_emergency']) and $myRoleInfo['request_emergency'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="request_emergency"
+                                                                   class="card-title ml-1">{{ __('All Emergency') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="request_out" name="role_info[]"
+                                                                   id="request_out"
+                                                                   @if(isset($myRoleInfo['request_out']) and $myRoleInfo['request_out'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="request_out"
+                                                                   class="card-title ml-1">{{ __('All OutPatient') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="request_in" name="role_info[]"
+                                                                   id="request_in"
+                                                                   @if(isset($myRoleInfo['request_in']) and $myRoleInfo['request_in'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="request_in"
+                                                                   class="card-title ml-1">{{ __('All InPatient') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <label><strong> {{ __('Users') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_patent" name="role_info[]"
+                                                                   id="user_patent"
+                                                                   @if(isset($myRoleInfo['request_in']) and $myRoleInfo['request_in'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_patent"
+                                                                   class="card-title ml-1">{{ __('All Patent') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_doctor" name="role_info[]"
+                                                                   id="user_doctor"
+                                                                   @if(isset($myRoleInfo['user_doctor']) and $myRoleInfo['user_doctor'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_doctor"
+                                                                   class="card-title ml-1">{{ __('All Doctor') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_partner" name="role_info[]"
+                                                                   id="user_partner"
+                                                                   @if(isset($myRoleInfo['user_partner']) and $myRoleInfo['user_partner'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_partner"
+                                                                   class="card-title ml-1">{{ __('All Partner') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_nurse" name="role_info[]"
+                                                                   id="user_nurse"
+                                                                   @if(isset($myRoleInfo['user_nurse']) and $myRoleInfo['user_nurse'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_nurse"
+                                                                   class="card-title ml-1">{{ __('All Nurse') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
                                                 <h4>التخصصات</h4>
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="specialty_view" name="role_info[]"
                                                                    id="specialty_view"
@@ -79,7 +184,7 @@
                                                                    class="card-title ml-1">عرض </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="specialty_cr" name="role_info[]"
                                                                    id="specialty_cr"
@@ -91,7 +196,7 @@
                                                                    class="card-title ml-1">انشاء </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="specialty_idt" name="role_info[]"
                                                                    id="specialty_idt"
@@ -108,7 +213,7 @@
 
                                                 <h4>{{ __('Serves') }}</h4>
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="serves_view" name="role_info[]"
                                                                    id="serves_view"
@@ -120,7 +225,7 @@
                                                                    class="card-title ml-1">{{ __('View') }} </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="serves_cr" name="role_info[]"
                                                                    id="serves_cr"
@@ -132,7 +237,7 @@
                                                                    class="card-title ml-1">{{ __('Create') }} </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="serves_idt" name="role_info[]"
                                                                    id="serves_idt"
@@ -144,6 +249,240 @@
                                                                    class="card-title ml-1">{{ __('Edit') }} </label>
                                                         </div>
                                                     </div>
+                                                </div>
+
+                                                <label><strong> {{ __('Survey') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="survey_view" name="role_info[]"
+                                                                   id="survey_view"
+                                                                   @if(isset($myRoleInfo['survey_view']) and $myRoleInfo['survey_view'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="survey_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                <label><strong> {{ __('Company') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="company_view" name="role_info[]"
+                                                                   id="company_view"
+                                                                   @if(isset($myRoleInfo['company_view']) and $myRoleInfo['company_view'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="company_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="company_cr" name="role_info[]"
+                                                                   id="company_cr"
+                                                                   @if(isset($myRoleInfo['company_cr']) and $myRoleInfo['company_cr'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="company_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="company_idt" name="role_info[]"
+                                                                   id="company_idt"
+                                                                   @if(isset($myRoleInfo['company_idt']) and $myRoleInfo['company_idt'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="company_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <label><strong> {{ __('Package') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="package_view" name="role_info[]"
+                                                                   id="package_view"
+                                                                   @if(isset($myRoleInfo['package_view']) and $myRoleInfo['package_view'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="package_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="package_cr" name="role_info[]"
+                                                                   id="package_cr"
+                                                                   @if(isset($myRoleInfo['package_cr']) and $myRoleInfo['package_cr'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="package_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="package_idt" name="role_info[]"
+                                                                   id="package_idt"
+                                                                   @if(isset($myRoleInfo['package_idt']) and $myRoleInfo['package_idt'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="package_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <label><strong> {{ __('Referral') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="referral_view" name="role_info[]"
+                                                                   id="referral_view"
+                                                                   @if(isset($myRoleInfo['referral_view']) and $myRoleInfo['referral_view'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="referral_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="referral_cr" name="role_info[]"
+                                                                   id="referral_cr"
+                                                                   @if(isset($myRoleInfo['referral_cr']) and $myRoleInfo['referral_cr'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="referral_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="referral_idt" name="role_info[]"
+                                                                   id="referral_idt"
+                                                                   @if(isset($myRoleInfo['referral_idt']) and $myRoleInfo['referral_idt'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="referral_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <label><strong> {{ __('Admin') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="admin_view" name="role_info[]"
+                                                                   id="admin_view"
+                                                                   @if(isset($myRoleInfo['admin_view']) and $myRoleInfo['admin_view'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="admin_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="admin_cr" name="role_info[]"
+                                                                   id="admin_cr"
+                                                                   @if(isset($myRoleInfo['admin_cr']) and $myRoleInfo['admin_cr'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="admin_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="admin_idt" name="role_info[]"
+                                                                   id="admin_idt"
+                                                                   @if(isset($myRoleInfo['admin_idt']) and $myRoleInfo['admin_idt'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="admin_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <label><strong> {{ __('Permission') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="role_view" name="role_info[]"
+                                                                   id="role_view"
+                                                                   @if(isset($myRoleInfo['role_view']) and $myRoleInfo['role_view'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="role_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="role_cr" name="role_info[]"
+                                                                   id="role_cr"
+                                                                   @if(isset($myRoleInfo['role_cr']) and $myRoleInfo['role_cr'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="role_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="role_idt" name="role_info[]"
+                                                                   id="role_idt"
+                                                                   @if(isset($myRoleInfo['role_idt']) and $myRoleInfo['role_idt'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="role_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <label><strong> {{ __('Setting') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="setting_view" name="role_info[]"
+                                                                   id="setting_view"
+                                                                   @if(isset($myRoleInfo['setting_view']) and $myRoleInfo['setting_view'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="setting_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    
                                                 </div>
 
 

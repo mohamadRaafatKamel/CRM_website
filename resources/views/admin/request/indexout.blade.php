@@ -54,6 +54,7 @@
                                                         <th>العميل</th>
                                                         <th> موبيل</th>
                                                         <th> موبيل</th>
+                                                        <th> Date</th>
                                                         <th> الحاله</th>
                                                     </tr>
                                                     </thead>
@@ -77,8 +78,12 @@
                                                                 </td>
                                                                 <td>{{$request -> phone}}</td>
                                                                 <td>{{$request -> phone2 }}</td>
-                                                                <td>{{ __(\App\Models\Requests::getRequestStateCC($request -> status_in_out)) }}</td>
-                                                            
+                                                                <td>{{$request -> created_at}}</td>
+                                                                <td>
+                                                                    <span class="badge {{ \App\Models\Requests::getStateColor($request ->status_in_out) }}">
+                                                                        {{ \App\Models\Requests::getRequestState($request -> status_in_out) }}
+                                                                    </span>
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                     @endisset

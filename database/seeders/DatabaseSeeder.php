@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             AdminTableSeeder::class,
             RequestTableSeeder::class,
+            DocInfoTableSeeder::class,
             
             CountriesTableSeeder::class,
             GovernoratesTableSeeder::class,

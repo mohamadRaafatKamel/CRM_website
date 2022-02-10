@@ -17,25 +17,27 @@ class Requests extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'user_id', 'doctor_id', 'nurse_id', 'fullname', 'name_caregiver', 'gender', 'location', 'governorate_id', 
-        'city_id', 'adress', 'land_mark', 'floor', 'apartment', 'phone', 'phone2', 'whatapp', 'whatapp2', 'whatsApp_group',
-        'age', 'referral', 'corporate', 'physician', 'type', 'covid19', 'specialty_id', 'service_id', 
-        'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to', 'expectation_cost', 'real_cost', 'bill_serial', 
-        'pay_or_not', 'code_zone_patient_id', 'bed_number', 'symptoms', 'doc_note', 'Feedback', 'doc_rate', 'user_rate', 
-        'opd_admin_id', 'cc_admin_id', 'admin_id_in_out', 'status_doc', 'status_user', 'status_cc', 'status_in_out', 
-        'created_at', 'updated_at'
+        'id', 'user_id', 'doctor_id', 'nurse_id', 'fullname', 'name_caregiver', 'gender', 'location', 
+        'governorate_id', 'city_id', 'adress', 'land_mark', 'floor', 'apartment', 'phone', 'phone2', 'whatapp', 
+        'whatapp2', 'whatsApp_group', 'age', 'referral_id', 'corporate_id', 'physician', 'type', 'covid19', 
+        'specialty_id', 'service_id', 'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to', 
+        'expectation_cost', 'real_cost', 'bill_serial', 'pay_or_not', 'code_zone_patient_id', 'bed_number', 
+        'symptoms', 'doc_note', 'Feedback', 'doc_rate', 'user_rate', 'opd_admin_id', 'cc_admin_id', 
+        'admin_id_in_out', 'status_doc', 'status_user', 'status_cc', 'status_in_out', 'created_at', 
+        'updated_at','driver_id'
     ];
 
     public function  scopeSelection($query){
         $query -> where('id','!=',0);
         return $query -> select(
-            'id', 'user_id', 'doctor_id', 'nurse_id', 'fullname', 'name_caregiver', 'gender', 'location', 'governorate_id', 
-            'city_id', 'adress', 'land_mark', 'floor', 'apartment', 'phone', 'phone2', 'whatapp', 'whatapp2', 'whatsApp_group',
-            'age', 'referral', 'corporate', 'physician', 'type', 'covid19', 'specialty_id', 'service_id', 
-            'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to', 'expectation_cost', 'real_cost', 'bill_serial', 
-            'pay_or_not', 'code_zone_patient_id', 'bed_number', 'symptoms', 'doc_note', 'Feedback', 'doc_rate', 'user_rate', 
-            'opd_admin_id', 'cc_admin_id', 'admin_id_in_out', 'status_doc', 'status_user', 'status_cc', 'status_in_out', 
-            'created_at', 'updated_at'
+            'id', 'user_id', 'doctor_id', 'nurse_id', 'fullname', 'name_caregiver', 'gender', 'location', 
+            'governorate_id', 'city_id', 'adress', 'land_mark', 'floor', 'apartment', 'phone', 'phone2', 'whatapp', 
+            'whatapp2', 'whatsApp_group', 'age', 'referral_id', 'corporate_id', 'physician', 'type', 'covid19', 
+            'specialty_id', 'service_id', 'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to', 
+            'expectation_cost', 'real_cost', 'bill_serial', 'pay_or_not', 'code_zone_patient_id', 'bed_number', 
+            'symptoms', 'doc_note', 'Feedback', 'doc_rate', 'user_rate', 'opd_admin_id', 'cc_admin_id', 
+            'admin_id_in_out', 'status_doc', 'status_user', 'status_cc', 'status_in_out', 'created_at', 
+            'updated_at','driver_id'
         );
     }
 
@@ -55,42 +57,42 @@ class Requests extends Model
         return 0;
     }
 
-    static public function getRequestStateCC($state_cc)
+    static public function getRequestState($state)
     {
-        switch ($state_cc){
+        switch ($state){
             case 1:
-                return __("Waiting");
+                return __('Waiting');
                 break;
             case 2:
-                return __("Hold");
+                return __('Hold');
                 break;
             case 4:
-                return __("DONE");
+                return __('DONE') ;
                 break;
             case 5:
-                return __("Cancel");
+                return __('Cancel') ;
                 break;
         }
-        return "";
+        return "_";
     }
 
-    static public function getRequestStateInOut($state_in_out)
+    static public function getStateColor($state)
     {
-        switch ($state_in_out){
+        switch ($state){
             case 1:
-                return __("Waiting");
+                return "badge-danger";
                 break;
             case 2:
-                return __("Hold");
+                return 'badge-warning';
                 break;
             case 4:
-                return __("DONE");
+                return 'badge-success';
                 break;
             case 5:
-                return __("Cancel");
+                return 'badge-secondary';
                 break;
         }
-        return "";
+        return "_";
     }
 
     // public static function getAddress($id)

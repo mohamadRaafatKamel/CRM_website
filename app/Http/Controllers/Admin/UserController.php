@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\Admin;
 use App\Models\City;
-use App\Models\CompanyInfo;
 use App\Models\Country;
 use App\Models\DoctorInfo;
 use App\Models\DoctorWorkDay;
-use App\Models\Emarh;
 use App\Models\Governorate;
 use App\Models\Role;
 use App\Models\Specialty;
@@ -41,16 +39,18 @@ class UserController extends Controller
         $info = ['name' => "All Doctor", 'type' => '2'];
         return view('admin.user.index', compact('users','info'));
     }
-    public function indexPartner()
-    {
-        $users = User::select()->where('type',3)->paginate(PAGINATION_COUNT);
-        $info = ['name' => "All Partner", 'type' => '3'];
-        return view('admin.user.index', compact('users','info'));
-    }
+    
     public function indexNurse()
     {
         $users = User::select()->where('type',4)->paginate(PAGINATION_COUNT);
         $info = ['name' => "All Nurse", 'type' => '4'];
+        return view('admin.user.index', compact('users','info'));
+    }
+
+    public function indexDriver()
+    {
+        $users = User::select()->where('type',5)->paginate(PAGINATION_COUNT);
+        $info = ['name' => "All Driver", 'type' => '5'];
         return view('admin.user.index', compact('users','info'));
     }
 
@@ -70,11 +70,6 @@ class UserController extends Controller
         if(!isset($doctor->id)){
             $doctor = DoctorInfo::select()->find(0);
         }
-        // get partner data
-        $partner = CompanyInfo::select()->where('user_id',$id)->first();
-        if(!isset($partner->id)){
-            $partner = CompanyInfo::select()->find(0);
-        }
         // time work
         $timeWork = [];
         $docWorks = DoctorWorkDay::select()->where('user_id',$id)->get();
@@ -89,7 +84,7 @@ class UserController extends Controller
         foreach($docSpes as $dd){
             $mainSpecial[] = $dd['specialty_id'];
         }
-        return view('admin.user.view',compact('user','specialtis','mainSpecial','mainSpecialtis','doctor','partner','countrys','governorates','citys','timeWork'));
+        return view('admin.user.view',compact('user','specialtis','mainSpecial','mainSpecialtis','doctor','countrys','governorates','citys','timeWork'));
     }
 
     public function update($id, UserRequest $request)
@@ -143,14 +138,6 @@ class UserController extends Controller
                         DoctorInfo::create($mydoctor);
                     }
 
-                }else
-                if($request->btn == "partner"){
-                    $myPartner = CompanyInfo::select()->where('user_id',$id)->first();
-                    if(isset($myPartner->id)){
-                        $myPartner->update($request->except('_token'));
-                    }else{
-                        CompanyInfo::create(array_merge($request->except(['_token']),['user_id' => $id]));
-                    }
                 }
             }
 
@@ -188,14 +175,15 @@ class UserController extends Controller
     {
         $request->validate([
             'username' => ['required', 'string', 'max:255'],
-            'email' => ['string', 'email', 'max:255', 'unique:users'],
+            // 'email' => ['email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:255', 'unique:users'],
         ]);
         try {
 
             $user = new User([
                 'username' => $request->username,
-                'email' => $request->email,
+                'quick' => "1",
+                // 'email' => $request->email,
                 'phone' => $request->phone,
                 'type' => $request->btn,
                 'password' => Hash::make(rand(1000000000,9999999999)),

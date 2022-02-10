@@ -32,13 +32,15 @@ class Role extends Model
     {
         $userRole = Auth::user()->permission;
         if($userRole != '0'){
-            $role = RoleInfo::select()->where([
-                ['name','=',$permissionName],
-                ['role_id','=',$userRole]
-            ])->first();
-            if(isset($role['have_permission'])){
-                if($role['have_permission'] == '1'){
-                    return true;
+            foreach($permissionName as $permisson){
+                $role = RoleInfo::select()->where([
+                    ['name','=',$permisson],
+                    ['role_id','=',$userRole]
+                ])->first();
+                if(isset($role['have_permission'])){
+                    if($role['have_permission'] == '1'){
+                        return true;
+                    }
                 }
             }
         }else{

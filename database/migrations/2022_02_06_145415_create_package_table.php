@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoleInfoTable extends Migration
+class CreatePackageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateRoleInfoTable extends Migration
      */
     public function up()
     {
-        Schema::create('role_info', function (Blueprint $table) {
+        Schema::create('package', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('role')->onDelete('cascade');
-            $table->string('name');
-            $table->integer('have_permission');
+            $table->string('name_ar')->nullable();
+            $table->string('name_en')->nullable();
+            $table->string('description')->nullable();
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
+            $table->integer('disabled')->default(0);
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateRoleInfoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_info');
+        Schema::dropIfExists('service');
     }
 }

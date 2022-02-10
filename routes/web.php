@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 // if (isset($_COOKIE['lang'])){
 //     Route::redirect('/', $_COOKIE['lang']);
 // }else{
-//     Route::redirect('/', 'ar');
+    // Route::redirect('/', 'ar');
 // }
+
+Route::redirect('/', 'admin');
 
 Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ], function () {
     // Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {

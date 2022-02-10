@@ -22,7 +22,7 @@ class CreateSpecialtyTable extends Migration
             $table->string('image')->nullable();
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
-            $table->binary('disabled')->default(0);
+            $table->integer('disabled')->default(0);
             $table->timestamps();
         });
     }
