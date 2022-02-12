@@ -1,7 +1,8 @@
 @extends('layouts.admin')
-@section('title','company')
+@section('title',__("Company"))
 @section('company_view','')
 @section('content')
+<?php $readonly=""; ?>
 
     <div class="app-content content">
         <div class="content-wrapper">
@@ -12,9 +13,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.company')}}">  company </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.company')}}"> {{ __("Company") }} </a>
                                 </li>
-                                <li class="breadcrumb-item active">تعديل
+                                <li class="breadcrumb-item active">{{ __('View') }}
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +29,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">تعديل</h4>
+                                    <h4 class="card-title" id="basic-layout-form">{{ __('Edit') }}</h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -53,10 +54,10 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="org_name"> الاسم  </label>
+                                                            <label for="org_name"> {{ __('Name') }}  </label>
                                                             <input type="text"  id="org_name" value="{{$datas -> org_name}}"
                                                                    class="form-control" required
-                                                                   placeholder="الاسم "
+                                                                   placeholder="{{ __('Name') }}"
                                                                    name="org_name">
                                                             @error('org_name')
                                                             <span class="text-danger">{{$message}}</span>

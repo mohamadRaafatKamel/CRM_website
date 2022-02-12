@@ -1,18 +1,18 @@
 @extends('layouts.admin')
-@section('title','company')
+@section('title',__('Company'))
 @section('company_view','')
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">  {{ __('company') }} </h3>
+                    <h3 class="content-header-title">  {{ __('Company') }} </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active">  {{ __('company') }}
+                                <li class="breadcrumb-item active">  {{ __('Company') }}
                                 </li>
                             </ol>
                         </div>
@@ -26,7 +26,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> {{ __('company') }} </h4>
+                                    <h4 class="card-title"> {{ __('Company') }} </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -44,15 +44,17 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-primary mb-2" href="{{ route('admin.company.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
+                                        @if(\App\Models\Role::havePremission(['company_cr']))
+                                            <a class="btn btn-primary mb-2" href="{{ route('admin.company.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
+                                        @endif
                                         <div class="table-responsive">
                                         <table
                                             class="table table-striped table-bordered zero-configuration ">
                                             <thead>
                                             <tr>
-                                                <th>اسم </th>
-                                                <th> phone</th>
-                                                <th>  website </th>
+                                                <th>{{ __('Name') }} </th>
+                                                <th> {{ __('Phone') }}</th>
+                                                <th>  {{ __('Website') }} </th>
                                                 <th></th>
                                             </tr>
                                             </thead>
@@ -67,8 +69,8 @@
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                <a href="{{route('admin.company.edit',['id'=> $data->id ])}}"
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
+                                                                    <a href="{{route('admin.company.edit',['id'=> $data->id ])}}"
+                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
 {{--                                                                <a href="{{route('admin.company.delete',$data -> id)}}"--}}
 {{--                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>--}}
                                                             </div>

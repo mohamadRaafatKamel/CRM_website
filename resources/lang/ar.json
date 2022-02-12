@@ -103,7 +103,7 @@
     "All OutPatient": "خدمات خارجي ",
     "//Admin SideBar End": "Admin SideBar End",
 
-    "//Admin user view Start": "Admin user view Start",
+    "//Admin user Start": "Admin user Start",
     "Organization Name": "اسم النظمه",
     "Organization Email": "ايميل المنظمه",
     "Organization Phone": "رقم التليفون للمنظمه",
@@ -128,7 +128,7 @@
     "Doctor Info": "بيانات الطبيب",
     "Company Info": "بيانات الشركاء",
     "": "",
-    "//Admin user view End": "Admin user view End",
+    "//Admin user End": "Admin user End",
 
     "//Admin Request Start": "Admin Request Start",
     "Guest": "زائر",
@@ -160,6 +160,15 @@
     "": "",
     "": "",
     "//Admin Order End": "Admin Order End",
+
+    "//Admin Company Start": "Admin Company Start",
+    "Company": "شركات",
+    "Website": "الموقع الالكتروني",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "//Admin Company End": "Admin Company End",
 
     "//Admin Role Start": "Admin Role Start",
     "View": "عرض",

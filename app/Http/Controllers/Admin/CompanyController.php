@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyInfo;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,12 +12,16 @@ class CompanyController extends Controller
 {
     public function index()
     {
+        if(! Role::havePremission(['company_view','company_idt']))
+            return redirect()->route('admin.dashboard');
         $datas = CompanyInfo::select()->paginate(PAGINATION_COUNT);
         return view('admin.company.index', compact('datas'));
     }
 
     public function create()
     {
+        if(! Role::havePremission(['company_cr']))
+            return redirect()->route('admin.dashboard');
         return view('admin.company.create');
     }
 
