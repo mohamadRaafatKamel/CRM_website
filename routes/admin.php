@@ -180,10 +180,6 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('/getUserInfo/{id}', 'RequestController@getUserInfo');
         Route::get('/getCityGevern/{id}', 'RequestController@getCityGevern');
         
-//
-        Route::get('call/{id}','RequestController@callhim')->name('admin.user.call.him');
-
-//        Route::get('delete/{id}','RequestController@destroy') -> name('admin.user.delete');
     });
     ##################### End Request ##########################
 

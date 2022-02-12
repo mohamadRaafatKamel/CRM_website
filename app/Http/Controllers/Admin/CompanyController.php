@@ -27,6 +27,8 @@ class CompanyController extends Controller
 
     public function store(Request $request)
     {
+        if(! Role::havePremission(['company_cr']))
+            return redirect()->route('admin.dashboard');
         try {
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
             
@@ -43,6 +45,8 @@ class CompanyController extends Controller
 
     public function edit($id)
     {
+        if(! Role::havePremission(['company_view','company_idt']))
+            return redirect()->route('admin.dashboard');
         $datas = CompanyInfo::select()->find($id);
         if(!$datas){
             return redirect()->route('admin.company')->with(['error'=>"غير موجود"]);
@@ -52,6 +56,8 @@ class CompanyController extends Controller
 
     public function update($id, Request $request)
     {
+        if(! Role::havePremission(['company_idt']))
+            return redirect()->route('admin.dashboard');
         try {
             $data = CompanyInfo::find($id);
             if (!$data) {
@@ -64,17 +70,17 @@ class CompanyController extends Controller
         }
     }
 
-    public function destroy($id)
-    {
-        try {
-            $data = CompanyInfo::find($id);
-            if (!$data) {
-                return redirect()->route('admin.company', $id)->with(['error' => '  غير موجوده']);
-            }
-            $data->delete();
-            return redirect()->route('admin.company')->with(['success' => 'تم حذف  بنجاح']);
-        } catch (\Exception $ex) {
-            return redirect()->route('admin.company')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
-        }
-    }
+    // public function destroy($id)
+    // {
+    //     try {
+    //         $data = CompanyInfo::find($id);
+    //         if (!$data) {
+    //             return redirect()->route('admin.company', $id)->with(['error' => '  غير موجوده']);
+    //         }
+    //         $data->delete();
+    //         return redirect()->route('admin.company')->with(['success' => 'تم حذف  بنجاح']);
+    //     } catch (\Exception $ex) {
+    //         return redirect()->route('admin.company')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+    //     }
+    // }
 }

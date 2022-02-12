@@ -27,12 +27,17 @@ class RequestController extends Controller
     //  CC 
     public function indexCC()
     {
+        if(! Role::havePremission(['request_all']))
+            return redirect()->route('admin.dashboard');
         $requests = Requests::selection()->paginate(PAGINATION_COUNT);
         return view('admin.request.indexcc', compact('requests'));
     }
 
     public function createCC()
     {
+        if(! Role::havePremission(['request_all','request_emergency']))
+            return redirect()->route('admin.dashboard');
+
         if(isset($_GET['req'])) $req=$_GET['req']; else $req=0;
 
         $serves = Service::select()->active()->get();
@@ -48,22 +53,11 @@ class RequestController extends Controller
         return view('admin.request.createcc',compact('users','companys','referrals','calls','governorates','citys','specialtys','serves','myorder'));
     }
 
-    public function statusCC($id, $type)
-    {
-        try{
-            $data = Requests::find($id);
-            if (!$data) {
-                return redirect()->route('admin.request.cc')->with(['error' => '  غير موجوده']);
-            }
-            $data->update(['status_cc' => $type ]);
-            return redirect()->route('admin.request.cc')->with(['success'=>'تم الحفظ']);
-        }catch (\Exception $ex){
-            return redirect()->route('admin.request.create.cc')->with(['error'=>'يوجد خطء']);
-        }
-    }
-
     public function store(Request $request)
     {
+        if(! Role::havePremission(['request_all','request_emergency']))
+            return redirect()->route('admin.dashboard');
+
         // Add User
         if (!$request->has('user_id') || $request->user_id == null ){ 
             if ($request->has('phone')){
@@ -71,15 +65,8 @@ class RequestController extends Controller
                     'phone'=>"unique:users,phone|required",
                     'fullname'=>"required",
                 ]);
-                $user = new User([
-                    'username' => $request->fullname,
-                    'phone' => $request->phone,
-                    'type' => '1',
-                    'quick' => "1",
-                    'password' => Hash::make(rand(1000000000,9999999999)),
-                ]);
-                $user->save();
-                $request->request->add(['user_id' => $user->id ]);
+                $userID = $this->addUser($request->fullname,$request->phone);
+                $request->request->add(['user_id' => $userID ]);
             }
         }
 
@@ -121,6 +108,9 @@ class RequestController extends Controller
 
     public function update(Request $request, $id)
     {
+        if(! Role::havePremission(['request_all','request_emergency']))
+            return redirect()->route('admin.dashboard');
+
         // Add User
         if (!$request->has('user_id') || $request->user_id == null ){ 
             if ($request->has('phone')){
@@ -128,14 +118,8 @@ class RequestController extends Controller
                     'phone'=>"unique:users,phone|required",
                     'fullname'=>"required",
                 ]);
-                $user = new User([
-                    'username' => $request->fullname,
-                    'phone' => $request->phone,
-                    'type' => '1',
-                    'password' => Hash::make(rand(1000000000,9999999999)),
-                ]);
-                $user->save();
-                $request->request->add(['user_id' => $user->id ]);
+                $userID = $this->addUser($request->fullname,$request->phone);
+                $request->request->add(['user_id' => $userID ]);
             }
         }
 
@@ -207,10 +191,11 @@ class RequestController extends Controller
         }
     }
 
-
     //  Em 
     public function indexEm()
     {
+        if(! Role::havePremission(['request_emergency']))
+            return redirect()->route('admin.dashboard');
         $requests = Requests::selection()->where('type',1)->paginate(PAGINATION_COUNT);
         return view('admin.request.indexem', compact('requests'));
     }
@@ -218,12 +203,17 @@ class RequestController extends Controller
     //  IN 
     public function indexIN()
     {
+        if(! Role::havePremission(['request_in']))
+            return redirect()->route('admin.dashboard');
         $requests = Requests::selection()->where('type',3)->where('status_cc',4)->paginate(PAGINATION_COUNT);
         return view('admin.request.indexin', compact('requests'));
     }
 
     public function createIN($req)
     {
+        if(! Role::havePremission(['request_in']))
+            return redirect()->route('admin.dashboard');
+
         $myorder = Requests::select()->find($req);
         if (!isset($myorder->id)) {
             return redirect()->route('admin.request.in')->with(['error' => '  غير موجوده']);
@@ -246,6 +236,9 @@ class RequestController extends Controller
 
     public function updateIN(Request $request, $id)
     {
+        if(! Role::havePremission(['request_in']))
+            return redirect()->route('admin.dashboard');
+
         // Add User
         if (!$request->has('user_id') || $request->user_id == null ){ 
             if ($request->has('phone')){
@@ -253,19 +246,12 @@ class RequestController extends Controller
                     'phone'=>"unique:users,phone|required",
                     'fullname'=>"required",
                 ]);
-                $user = new User([
-                    'username' => $request->fullname,
-                    'phone' => $request->phone,
-                    'type' => '1',
-                    'quick' => "1",
-                    'password' => Hash::make(rand(1000000000,9999999999)),
-                ]);
-                $user->save();
-                $request->request->add(['user_id' => $user->id ]);
+                $userID = $this->addUser($request->fullname,$request->phone);
+                $request->request->add(['user_id' => $userID ]);
             }
         }
 
-        // try {
+        try {
             $data = Requests::find($id);
             if (!$data) {
                 return redirect()->route('admin.request.create.in')->with(['error' => '  غير موجوده']);
@@ -352,34 +338,25 @@ class RequestController extends Controller
             
             $data->update($request->except(['_token']));
             return redirect()->route('admin.request.in')->with(['success'=>'تم الحفظ']);
-        // }catch (\Exception $ex){
-        //     return redirect()->route('admin.request.in')->with(['error'=>'يوجد خطء']);
-        // }
-    }
-
-    public function statusIN($id, $type)
-    {
-        try{
-            $data = Requests::find($id);
-            if (!$data) {
-                return redirect()->route('admin.request.in')->with(['error' => '  غير موجوده']);
-            }
-            $data->update(['status_in_out' => $type ]);
-            return redirect()->route('admin.request.in')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
-            return redirect()->route('admin.request.create.in')->with(['error'=>'يوجد خطء']);
+            return redirect()->route('admin.request.in')->with(['error'=>'يوجد خطء']);
         }
     }
 
     //  OUT 
     public function indexOut()
     {
+        if(! Role::havePremission(['request_out']))
+            return redirect()->route('admin.dashboard');
         $requests = Requests::selection()->where('type',2)->where('status_cc',4)->paginate(PAGINATION_COUNT);
         return view('admin.request.indexout', compact('requests'));
     }
 
     public function createOut($req)
     {
+        if(! Role::havePremission(['request_out']))
+            return redirect()->route('admin.dashboard');
+            
         $myorder = Requests::select()->find($req);
         if (!isset($myorder->id)) {
             return redirect()->route('admin.request.out')->with(['error' => '  غير موجوده']);
@@ -408,15 +385,8 @@ class RequestController extends Controller
                     'phone'=>"unique:users,phone|required",
                     'fullname'=>"required",
                 ]);
-                $user = new User([
-                    'username' => $request->fullname,
-                    'phone' => $request->phone,
-                    'type' => '1',
-                    'quick' => "1",
-                    'password' => Hash::make(rand(1000000000,9999999999)),
-                ]);
-                $user->save();
-                $request->request->add(['user_id' => $user->id ]);
+                $userID = $this->addUser($request->fullname,$request->phone);
+                $request->request->add(['user_id' => $userID ]);
             }
         }
 
@@ -491,64 +461,21 @@ class RequestController extends Controller
             return redirect()->route('admin.request.out')->with(['error'=>'يوجد خطء']);
         }
     }
+ 
+    public function AddUser($name, $phone)
+    {
+        $user = new User([
+            'username' => $name,
+            'phone' => $phone,
+            'type' => '1',
+            'quick' => "1",
+            'password' => Hash::make(rand(1000000000,9999999999)),
+        ]);
+        $user->save();
+        return $user->id;
+    }
 
-
-    // public function create()
-    // {
-    //     $serves = Service::select()->active()->get();
-    //     $specialtys = [];
-    //     $doctors = User::select()->doctor()->Verification()->get();
-    //     $users = User::select()->get();
-    //     $governorates = Governorate::select()->get();
-    //     $citys = City::select()->get();
-    //     return view('admin.request.createcc');
-    // }
-
-    
-    // public function indexEmergency()
-    // {
-    //     $requests = Requests::select()->where([['type','=',1],['call_him','!=',1]])->paginate(PAGINATION_COUNT);
-    //     $info = ['name' => "All Emergency", 'type' => '1'];
-    //     return view('admin.request.index', compact('requests','info'));
-    // }
-
-    // public function indexVisit()
-    // {
-    //     $requests = Requests::select()->where('type',2)->paginate(PAGINATION_COUNT);
-    //     $info = ['name' => "All Visit", 'type' => '2'];
-    //     return view('admin.request.index', compact('requests','info'));
-    // }
-
-    // public function indexBook()
-    // {
-    //     $requests = Requests::select()->where('type',3)->paginate(PAGINATION_COUNT);
-    //     $info = ['name' => "All Book", 'type' => '3'];
-    //     return view('admin.request.index', compact('requests','info'));
-    // }
-
-    // public function callhim($id)
-    // {
-    //     try {
-    //         $reqest = Requests::select()->find($id);
-    //         if(!$reqest){
-    //             return redirect()->route('admin.request')->with(['error'=>"غير موجود"]);
-    //         }
-    //         date_default_timezone_set('Africa/Cairo');
-    //         $date = date('Y-m-d H:i:s', time());
-    //         $reqest->update(['call_him'=>'1','call_him_time'=>$date]);
-    //         return redirect()->back();
-    //     }catch (\Exception $ex){
-    //         return redirect()->route('admin.request')->with(['error'=>'يوجد خطء']);
-    //     }
-    // }
-
-    // public function getCountReqest($type = 0){
-    //     // get records from database
-    //     $arr['count'] = Requests::where('type',$type)->count();
-    //     echo json_encode($arr);
-    //     exit;
-    // }
-
+    // JSON
     public function getUserInfo($id = 0){
         // get records from database
         if($id!=0){
@@ -570,5 +497,12 @@ class RequestController extends Controller
         echo json_encode($arr);
         exit;
     }
+
+    // public function getCountReqest($type = 0){
+    //     // get records from database
+    //     $arr['count'] = Requests::where('type',$type)->count();
+    //     echo json_encode($arr);
+    //     exit;
+    // }
 
 }

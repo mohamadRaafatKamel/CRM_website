@@ -43,7 +43,7 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        {{-- <a class="btn btn-primary mb-2" href="{{ route('admin.request.create.cc') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a> --}}
+                                        <a class="btn btn-primary mb-2" href="{{ route('admin.request.create.cc') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a>
                                         <a class="btn btn-danger mb-2" href="{{ route('admin.request.emergency') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
                                         <div class="table-responsive">
                                             

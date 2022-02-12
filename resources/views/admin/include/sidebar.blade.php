@@ -3,13 +3,13 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
             <li class="nav-item"><a href="{{route('admin.dashboard')}}"><i class="la la-mouse-pointer"></i><span
-                        class="menu-title" data-i18n="nav.add_on_drag_drop.main">الرئيسية </span></a>
+                        class="menu-title" data-i18n="nav.add_on_drag_drop.main">{{ __('Home') }} </span></a>
             </li>
 
             @if(\App\Models\Role::havePremission(['request_all','request_emergency','request_out','request_in']))
             <li class="nav-item"> {{-- active --}}
                 <a href=""><i class="la la-certificate"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main"> الطلبات </span>
+                    <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Request') }} </span>
                 </a>
                 <ul class="menu-content">
                     @if(\App\Models\Role::havePremission(['request_all']))

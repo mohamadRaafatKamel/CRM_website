@@ -2,7 +2,12 @@
 @section('title',__("Company"))
 @section('company_view','')
 @section('content')
-<?php $readonly=""; ?>
+<?php 
+if(! $permissoin = \App\Models\Role::havePremission(['company_idt']))
+    $readonly="readonly"; 
+else 
+    $readonly="";
+?>
 
     <div class="app-content content">
         <div class="content-wrapper">
@@ -11,7 +16,7 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{ __('Home') }} </a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{route('admin.company')}}"> {{ __("Company") }} </a>
                                 </li>
@@ -29,7 +34,6 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">{{ __('Edit') }}</h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -45,18 +49,21 @@
                                 @include('admin.include.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
+                                        @if ($permissoin)
                                         <form class="form" action="{{route('admin.company.update',$datas -> id)}}" method="POST"
-                                              enctype="multipart/form-data">
-                                            @csrf
+                                            enctype="multipart/form-data">
+                                          @csrf
+                                        @endif
+                                        
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> البيانات  </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> {{ __('Data') }}  </h4>
                                                 <div class="row">
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="org_name"> {{ __('Name') }}  </label>
                                                             <input type="text"  id="org_name" value="{{$datas -> org_name}}"
-                                                                   class="form-control" required
+                                                                   class="form-control" required {{ $readonly }}
                                                                    placeholder="{{ __('Name') }}"
                                                                    name="org_name">
                                                             @error('org_name')
@@ -70,7 +77,7 @@
                                                             <label for="email"> email </label>
                                                             <input type="email"  id="email"
                                                                    class="form-control" value="{{$datas -> email}}"
-                                                                   placeholder="email  "
+                                                                   placeholder="email  " {{ $readonly }}
                                                                    name="email">
                                                             @error('email')
                                                             <span class="text-danger">{{$message}}</span>
@@ -83,7 +90,7 @@
                                                             <label for="phone"> phone </label>
                                                             <input type="text"  id="phone"
                                                                    class="form-control" value="{{$datas -> phone}}"
-                                                                   placeholder="phone"
+                                                                   placeholder="phone" {{ $readonly }}
                                                                    name="phone">
                                                             @error('phone')
                                                             <span class="text-danger">{{$message}}</span>
@@ -96,7 +103,7 @@
                                                             <label for="website"> website </label>
                                                             <input type="text"  id="website"
                                                                    class="form-control" value="{{$datas -> website}}"
-                                                                   placeholder="website"
+                                                                   placeholder="website" {{ $readonly }}
                                                                    name="website">
                                                             @error('website')
                                                             <span class="text-danger">{{$message}}</span>
@@ -109,7 +116,7 @@
                                                             <label for="contact_person_name"> contact person name </label>
                                                             <input type="text"  id="contact_person_name"
                                                                    class="form-control" value="{{$datas -> contact_person_name}}"
-                                                                   placeholder="contact_person_name"
+                                                                   placeholder="contact_person_name" {{ $readonly }}
                                                                    name="contact_person_name">
                                                             @error('contact_person_name')
                                                             <span class="text-danger">{{$message}}</span>
@@ -122,7 +129,7 @@
                                                             <label for="registration_num"> registration Number </label>
                                                             <input type="text"  id="registration_num"
                                                                    class="form-control" value="{{$datas -> registration_num}}"
-                                                                   placeholder="registration_num"
+                                                                   placeholder="registration_num" {{ $readonly }}
                                                                    name="registration_num">
                                                             @error('registration_num')
                                                             <span class="text-danger">{{$message}}</span>
@@ -135,7 +142,7 @@
                                                             <label for="tax_certificate_num"> tax certificate Number </label>
                                                             <input type="text"  id="tax_certificate_num"
                                                                    class="form-control" value="{{$datas -> tax_certificate_num}}"
-                                                                   placeholder="tax_certificate_num"
+                                                                   placeholder="tax_certificate_num" {{ $readonly }}
                                                                    name="tax_certificate_num">
                                                             @error('tax_certificate_num')
                                                             <span class="text-danger">{{$message}}</span>
@@ -146,7 +153,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="type"> {{ __('Type') }} </label>
-                                                            <select name="type" class="form-control" id="type" required>
+                                                            <select name="type" class="form-control" id="type" {{ $readonly }} required>
                                                                 <option value="1" @if ($datas -> type == '1') selected @endif >تامين</option>
                                                                 <option value="9" @if ($datas -> type == '9') selected @endif >{{ __("other") }}</option>
                                                             </select>
@@ -159,7 +166,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="pay"> {{ __('Pay') }} </label>
-                                                            <select name="pay" class="form-control" id="pay" required>
+                                                            <select name="pay" class="form-control" id="pay" {{ $readonly }} required>
                                                                 <option value="1" @if ($datas -> pay == '1') selected @endif >{{ __('later') }}</option>
                                                                 <option value="2" @if ($datas -> pay == '2') selected @endif >{{ __("cash") }}</option>
                                                             </select>
@@ -173,7 +180,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="description"> وصف </label>
-                                                            <textarea id="description" class="form-control" placeholder="وصف" 
+                                                            <textarea id="description" class="form-control" placeholder="وصف"  {{ $readonly }}
                                                                 name="description">{{$datas -> description}}</textarea>
                                                             @error('description')
                                                             <span class="text-danger">{{$message}}</span>
@@ -185,7 +192,7 @@
 
                                             </div>
 
-
+                                            @if ($permissoin)
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
                                                         onclick="history.back();">
@@ -195,6 +202,7 @@
                                                     <i class="la la-check-square-o"></i>  تحديث
                                                 </button>
                                             </div>
+                                            @endif
                                         </form>
                                     </div>
                                 </div>
