@@ -38,7 +38,7 @@ class WebSurvayController extends Controller
      */
     public function store(WebSuvayRequest $request)
     {
-        // try{
+        try{
             $mySurvy = new WebSurvay();
             if (Auth::guard('api')->check()) {
                 $mySurvy->user_id = Auth::guard('api')->user()->id;
@@ -52,9 +52,9 @@ class WebSurvayController extends Controller
             $mySurvy->note = $request->note;
             $mySurvy->save();
             return response()->json([ 'data'=>['success' => "1"] ]);
-        // } catch (\Exception $ex) {
-        //     return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
-        // }
+        } catch (\Exception $ex) {
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
+        }
     }
 
     /**
