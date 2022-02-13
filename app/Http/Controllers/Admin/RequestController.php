@@ -361,6 +361,7 @@ class RequestController extends Controller
         if (!isset($myorder->id)) {
             return redirect()->route('admin.request.out')->with(['error' => '  غير موجوده']);
         }
+        $opds = Admin::select()->where('permission', Auth::user()->permission )->get();
         $doctors = User::select()->doctor()->Verification()->get();
         $nurses = User::select()->nurse()->get();
         $drivers = User::select()->driver()->get();
@@ -373,7 +374,7 @@ class RequestController extends Controller
         $referrals = Referral::select()->get();
         $calls = RequestCall::select()->where('request_id',$req)->get();
         
-        return view('admin.request.createout',compact('users','drivers','companys','referrals','calls','governorates','citys','specialtys','serves','myorder','doctors','nurses'));
+        return view('admin.request.createout',compact('users','opds','drivers','companys','referrals','calls','governorates','citys','specialtys','serves','myorder','doctors','nurses'));
     }
 
     public function updateOut(Request $request, $id)
@@ -398,6 +399,10 @@ class RequestController extends Controller
             if (!$data) {
                 return redirect()->route('admin.request.create.out')->with(['error' => '  غير موجوده']);
             }
+
+            // opd
+            if($data->opd_admin_id == null)
+                $request->request->add(['opd_admin_id' =>  Auth::user()->id]);
 
             if($request->btn == "done")
                 $request->request->add(['status_in_out' => 4]);

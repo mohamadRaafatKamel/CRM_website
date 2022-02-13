@@ -54,6 +54,7 @@
                                                         <th>العميل</th>
                                                         <th> موبيل</th>
                                                         <th> موبيل</th>
+                                                        <th> OPD</th>
                                                         <th> Date</th>
                                                         <th> الحاله</th>
                                                     </tr>
@@ -78,6 +79,7 @@
                                                                 </td>
                                                                 <td>{{$request -> phone}}</td>
                                                                 <td>{{$request -> phone2 }}</td>
+                                                                <td>{{ \App\Models\Admin::getAdminNamebyId($request ->opd_admin_id ) }}</td>
                                                                 <td>{{$request -> created_at}}</td>
                                                                 <td>
                                                                     <span class="badge {{ \App\Models\Requests::getStateColor($request ->status_in_out) }}">

@@ -558,6 +558,25 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="opd_admin_id">{{ __('OPD') }}</label>
+                                                            <select class="select2 form-control" name="opd_admin_id" id="opd_admin_id">
+                                                                <option value=""></option>
+                                                                @foreach($opds as $opd)
+                                                                    <option value="{{ $opd->id }}"
+                                                                            @if(isset($myorder->opd_admin_id))
+                                                                                @if($myorder->opd_admin_id == $opd->id) selected @endif @endif >
+                                                                        {{ $opd->name." [ ".$opd->email." ]"}}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('opd_admin_id')
+                                                                <span class="text-danger">{{$message}}</span>--}}
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="whatsApp_group"> {{ __('Name of whatsApp Group') }} </label>
                                                             <input type="text" id="whatsApp_group"
                                                                    class="form-control"

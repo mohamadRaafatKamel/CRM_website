@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             CountriesTableSeeder::class,
             GovernoratesTableSeeder::class,
             CitiesTableSeeder::class,
+
+            DataEntryTableSeeder::class,
         ]);
     }
 }
