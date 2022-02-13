@@ -110,6 +110,16 @@
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_all" name="role_info[]"
+                                                                   id="user_all"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_all"
+                                                                   class="card-title ml-1">{{ __('All User') }} </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
                                                             <input type="checkbox"  value="user_patent" name="role_info[]"
                                                                    id="user_patent"
                                                                    class="switchery" data-color="success"/>
@@ -117,6 +127,11 @@
                                                                    class="card-title ml-1">{{ __('All Patent') }} </label>
                                                         </div>
                                                     </div>
+
+                                                </div>
+
+                                                <label><strong> {{ __('Stuff') }} </strong></label>
+                                                <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="user_doctor" name="role_info[]"
