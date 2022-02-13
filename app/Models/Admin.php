@@ -55,12 +55,17 @@ class Admin extends Authenticatable
     public static function getRoleNamebyId($id)
     {
         $role = Role::select('name')->find($id);
-        return $role['name'];
+        if(isset($role->id)){
+            return $role['name'];
+        }
+        
     }
 
     public static function getAdminNamebyId($id)
     {
         $role = Admin::select('name')->find($id);
-        return $role['name'];
+        if(isset($role->id)){
+            return $role['name'];
+        }
     }
 }
