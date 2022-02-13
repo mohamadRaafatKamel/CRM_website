@@ -356,7 +356,7 @@ class RequestController extends Controller
     {
         if(! Role::havePremission(['request_out']))
             return redirect()->route('admin.dashboard');
-            
+
         $myorder = Requests::select()->find($req);
         if (!isset($myorder->id)) {
             return redirect()->route('admin.request.out')->with(['error' => '  غير موجوده']);
@@ -378,6 +378,9 @@ class RequestController extends Controller
 
     public function updateOut(Request $request, $id)
     {
+        if(! Role::havePremission(['request_out']))
+            return redirect()->route('admin.dashboard');
+            
         // Add User
         if (!$request->has('user_id') || $request->user_id == null ){ 
             if ($request->has('phone')){
