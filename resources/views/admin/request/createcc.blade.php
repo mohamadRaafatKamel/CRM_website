@@ -380,8 +380,10 @@
                                                                     @if(old('city_id') == $city->id)
                                                                         <option value="{{$city->id}}" class="{{ $city->governorate_id }}" selected>{{$city->city_name_ar}}</option>
                                                                     @endif
-                                                                    @if($myorder->city_id == $city->id)
-                                                                        <option value="{{$city->id}}" class="{{ $city->governorate_id }}" selected>{{$city->city_name_ar}}</option>
+                                                                    @if(isset($myorder->city_id))
+                                                                        @if($myorder->city_id == $city->id)
+                                                                            <option value="{{$city->id}}" class="{{ $city->governorate_id }}" selected>{{$city->city_name_ar}}</option>
+                                                                        @endif
                                                                     @endif
                                                                         {{-- <option value="{{$city->id}}" class="{{ $city->governorate_id }}"
                                                                                 @if(isset($myorder->city_id))
