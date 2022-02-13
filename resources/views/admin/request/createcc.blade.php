@@ -82,7 +82,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="fullname"> {{ __('Full Name') }} </label>
+                                                            <label for="fullname"> {{ __('Full Name') }} <span style="color: #ff4961;">*</span> </label>
                                                             <input type="text" id="fullname" required
                                                                    class="form-control" 
                                                                    @if(isset($myorder->fullname))
@@ -100,7 +100,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="phone"> {{ __('Phone') }} 1</label>
+                                                            <label for="phone"> {{ __('Phone') }} <span style="color: #ff4961;">*</span></label>
                                                             <input type="text" id="phone" required
                                                                    class="form-control"
                                                                    @if(isset($myorder->phone))
@@ -312,7 +312,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="type"> {{ __('Out/In') }} </label>
+                                                            <label for="type"> {{ __('Out/In') }} <span style="color: #ff4961;">*</span></label>
                                                             <select name="type" id="type" required
                                                                     class="form-control @error('type') is-invalid @enderror">
                                                                 <option value=""></option>
@@ -456,7 +456,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="adress"> {{ __('Address') }}</label>
+                                                            <label for="adress"> {{ __('Address') }} <span style="color: #ff4961;">*</span></label>
                                                             <input type="text" id="adress" required
                                                                    class="form-control"
                                                                    @if(isset($myorder->adress))

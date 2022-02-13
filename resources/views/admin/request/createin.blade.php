@@ -74,7 +74,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="fullname"> {{ __('Full Name') }} </label>
+                                                            <label for="fullname"> {{ __('Full Name') }} <span style="color: #ff4961;">*</span></label>
                                                             <input type="text" id="fullname" required
                                                                    class="form-control"
                                                                    @if(isset($myorder->fullname))
@@ -127,7 +127,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="phone"> {{ __('Phone') }} 1</label>
+                                                            <label for="phone"> {{ __('Phone') }} <span style="color: #ff4961;">*</span></label>
                                                             <input type="text" id="phone" required
                                                                    class="form-control"
                                                                    @if(isset($myorder->phone))
@@ -318,7 +318,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="adress"> {{ __('Address') }}</label>
+                                                            <label for="adress"> {{ __('Address') }} <span style="color: #ff4961;">*</span></label>
                                                             <input type="text" id="adress" required
                                                                    class="form-control"
                                                                    @if(isset($myorder->adress))
@@ -710,9 +710,9 @@
 
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="shift_date"> {{ __('Date') }} </label>
+                                                            <label for="shift_date"> {{ __('Date') }} <span style="color: #ff4961;">*</span></label>
                                                             <input type="date" id="shift_date"
-                                                                   class="form-control" required
+                                                                   class="form-control" 
                                                                    placeholder="{{ __('Date') }} "
                                                                    name="shift_date">
                                                             @error('shift_date')
@@ -723,8 +723,8 @@
 
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="nurse_id">{{ __('Nurse Name') }}</label>
-                                                            <select class="select2 form-control" name="nurse_id" id="nurse_id" required >
+                                                            <label for="nurse_id">{{ __('Nurse Name') }} <span style="color: #ff4961;">*</span></label>
+                                                            <select class="select2 form-control" name="nurse_id" id="nurse_id"  >
                                                                 <option value="">{{ __('Choose Nurse Name') }}</option>
                                                                 @foreach($nurses as $nurse)
                                                                     <option value="{{ $nurse->id }}"
@@ -742,8 +742,8 @@
 
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="shift_type"> {{ __('Type') }} </label>
-                                                            <select name="shift_type" id="shift_type" required
+                                                            <label for="shift_type"> {{ __('Type') }} <span style="color: #ff4961;">*</span></label>
+                                                            <select name="shift_type" id="shift_type" 
                                                                     class="form-control @error('shift_type') is-invalid @enderror">
                                                                 <option value=""></option>
                                                                 <option value="1">{{ __('Long') }}</option>
@@ -757,8 +757,8 @@
 
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="issues"> {{ __('Customer Issues') }} </label>
-                                                            <textarea id="issues" class="form-control" placeholder=" {{ __('Customer Issues') }}"  required
+                                                            <label for="issues"> {{ __('Customer Issues') }} <span style="color: #ff4961;">*</span></label>
+                                                            <textarea id="issues" class="form-control" placeholder=" {{ __('Customer Issues') }}"  
                                                                 name="issues"></textarea>
                                                             @error('issues')
                                                             <span class="text-danger">{{$message}}</span>
