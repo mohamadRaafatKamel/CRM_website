@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,18 +12,25 @@ class SpecialtyController extends Controller
 {
     public function index()
     {
+        if(! Role::havePremission(['specialty_view','specialty_idt']))
+            return redirect()->route('admin.dashboard');
         $datas = Specialty::select()->paginate(PAGINATION_COUNT);
         return view('admin.specialty.index', compact('datas'));
     }
 
     public function create()
     {
+        if(! Role::havePremission(['specialty_cr']))
+            return redirect()->route('admin.dashboard');
         $generals = Specialty::select()->General()->get();
         return view('admin.specialty.create',compact('generals'));
     }
 
     public function store(Request $request)
     {
+        if(! Role::havePremission(['specialty_cr']))
+            return redirect()->route('admin.dashboard');
+
         $request->validate([
             'name_en'=>"unique:specialty,name_en",
         ]);
@@ -48,6 +56,8 @@ class SpecialtyController extends Controller
 
     public function edit($id)
     {
+        if(! Role::havePremission(['specialty_view','specialty_idt']))
+            return redirect()->route('admin.dashboard');
         $generals = Specialty::select()->General()->get();
         $datas = Specialty::select()->find($id);
         if(!$datas){
@@ -58,11 +68,10 @@ class SpecialtyController extends Controller
 
     public function update($id, Request $request)
     {
-        // $request->validate([
-        //     'name_en'=>"unique:specialty,name_en",
-        // ]);
-        try {
+        if(! Role::havePremission(['specialty_idt']))
+            return redirect()->route('admin.dashboard');
 
+        try {
             $data = Specialty::find($id);
             if (!$data) {
                 return redirect()->route('admin.specialty.edit', $id)->with(['error' => '  غير موجوده']);
@@ -90,20 +99,20 @@ class SpecialtyController extends Controller
         }
     }
 
-    public function destroy($id)
-    {
+    // public function destroy($id)
+    // {
 
-        try {
-            $data = Specialty::find($id);
-            if (!$data) {
-                return redirect()->route('admin.specialty', $id)->with(['error' => '  غير موجوده']);
-            }
-            $data->delete();
+    //     try {
+    //         $data = Specialty::find($id);
+    //         if (!$data) {
+    //             return redirect()->route('admin.specialty', $id)->with(['error' => '  غير موجوده']);
+    //         }
+    //         $data->delete();
 
-            return redirect()->route('admin.specialty')->with(['success' => 'تم حذف  بنجاح']);
+    //         return redirect()->route('admin.specialty')->with(['success' => 'تم حذف  بنجاح']);
 
-        } catch (\Exception $ex) {
-            return redirect()->route('admin.specialty')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
-        }
-    }
+    //     } catch (\Exception $ex) {
+    //         return redirect()->route('admin.specialty')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+    //     }
+    // }
 }

@@ -1,7 +1,13 @@
 @extends('layouts.admin')
 @section('title','تعديل')
+@section('specialty_view','')
 @section('content')
-
+<?php 
+if(! $permissoin = \App\Models\Role::havePremission(['specialty_idt']))
+    $readonly="readonly";
+else 
+    $readonly="";
+?>
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
@@ -9,7 +15,7 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{ __('Home') }} </a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{route('admin.specialty')}}">  تخصص </a>
                                 </li>
@@ -43,9 +49,11 @@
                                 @include('admin.include.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
+                                        @if ($permissoin)
                                         <form class="form" action="{{route('admin.specialty.update',$datas -> id)}}" method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
+                                        @endif
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i> البيانات  </h4>
                                                 <div class="row">
@@ -54,7 +62,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم بالعربي </label>
                                                             <input type="text" value="{{$datas -> name_ar}}" id="name_ar"
-                                                                   class="form-control"
+                                                                   class="form-control" {{ $readonly }}
                                                                    placeholder="الاسم بالعربي"
                                                                    name="name_ar">
                                                             @error('name_ar')
@@ -67,7 +75,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم بالانجليزي </label>
                                                             <input type="text" value="{{$datas -> name_en}}" id="name_en"
-                                                                   class="form-control"
+                                                                   class="form-control" {{ $readonly }}
                                                                    placeholder="الاسم بالانجليزي  "
                                                                    name="name_en">
                                                             @error('name_en')
@@ -79,7 +87,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="parent_id">{{ __('Parent') }}</label>
-                                                            <select class="select2 form-control" name="parent_id" required>
+                                                            <select class="select2 form-control" name="parent_id" required {{ $readonly }} >
                                                                 <option value=""></option>
                                                                 @foreach($generals as $general)
                                                                     <option @if ($datas -> parent_id == $general->id) selected @endif 
@@ -102,7 +110,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="img">  اضف صوره </label>
-                                                            <input type="file" id="img"
+                                                            <input type="file" id="img" {{ $readonly }}
                                                                    class="form-control"
                                                                    accept="image/*"
                                                                    name="img">
@@ -123,7 +131,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
-                                                            <input type="checkbox"  value="0" name="disabled"
+                                                            <input type="checkbox"  value="0" name="disabled" {{ $readonly }}
                                                                    id="switcheryColor4"
                                                                    class="switchery" data-color="success"
 
@@ -141,16 +149,17 @@
 
                                             </div>
 
-
-                                            <div class="form-actions">
-                                                <button type="button" class="btn btn-warning mr-1"
-                                                        onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i>  تحديث
-                                                </button>
-                                            </div>
+                                            @if ($permissoin)
+                                                <div class="form-actions">
+                                                    <button type="button" class="btn btn-warning mr-1"
+                                                            onclick="history.back();">
+                                                        <i class="ft-x"></i> تراجع
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="la la-check-square-o"></i>  تحديث
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </form>
                                     </div>
                                 </div>

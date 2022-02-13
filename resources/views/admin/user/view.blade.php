@@ -98,7 +98,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="username"> {{ __('UserName') }} </label>
+                                                            <label for="username"> {{ __('Full Name') }} </label>
                                                             <input type="text" value="{{$user -> username}}" id="username"
                                                                    class="form-control"
                                                                    placeholder="{{ __('UserName') }}"

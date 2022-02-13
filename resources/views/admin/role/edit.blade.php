@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title','تعديل')
+@section('role_view','')
 @section('content')
 
     <div class="app-content content">
@@ -9,7 +10,7 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{ __('Home') }} </a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{route('admin.role')}}"> الصلاحيات </a>
                                 </li>
@@ -121,9 +122,22 @@
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_all" name="role_info[]"
+                                                                   id="user_all"
+                                                                   @if(isset($myRoleInfo['user_all']) and $myRoleInfo['user_all'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_all"
+                                                                   class="card-title ml-1">{{ __('All User') }} </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
                                                             <input type="checkbox"  value="user_patent" name="role_info[]"
                                                                    id="user_patent"
-                                                                   @if(isset($myRoleInfo['request_in']) and $myRoleInfo['request_in'] == '1')
+                                                                   @if(isset($myRoleInfo['user_patent']) and $myRoleInfo['user_patent'] == '1')
                                                                        checked
                                                                    @endif
                                                                    class="switchery" data-color="success"/>
@@ -131,6 +145,11 @@
                                                                    class="card-title ml-1">{{ __('All Patent') }} </label>
                                                         </div>
                                                     </div>
+
+                                                </div>
+
+                                                <label><strong> {{ __('Stuff') }} </strong></label>
+                                                <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="user_doctor" name="role_info[]"
@@ -145,18 +164,6 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
-                                                            <input type="checkbox"  value="user_partner" name="role_info[]"
-                                                                   id="user_partner"
-                                                                   @if(isset($myRoleInfo['user_partner']) and $myRoleInfo['user_partner'] == '1')
-                                                                       checked
-                                                                   @endif
-                                                                   class="switchery" data-color="success"/>
-                                                            <label for="user_partner"
-                                                                   class="card-title ml-1">{{ __('All Partner') }} </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group mt-1">
                                                             <input type="checkbox"  value="user_nurse" name="role_info[]"
                                                                    id="user_nurse"
                                                                    @if(isset($myRoleInfo['user_nurse']) and $myRoleInfo['user_nurse'] == '1')
@@ -165,6 +172,18 @@
                                                                    class="switchery" data-color="success"/>
                                                             <label for="user_nurse"
                                                                    class="card-title ml-1">{{ __('All Nurse') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="user_driver" name="role_info[]"
+                                                                   id="user_driver"
+                                                                   @if(isset($myRoleInfo['user_driver']) and $myRoleInfo['user_driver'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="user_driver"
+                                                                   class="card-title ml-1">{{ __('All Driver') }} </label>
                                                         </div>
                                                     </div>
                                                 </div>

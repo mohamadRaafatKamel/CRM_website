@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title','Out Patient')
+@section('request_out','')
 @section('content')
 
     <div class="app-content content">

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title','تخصص')
+@section('specialty_view','')
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
@@ -43,7 +44,9 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
+                                        @if(\App\Models\Role::havePremission(['specialty_cr']))
                                         <a class="btn btn-primary mb-2" href="{{ route('admin.specialty.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Specialty') }}</a>
+                                        @endif
                                         <table
                                             class="table table-striped table-bordered zero-configuration ">
                                             <thead>
@@ -74,8 +77,10 @@
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
+                                                                 @if(\App\Models\Role::havePremission(['specialty_idt']))
                                                                 <a href="{{route('admin.specialty.edit',['id'=> $data->id ])}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
+                                                                   @endif
                                                             </div>
                                                         </td>
                                                     </tr>

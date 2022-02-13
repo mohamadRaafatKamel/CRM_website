@@ -15,7 +15,7 @@
                     @if(\App\Models\Role::havePremission(['request_all']))
 
                     <li 
-                    
+                    @if(View::hasSection('request_all')) class="active" @endif
                     ><a class="menu-item" href="{{route('admin.request.cc')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Request') }}</span>
@@ -27,7 +27,7 @@
                     @endif
                     @if(\App\Models\Role::havePremission(['request_emergency']))
                     <li
-                            {{-- class="active" --}}
+                    @if(View::hasSection('request_emergency')) class="active" @endif
                     ><a class="menu-item" href="{{route('admin.request.emergency')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Emergency') }}</span>
@@ -39,7 +39,7 @@
                     @endif
                     @if(\App\Models\Role::havePremission(['request_out']))
                     <li
-                            {{-- class="active" --}}
+                    @if(View::hasSection('request_out')) class="active" @endif
                     ><a class="menu-item" href="{{route('admin.request.out')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All OutPatient') }}</span>
@@ -51,7 +51,7 @@
                     @endif
                     @if(\App\Models\Role::havePremission(['request_in']))
                     <li
-                            {{-- class="active" --}}
+                    @if(View::hasSection('request_in')) class="active" @endif
                     ><a class="menu-item" href="{{route('admin.request.in')}}"  
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All InPatient') }}</span>
@@ -64,36 +64,64 @@
                 </ul>
             </li>
             @endif
-            @if(\App\Models\Role::havePremission(['user_patent','user_doctor','user_nurse','user_driver']))
+            @if(\App\Models\Role::havePremission(['user_patent','user_all']))
             <li class="nav-item">
                 <a href=""><i class="la la-certificate"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> العملاء </span>
                 </a>
-                <ul class="menu-content">
-                   
+                <ul class="menu-content" >
+
+                    @if(\App\Models\Role::havePremission(['user_all']))
+                    <li
+                    @if(View::hasSection('all_user')) class="active" @endif
+                    ><a class="menu-item" href="{{route('admin.user')}}"   class="active"
+                           data-i18n="nav.dash.ecommerce"> {{ __('All User') }} </a>
+                    </li>
+                    @endif
+
                     @if(\App\Models\Role::havePremission(['user_patent']))
-                    <li><a class="menu-item" href="{{route('admin.user.patent')}}"   class="active"
+                    <li
+                    @if(View::hasSection('all_patent')) class="active" @endif
+                    ><a class="menu-item" href="{{route('admin.user.patent')}}"   class="active"
                            data-i18n="nav.dash.ecommerce"> {{ __('All Patent') }} </a>
                     </li>
                     @endif
+                    
+                </ul>
+            </li>
+            @endif
+
+            @if(\App\Models\Role::havePremission(['user_doctor','user_nurse','user_driver']))
+            <li class="nav-item">
+                <a href=""><i class="la la-certificate"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main"> {{ _('Stuff') }} </span>
+                </a>
+                <ul class="menu-content" >
                     @if(\App\Models\Role::havePremission(['user_doctor']))
-                    <li><a class="menu-item" href="{{route('admin.user.doctor')}}"   class="active"
+                    <li
+                    @if(View::hasSection('all_doctor')) class="active" @endif
+                    ><a class="menu-item" href="{{route('admin.user.doctor')}}"   class="active"
                            data-i18n="nav.dash.ecommerce"> {{ __('All Doctor') }} </a>
                     </li>
                     @endif
                     @if(\App\Models\Role::havePremission(['user_nurse']))
-                    <li><a class="menu-item" href="{{route('admin.user.nurse')}}"   class="active"
+                    <li
+                    @if(View::hasSection('all_nurse')) class="active" @endif
+                    ><a class="menu-item" href="{{route('admin.user.nurse')}}"   class="active"
                         data-i18n="nav.dash.ecommerce"> {{ __('All Nurse') }} </a>
                     </li>
                     @endif
                     @if(\App\Models\Role::havePremission(['user_driver']))
-                    <li><a class="menu-item" href="{{route('admin.user.driver')}}"   class="active"
+                    <li
+                    @if(View::hasSection('all_driver')) class="active" @endif
+                    ><a class="menu-item" href="{{route('admin.user.driver')}}"   class="active"
                         data-i18n="nav.dash.ecommerce"> {{ __('All Driver') }} </a>
                     </li>
                     @endif
                 </ul>
             </li>
             @endif
+
             @if(\App\Models\Role::havePremission(['specialty_view','specialty_cr','specialty_idt']))
                 <li class="nav-item">
                     <a href=""><i class="la la-map-signs"></i>
@@ -101,12 +129,16 @@
                     </a>
                     <ul class="menu-content">
                         @if(\App\Models\Role::havePremission(['specialty_view','specialty_idt']))
-                        <li><a class="menu-item" href="{{route('admin.specialty')}}"
-                            data-i18n="nav.dash.ecommerce"> عرض الكل </a>
-                        </li>
+                            <li
+                            @if(View::hasSection('specialty_view')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.specialty')}}"
+                                data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                            </li>
                         @endif
                         @if(\App\Models\Role::havePremission(['specialty_cr']))
-                            <li><a class="menu-item" href="{{route('admin.specialty.create')}}" data-i18n="nav.dash.crypto">
+                            <li
+                            @if(View::hasSection('specialty_cr')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.specialty.create')}}" data-i18n="nav.dash.crypto">
                                     أضافه جديد </a>
                             </li>
                         @endif

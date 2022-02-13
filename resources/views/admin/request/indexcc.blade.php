@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', __('All Request') )
+@section('request_all','')
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">

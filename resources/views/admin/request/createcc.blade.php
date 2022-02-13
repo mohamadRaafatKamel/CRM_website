@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title','Request CC')
+{{-- @section('request_all','') --}}
 @section('content')
 
     <div class="app-content content">

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title','الصلاحيات')
+@section('role_cr','')
 @section('content')
 
     <div class="app-content content">
