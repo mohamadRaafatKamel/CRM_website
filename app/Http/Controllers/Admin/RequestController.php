@@ -40,6 +40,9 @@ class RequestController extends Controller
 
         if(isset($_GET['req'])) $req=$_GET['req']; else $req=0;
 
+        date_default_timezone_set('Africa/Cairo');
+        $datenaw = date("Y-m-d")."T".date("H:i:s");
+
         $serves = Service::select()->active()->get();
         $specialtys = Specialty::select()->active()->get();
         $users = User::select()->get();
@@ -50,7 +53,7 @@ class RequestController extends Controller
         $myorder = Requests::select()->find($req);
         $calls = RequestCall::select()->where('request_id',$req)->get();
 
-        return view('admin.request.createcc',compact('users','companys','referrals','calls','governorates','citys','specialtys','serves','myorder'));
+        return view('admin.request.createcc',compact('users','companys','referrals','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
     }
 
     public function store(Request $request)
@@ -165,23 +168,12 @@ class RequestController extends Controller
             elseif($request->btn == "cancel")
                 $request->request->add(['status_cc' => 5]);
 
+                dd($request->post(['call']));
             // add call
-            if ($request->has('time') || $request->has('note') ){
-                if($request->note != "" || $request->time != ""){
-                    $call = new RequestCall();
-                    if ($request->has('time')){
-                        $call->call_time = $request->time;
-                        $request->request->remove('time');
-                    }
-                    if ($request->has('note')){
-                        $call->note = $request->note;
-                        $request->request->remove('note');
-                    }
-                    $call->request_id = $id;
-                    $call->department = 1;
-                    $call->admin_id  = Auth::user()->id;
-                    $call->save();
-                }
+            if ($request->has('time') || $request->has('note') ){ 
+                $this->AddCall($request->time, $request->note, $id);
+                $request->request->remove('time');
+                $request->request->remove('note');
             }
 
             $data->update($request->except(['_token']));
@@ -481,6 +473,29 @@ class RequestController extends Controller
         ]);
         $user->save();
         return $user->id;
+    }
+
+    public function AddCall($time, $note, $id)
+    {
+        dd($time);
+        if(count($time) > 0 ){
+            for($i=0;$i < count($time); $i++ ){
+                if($time[$i] || $note[$i]){
+                    $call = new RequestCall();
+                    if ($time[$i] != ""){
+                        $call->call_time = $time[$i];
+                    }
+                    if ($note[$i] != ""){
+                        $call->note = $note[$i];
+                    }
+                    $call->request_id = $id;
+                    $call->department = 1;
+                    $call->admin_id  = Auth::user()->id;
+                    $call->save();
+                }
+            }
+        }
+        
     }
 
     // JSON
