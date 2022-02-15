@@ -32,6 +32,7 @@ class CompanyController extends Controller
         try {
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
             
+            // dd($request->post());
             CompanyInfo::create($request->except(['_token']));
             if(isset($request->btn))
                 if($request->btn =="saveAndNew")

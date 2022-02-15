@@ -168,18 +168,32 @@ class RequestController extends Controller
             elseif($request->btn == "cancel")
                 $request->request->add(['status_cc' => 5]);
 
-                dd($request->post(['call']));
             // add call
-            if ($request->has('time') || $request->has('note') ){ 
-                $this->AddCall($request->time, $request->note, $id);
-                $request->request->remove('time');
-                $request->request->remove('note');
+            if ($request->has('time') || $request->has('note') ){
+                if($request->note != "" || $request->time != ""){
+                    $call = new RequestCall();
+                    if ($request->has('time')){
+                        $call->call_time = $request->time;
+                        $request->request->remove('time');
+                    }
+                    if ($request->has('note')){
+                        $call->note = $request->note;
+                        $request->request->remove('note');
+                    }
+                    $call->request_id = $id;
+                    $call->department = 2;
+                    $call->admin_id  = Auth::user()->id;
+                    $call->save();
+                }
             }
-
             $data->update($request->except(['_token']));
+
+            if($request->btn == "saveAndNew")
+                return redirect()->route('admin.request.create.cc',['req'=>$id])->with(['success'=>'تم الحفظ']);
+
             return redirect()->route('admin.request.cc')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
-            return redirect()->route('admin.request.create.cc')->with(['error'=>'يوجد خطء']);
+            return redirect()->route('admin.request.cc')->with(['error'=>'يوجد خطء']);
         }
     }
 
@@ -250,7 +264,7 @@ class RequestController extends Controller
             }
 
             // add Nurse Sheet
-            if ($request->has('btn') || $request->btn != "nurseSheet" ){
+            if ($request->has('btn') && $request->btn == "nurseSheet" ){
                 $sheet = new NurseSheet();
                 $sheet->nurse_id = $request->nurse_id;
                 $sheet->shift_date = $request->shift_date;
@@ -329,6 +343,10 @@ class RequestController extends Controller
             $request->request->add(['admin_id_in_out' =>  Auth::user()->id]);
             
             $data->update($request->except(['_token']));
+
+            if($request->btn == "saveAndNew")
+                return redirect()->route('admin.request.create.in',$id)->with(['success'=>'تم الحفظ']);
+
             return redirect()->route('admin.request.in')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.request.in')->with(['error'=>'يوجد خطء']);
@@ -456,6 +474,11 @@ class RequestController extends Controller
             $request->request->add(['admin_id_in_out' =>  Auth::user()->id]);
             
             $data->update($request->except(['_token']));
+
+            if($request->btn == "saveAndNew")
+                return redirect()->route('admin.request.create.out',$id)->with(['success'=>'تم الحفظ']);
+
+
             return redirect()->route('admin.request.out')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.request.out')->with(['error'=>'يوجد خطء']);
@@ -475,28 +498,27 @@ class RequestController extends Controller
         return $user->id;
     }
 
-    public function AddCall($time, $note, $id)
-    {
-        dd($time);
-        if(count($time) > 0 ){
-            for($i=0;$i < count($time); $i++ ){
-                if($time[$i] || $note[$i]){
-                    $call = new RequestCall();
-                    if ($time[$i] != ""){
-                        $call->call_time = $time[$i];
-                    }
-                    if ($note[$i] != ""){
-                        $call->note = $note[$i];
-                    }
-                    $call->request_id = $id;
-                    $call->department = 1;
-                    $call->admin_id  = Auth::user()->id;
-                    $call->save();
-                }
-            }
-        }
-        
-    }
+    // public function AddCall($time, $note, $id)
+    // {
+    //     dd($time);
+    //     if(count($time) > 0 ){
+    //         for($i=0;$i < count($time); $i++ ){
+    //             if($time[$i] || $note[$i]){
+    //                 $call = new RequestCall();
+    //                 if ($time[$i] != ""){
+    //                     $call->call_time = $time[$i];
+    //                 }
+    //                 if ($note[$i] != ""){
+    //                     $call->note = $note[$i];
+    //                 }
+    //                 $call->request_id = $id;
+    //                 $call->department = 1;
+    //                 $call->admin_id  = Auth::user()->id;
+    //                 $call->save();
+    //             }
+    //         }
+    //     }
+    // }
 
     // JSON
     public function getUserInfo($id = 0){

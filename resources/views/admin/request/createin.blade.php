@@ -576,8 +576,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                @include('admin.include.alerts.success')
-                                @include('admin.include.alerts.errors')
+                                
                                 <div class="card-content collapse show">
                                     <div class="card-body">
 
@@ -631,7 +630,6 @@
                                                         </div>
                                                     </div>
 
-
                                                 </div>
 
                                             </div>
@@ -639,6 +637,11 @@
 
                                             <div class="form-actions">
                                                
+                                                <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
+                                                    <i class="la la-check-square-o"></i> {{ __('Save and New Call') }}
+                                                </button>
+                                                <br/> <br/>
+
                                                 <button type="submit" name="btn" value="done" class="btn btn-success">
                                                     <i class="la la-check-square-o"></i> {{ _('DONE') }}
                                                 </button>

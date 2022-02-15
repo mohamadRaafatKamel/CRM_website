@@ -574,139 +574,115 @@
                 </section>
                 <!-- // Basic form layout section end -->
 
-               
-
-        <!-- Form repeater section start -->
-        @if (isset($myorder->id) && $myorder->id != 0)
-        <section id="form-repeater">
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4 class="card-title" id="repeat-form"></h4>
-                    <h4 class="form-section"> {{ __('Calls') }}  <i class="ft-phone-call"></i> </h4>
-
-                    <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
-                    <div class="heading-elements">
-                      <ul class="list-inline mb-0">
-                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                        <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                        <li><a data-action="close"><i class="ft-x"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="card-content collapse show">
-                    <div class="card-body">
-                      <div class="repeater-default">
-                        <div data-repeater-list="call">
-                          <div data-repeater-item>
-                            <div class="form-body">
-
-                                @if (isset($calls))
-                                    @foreach ($calls as $call)
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            {{ \App\Models\Admin::getAdminNamebyId($call->admin_id)  }}
-                                        </div>
-                                        <div class="col-md-2">
-                                            {{ \App\Models\RequestCall::getDepartment($call->department) }}
-                                        </div>
-                                        <div class="col-md-2">
-                                            {{ $call->call_time }}
-                                        </div>
-                                        <div class="col-md-6">
-                                            {{ $call->note }}
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                    
-                                @endif
-
-
-                            </div>
-
-                            <div class="row">
-                                
-                                
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="time"> {{ __('Time') }} </label>
-                                        <input type="datetime-local" id="time"
-                                               class="form-control"
-                                               {{-- value="{{ $datenaw }}" --}}
-                                               name="time">
-                                        @error('time')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
+                @if (isset($myorder->id) && $myorder->id != 0)
+                <!-- Basic form layout section start -->
+                <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title" id="basic-layout-form"> {{ __('Calls') }} </h4>
+                                    <a class="heading-elements-toggle"><i
+                                            class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                        </ul>
                                     </div>
                                 </div>
+                                @include('admin.include.alerts.success')
+                                @include('admin.include.alerts.errors')
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+
+                                            <div class="form-body">
+                                                <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
+
+                                                @if (isset($calls))
+                                                    @foreach ($calls as $call)
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            {{ \App\Models\Admin::getAdminNamebyId($call->admin_id)  }}
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            {{ \App\Models\RequestCall::getDepartment($call->department) }}
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            {{ $call->call_time }}
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            {{ $call->note }}
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
+                                                    
+                                                @endif
+
+                                                <div class="row">
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="time"> {{ __('Time') }} </label>
+                                                            <input type="datetime-local" id="time"
+                                                                   class="form-control"
+                                                                   placeholder="{{ __('Time') }} "
+                                                                   name="time">
+                                                            @error('time')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
 
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="Note"> {{ __('Note') }} </label>
-                                        <textarea id="note" class="form-control" placeholder=" {{ __('Note') }}" 
-                                            name="note"></textarea>
-                                        @error('note')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label for="Note"> {{ __('Note') }} </label>
+                                                            <textarea id="note" class="form-control" placeholder=" {{ __('Note') }}" 
+                                                                name="note"></textarea>
+                                                            @error('note')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    
+                                                    
+
+                                                </div>
+
+                                            </div>
+                                            @if(isset($myorder->status_cc) && $myorder->status_cc != 4)
+                                                <div class="form-actions">
+                                                    <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
+                                                        <i class="la la-check-square-o"></i> {{ __('Save and New Call') }}
+                                                    </button>
+                                                    <br/> <br/>
+                                                    
+                                                    <button type="submit" name="btn" value="done" class="btn btn-success">
+                                                        <i class="la la-check-square-o"></i> {{ _('DONE') }}
+                                                    </button>
+
+                                                    <button type="submit" name="btn" value="hold" class="btn btn-primary">
+                                                        <i class="la la-check-square-o"></i> {{ _('Save & Hold') }}
+                                                    </button>
+
+                                                    <button type="submit" name="btn" value="cancel" class="btn btn-danger">
+                                                        <i class="la la-check-square-o"></i> {{ _('Cancel') }}
+                                                    </button>
+                                                </div>
+                                            @endif
+                                        </form>
                                     </div>
                                 </div>
-
-                                <div class="form-group col-sm-12 col-md-2 text-center mt-2">
-                                    <button type="button" class="btn btn-danger" data-repeater-delete> <i class="ft-x"></i> Delete</button>
-                                </div>
-                            </div>       
-                            <hr>
-                          </div>
-                        </div>
-                        <div class="form-group overflow-hidden">
-                          <div class="col-12">
-                            <div class="form-actions">
-                                <button data-repeater-create class="btn btn-primary" type="button">
-                                    <i class="ft-plus"></i> Add
-                                  </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="basic-form-layouts">
-            <div class="row match-height">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-content collapse show">
-                            <div class="card-body">
-                                    <div class="form-body">
-                                        <button type="submit" name="btn" value="done" class="btn btn-success">
-                                            <i class="la la-check-square-o"></i> {{ _('DONE') }}
-                                        </button>
-
-                                        <button type="submit" name="btn" value="hold" class="btn btn-primary">
-                                            <i class="la la-check-square-o"></i> {{ _('Save & Hold') }}
-                                        </button>
-
-                                        <button type="submit" name="btn" value="cancel" class="btn btn-danger">
-                                            <i class="la la-check-square-o"></i> {{ _('Cancel') }}
-                                        </button>
-                                    </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
-            </div>
-        </section>
-       
-        @endif
-        <!-- // Form repeater section end -->
+                </section>
+                @endif
+                <!-- // Basic form layout section end -->
 
 
 
@@ -717,10 +693,6 @@
 @endsection
 
 @section('script')
-
-<script src="{{asset('assets/admin/vendors/js/forms/repeater/jquery.repeater.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/admin/js/scripts/forms/form-repeater.js')}}" type="text/javascript"></script>
-
     <script>
         jQuery(document).ready(function ($) {
 
