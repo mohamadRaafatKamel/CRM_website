@@ -58,7 +58,7 @@ class AuthController extends Controller
             'email' => ['required','string'],
             'password' => ['required','string'],
         ]);
-        try {
+        // try {
             // auth by phone or email
             if (strpos($request->email, '@') !== false) {
                 $credentials = request(['email','password']);
@@ -83,9 +83,9 @@ class AuthController extends Controller
                 'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateString(),
                 'access_token' => $tokenResult->accessToken,
             ]]);
-        } catch (\Exception $ex) {
-            return response()->json(['data' => ['success' => "0", 'error' => "Something Error"]]);
-        }
+        // } catch (\Exception $ex) {
+        //     return response()->json(['data' => ['success' => "0", 'error' => "Something Error"]]);
+        // }
     }
 
     public function logout(Request $request)
