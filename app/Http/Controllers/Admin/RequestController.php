@@ -15,11 +15,14 @@ use App\Models\NurseSheet;
 use App\Models\Package;
 use App\Models\Referral;
 use App\Models\Service;
+use App\Models\Setting;
 use App\Models\Specialty;
 use App\Models\User;
+use App\Mail\requestMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RequestController extends Controller
@@ -161,9 +164,13 @@ class RequestController extends Controller
                 return redirect()->route('admin.request.create.cc')->with(['error' => '  غير موجوده']);
             }
 
-            if($request->btn == "done")
+            if($request->btn == "done"){
                 $request->request->add(['status_cc' => 4]);
-            elseif($request->btn == "hold")
+                if($request->type == '2')
+                    $this->requestMail($request, "InPatient");
+                if($request->type == '3')
+                    $this->requestMail($request, "OutPatient");
+            }elseif($request->btn == "hold")
                 $request->request->add(['status_cc' => 2]);
             elseif($request->btn == "cancel")
                 $request->request->add(['status_cc' => 5]);
@@ -541,6 +548,25 @@ class RequestController extends Controller
         }
         echo json_encode($arr);
         exit;
+    }
+
+    public function requestMail(Request $request,$depart ="")  // Request Mail
+    {
+        try {
+            // Check mail
+            $mailTo ="it@care-hub.net";
+            $setting = Setting::select()->where('name', $depart)->first();
+            if(isset($setting->value)){
+                $testMail = $setting->value ;
+                if (strpos($testMail, '@') !== false) {
+                    $mailTo = $setting->value ;
+                }
+            } 
+            Mail::To($mailTo)->send(new requestMail($request->post()));
+            return response()->json([ 'data'=>['success' => "1"] ]);
+        } catch (\Exception $ex) {
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Email Error"] ]);
+        }
     }
 
     // public function getCountReqest($type = 0){
