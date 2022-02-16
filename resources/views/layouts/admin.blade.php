@@ -175,7 +175,7 @@
 
         function CountEmergency() {
             $.ajax({
-                url: 'http://' + window.location.hostname +'/carehome/admin/getnotification',
+                url: 'https://' + window.location.hostname +'/admin/getnotification',
                 type: 'get',
                 dataType: 'json',
                 success: function (response) {
