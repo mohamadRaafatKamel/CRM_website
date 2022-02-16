@@ -815,7 +815,7 @@
                                                     </div>
 
 
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="Note"> {{ __('Note') }} </label>
                                                             <textarea id="note" class="form-control" placeholder=" {{ __('Note') }}" 
@@ -826,6 +826,15 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label style=" height: 49px;"> </label>
+                                                            <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
+                                                                <i class="la la-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
 
                                                 </div>
 
@@ -833,12 +842,7 @@
 
 
                                             <div class="form-actions">
-
-                                                <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
-                                                    <i class="la la-check-square-o"></i> {{ __('Save and New Call') }}
-                                                </button>
-                                                <br/> <br/>
-                                               
+                                            
                                                 <button type="submit" name="btn" value="done" class="btn btn-success">
                                                     <i class="la la-check-square-o"></i> {{ _('DONE') }}
                                                 </button>

@@ -172,27 +172,62 @@
     // Notification 
     $(document).ready(function() {
 
+
         function CountEmergency() {
             $.ajax({
-                url: window.location.hostname.'/carehome/admin/getcountreqest/1',
+                url: 'http://' + window.location.hostname +'/carehome/admin/getnotification',
                 type: 'get',
                 dataType: 'json',
                 success: function (response) {
-                    console.log(response);
-                    console.log('oo');
+                    // console.log(response);
+                    let note_dev = "";
+                    let note_total = response.newCC + response.newEM + response.newIN + response.newOUT;
+                    
+                    if(response.newCC != 0){
+                        note_dev +='<a href="{{route("admin.request.cc")}}"><div class="media">'+
+                                '<div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div><div class="media-body">'+
+                                    '<h6 class="media-heading red darken-1"> <span> New '+ response.newCC +'</span> <span> in All Request </span> </h6>'+
+                                '</div></div></a>';
+                    }
+                    if(response.newEM != 0){
+                        note_dev +='<a href="{{route("admin.request.emergency")}}"><div class="media">'+
+                                '<div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div><div class="media-body">'+
+                                    '<h6 class="media-heading red darken-1"> <span> New '+ response.newEM +'</span> <span> in Emergency Request </span> </h6>'+
+                                '</div></div></a>';
+                    }
+                    if(response.newIN != 0){
+                        note_dev +='<a href="{{route("admin.request.in")}}"><div class="media">'+
+                                '<div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div><div class="media-body">'+
+                                    '<h6 class="media-heading red darken-1"> <span> New '+ response.newIN +'</span> <span> in InPatient </span> </h6>'+
+                                '</div></div></a>';
+                    }
+                    if(response.newOUT != 0){
+                        note_dev +='<a href="{{route("admin.request.out")}}"><div class="media">'+
+                                '<div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div><div class="media-body">'+
+                                    '<h6 class="media-heading red darken-1"> <span> New '+ response.newOUT +'</span> <span> in OutPatient </span> </h6>'+
+                                '</div></div></a>';
+                    }
+
+                    if(note_total == 0){
+                        note_dev ='<li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="#">No Any Request</a></li>';
+                    }
+
+                    $('#note_count_total').text(note_total);
+                    $('#note_all_massage').html(note_dev);
+
+                    // console.log(note_dev);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     // input.val(0);
-                    console.log('ff');
+                    console.log('Error');
                 }
             });
         }
         CountEmergency();
 
-    // setInterval(function() {
-    //     // $("#signInButton").trigger('click');
-    //     console.log("555");
-    // }, 30 * 1000);
+    setInterval(function() {
+        CountEmergency();
+    }, 3 * 1000);
 
     });
 

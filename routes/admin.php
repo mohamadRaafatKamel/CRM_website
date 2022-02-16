@@ -19,6 +19,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
     Route::get('/','DashboardController@index')->name('admin.dashboard');
     Route::get('logout','DashboardController@logout')->name('admin.logout');
 
+    Route::get('getnotification', 'DashboardController@notificationShow');
+
     ##################### Specialty ############################
     Route::group(['prefix'=>'specialty'],function (){
         Route::get('/','SpecialtyController@index')->name('admin.specialty');

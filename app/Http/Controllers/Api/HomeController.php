@@ -14,6 +14,7 @@ use App\Models\DoctorInfo;
 use App\Models\DoctorWorkDay;
 use App\Models\Order;
 use App\Models\Requests;
+use App\Models\Role;
 use App\Models\Setting;
 use App\Models\User;
 use Dotenv\Validator;
@@ -191,7 +192,6 @@ class HomeController extends Controller
     }
 
     
-
     // Not for API /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

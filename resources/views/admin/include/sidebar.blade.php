@@ -13,7 +13,6 @@
                 </a>
                 <ul class="menu-content">
                     @if(\App\Models\Role::havePremission(['request_all']))
-
                     <li 
                     @if(View::hasSection('request_all')) class="active" @endif
                     ><a class="menu-item" href="{{route('admin.request.cc')}}"   
@@ -32,7 +31,7 @@
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Emergency') }}</span>
                             <span class="badge badge badge-info badge-pill float-right mr-2">
-                                {{App\Models\Requests::where('type',1)->count()}}
+                                {{App\Models\Requests::where('status_cc','!=',4)->where('type',1)->count()}}
                             </span>
                         </a>
                     </li>
