@@ -805,14 +805,16 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label style=" height: 49px;"> </label>
-                                                            <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
-                                                                <i class="la la-plus"></i>
-                                                            </button>
+                                                    @if(isset($myorder->status_cc) && $myorder->status_cc != 4)
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label style=" height: 49px;"> </label>
+                                                                <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
+                                                                    <i class="la la-plus"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    @endif
 
 
                                                 </div>
