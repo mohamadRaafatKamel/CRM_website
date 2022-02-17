@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             GovernoratesTableSeeder::class,
             CitiesTableSeeder::class,
 
-            DataEntryTableSeeder::class,
+            // DataEntry
+            OutpatientTableSeeder::class,
         ]);
     }
 }
