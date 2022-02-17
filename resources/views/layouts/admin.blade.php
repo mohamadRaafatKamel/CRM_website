@@ -212,7 +212,7 @@
                                 '<div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-cyan"></i></div><div class="media-body">'+
                                     '<h6 class="media-heading"> <span> New '+ response.newOUT +'</span> <span> in OutPatient </span> </h6>'+
                                 '</div></div></a>';
-                        $.notify("New "+ response.newOUT +" in OutPatient", successOptions );
+                        $.notify("New "+ response.newOUT +" in OutPatient", "info" );
                     }
 
                     if(note_total == 0){
