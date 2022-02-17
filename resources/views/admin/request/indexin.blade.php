@@ -56,7 +56,7 @@
                                                         <th>العميل</th>
                                                         <th> موبيل</th>
                                                         <th> موبيل</th>
-                                                        <th> Date</th>
+                                                        <th> {{ __('Date') }}</th>
                                                         <th> الحاله</th>
                                                     </tr>
                                                     </thead>

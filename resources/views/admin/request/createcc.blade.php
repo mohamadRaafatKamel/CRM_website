@@ -369,7 +369,7 @@
                                                                    @if($myorder->covid19  == 1 ) checked @endif
                                                             />
                                                             <label for="covid19"
-                                                                   class="card-title ml-1">Covid-19 </label>
+                                                                   class="card-title ml-1">{{ __('Covid-19') }} </label>
 
                                                             @error('covid19')
                                                             <span class="text-danger">{{$message}}</span>
@@ -382,7 +382,7 @@
                                                         <div class="form-group">
                                                             <label for="specialty_id">{{ __('Specialty') }}</label>
                                                             <select class="select2 form-control" id="specialty_id" name="specialty_id">
-                                                                <option value=""></option>
+                                                                <option value="">-- {{ __('Select') }} {{ __('Specialty') }} -- </option>
                                                                 {{-- <option value="2">222</option> --}}
                                                                 @foreach($specialtys as $specialty)
                                                                     <option value="{{ $specialty->id }}"
@@ -403,7 +403,7 @@
                                                         <div class="form-group">
                                                             <label for="service_id">{{ __('Service') }}</label>
                                                             <select class="select2 form-control" name="service_id">
-                                                                <option value=""></option>
+                                                                <option value="">-- {{ __('Select') }} {{ __('Service') }} -- </option>
                                                                 @foreach($serves as $serve)
                                                                     <option value="{{ $serve->id }}"
                                                                          @if(isset($myorder->service_id))
@@ -712,11 +712,11 @@
                                                 <div class="form-actions">
                                                     @if (isset($myorder->id) && $myorder->id != 0)
                                                         <button type="submit" class="btn btn-primary">
-                                                            <i class="la la-check-square-o"></i> Update
+                                                            <i class="la la-check-square-o"></i> {{ __('Update') }}
                                                         </button>
                                                     @else
                                                         <button type="submit" class="btn btn-primary">
-                                                            <i class="la la-check-square-o"></i> حفظ
+                                                            <i class="la la-check-square-o"></i> {{ __('Save') }}
                                                         </button>
                                                     @endif
                                                     
@@ -823,15 +823,18 @@
                                                     
                                                     
                                                     <button type="submit" name="btn" value="done" class="btn btn-success">
-                                                        <i class="la la-check-square-o"></i> {{ _('DONE') }}
+                                                        <i class="la la-check-square-o"></i> {{ __('DONE') }}
                                                     </button>
 
-                                                    <button type="submit" name="btn" value="hold" class="btn btn-primary">
-                                                        <i class="la la-check-square-o"></i> {{ _('Save & Hold') }}
+                                                    <button type="submit" name="btn" value="hold" class="btn btn-warning">
+                                                        <i class="la la-check-square-o"></i> {{ __('Hold') }}
+                                                    </button>
+                                                    <button type="submit" name="btn" value="approve" class="btn btn-warning">
+                                                        <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
                                                     </button>
 
                                                     <button type="submit" name="btn" value="cancel" class="btn btn-danger">
-                                                        <i class="la la-check-square-o"></i> {{ _('Cancel') }}
+                                                        <i class="la la-check-square-o"></i> {{ __('Cancel') }}
                                                     </button>
                                                 </div>
                                             @endif

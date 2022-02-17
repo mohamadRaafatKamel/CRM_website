@@ -144,7 +144,7 @@
                                                                     @if($myorder -> whatapp  == 1 ) checked @endif
                                                                    @endif
                                                             />
-                                                            <label for="whatapp" class="card-title ml-1"> Whatapp </label>
+                                                            <label for="whatapp" class="card-title ml-1"> {{ __('Whatapp') }} </label>
                                                             @error('phone')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -167,7 +167,7 @@
                                                                    @if (isset($myorder -> whatapp2))
                                                                     @if($myorder -> whatapp2  == 1 ) checked @endif
                                                                    @endif />
-                                                            <label for="whatapp2" class="card-title ml-1"> Whatapp </label>
+                                                            <label for="whatapp2" class="card-title ml-1"> {{ __('Whatapp') }} </label>
                                                             @error('phone2')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -196,7 +196,7 @@
                                                             <label for="gender"> {{ __('Gender') }} </label>
                                                             <select name="gender" id="gender"
                                                                     class="form-control @error('gender') is-invalid @enderror">
-                                                                <option value=""></option>
+                                                                <option value="">-- {{ __('Select') }} {{ __('Gender') }} --</option>
                                                                 @if(isset($myorder -> gender))
                                                                 <option value="1"
                                                                         @if($myorder -> gender == "1") selected @endif>{{ __('Male') }}</option>
@@ -220,7 +220,7 @@
                                                             <label for="governorate_id"> {{ __('Governorate') }} </label>
                                                             <select name="governorate_id" id="governorate_id" 
                                                                     class="select2 form-control ">
-                                                                <option></option>
+                                                                <option value="">-- {{ __('Select') }} {{ __('Governorate') }} --</option>
                                                                 @if($governorates)
                                                                     @foreach($governorates as $governorate)
                                                                         <option value="{{$governorate->id}}"
@@ -243,7 +243,7 @@
                                                             <label for="city_id"> {{ __('Area') }} </label>
                                                             <select name="city_id" id="city_id" 
                                                                     class="select2 form-control" >
-                                                                <option></option>
+                                                                <option value="">-- {{ __('Select') }} {{ __('Area') }} --</option>
                                                                 @if($citys)
                                                                     @foreach($citys as $city)
                                                                     @if(old('city_id') == $city->id)
@@ -359,7 +359,7 @@
                                                         <div class="form-group">
                                                             <label for="referral_id">{{ __('Referral') }}</label>
                                                             <select class="select2 form-control" id="referral_id" name="referral_id">
-                                                                <option value=""></option>
+                                                                <option value="">-- {{ __('Select') }} {{ __('Referral') }} --</option>
                                                                 @foreach($referrals as $referral)
                                                                     <option value="{{ $referral->id }}"
                                                                         @if(isset($myorder->referral_id))
@@ -380,7 +380,7 @@
                                                             <label for="referral"> {{ __('Referral') }} </label>
                                                             <input type="text" id="referral" 
                                                                    class="form-control"
-                                                                   placeholder="{{ __('Referral Name') }}"
+                                                                   placeholder="{{ __('Referral') }}"
                                                                    name="referral">
                                                             @error('referral')
                                                             <span class="text-danger">{{$message}}</span>
@@ -395,7 +395,7 @@
                                                         <div class="form-group">
                                                             <label for="corporate_id">{{ __('Corporate') }}</label>
                                                             <select class="select2 form-control" id="corporate_id" name="corporate_id">
-                                                                <option value=""></option>
+                                                                <option value="">-- {{ __('Select') }} {{ __('Corporate') }} --</option>
                                                                 @foreach($companys as $company)
                                                                     <option value="{{ $company->id }}"
                                                                         @if(isset($myorder->corporate_id))
@@ -431,7 +431,7 @@
                                                         <div class="form-group">
                                                             <label for="package_id">{{ __('Package') }}</label>
                                                             <select class="select2 form-control" id="package_id" name="package_id">
-                                                                <option value=""></option>
+                                                                <option value="">-- {{ __('Select') }} {{ __('Package') }} --</option>
                                                                 @foreach($packages as $package)
                                                                     <option value="{{ $package->id }}"
                                                                         @if(isset($myorder->package_id))
@@ -546,7 +546,7 @@
                                             <div class="form-actions">
                                                 
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> {{ _('save') }}
+                                                    <i class="la la-check-square-o"></i> {{ __('Save') }}
                                                 </button>
                                             </div>
                                         
@@ -646,16 +646,20 @@
                                             <div class="form-actions">
                                                
                                                 <button type="submit" name="btn" value="done" class="btn btn-success">
-                                                    <i class="la la-check-square-o"></i> {{ _('DONE') }}
+                                                    <i class="la la-check-square-o"></i> {{ __('DONE') }}
                                                 </button>
 
-                                                <button type="submit" name="btn" value="hold" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> {{ _('Save & Hold') }}
+                                                <button type="submit" name="btn" value="hold" class="btn btn-warning">
+                                                    <i class="la la-check-square-o"></i> {{ __('Hold') }}
                                                 </button>
+                                                {{-- <button type="submit" name="btn" value="approve" class="btn btn-warning">
+                                                    <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
+                                                </button> --}}
 
                                                 <button type="submit" name="btn" value="cancel" class="btn btn-danger">
-                                                    <i class="la la-check-square-o"></i> {{ _('Cancel') }}
+                                                    <i class="la la-check-square-o"></i> {{ __('Cancel') }}
                                                 </button>
+
                                             </div>
                                         
                                     </div>
@@ -781,7 +785,7 @@
                                             <div class="form-actions">
                                                
                                                 <button type="submit" name="btn" value="nurseSheet" class="btn btn-success">
-                                                    <i class="la la-check-square-o"></i> {{ _('Add Nurse Only') }}
+                                                    <i class="la la-check-square-o"></i> {{ __('Add Nurse Only') }}
                                                 </button>
 
                                             </div>
