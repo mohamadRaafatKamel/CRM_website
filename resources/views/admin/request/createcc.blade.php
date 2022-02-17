@@ -101,6 +101,44 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="name_caregiver"> {{ __('Name Of Care Giver') }} </label>
+                                                            <input type="text" id="name_caregiver" 
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->name_caregiver))
+                                                                        value="{{ $myorder->name_caregiver }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Name Of Care Giver') }}"
+                                                                   name="name_caregiver">
+                                                            @error('name_caregiver')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="doctor_id">{{ __('Consultant') }}</label>
+                                                            <select class="select2 form-control" name="doctor_id" id="doctor_id">
+                                                                <option value="">{{ __('Consultant') }}</option>
+                                                                @foreach($doctors as $doctor)
+                                                                    <option value="{{ $doctor->id }}"
+                                                                            @if(isset($myorder->doctor_id))
+                                                                            @if($myorder->doctor_id == $doctor->id) selected @endif @endif
+                                                                    >
+                                                                        {{ $doctor->username }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('doctor_id')
+                                                            <span class="text-danger">{{$message}}</span>--}}
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="phone"> {{ __('Phone') }} <span style="color: #ff4961;">*</span></label>
                                                             <input type="text" id="phone" required
                                                                    class="form-control"
@@ -120,7 +158,7 @@
                                                                    @endif
                                                                    @if(old('whatapp') == 1) checked @endif />
                                                             
-                                                            <label for="whatapp" class="card-title ml-1"> Whatapp </label>
+                                                            <label for="whatapp" class="card-title ml-1"> {{ __('Whatapp') }} </label>
                                                             @error('phone')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -146,7 +184,7 @@
                                                                     @if($myorder -> whatapp2  == 1 ) checked @endif
                                                                    @endif 
                                                                    @if(old('whatapp2') == 1) checked @endif />
-                                                            <label for="whatapp2" class="card-title ml-1"> Whatapp </label>
+                                                            <label for="whatapp2" class="card-title ml-1">  {{ __('Whatapp') }}  </label>
                                                             @error('phone2')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -200,7 +238,7 @@
                                                         <div class="form-group">
                                                             <label for="referral_id">{{ __('Referral') }}</label>
                                                             <select class="select2 form-control" id="referral_id" name="referral_id">
-                                                                <option value=""></option>
+                                                                <option value="">-- {{ __('Select') }}  {{ __('Referral') }} --</option>
                                                                 @foreach($referrals as $referral)
                                                                     <option value="{{ $referral->id }}"
                                                                         @if(isset($myorder->referral_id))
@@ -222,7 +260,7 @@
                                                             <input type="text" id="referral" 
                                                                    class="form-control"
                                                                     value="{{ old('referral') }}"
-                                                                   placeholder="{{ __('Referral Name') }}"
+                                                                   placeholder="{{__('Referral') }}"
                                                                    name="referral">
                                                             @error('referral')
                                                             <span class="text-danger">{{$message}}</span>
@@ -237,7 +275,7 @@
                                                         <div class="form-group">
                                                             <label for="corporate_id">{{ __('Corporate') }}</label>
                                                             <select class="select2 form-control" id="corporate_id" name="corporate_id">
-                                                                <option value=""></option>
+                                                                <option value=""> -- {{ __('Select') }}  {{ __('Corporate') }} --</option>
                                                                 @foreach($companys as $company)
                                                                     <option value="{{ $company->id }}"
                                                                         @if(isset($myorder->corporate_id))
@@ -269,6 +307,76 @@
 
                                                 </div>
                                                 <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="package_id">{{ __('Package') }}</label>
+                                                            <select class="select2 form-control" id="package_id" name="package_id">
+                                                                <option value="">-- {{ __('Select') }}  {{ __('Package') }} --</option>
+                                                                @foreach($packages as $package)
+                                                                    <option value="{{ $package->id }}"
+                                                                        @if(isset($myorder->package_id))
+                                                                            @if($myorder->package_id == $package->id) selected @endif
+                                                                        @endif
+                                                                        @if(old('package_id') == $package->id) selected @endif
+                                                                    >{{ $package->name_ar}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('package_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="package"> {{ __('Package') }} </label>
+                                                            <input type="text" id="package" 
+                                                                   class="form-control"
+                                                                   placeholder="{{ __('Package') }}"
+                                                                   name="package">
+                                                            @error('package')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="physician"> {{ __('Physician') }} </label>
+                                                            <input type="text" id="physician" 
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->physician))
+                                                                        value="{{ $myorder->physician }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Physician') }}"
+                                                                   name="physician">
+                                                            @error('physician')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="1" name="covid19"
+                                                                   id="covid19"
+                                                                   class="switchery" data-color="success"
+
+                                                                   @if($myorder->covid19  == 1 ) checked @endif
+                                                            />
+                                                            <label for="covid19"
+                                                                   class="card-title ml-1">Covid-19 </label>
+
+                                                            @error('covid19')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -323,10 +431,10 @@
                                                                         @if(old('type') == "1") selected @endif >{{ __('Emergency Call') }}</option>
                                                                 <option value="2"
                                                                         @if($myorder -> type == "2") selected @endif
-                                                                        @if(old('type') == "2") selected @endif >{{ __('Out Patient') }}</option>
+                                                                        @if(old('type') == "2") selected @endif >{{ __('OutPatient') }}</option>
                                                                 <option value="3"
                                                                         @if($myorder -> type == "3") selected @endif
-                                                                        @if(old('type') == "3") selected @endif >{{ __('In Patient') }}</option>
+                                                                        @if(old('type') == "3") selected @endif >{{ __('InPatient') }}</option>
                                                                 @else
                                                                     <option value="1" @if (old('type') == "1") selected @endif>{{ __('Emergency Call') }}</option>
                                                                     <option value="2" @if (old('type') == "2") selected @endif>{{ __('Out Patient') }}</option>
@@ -474,6 +582,55 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="location"> {{ __('Location') }} </label>
+                                                            <input type="text" id="location"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->location))
+                                                                    value="{{ $myorder->location }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Location') }}"
+                                                                   name="location">
+                                                            @error('location')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="whatsApp_group"> {{ __('Name of whatsApp Group') }} </label>
+                                                            <input type="text" id="whatsApp_group"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->whatsApp_group))
+                                                                    value="{{ $myorder->whatsApp_group }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Name of whatsApp Group') }}"
+                                                                   name="whatsApp_group">
+                                                            @error('whatsApp_group')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="bed_number"> {{ __('Bed Number') }} </label>
+                                                            <input type="text" id="bed_number"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->bed_number))
+                                                                    value="{{ $myorder->bed_number }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Bed Number') }}"
+                                                                   name="bed_number">
+                                                            @error('bed_number')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="row">

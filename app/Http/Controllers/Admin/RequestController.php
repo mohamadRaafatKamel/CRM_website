@@ -46,6 +46,8 @@ class RequestController extends Controller
         date_default_timezone_set('Africa/Cairo');
         $datenaw = date("Y-m-d")."T".date("H:i:s");
 
+        $doctors = User::select()->doctor()->Verification()->get();
+        $nurses = User::select()->nurse()->get();
         $serves = Service::select()->active()->get();
         $specialtys = Specialty::select()->active()->get();
         $users = User::select()->get();
@@ -53,10 +55,11 @@ class RequestController extends Controller
         $citys = City::select()->get();
         $companys = CompanyInfo::select()->get();
         $referrals = Referral::select()->get();
+        $packages = Package::select()->get();
         $myorder = Requests::select()->find($req);
         $calls = RequestCall::select()->where('request_id',$req)->get();
 
-        return view('admin.request.createcc',compact('users','companys','referrals','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
+        return view('admin.request.createcc',compact('users','doctors','nurses','companys','referrals','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
     }
 
     public function store(Request $request)
@@ -77,6 +80,9 @@ class RequestController extends Controller
         }
 
         try {
+
+            if (!$request->has('covid19'))
+                $request->request->add(['covid19' => 0]);
             if (!$request->has('whatapp'))
                 $request->request->add(['whatapp' => 0]);
             if (!$request->has('whatapp2'))
@@ -84,23 +90,25 @@ class RequestController extends Controller
 
             // Add Referral
             if (!$request->has('referral_id') || $request->referral_id == null ){
-                if ($request->has('referral') && $request->referral !=""){
-                    $reff = new Referral();
-                    $reff->name_ar = $request->referral;
-                    $reff->admin_id = Auth::user()->id;
-                    $reff->save();
-                    $request->request->add(['referral_id' => $reff->id ]);
+                if ( $request->has('referral')){
+                    $referralID = $this->AddReferral( $request->referral );
+                    $request->request->add(['referral_id' => $referralID ]);
                 }
-            }
+             }
 
             // Add Corporate
             if (!$request->has('corporate_id') || $request->corporate_id == null ){
-                if ($request->has('corporate') && $request->corporate !=""){
-                    $corp = new CompanyInfo();
-                    $corp->org_name = $request->corporate;
-                    $corp->admin_id = Auth::user()->id;
-                    $corp->save();
-                    $request->request->add(['corporate_id' => $corp->id ]);
+                if ( $request->has('corporate')){
+                    $corporateID = $this->AddCorporate( $request->corporate );
+                    $request->request->add(['corporate_id' => $corporateID ]);
+                }
+            }
+
+            // Add Package
+            if (!$request->has('package_id') || $request->package_id == null ){
+                if ( $request->has('package')){
+                    $packageID = $this->AddPackage( $request->package );
+                    $request->request->add(['package_id' => $packageID ]);
                 }
             }
              
@@ -131,6 +139,8 @@ class RequestController extends Controller
 
         try {
 
+            if (!$request->has('covid19'))
+                $request->request->add(['covid19' => 0]);
             if (!$request->has('whatapp'))
                 $request->request->add(['whatapp' => 0]);
             if (!$request->has('whatapp2'))
@@ -138,23 +148,25 @@ class RequestController extends Controller
 
             // Add Referral
             if (!$request->has('referral_id') || $request->referral_id == null ){
-                if ($request->has('referral') && $request->referral !=""){
-                    $reff = new Referral();
-                    $reff->name_ar = $request->referral;
-                    $reff->admin_id = Auth::user()->id;
-                    $reff->save();
-                    $request->request->add(['referral_id' => $reff->id ]);
+                if ( $request->has('referral')){
+                    $referralID = $this->AddReferral( $request->referral );
+                    $request->request->add(['referral_id' => $referralID ]);
                 }
-            }
+             }
 
             // Add Corporate
             if (!$request->has('corporate_id') || $request->corporate_id == null ){
-                if ($request->has('corporate') && $request->corporate !=""){
-                    $corp = new CompanyInfo();
-                    $corp->org_name = $request->corporate;
-                    $corp->admin_id = Auth::user()->id;
-                    $corp->save();
-                    $request->request->add(['corporate_id' => $corp->id ]);
+                if ( $request->has('corporate')){
+                    $corporateID = $this->AddCorporate( $request->corporate );
+                    $request->request->add(['corporate_id' => $corporateID ]);
+                }
+            }
+
+            // Add Package
+            if (!$request->has('package_id') || $request->package_id == null ){
+                if ( $request->has('package')){
+                    $packageID = $this->AddPackage( $request->package );
+                    $request->request->add(['package_id' => $packageID ]);
                 }
             }
 
@@ -297,34 +309,25 @@ class RequestController extends Controller
 
             // Add Referral
             if (!$request->has('referral_id') || $request->referral_id == null ){
-                if ($request->has('referral') && $request->referral !=""){
-                    $reff = new Referral();
-                    $reff->name_ar = $request->referral;
-                    $reff->admin_id = Auth::user()->id;
-                    $reff->save();
-                    $request->request->add(['referral_id' => $reff->id ]);
+                if ( $request->has('referral')){
+                    $referralID = $this->AddReferral( $request->referral );
+                    $request->request->add(['referral_id' => $referralID ]);
                 }
-            }
+             }
 
             // Add Corporate
             if (!$request->has('corporate_id') || $request->corporate_id == null ){
-                if ($request->has('corporate') && $request->corporate !=""){
-                    $corp = new CompanyInfo();
-                    $corp->org_name = $request->corporate;
-                    $corp->admin_id = Auth::user()->id;
-                    $corp->save();
-                    $request->request->add(['corporate_id' => $corp->id ]);
+                if ( $request->has('corporate')){
+                    $corporateID = $this->AddCorporate( $request->corporate );
+                    $request->request->add(['corporate_id' => $corporateID ]);
                 }
             }
 
             // Add Package
             if (!$request->has('package_id') || $request->package_id == null ){
-                if ($request->has('package') && $request->package !=""){
-                    $pack = new Package();
-                    $pack->name_ar = $request->package;
-                    $pack->admin_id = Auth::user()->id;
-                    $pack->save();
-                    $request->request->add(['package_id' => $pack->id ]);
+                if ( $request->has('package')){
+                    $packageID = $this->AddPackage( $request->package );
+                    $request->request->add(['package_id' => $packageID ]);
                 }
             }
 
@@ -492,7 +495,7 @@ class RequestController extends Controller
         }
     }
  
-    public function AddUser($name, $phone)
+    private function AddUser($name, $phone)
     {
         $user = new User([
             'username' => $name,
@@ -503,6 +506,44 @@ class RequestController extends Controller
         ]);
         $user->save();
         return $user->id;
+    }
+
+    
+
+    private function AddReferral($name)
+    {
+        if ($name !=""){
+            $reff = new Referral();
+            $reff->name_ar = $name;
+            $reff->admin_id = Auth::user()->id;
+            $reff->save();
+            return $reff->id;
+        }
+        return null;
+    }
+
+    private function AddCorporate($name)
+    {
+        if ($name !=""){
+            $corp = new CompanyInfo();
+            $corp->org_name = $name;
+            $corp->admin_id = Auth::user()->id;
+            $corp->save();
+            return $corp->id;
+        }
+        return null;
+    }
+
+    private function AddPackage($name)
+    {
+        if ($name !=""){
+            $pack = new Package();
+            $pack->name_ar = $name;
+            $pack->admin_id = Auth::user()->id;
+            $pack->save();
+            return $pack->id;
+        }
+        return null;
     }
 
     // public function AddCall($time, $note, $id)
