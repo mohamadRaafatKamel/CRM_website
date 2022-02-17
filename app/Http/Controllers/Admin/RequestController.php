@@ -186,6 +186,8 @@ class RequestController extends Controller
                 $request->request->add(['status_cc' => 2]);
             elseif($request->btn == "cancel")
                 $request->request->add(['status_cc' => 5]);
+            elseif($request->btn == "approve")
+                $request->request->add(['status_cc' => 6]);
 
             // add call
             if ($request->has('time') || $request->has('note') ){
@@ -301,6 +303,8 @@ class RequestController extends Controller
                 $request->request->add(['status_in_out' => 2]);
             elseif($request->btn == "cancel")
                 $request->request->add(['status_in_out' => 5]);
+            // elseif($request->btn == "approve")
+            //     $request->request->add(['status_in_out' => 6]);
 
             if (!$request->has('whatapp'))
                 $request->request->add(['whatapp' => 0]);
@@ -430,6 +434,8 @@ class RequestController extends Controller
                 $request->request->add(['status_in_out' => 2]);
             elseif($request->btn == "cancel")
                 $request->request->add(['status_in_out' => 5]);
+            // elseif($request->btn == "approve")
+            //     $request->request->add(['status_in_out' => 6]);
 
             if (!$request->has('covid19'))
                 $request->request->add(['covid19' => 0]);

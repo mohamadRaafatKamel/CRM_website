@@ -57,7 +57,7 @@
                                                         <th> موبيل</th>
                                                         <th> موبيل</th>
                                                         <th> نوع الزياره</th>
-                                                        <th> Date</th>
+                                                        <th> {{ __('Date') }}</th>
                                                         <th> الحاله</th>
                                                     </tr>
                                                     </thead>
