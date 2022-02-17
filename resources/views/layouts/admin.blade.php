@@ -117,6 +117,7 @@
 <!-- END PAGE LEVEL JS-->
 
 <script src="{{asset('assets/admin/js/scripts/forms/checkbox-radio.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/admin/js/scripts/notify.min.js')}}" type="text/javascript"></script>
 
 <script src="{{asset('assets/admin/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
 
@@ -176,6 +177,7 @@
         function CountEmergency() {
             $.ajax({
                 url: 'https://' + window.location.hostname +'/admin/getnotification',
+                // url: 'http://' + window.location.hostname +'/carehome/admin/getnotification',
                 type: 'get',
                 dataType: 'json',
                 success: function (response) {
@@ -185,27 +187,32 @@
                     
                     if(response.newCC != 0){
                         note_dev +='<a href="{{route("admin.request.cc")}}"><div class="media">'+
-                                '<div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div><div class="media-body">'+
-                                    '<h6 class="media-heading red darken-1"> <span> New '+ response.newCC +'</span> <span> in All Request </span> </h6>'+
+                                '<div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3"></i></div><div class="media-body">'+
+                                    '<h6 class="media-heading yellow darken-3"> <span> New '+ response.newCC +'</span> <span> in All Request </span> </h6>'+
                                 '</div></div></a>';
+                        $.notify("New "+ response.newCC +" in All Request", "warn");
                     }
                     if(response.newEM != 0){
                         note_dev +='<a href="{{route("admin.request.emergency")}}"><div class="media">'+
-                                '<div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div><div class="media-body">'+
+                                '<div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-red bg-darken-1"></i></div><div class="media-body">'+
                                     '<h6 class="media-heading red darken-1"> <span> New '+ response.newEM +'</span> <span> in Emergency Request </span> </h6>'+
                                 '</div></div></a>';
+                        $.notify("New "+ response.newEM +" in Emergency Request", "error");
                     }
                     if(response.newIN != 0){
                         note_dev +='<a href="{{route("admin.request.in")}}"><div class="media">'+
-                                '<div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div><div class="media-body">'+
-                                    '<h6 class="media-heading red darken-1"> <span> New '+ response.newIN +'</span> <span> in InPatient </span> </h6>'+
+                                '<div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-cyan"></i></div><div class="media-body">'+
+                                    '<h6 class="media-heading"> <span> New '+ response.newIN +'</span> <span> in InPatient </span> </h6>'+
                                 '</div></div></a>';
+                        $.notify("New "+ response.newIN +" in InPatient", "info");
+
                     }
                     if(response.newOUT != 0){
                         note_dev +='<a href="{{route("admin.request.out")}}"><div class="media">'+
-                                '<div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div><div class="media-body">'+
-                                    '<h6 class="media-heading red darken-1"> <span> New '+ response.newOUT +'</span> <span> in OutPatient </span> </h6>'+
+                                '<div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-cyan"></i></div><div class="media-body">'+
+                                    '<h6 class="media-heading"> <span> New '+ response.newOUT +'</span> <span> in OutPatient </span> </h6>'+
                                 '</div></div></a>';
+                        $.notify("New "+ response.newOUT +" in OutPatient", successOptions );
                     }
 
                     if(note_total == 0){
@@ -225,9 +232,9 @@
         }
         CountEmergency();
 
-    setInterval(function() {
-        CountEmergency();
-    }, 3 * 1000);
+        setInterval(function() {
+            CountEmergency();
+        }, 15 * 1000);
 
     });
 

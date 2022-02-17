@@ -38,10 +38,12 @@ class SpecialtyController extends Controller
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
 
-            $image = $request->file('img');
-            $imageName = "spc_".str_replace(' ', '_', $request->name_en) . ".". $image->extension();
-            $image->move(public_path('specialty'),$imageName);
-            $request->request->add(['image' =>  "public/specialty/".$imageName ]);
+            if ($request->has('img')){
+                $image = $request->file('img');
+                $imageName = "spc_".str_replace(' ', '_', $request->name_en) . ".". $image->extension();
+                $image->move(public_path('specialty'),$imageName);
+                $request->request->add(['image' =>  "public/specialty/".$imageName ]);
+            }
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
             Specialty::create($request->except(['_token']));
             if(isset($request->btn))

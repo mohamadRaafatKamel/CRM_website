@@ -51,6 +51,9 @@
                     {{-- <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-gb"></i> English</a> --}}
               </div>
             </li>
+
+            @if(\App\Models\Role::havePremission(['request_all','request_emergency','request_out','request_in']))
+
             <li class="dropdown dropdown-notification nav-item">
               <a class="nav-link nav-link-label" href="#" data-toggle="dropdown">
                 <i class="ficon ft-bell"></i>
@@ -65,7 +68,7 @@
                 </li>
                 <li class="scrollable-container media-list w-100" id="note_all_massage">
 
-                  {{-- <a href="javascript:void(0)">
+                  <a href="javascript:void(0)">
                     <div class="media">
                       <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
                       <div class="media-body">
@@ -76,7 +79,7 @@
                         </small>
                       </div>
                     </div>
-                  </a> --}}
+                  </a>
 
                   {{-- <a href="{{route("admin.request.cc")}}">
                     <div class="media">
@@ -99,6 +102,7 @@
                       </div>
                     </div>
                   </a> --}}
+
                   {{-- <a href="javascript:void(0)">
                     <div class="media">
                       <div class="media-left align-self-center"><i class="ft-check-circle icon-bg-circle bg-cyan"></i></div>
@@ -125,6 +129,7 @@
                 {{-- <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all notifications</a></li> --}}
               </ul>
             </li>
+            @endif
           </ul>
 
 

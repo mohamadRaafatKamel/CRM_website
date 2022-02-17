@@ -61,7 +61,7 @@ class Requests extends Model
     {
         switch ($state){
             case 1:
-                return __('Waiting');
+                return __('New Request');
                 break;
             case 2:
                 return __('Hold');

@@ -63,7 +63,7 @@ else
                                                             <label for="projectinput1"> الاسم بالعربي </label>
                                                             <input type="text" value="{{$datas -> name_ar}}" id="name_ar"
                                                                    class="form-control" {{ $readonly }}
-                                                                   placeholder="الاسم بالعربي"
+                                                                   placeholder="الاسم بالعربي" required
                                                                    name="name_ar">
                                                             @error('name_ar')
                                                             <span class="text-danger">{{$message}}</span>
@@ -76,7 +76,7 @@ else
                                                             <label for="projectinput1"> الاسم بالانجليزي </label>
                                                             <input type="text" value="{{$datas -> name_en}}" id="name_en"
                                                                    class="form-control" {{ $readonly }}
-                                                                   placeholder="الاسم بالانجليزي  "
+                                                                   placeholder="الاسم بالانجليزي  " required
                                                                    name="name_en">
                                                             @error('name_en')
                                                             <span class="text-danger">{{$message}}</span>
@@ -87,8 +87,8 @@ else
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="parent_id">{{ __('Parent') }}</label>
-                                                            <select class="select2 form-control" name="parent_id" required {{ $readonly }} >
-                                                                <option value=""></option>
+                                                            <select class="select2 form-control" name="parent_id"  {{ $readonly }} >
+                                                                <option value="">-- {{ __('Parent') }} --</option>
                                                                 @foreach($generals as $general)
                                                                     <option @if ($datas -> parent_id == $general->id) selected @endif 
                                                                         value="{{ $general->id }}">

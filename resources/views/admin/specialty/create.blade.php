@@ -57,7 +57,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم بالعربي </label>
                                                             <input type="text" value="" id="name_ar"
-                                                                   class="form-control"
+                                                                   class="form-control" required
                                                                    placeholder="الاسم بالعربي"
                                                                    name="name_ar">
                                                             @error('name_ar')
@@ -70,7 +70,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم بالانجليزي </label>
                                                             <input type="text" value="" id="name_en"
-                                                                   class="form-control"
+                                                                   class="form-control" required
                                                                    placeholder="الاسم بالانجليزي  "
                                                                    name="name_en">
                                                             @error('name_en')
@@ -83,7 +83,7 @@
                                                         <div class="form-group">
                                                             <label for="parent_id">{{ __('Parent') }}</label>
                                                             <select class="select2 form-control" name="parent_id">
-                                                                <option value=""></option>
+                                                                <option value="">-- {{ __('Parent') }} --</option>
                                                                 @foreach($generals as $general)
                                                                     <option value="{{ $general->id }}">
                                                                         @if (App::getLocale() == 'ar')
@@ -107,7 +107,7 @@
                                                             <input type="file" id="img"
                                                                    class="form-control"
                                                                    accept="image/*"
-                                                                   name="img" required>
+                                                                   name="img">
                                                             @error('img')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
