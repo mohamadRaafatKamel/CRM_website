@@ -38,11 +38,11 @@ class DashboardController extends Controller
             $arr['newEM'] = $newEM;
         }
         if(Role::havePremission(['request_out'])){
-            $newIN = Requests::where('status_cc',4)->where('status_in_out','=',1)->where('type',3)->count();
+            $newIN = Requests::where('status_cc',4)->where('status_in_out','=',1)->where('type',2)->count();
             $arr['newIN'] = $newIN;
         }
         if(Role::havePremission(['request_in'])){
-            $newOUT = Requests::where('status_cc',4)->where('status_in_out','=',1)->where('type',4)->count();
+            $newOUT = Requests::where('status_cc',4)->where('status_in_out','=',1)->where('type',3)->count();
             $arr['newOUT'] = $newOUT;
         }
         echo json_encode($arr);

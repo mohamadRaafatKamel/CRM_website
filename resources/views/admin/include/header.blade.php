@@ -68,7 +68,7 @@
                 </li>
                 <li class="scrollable-container media-list w-100" id="note_all_massage">
 
-                  <a href="javascript:void(0)">
+                  {{-- <a href="javascript:void(0)">
                     <div class="media">
                       <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
                       <div class="media-body">
@@ -79,7 +79,7 @@
                         </small>
                       </div>
                     </div>
-                  </a>
+                  </a> --}}
 
                   {{-- <a href="{{route("admin.request.cc")}}">
                     <div class="media">
