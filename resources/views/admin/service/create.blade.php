@@ -56,7 +56,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم بالعربي </label>
                                                             <input type="text" value="" id="name_ar"
-                                                                   class="form-control"
+                                                                   class="form-control" required
                                                                    placeholder="الاسم بالعربي"
                                                                    name="name_ar">
                                                             @error('name_ar')
@@ -69,7 +69,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم بالانجليزي </label>
                                                             <input type="text" value="" id="name_en"
-                                                                   class="form-control"
+                                                                   class="form-control" required
                                                                    placeholder="الاسم بالانجليزي  "
                                                                    name="name_en">
                                                             @error('name_en')

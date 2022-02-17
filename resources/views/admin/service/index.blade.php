@@ -43,7 +43,7 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-primary mb-2" href="{{ route('admin.service.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Service') }}</a>
+                                        <a class="btn btn-primary mb-2" href="{{ route('admin.service.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
                                         <div class="table-responsive">
                                         <table
                                             class="table table-striped table-bordered zero-configuration ">

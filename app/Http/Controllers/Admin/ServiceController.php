@@ -30,10 +30,14 @@ class ServiceController extends Controller
                 $request->request->add(['disabled' => 1]);
 
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
-            $image = $request->file('img');
-            $imageName = "serv_".str_replace(' ', '_', $request->name_en) . ".". $image->extension();
-            $image->move(public_path('service'),$imageName);
-            $request->request->add(['image' =>  "public/service/".$imageName ]);
+
+            if ($request->has('img')){
+                $image = $request->file('img');
+                $imageName = "serv_".str_replace(' ', '_', $request->name_en) . ".". $image->extension();
+                $image->move(public_path('service'),$imageName);
+                $request->request->add(['image' =>  "public/service/".$imageName ]);
+            }
+            
             Service::create($request->except(['_token']));
             if(isset($request->btn))
                 if($request->btn =="saveAndNew")
