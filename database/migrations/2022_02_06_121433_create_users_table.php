@@ -31,8 +31,10 @@ class CreateUsersTable extends Migration
             $table->foreign('nationality_code')->references('country_code')->on('countries')->onDelete('cascade');
             $table->unsignedBigInteger('governorate_id')->nullable();
             $table->foreign("governorate_id")->references('id')->on('governorates')->onDelete('cascade');
+            // remove--
             $table->unsignedBigInteger('city_id')->nullable();
             $table->foreign("city_id")->references('id')->on('cities')->onDelete('cascade');
+            // --------
             $table->string('address')->nullable();
             $table->string('adress2')->nullable();
             $table->string('code_zone_patient_id')->nullable();

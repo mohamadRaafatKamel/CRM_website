@@ -29,8 +29,10 @@ class CreateRequestTable extends Migration
             $table->string('location')->nullable();
             $table->unsignedBigInteger('governorate_id')->nullable();
             $table->foreign("governorate_id")->references('id')->on('governorates')->onDelete('cascade');
+            // remove--
             $table->unsignedBigInteger('city_id')->nullable();
             $table->foreign("city_id")->references('id')->on('cities')->onDelete('cascade');
+            // --------
             $table->string('adress')->nullable();
             $table->string('land_mark')->nullable();
             $table->string('floor')->nullable();
