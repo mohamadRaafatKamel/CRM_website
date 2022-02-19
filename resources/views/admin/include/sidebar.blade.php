@@ -152,12 +152,16 @@
                     </a>
                     <ul class="menu-content">
                         @if(\App\Models\Role::havePremission(['serves_view','serves_idt']))
-                            <li><a class="menu-item" href="{{route('admin.service')}}"
+                            <li 
+                            @if(View::hasSection('serves_view')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.service')}}"
                                 data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                             </li>
                         @endif
                         @if(\App\Models\Role::havePremission(['serves_cr']))
-                            <li><a class="menu-item" href="{{route('admin.service.create')}}" data-i18n="nav.dash.crypto">
+                            <li
+                            @if(View::hasSection('serves_cr')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.service.create')}}" data-i18n="nav.dash.crypto">
                                     أضافه جديد </a>
                             </li>
                         @endif
@@ -165,16 +169,20 @@
                 </li>
             @endif
 
-            @if(\App\Models\Role::havePremission(['survay_view']))
+            @if(\App\Models\Role::havePremission(['survey_view']))
                 <li class="nav-item">
                     <a href=""><i class="la la-map-signs"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Survey') }} </span>
                     </a>
                     <ul class="menu-content">
-                        <li><a class="menu-item" href="{{route('admin.survay')}}"
+                        <li
+                        @if(View::hasSection('survey_view')) class="active" @endif
+                        ><a class="menu-item" href="{{route('admin.survay')}}"
                                data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                         </li>
-                        <li><a class="menu-item" href="{{route('admin.statistics')}}"
+                        <li
+                        @if(View::hasSection('serves_static')) class="active" @endif
+                        ><a class="menu-item" href="{{route('admin.statistics')}}"
                             data-i18n="nav.dash.ecommerce"> الاحصائيات </a>
                      </li>
                     </ul>
@@ -260,12 +268,14 @@
                 <ul class="menu-content">
                     
                     @if(\App\Models\Role::havePremission(['admin_view','admin_idt']))
-                    <li><a class="menu-item" href="{{route('admin.admin')}}"
+                    <li @if(View::hasSection('admin_view')) class="active" @endif
+                    ><a class="menu-item" href="{{route('admin.admin')}}"
                            data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
                     @endif
                     @if(\App\Models\Role::havePremission(['admin_cr']))
-                    <li><a class="menu-item" href="{{route('admin.admin.create')}}" data-i18n="nav.dash.crypto">
+                    <li @if(View::hasSection('admin_cr')) class="active" @endif
+                    ><a class="menu-item" href="{{route('admin.admin.create')}}" data-i18n="nav.dash.crypto">
                             أضافه جديد </a>
                     </li>
                     @endif
@@ -303,7 +313,8 @@
                         <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Setting') }} </span>
                     </a>
                     <ul class="menu-content">
-                        <li><a class="menu-item" href="{{route('admin.setting')}}"
+                        <li @if(View::hasSection('setting_view')) class="active" @endif
+                        ><a class="menu-item" href="{{route('admin.setting')}}"
                                data-i18n="nav.dash.ecommerce"> {{ __('Setting') }} </a>
                         </li>
                     </ul>

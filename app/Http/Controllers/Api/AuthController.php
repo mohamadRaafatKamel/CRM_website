@@ -17,36 +17,56 @@ class AuthController extends Controller
         $request->validate([
             'username' => ['required', 'string', 'max:255'],
             'email' => ['string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'string', 'max:255', 'unique:users'],
+            // 'phone' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'gender' => ['integer'],
             'type' => ['integer'],
         ]);
         try {
-
-            if(isset($request->type)){
-                if($request->type > 3 or $request->type < 1 ){
-                    $request->type = 1;
+            // check if add quick or not
+            $user = User::where('phone',$request->phone)->first();
+            if(isset($user->id)){
+                // quick user
+                if($user->quick == 1){
+                    $user->update([
+                        'username' => $request->username,
+                        'email' => $request->email,
+                        'fname' => $request->fname,
+                        'lname' => $request->lname,
+                        'title' => $request->title,
+                        'birth_date' => $request->birth_date,
+                        'gender' => $request->gender,
+                        'password' => Hash::make($request->password),
+                        'quick' => '0',
+                    ]);
+                    return response()->json(['data' => ['success' => "1", 'massage' => "User has been Registration"]], 200);
+                }else{
+                    return response()->json(['data' => ['success' => "0", 'error' => "This Phone Exists"]]);
                 }
             }else{
-                $request->request->add(['type' => '1' ]);
-            }
-            
-            $user = new User([
-                'username' => $request->username,
-                'email' => $request->email,
-                'fname' => $request->fname,
-                'lname' => $request->lname,
-                'title' => $request->title,
-                'birth_date' => $request->birth_date,
-                'phone' => $request->phone,
-                'gender' => $request->gender,
-                'type' => $request->type,
-                'password' => Hash::make($request->password),
-            ]);
-
-            $user->save();
-            return response()->json(['data' => ['success' => "1", 'massage' => "User has been Registration"]], 200);
+                // new user
+                if(isset($request->type)){
+                    if($request->type > 3 or $request->type < 1 ){
+                        $request->type = 1;
+                    }
+                }else{
+                    $request->request->add(['type' => '1' ]);
+                }               
+                $user = new User([
+                    'username' => $request->username,
+                    'email' => $request->email,
+                    'fname' => $request->fname,
+                    'lname' => $request->lname,
+                    'title' => $request->title,
+                    'birth_date' => $request->birth_date,
+                    'phone' => $request->phone,
+                    'gender' => $request->gender,
+                    'type' => $request->type,
+                    'password' => Hash::make($request->password),
+                ]);    
+                $user->save();
+                return response()->json(['data' => ['success' => "1", 'massage' => "User has been Registration"]], 200);
+            }           
         } catch (\Exception $ex) {
             return response()->json(['data' => ['success' => "0", 'error' => "Something Error"]]);
         }
@@ -58,7 +78,7 @@ class AuthController extends Controller
             'email' => ['required','string'],
             'password' => ['required','string'],
         ]);
-        // try {
+        try {
             // auth by phone or email
             if (strpos($request->email, '@') !== false) {
                 $credentials = request(['email','password']);
@@ -83,9 +103,9 @@ class AuthController extends Controller
                 'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateString(),
                 'access_token' => $tokenResult->accessToken,
             ]]);
-        // } catch (\Exception $ex) {
-        //     return response()->json(['data' => ['success' => "0", 'error' => "Something Error"]]);
-        // }
+        } catch (\Exception $ex) {
+            return response()->json(['data' => ['success' => "0", 'error' => "Something Error"]]);
+        }
     }
 
     public function logout(Request $request)

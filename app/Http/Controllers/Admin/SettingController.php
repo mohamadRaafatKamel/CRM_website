@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\Setting;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
@@ -12,6 +13,9 @@ class SettingController extends Controller
 {
     public function create()
     {
+        if(! Role::havePremission(['setting_view']))
+            return redirect()->route('admin.dashboard');
+
         $datas = Setting::select()->get();
         $setting = [];
         foreach ($datas as $data){
@@ -22,6 +26,9 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
+        if(! Role::havePremission(['setting_view']))
+            return redirect()->route('admin.dashboard');
+
         try {
             if (isset($request->value) && $request->value != null) {
                 $allSetting = $request->value;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\WebSurvay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,12 +14,18 @@ class WebSurvayController extends Controller
 {
     public function index()
     {
+        if(! Role::havePremission(['survey_view']))
+            return redirect()->route('admin.dashboard');
+
         $datas = WebSurvay::select()->paginate(PAGINATION_COUNT);
         return view('admin.websurvay.index', compact('datas'));
     }
 
     public function statistics()
     {
+        if(! Role::havePremission(['survey_view']))
+            return redirect()->route('admin.dashboard');
+            
         $opinionAge1 = WebSurvay::select('opinion_carehub as opinion', DB::raw('count(*) as total'))
                                 ->where('age','1')->groupBy('opinion_carehub')->get();
         $opinionAge2 = WebSurvay::select('opinion_carehub as opinion', DB::raw('count(*) as total'))

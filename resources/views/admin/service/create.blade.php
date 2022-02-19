@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title','الخدمات')
+@section('serves_cr','')
 @section('content')
 
     <div class="app-content content">

@@ -14,18 +14,27 @@ class AdminController extends Controller
 {
     public function index()
     {
+        if(! Role::havePremission(['admin_view','admin_idt']))
+            return redirect()->route('admin.dashboard');
+
         $admins = Admin::select()->paginate(PAGINATION_COUNT);
         return view('admin.admin.index', compact('admins'));
     }
 
     public function create()
     {
+        if(! Role::havePremission(['admin_cr']))
+            return redirect()->route('admin.dashboard');
+
         $roles = Role::select()->get();
         return view('admin.admin.create',compact('roles'));
     }
 
     public function store(Request $request)
     {
+        if(! Role::havePremission(['admin_cr']))
+            return redirect()->route('admin.dashboard');
+
         try {
             $pass = Hash::make($request->password);
             unset($request->password);
@@ -42,6 +51,9 @@ class AdminController extends Controller
 
     public function edit($id)
     {
+        if(! Role::havePremission(['admin_view','admin_idt']))
+            return redirect()->route('admin.dashboard');
+
         $roles = Role::select()->get();
         $admins = Admin::select()->find($id);
         if(!$admins){
@@ -52,6 +64,9 @@ class AdminController extends Controller
 
     public function update($id, Request $request)
     {
+        if(! Role::havePremission(['admin_idt']))
+            return redirect()->route('admin.dashboard');
+
         try {
 
             $admins = Admin::find($id);
@@ -85,7 +100,8 @@ class AdminController extends Controller
 
     public function destroy($id)
     {
-
+        if(! Role::havePremission(['admin_view','admin_cr','admin_idt']))
+            return redirect()->route('admin.dashboard');
         try {
             $admins = Admin::find($id);
             if (!$admins) {

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title','الاعدادات')
+@section('setting_view','')
 @section('content')
 
     <div class="app-content content">

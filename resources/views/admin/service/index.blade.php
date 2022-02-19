@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title','الخدمات')
+@section('serves_view','')
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
@@ -43,7 +44,9 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
+                                        @if(\App\Models\Role::havePremission(['serves_cr']))
                                         <a class="btn btn-primary mb-2" href="{{ route('admin.service.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
+                                        @endif
                                         <div class="table-responsive">
                                         <table
                                             class="table table-striped table-bordered zero-configuration ">

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
-@section('title','الامارات')
+@section('title','ادمن')
+@section('admin_view','')
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
@@ -43,7 +44,9 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-primary mb-2" href="{{ route('admin.admin.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Admin') }}</a>
+                                        @if(\App\Models\Role::havePremission(['admin_cr']))
+                                            <a class="btn btn-primary mb-2" href="{{ route('admin.admin.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
+                                        @endif
                                         <table
                                             class="table table-striped table-bordered zero-configuration">
                                             <thead>
@@ -68,10 +71,10 @@
                                                                 <a href="{{route('admin.admin.edit',['id'=> $admin->id ])}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
 
-
-                                                                <a href="{{route('admin.admin.delete',$admin -> id)}}"
-                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
-
+                                                                   @if(\App\Models\Role::havePremission(['admin_idt']))
+                                                                        <a href="{{route('admin.admin.delete',$admin -> id)}}"
+                                                                        class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
+                                                                    @endif
 
                                                             </div>
                                                         </td>

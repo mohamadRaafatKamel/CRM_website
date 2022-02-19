@@ -2,7 +2,12 @@
 @section('title','تعديل')
 @section('referral_view','')
 @section('content')
-
+<?php 
+if(! $permissoin = \App\Models\Role::havePremission(['referral_idt']))
+    $readonly="readonly";
+else 
+    $readonly="";
+?>
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
@@ -10,9 +15,9 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{ __('Home') }} </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.referral')}}">  referral </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.referral')}}">  {{ __('Referral') }} </a>
                                 </li>
                                 <li class="breadcrumb-item active">تعديل
                                 </li>
@@ -55,7 +60,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم بالعربي </label>
                                                             <input type="text" value="{{$datas -> name_ar}}" id="name_ar"
-                                                                   class="form-control"
+                                                                   class="form-control" {{ $readonly }}
                                                                    placeholder="الاسم بالعربي"
                                                                    name="name_ar">
                                                             @error('name_ar')
@@ -68,7 +73,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم بالانجليزي </label>
                                                             <input type="text" value="{{$datas -> name_en}}" id="name_en"
-                                                                   class="form-control"
+                                                                   class="form-control" {{ $readonly }}
                                                                    placeholder="الاسم بالانجليزي  "
                                                                    name="name_en">
                                                             @error('name_en')
@@ -80,7 +85,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> وصف </label>
-                                                            <textarea id="description" class="form-control" placeholder="وصف" 
+                                                            <textarea id="description" class="form-control" placeholder="وصف" {{ $readonly }} 
                                                                 name="description">{{$datas -> description}}</textarea>
                                                             @error('description')
                                                             <span class="text-danger">{{$message}}</span>
@@ -94,7 +99,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="0" name="disabled"
-                                                                   id="switcheryColor4"
+                                                                   id="switcheryColor4" {{ $readonly }}
                                                                    class="switchery" data-color="success"
 
                                                                    @if($datas -> disabled  == 0 ) checked @endif
@@ -111,16 +116,17 @@
 
                                             </div>
 
-
-                                            <div class="form-actions">
-                                                <button type="button" class="btn btn-warning mr-1"
-                                                        onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i>  تحديث
-                                                </button>
-                                            </div>
+                                            @if ($permissoin)
+                                                <div class="form-actions">
+                                                    <button type="button" class="btn btn-warning mr-1"
+                                                            onclick="history.back();">
+                                                        <i class="ft-x"></i> تراجع
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="la la-check-square-o"></i>  تحديث
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </form>
                                     </div>
                                 </div>
