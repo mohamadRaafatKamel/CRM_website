@@ -70,7 +70,7 @@
                                                             </a></td>
                                                         {{-- <td>{{$user -> username}}</td> --}}
                                                         <td>{{$user -> phone }}</td>
-                                                        <td>{{\App\Models\User::getUserType($user -> type) }}</td>
+                                                        <td>{{ __(\App\Models\User::getUserType($user -> type) )}}</td>
                                                         
                                                     </tr>
                                                 @endforeach

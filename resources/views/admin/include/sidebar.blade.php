@@ -93,7 +93,7 @@
             @if(\App\Models\Role::havePremission(['user_doctor','user_nurse','user_driver']))
             <li class="nav-item">
                 <a href=""><i class="la la-certificate"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main"> {{ _('Stuff') }} </span>
+                    <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Stuff') }} </span>
                 </a>
                 <ul class="menu-content" >
                     @if(\App\Models\Role::havePremission(['user_doctor']))

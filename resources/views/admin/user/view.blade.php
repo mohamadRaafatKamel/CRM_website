@@ -520,7 +520,7 @@
                                               enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> Doctor </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> {{ __('Doctor') }} </h4>
                                                 <div class="row">
 
                                                     <div class="col-md-6">
@@ -559,10 +559,10 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="phone1"> {{ __('Phone 1') }} </label>
+                                                            <label for="phone1"> {{ __('Phone') }} 1</label>
                                                             <input type="text" value="{{$doctor -> phone1}}" id="phone1"
                                                                    class="form-control"
-                                                                   placeholder="{{ __('Phone 1') }}"
+                                                                   placeholder="{{ __('Phone') }}"
                                                                    name="phone1" >
                                                             @error('phone1')
                                                             <span class="text-danger">{{$message}}</span>
@@ -572,10 +572,10 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="phone2"> {{ __('Phone 2') }} </label>
+                                                            <label for="phone2"> {{ __('Phone') }} 2</label>
                                                             <input type="text" value="{{$doctor -> phone2}}" id="phone2"
                                                                    class="form-control"
-                                                                   placeholder="{{ __('Phone 2') }}"
+                                                                   placeholder="{{ __('Phone') }}"
                                                                    name="phone2" >
                                                             @error('phone2')
                                                             <span class="text-danger">{{$message}}</span>
@@ -665,7 +665,7 @@
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="form-body">
-                                                    <h4 class="form-section"><i class="ft-home"></i> Doctor </h4>
+                                                    <h4 class="form-section"><i class="ft-home"></i> {{ __('Doctor') }} </h4>
 
                                                     <div class="row">
                                                         <div class="col-md-3">
