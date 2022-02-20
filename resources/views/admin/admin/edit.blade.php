@@ -1,7 +1,13 @@
 @extends('layouts.admin')
 @section('title','تعديل')
+@section('admin_view','')
 @section('content')
-
+<?php 
+if(! $permissoin = \App\Models\Role::havePremission(['admin_idt']))
+    $readonly="readonly";
+else 
+    $readonly="";
+?>
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
@@ -54,7 +60,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم  </label>
                                                             <input type="text" value="{{$admins -> name}}" id="name_ar"
-                                                                   class="form-control"
+                                                                   class="form-control" {{ $readonly }}
                                                                    placeholder="الاسم"
                                                                    name="name" required>
                                                             @error('name')
@@ -66,7 +72,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1">  الايميل </label>
-                                                            <input type="email"
+                                                            <input type="email" {{ $readonly }}
                                                                    value="{{$admins -> email}}"
                                                                    id="email"
                                                                    class="form-control"
@@ -82,7 +88,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1">   كلمه للمرور </label>
                                                             <input type="text" value="" id="password"
-                                                                   class="form-control"
+                                                                   class="form-control" {{ $readonly }}
                                                                    placeholder="  كلمه المرور  "
                                                                    name="password">
                                                             @error('password')
@@ -94,7 +100,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> صلاحيات </label>
-                                                            <select class="form-control" id="permission" name="permission" required>
+                                                            <select class="form-control" id="permission" name="permission" required {{ $readonly }}>
                                                                 <option></option>
                                                                 @if($roles)
                                                                     @foreach($roles as $role)
@@ -109,15 +115,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-actions">
-                                                <button type="button" class="btn btn-warning mr-1"
-                                                        onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i>  تحديث
-                                                </button>
-                                            </div>
+                                            @if ($permissoin)
+                                                <div class="form-actions">
+                                                    <button type="button" class="btn btn-warning mr-1"
+                                                            onclick="history.back();">
+                                                        <i class="ft-x"></i> تراجع
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="la la-check-square-o"></i>  تحديث
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </form>
                                     </div>
                                 </div>

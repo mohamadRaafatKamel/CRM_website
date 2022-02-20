@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title','الاعدادات')
+@section('setting_view','')
 @section('content')
 
     <div class="app-content content">
@@ -45,7 +46,7 @@
                                               enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-body">
-                                                <h4 class="form-section"><span>Social Media</span> <i class="ft-home"></i></h4>
+                                                <h4 class="form-section"><span>{{ __('Social Media') }}</span> <i class="ft-home"></i></h4>
                                                 <div class="row">
 
                                                     <div class="col-md-6">
@@ -205,7 +206,7 @@
                                               enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-body">
-                                                <h4 class="form-section"><span>Emails</span> <i class="ft-home"></i></h4>
+                                                <h4 class="form-section"> <i class="ft-home"></i> {{ __('Email') }} </h4>
                                                 <div class="row">
 
                                                     <div class="col-md-6">
@@ -221,7 +222,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="callcenter"> CallCenter </label>
+                                                            <label for="callcenter"> {{ __('CallCenter') }} </label>
                                                             <input type="email" id="callcenter"
                                                                    value="@if(isset($setting['CallCenter'])){{ $setting['CallCenter'] }}@endif"
                                                                    class="form-control"
@@ -232,7 +233,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="emergency"> Emergency </label>
+                                                            <label for="emergency"> {{ __('Emergency') }} </label>
                                                             <input type="email" id="emergency"
                                                                    value="@if(isset($setting['Emergency'])){{ $setting['Emergency'] }}@endif"
                                                                    class="form-control"
@@ -243,7 +244,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="inpatient"> InPatient </label>
+                                                            <label for="inpatient"> {{ __('InPatient') }} </label>
                                                             <input type="email" id="inpatient"
                                                                    value="@if(isset($setting['InPatient'])){{ $setting['InPatient'] }}@endif"
                                                                    class="form-control"
@@ -254,7 +255,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="outpatient"> OutPatient </label>
+                                                            <label for="outpatient"> {{ __('OutPatient') }} </label>
                                                             <input type="email" id="outpatient"
                                                                    value="@if(isset($setting['OutPatient'])){{ $setting['OutPatient'] }}@endif"
                                                                    class="form-control"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Referral;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,17 +12,24 @@ class ReferralController extends Controller
 {
     public function index()
     {
+        if(! Role::havePremission(['referral_view','referral_idt']))
+            return redirect()->route('admin.dashboard');
+
         $datas = Referral::select()->paginate(PAGINATION_COUNT);
         return view('admin.referral.index', compact('datas'));
     }
 
     public function create()
     {
+        if(! Role::havePremission(['referral_cr']))
+            return redirect()->route('admin.dashboard');
         return view('admin.referral.create');
     }
 
     public function store(Request $request)
     {
+        if(! Role::havePremission(['referral_cr']))
+            return redirect()->route('admin.dashboard');
         try {
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
@@ -40,6 +48,9 @@ class ReferralController extends Controller
 
     public function edit($id)
     {
+        if(! Role::havePremission(['referral_view','referral_idt']))
+            return redirect()->route('admin.dashboard');
+
         $datas = Referral::select()->find($id);
         if(!$datas){
             return redirect()->route('admin.referral')->with(['error'=>"غير موجود"]);
@@ -49,6 +60,9 @@ class ReferralController extends Controller
 
     public function update($id, Request $request)
     {
+        if(! Role::havePremission(['referral_idt']))
+            return redirect()->route('admin.dashboard');
+
         try {
             $data = Referral::find($id);
             if (!$data) {
@@ -66,20 +80,20 @@ class ReferralController extends Controller
         }
     }
 
-    public function destroy($id)
-    {
+    // public function destroy($id)
+    // {
 
-        try {
-            $data = Referral::find($id);
-            if (!$data) {
-                return redirect()->route('admin.referral', $id)->with(['error' => '  غير موجوده']);
-            }
-            $data->delete();
+    //     try {
+    //         $data = Referral::find($id);
+    //         if (!$data) {
+    //             return redirect()->route('admin.referral', $id)->with(['error' => '  غير موجوده']);
+    //         }
+    //         $data->delete();
 
-            return redirect()->route('admin.referral')->with(['success' => 'تم حذف  بنجاح']);
+    //         return redirect()->route('admin.referral')->with(['success' => 'تم حذف  بنجاح']);
 
-        } catch (\Exception $ex) {
-            return redirect()->route('admin.referral')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
-        }
-    }
+    //     } catch (\Exception $ex) {
+    //         return redirect()->route('admin.referral')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+    //     }
+    // }
 }

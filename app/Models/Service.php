@@ -18,13 +18,13 @@ class Service extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name_ar', 'name_en', 'description', 'image', 'type', 'admin_id', 'disabled', 'created_at', 'updated_at'
+        'id', 'name_ar', 'name_en', 'description', 'image', 'type', 'site', 'admin_id', 'disabled', 'created_at', 'updated_at'
     ];
 
     public function  scopeSelection($query){
 
         return $query -> select(
-            'id', 'name_ar', 'name_en', 'description', 'image', 'type', 'admin_id', 'disabled', 'created_at', 'updated_at'
+            'id', 'name_ar', 'name_en', 'description', 'image', 'type', 'site', 'admin_id', 'disabled', 'created_at', 'updated_at'
         );
     }
 

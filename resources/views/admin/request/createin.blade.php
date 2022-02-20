@@ -237,35 +237,21 @@
                                                             </select>
                                                         </div>
                                                     </div>
-
+                                                    
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="city_id"> {{ __('Area') }} </label>
-                                                            <select name="city_id" id="city_id" 
-                                                                    class="select2 form-control" >
-                                                                <option value="">-- {{ __('Select') }} {{ __('Area') }} --</option>
-                                                                @if($citys)
-                                                                    @foreach($citys as $city)
-                                                                    @if(old('city_id') == $city->id)
-                                                                        <option value="{{$city->id}}" class="{{ $city->governorate_id }}" selected>{{$city->city_name_ar}}</option>
-                                                                    @endif
-                                                                    @if($myorder->city_id == $city->id)
-                                                                        <option value="{{$city->id}}" class="{{ $city->governorate_id }}" selected>{{$city->city_name_ar}}</option>
-                                                                    @endif
-                                                                        {{-- <option value="{{$city->id}}" class="{{ $city->governorate_id }}"
-                                                                                @if(isset($myorder->city_id))
-                                                                                    @if($myorder->city_id == $city->id) selected @endif 
-                                                                                @endif
-                                                                                @if(old('city_id') == $city->id) selected @endif >
-                                                                            @if(app()->getLocale() == 'ar')
-                                                                                {{$city->city_name_ar}}
-                                                                            @else
-                                                                                {{$city->city_name_en}}
-                                                                            @endif
-                                                                        </option> --}}
-                                                                    @endforeach
-                                                                @endif
-                                                            </select>
+                                                            <label for="city_id">{{ __('Area') }} </label>
+                                                            <input type="text" 
+                                                                    @if(isset($myorder->city_id))
+                                                                    value="{{$myorder->city_id }}" 
+                                                                    @endif 
+                                                                    id="city_id"
+                                                                   class="form-control"
+                                                                   placeholder="{{ __('Area') }}"
+                                                                   name="city_id">
+                                                            @error('city_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
                                                         </div>
                                                     </div>
 
@@ -376,8 +362,8 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="referral"> {{ __('Referral') }} </label>
+                                                        <div class="form-group" id="referral_dev">
+                                                            <label for="referral">{{ __('Add') }} {{ __('Referral') }} </label>
                                                             <input type="text" id="referral" 
                                                                    class="form-control"
                                                                    placeholder="{{ __('Referral') }}"
@@ -412,8 +398,8 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="corporate"> {{ __('Corporate') }} </label>
+                                                        <div class="form-group" id="corporate_dev">
+                                                            <label for="corporate">{{ __('Add') }} {{ __('Corporate') }} </label>
                                                             <input type="text" id="corporate" 
                                                                    class="form-control"
                                                                    placeholder="{{ __('Corporate') }}"
@@ -448,8 +434,8 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="package"> {{ __('Package') }} </label>
+                                                        <div class="form-group" id="package_dev">
+                                                            <label for="package">{{ __('Add') }} {{ __('Package') }} </label>
                                                             <input type="text" id="package" 
                                                                    class="form-control"
                                                                    placeholder="{{ __('Package') }}"
@@ -877,6 +863,48 @@
                     // }
                 });
             }
+
+            // Referral
+            function referralDisplay(){
+                let ref = $('#referral_id').val();
+                if(ref !== null && ref !== ""){
+                    $('#referral_dev').hide();
+                }else{
+                    $('#referral_dev').show();
+                }
+            }
+            referralDisplay();
+            $('#referral_id').change(function () {
+                referralDisplay();
+            });
+
+            // Corporate
+            function referralCorporate(){
+                let cor = $('#corporate_id').val();
+                if(cor !== null && cor !== ""){
+                    $('#corporate_dev').hide();
+                }else{
+                    $('#corporate_dev').show();
+                }
+            }
+            referralCorporate();
+            $('#corporate_id').change(function () {
+                referralCorporate();
+            });
+
+            // Package
+            function referralPackage(){
+                let pack = $('#package_id').val();
+                if(pack !== null && pack !== ""){
+                    $('#package_dev').hide();
+                }else{
+                    $('#package_dev').show();
+                }
+            }
+            referralPackage();
+            $('#package_id').change(function () {
+                referralPackage();
+            });
         });
     </script>
 @endsection

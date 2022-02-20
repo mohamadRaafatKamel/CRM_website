@@ -27,7 +27,7 @@
           <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-user nav-item">
               <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                <span class="mr-1">Hello,
+                <span class="mr-1">{{ __('Hello') }},
                   <span class="user-name text-bold-700">{{ Auth::user()->name }}</span>
                 </span>
                 <span class="avatar avatar-online">
@@ -39,7 +39,7 @@
                 <a class="dropdown-item" href="#"><i class="ft-check-square"></i> Task</a>
                 <a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a> --}}
                 {{-- <div class="dropdown-divider"></div> --}}
-                <a class="dropdown-item" href="{{route('admin.logout')}}"><i class="ft-power"></i> Logout</a>
+                <a class="dropdown-item" href="{{route('admin.logout')}}"><i class="ft-power"></i> {{ __('Logout') }}</a>
               </div>
             </li>
             <li class="dropdown dropdown-language nav-item">

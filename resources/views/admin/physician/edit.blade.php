@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('title','تعديل')
-@section('referral_view','')
+@section('physician_view','')
 @section('content')
 <?php 
-if(! $permissoin = \App\Models\Role::havePremission(['referral_idt']))
+if(! $permissoin = \App\Models\Role::havePremission(['physician_idt']))
     $readonly="readonly";
 else 
     $readonly="";
@@ -15,9 +15,9 @@ else
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{ __('Home') }} </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.referral')}}">  {{ __('Referral') }} </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.physician')}}">  {{ __('Physician') }} </a>
                                 </li>
                                 <li class="breadcrumb-item active">تعديل
                                 </li>
@@ -49,7 +49,7 @@ else
                                 @include('admin.include.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.referral.update',$datas -> id)}}" method="POST"
+                                        <form class="form" action="{{route('admin.physician.update',$datas -> id)}}" method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-body">
@@ -58,25 +58,12 @@ else
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> الاسم بالعربي </label>
-                                                            <input type="text" value="{{$datas -> name_ar}}" id="name_ar"
-                                                                   class="form-control" {{ $readonly }}
-                                                                   placeholder="الاسم بالعربي"
-                                                                   name="name_ar">
-                                                            @error('name_ar')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> الاسم بالانجليزي </label>
-                                                            <input type="text" value="{{$datas -> name_en}}" id="name_en"
-                                                                   class="form-control" {{ $readonly }}
-                                                                   placeholder="الاسم بالانجليزي  "
-                                                                   name="name_en">
-                                                            @error('name_en')
+                                                            <label for="projectinput1"> الاسم  </label>
+                                                            <input type="text" value="{{$datas -> name}}" id="name"
+                                                                   class="form-control" required
+                                                                   placeholder="الاسم " {{ $readonly }}
+                                                                   name="name">
+                                                            @error('name')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -85,7 +72,7 @@ else
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> وصف </label>
-                                                            <textarea id="description" class="form-control" placeholder="وصف" {{ $readonly }} 
+                                                            <textarea id="description" class="form-control" placeholder="وصف"  {{ $readonly }}
                                                                 name="description">{{$datas -> description}}</textarea>
                                                             @error('description')
                                                             <span class="text-danger">{{$message}}</span>
@@ -93,25 +80,6 @@ else
                                                         </div>
                                                     </div>
 
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <input type="checkbox"  value="0" name="disabled"
-                                                                   id="switcheryColor4" {{ $readonly }}
-                                                                   class="switchery" data-color="success"
-
-                                                                   @if($datas -> disabled  == 0 ) checked @endif
-                                                            />
-                                                            <label for="switcheryColor4"
-                                                                   class="card-title ml-1">الحالة </label>
-
-                                                            @error('disabled')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
                                                 </div>
 
                                             </div>

@@ -234,7 +234,7 @@
 
         setInterval(function() {
             CountEmergency();
-        }, 15 * 1000);
+        }, 60 * 1000);
 
     });
 

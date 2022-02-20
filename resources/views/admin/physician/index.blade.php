@@ -1,17 +1,18 @@
 @extends('layouts.admin')
-@section('title',' المنتجات')
+@section('title',__('Physician'))
+@section('physician_view','')
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title"> المنتجات </h3>
+                    <h3 class="content-header-title">  {{ __('Physician') }} </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active"> المنتجات
+                                <li class="breadcrumb-item active">  {{ __('Physician') }}
                                 </li>
                             </ol>
                         </div>
@@ -25,7 +26,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> كل المنتجات </h4>
+                                    <h4 class="card-title"> {{ __('Physician') }} </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -43,36 +44,32 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
+                                        @if(\App\Models\Role::havePremission(['physician_cr']))
+                                        <a class="btn btn-primary mb-2" href="{{ route('admin.physician.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
+                                        @endif
+                                        <div class="table-responsive">
                                         <table
-                                            class="table display nowrap table-striped table-bordered ">
+                                            class="table table-striped table-bordered zero-configuration ">
                                             <thead>
                                             <tr>
-                                                <th> الاسم عربي</th>
-                                                <th>الاسم انجليزي</th>
-                                                <th> ملحوظه عربي</th>
-                                                <th>ملحوظه انجليزي</th>
-                                                <th>السعر</th>
-                                                <th>التصنيف</th>
-                                                <th>الحالة</th>
+                                                <th> اسم </th>
+                                                <th>  وصف </th>
+                                                <th></th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            @isset($products)
-                                                @foreach($products as $product)
+                                            @isset($datas)
+                                                @foreach($datas as $data)
                                                     <tr>
-                                                        <td>{{$product -> name_ar}}</td>
-                                                        <td>{{$product -> name_en}}</td>
-                                                        <td>{{$product -> notes_ar}}</td>
-                                                        <td>{{$product -> notes_en}}</td>
-                                                        <td>{{$product -> price}}</td>
-                                                        <td>{{$product -> getCategory()}}</td>
-                                                        <td>{{$product -> getActive()}}</td>
+                                                        <td>{{$data -> name}}</td>
+                                                        <td>{{$data -> description}}</td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                <a href="{{route('admin.product.edit',['id'=> $product->id ])}}"
+                                                                <a href="{{route('admin.physician.edit',['id'=> $data->id ])}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
+
 
                                                             </div>
                                                         </td>
@@ -83,6 +80,7 @@
 
                                             </tbody>
                                         </table>
+                                        </div>
                                         <div class="justify-content-center d-flex">
 
                                         </div>

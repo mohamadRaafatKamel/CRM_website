@@ -13,17 +13,26 @@ class RoleController extends Controller
 {
     public function index()
     {
+        if(! Role::havePremission(['role_view','role_idt']))
+            return redirect()->route('admin.dashboard');
+
         $promos = Role::select()->paginate(PAGINATION_COUNT);
         return view('admin.role.index', compact('promos'));
     }
 
     public function create()
     {
+        if(! Role::havePremission(['role_cr']))
+            return redirect()->route('admin.dashboard');
+
         return view('admin.role.create');
     }
 
     public function store(Request $request)
     {
+        if(! Role::havePremission(['role_cr']))
+            return redirect()->route('admin.dashboard');
+
         try {
             $role = new Role();
             $role->name = $request->name;
@@ -51,6 +60,9 @@ class RoleController extends Controller
 
     public function edit($id)
     {
+        if(! Role::havePremission(['role_view','role_idt']))
+        return redirect()->route('admin.dashboard');
+
         $role = Role::select()->find($id);
         if(!$role){
             return redirect()->route('admin.role')->with(['error'=>"غير موجود"]);
@@ -69,6 +81,9 @@ class RoleController extends Controller
 
     public function update($id,Request $request)
     {
+        if(! Role::havePremission(['role_idt']))
+            return redirect()->route('admin.dashboard');
+
         try {
 
             $role = Role::select()->find($id);

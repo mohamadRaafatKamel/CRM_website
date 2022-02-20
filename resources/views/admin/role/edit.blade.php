@@ -2,7 +2,12 @@
 @section('title','تعديل')
 @section('role_view','')
 @section('content')
-
+<?php 
+if(! $permissoin = \App\Models\Role::havePremission(['role_idt']))
+    $readonly="readonly";
+else 
+    $readonly="";
+?>
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
@@ -55,7 +60,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم </label>
-                                                            <input type="text" value="{{ $role->name }}" id="name"
+                                                            <input type="text" value="{{ $role->name }}" id="name" {{ $readonly }}
                                                                    class="form-control"
                                                                    placeholder=" الاسم" required
                                                                    name="name">
@@ -71,7 +76,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="request_all" name="role_info[]"
-                                                                   id="request_all"
+                                                                   id="request_all" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['request_all']) and $myRoleInfo['request_all'] == '1')
                                                                        checked
                                                                    @endif
@@ -83,7 +88,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="request_emergency" name="role_info[]"
-                                                                   id="request_emergency"
+                                                                   id="request_emergency" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['request_emergency']) and $myRoleInfo['request_emergency'] == '1')
                                                                        checked
                                                                    @endif
@@ -95,7 +100,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="request_out" name="role_info[]"
-                                                                   id="request_out"
+                                                                   id="request_out" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['request_out']) and $myRoleInfo['request_out'] == '1')
                                                                        checked
                                                                    @endif
@@ -107,7 +112,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="request_in" name="role_info[]"
-                                                                   id="request_in"
+                                                                   id="request_in" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['request_in']) and $myRoleInfo['request_in'] == '1')
                                                                        checked
                                                                    @endif
@@ -123,7 +128,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="user_all" name="role_info[]"
-                                                                   id="user_all"
+                                                                   id="user_all" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['user_all']) and $myRoleInfo['user_all'] == '1')
                                                                        checked
                                                                    @endif
@@ -136,7 +141,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="user_patent" name="role_info[]"
-                                                                   id="user_patent"
+                                                                   id="user_patent" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['user_patent']) and $myRoleInfo['user_patent'] == '1')
                                                                        checked
                                                                    @endif
@@ -153,7 +158,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="user_doctor" name="role_info[]"
-                                                                   id="user_doctor"
+                                                                   id="user_doctor" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['user_doctor']) and $myRoleInfo['user_doctor'] == '1')
                                                                        checked
                                                                    @endif
@@ -165,7 +170,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="user_nurse" name="role_info[]"
-                                                                   id="user_nurse"
+                                                                   id="user_nurse" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['user_nurse']) and $myRoleInfo['user_nurse'] == '1')
                                                                        checked
                                                                    @endif
@@ -177,7 +182,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="user_driver" name="role_info[]"
-                                                                   id="user_driver"
+                                                                   id="user_driver" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['user_driver']) and $myRoleInfo['user_driver'] == '1')
                                                                        checked
                                                                    @endif
@@ -194,7 +199,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="specialty_view" name="role_info[]"
-                                                                   id="specialty_view"
+                                                                   id="specialty_view" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['specialty_view']) and $myRoleInfo['specialty_view'] == '1')
                                                                        checked
                                                                    @endif
@@ -206,7 +211,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="specialty_cr" name="role_info[]"
-                                                                   id="specialty_cr"
+                                                                   id="specialty_cr" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['specialty_cr']) and $myRoleInfo['specialty_cr'] == 1)
                                                                    checked
                                                                    @endif
@@ -218,7 +223,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="specialty_idt" name="role_info[]"
-                                                                   id="specialty_idt"
+                                                                   id="specialty_idt" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['specialty_idt']) and $myRoleInfo['specialty_idt'] == 1)
                                                                    checked
                                                                    @endif
@@ -235,7 +240,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="serves_view" name="role_info[]"
-                                                                   id="serves_view"
+                                                                   id="serves_view" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['serves_view']) and $myRoleInfo['serves_view'] == 1)
                                                                    checked
                                                                    @endif
@@ -247,7 +252,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="serves_cr" name="role_info[]"
-                                                                   id="serves_cr"
+                                                                   id="serves_cr" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['serves_cr']) and $myRoleInfo['serves_cr'] == 1)
                                                                    checked
                                                                    @endif
@@ -259,7 +264,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="serves_idt" name="role_info[]"
-                                                                   id="serves_idt"
+                                                                   id="serves_idt" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['serves_idt']) and $myRoleInfo['serves_idt'] == 1)
                                                                    checked
                                                                    @endif
@@ -275,7 +280,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="survey_view" name="role_info[]"
-                                                                   id="survey_view"
+                                                                   id="survey_view" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['survey_view']) and $myRoleInfo['survey_view'] == 1)
                                                                    checked
                                                                    @endif
@@ -292,7 +297,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="company_view" name="role_info[]"
-                                                                   id="company_view"
+                                                                   id="company_view" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['company_view']) and $myRoleInfo['company_view'] == 1)
                                                                    checked
                                                                    @endif
@@ -304,7 +309,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="company_cr" name="role_info[]"
-                                                                   id="company_cr"
+                                                                   id="company_cr" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['company_cr']) and $myRoleInfo['company_cr'] == 1)
                                                                    checked
                                                                    @endif
@@ -316,7 +321,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="company_idt" name="role_info[]"
-                                                                   id="company_idt"
+                                                                   id="company_idt" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['company_idt']) and $myRoleInfo['company_idt'] == 1)
                                                                    checked
                                                                    @endif
@@ -332,7 +337,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="package_view" name="role_info[]"
-                                                                   id="package_view"
+                                                                   id="package_view" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['package_view']) and $myRoleInfo['package_view'] == 1)
                                                                    checked
                                                                    @endif
@@ -344,7 +349,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="package_cr" name="role_info[]"
-                                                                   id="package_cr"
+                                                                   id="package_cr" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['package_cr']) and $myRoleInfo['package_cr'] == 1)
                                                                    checked
                                                                    @endif
@@ -356,7 +361,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="package_idt" name="role_info[]"
-                                                                   id="package_idt"
+                                                                   id="package_idt" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['package_idt']) and $myRoleInfo['package_idt'] == 1)
                                                                    checked
                                                                    @endif
@@ -367,36 +372,76 @@
                                                     </div>
                                                 </div>
 
+                                                <label><strong> {{ __('Physician') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="physician_view" name="role_info[]"
+                                                                   id="physician_view" {{ $readonly }}
+                                                                   @if(isset($myRoleInfo['physician_view']) and $myRoleInfo['physician_view'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="physician_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="physician_cr" name="role_info[]"
+                                                                   id="physician_cr" {{ $readonly }}
+                                                                   @if(isset($myRoleInfo['physician_cr']) and $myRoleInfo['physician_cr'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="physician_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="physician_idt" name="role_info[]"
+                                                                   id="physician_idt" {{ $readonly }}
+                                                                   @if(isset($myRoleInfo['physician_idt']) and $myRoleInfo['physician_idt'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="physician_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <label><strong> {{ __('Referral') }} </strong></label>
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="referral_view" name="role_info[]"
-                                                                   id="referral_view"
+                                                                   id="referral_view" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['referral_view']) and $myRoleInfo['referral_view'] == 1)
                                                                    checked
                                                                    @endif
                                                                    class="switchery" data-color="success"/>
-                                                            <label for="referral_view"
+                                                            <label for="referral_view" 
                                                                    class="card-title ml-1">{{ __('View') }} </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="referral_cr" name="role_info[]"
-                                                                   id="referral_cr"
+                                                                   id="referral_cr" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['referral_cr']) and $myRoleInfo['referral_cr'] == 1)
                                                                    checked
                                                                    @endif
                                                                    class="switchery" data-color="success"/>
-                                                            <label for="referral_cr"
+                                                            <label for="referral_cr" 
                                                                    class="card-title ml-1">{{ __('Create') }} </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="referral_idt" name="role_info[]"
-                                                                   id="referral_idt"
+                                                                   id="referral_idt" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['referral_idt']) and $myRoleInfo['referral_idt'] == 1)
                                                                    checked
                                                                    @endif
@@ -412,7 +457,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="admin_view" name="role_info[]"
-                                                                   id="admin_view"
+                                                                   id="admin_view" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['admin_view']) and $myRoleInfo['admin_view'] == 1)
                                                                    checked
                                                                    @endif
@@ -424,7 +469,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="admin_cr" name="role_info[]"
-                                                                   id="admin_cr"
+                                                                   id="admin_cr" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['admin_cr']) and $myRoleInfo['admin_cr'] == 1)
                                                                    checked
                                                                    @endif
@@ -436,13 +481,13 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="admin_idt" name="role_info[]"
-                                                                   id="admin_idt"
+                                                                   id="admin_idt" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['admin_idt']) and $myRoleInfo['admin_idt'] == 1)
                                                                    checked
                                                                    @endif
                                                                    class="switchery" data-color="success"/>
                                                             <label for="admin_idt"
-                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                                   class="card-title ml-1">{{ __('Edit and Delete') }} </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -452,7 +497,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="role_view" name="role_info[]"
-                                                                   id="role_view"
+                                                                   id="role_view" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['role_view']) and $myRoleInfo['role_view'] == 1)
                                                                    checked
                                                                    @endif
@@ -464,7 +509,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="role_cr" name="role_info[]"
-                                                                   id="role_cr"
+                                                                   id="role_cr" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['role_cr']) and $myRoleInfo['role_cr'] == 1)
                                                                    checked
                                                                    @endif
@@ -476,7 +521,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="role_idt" name="role_info[]"
-                                                                   id="role_idt"
+                                                                   id="role_idt" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['role_idt']) and $myRoleInfo['role_idt'] == 1)
                                                                    checked
                                                                    @endif
@@ -492,7 +537,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="setting_view" name="role_info[]"
-                                                                   id="setting_view"
+                                                                   id="setting_view" {{ $readonly }}
                                                                    @if(isset($myRoleInfo['setting_view']) and $myRoleInfo['setting_view'] == 1)
                                                                    checked
                                                                    @endif
@@ -505,20 +550,18 @@
                                                 </div>
 
 
-
-
-
                                             </div>
-
-                                            <div class="form-actions">
-                                                <button type="button" class="btn btn-warning mr-1"
-                                                        onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i>  تحديث
-                                                </button>
-                                            </div>
+                                            @if ($permissoin)
+                                                <div class="form-actions">
+                                                    <button type="button" class="btn btn-warning mr-1"
+                                                            onclick="history.back();">
+                                                        <i class="ft-x"></i> تراجع
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="la la-check-square-o"></i>  تحديث
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </form>
                                     </div>
                                 </div>

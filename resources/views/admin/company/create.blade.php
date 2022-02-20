@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','company')
+@section('title',__('Company'))
 @section('company_cr','')
 @section('content')
 
@@ -10,11 +10,11 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{ __('Home') }} </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.company')}}">  company </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.company')}}">  {{ __('Company') }} </a>
                                 </li>
-                                <li class="breadcrumb-item active"> Add company
+                                <li class="breadcrumb-item active"> {{ __('Add Company') }} 
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> Add company </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> {{ __('Add Company') }}  </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -68,10 +68,10 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="email"> email </label>
+                                                            <label for="email"> {{ __('Email') }} </label>
                                                             <input type="email"  id="email"
                                                                    class="form-control"
-                                                                   placeholder="email  "
+                                                                   placeholder="{{ __('Email') }}"
                                                                    name="email">
                                                             @error('email')
                                                             <span class="text-danger">{{$message}}</span>
@@ -81,10 +81,10 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="phone"> phone </label>
+                                                            <label for="phone"> {{ __('Phone') }} </label>
                                                             <input type="text"  id="phone"
                                                                    class="form-control"
-                                                                   placeholder="phone"
+                                                                   placeholder="{{ __('Phone') }}"
                                                                    name="phone">
                                                             @error('phone')
                                                             <span class="text-danger">{{$message}}</span>
@@ -94,10 +94,10 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="website"> website </label>
+                                                            <label for="website"> {{ __('WebSite') }} </label>
                                                             <input type="text"  id="website"
                                                                    class="form-control"
-                                                                   placeholder="website"
+                                                                   placeholder="{{ __('WebSite') }}"
                                                                    name="website">
                                                             @error('website')
                                                             <span class="text-danger">{{$message}}</span>
@@ -107,10 +107,10 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="contact_person_name"> contact person name </label>
+                                                            <label for="contact_person_name"> {{ __('Contact Person Name') }} </label>
                                                             <input type="contact_person_name"  id="contact_person_name"
                                                                    class="form-control"
-                                                                   placeholder="contact_person_name"
+                                                                   placeholder="{{ __('Contact Person Name') }}"
                                                                    name="contact_person_name">
                                                             @error('contact_person_name')
                                                             <span class="text-danger">{{$message}}</span>
@@ -120,10 +120,10 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="registration_num"> registration Number </label>
+                                                            <label for="registration_num"> {{ __('Registration Number') }} </label>
                                                             <input type="registration_num"  id="registration_num"
                                                                    class="form-control"
-                                                                   placeholder="registration_num"
+                                                                   placeholder="{{ __('Registration Number') }}"
                                                                    name="registration_num">
                                                             @error('registration_num')
                                                             <span class="text-danger">{{$message}}</span>
@@ -133,10 +133,10 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="tax_certificate_num"> tax certificate Number </label>
+                                                            <label for="tax_certificate_num"> {{ __('Tax Certificate Number') }} </label>
                                                             <input type="tax_certificate_num"  id="tax_certificate_num"
                                                                    class="form-control"
-                                                                   placeholder="tax_certificate_num"
+                                                                   placeholder="{{ __('Tax Certificate Number') }}"
                                                                    name="tax_certificate_num">
                                                             @error('tax_certificate_num')
                                                             <span class="text-danger">{{$message}}</span>
@@ -161,8 +161,8 @@
                                                         <div class="form-group">
                                                             <label for="pay"> {{ __('Pay') }} </label>
                                                             <select name="pay" class="form-control" id="pay" required>
-                                                                <option value="1">{{ __('later') }}</option>
-                                                                <option value="2">{{ __("cash") }}</option>
+                                                                <option value="1">{{ __('Later') }}</option>
+                                                                <option value="2">{{ __("Cash") }}</option>
                                                             </select>
                                                             @error('pay')
                                                             <span class="text-danger">{{$message}}</span>

@@ -1,7 +1,13 @@
 @extends('layouts.admin')
 @section('title','تعديل')
+@section('serves_view','')
 @section('content')
-
+<?php 
+if(! $permissoin = \App\Models\Role::havePremission(['serves_idt']))
+    $readonly="readonly";
+else 
+    $readonly="";
+?>
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
@@ -55,7 +61,7 @@
                                                             <label for="projectinput1"> الاسم بالعربي </label>
                                                             <input type="text" value="{{$datas -> name_ar}}" id="name_ar"
                                                                    class="form-control" required
-                                                                   placeholder="الاسم بالعربي"
+                                                                   placeholder="الاسم بالعربي" {{ $readonly }}
                                                                    name="name_ar">
                                                             @error('name_ar')
                                                             <span class="text-danger">{{$message}}</span>
@@ -67,7 +73,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم بالانجليزي </label>
                                                             <input type="text" value="{{$datas -> name_en}}" id="name_en"
-                                                                   class="form-control" required
+                                                                   class="form-control" required {{ $readonly }}
                                                                    placeholder="الاسم بالانجليزي  "
                                                                    name="name_en">
                                                             @error('name_en')
@@ -79,9 +85,9 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="type"> {{ __('Type') }} </label>
-                                                            <select name="type" class="form-control" id="type" required>
-                                                                <option value="1" @if($datas -> type == '1') selected @endif>{{ __("Inpatient") }}</option>
-                                                                <option value="2" @if($datas -> type == '2') selected @endif>{{ __("Outpatient") }}</option>
+                                                            <select name="type" class="form-control" id="type" {{ $readonly }} required>
+                                                                <option value="1" @if($datas -> type == '1') selected @endif>{{ __("InPatient") }}</option>
+                                                                <option value="2" @if($datas -> type == '2') selected @endif>{{ __("OutPatient") }}</option>
                                                             </select>
                                                             @error('type')
                                                             <span class="text-danger">{{$message}}</span>
@@ -92,7 +98,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="img">  اضف صوره </label>
-                                                            <input type="file" id="img"
+                                                            <input type="file" id="img" {{ $readonly }}
                                                                    class="form-control" value=""
                                                                    accept="image/*"
                                                                    name="img">
@@ -105,7 +111,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> وصف </label>
-                                                            <textarea id="description" class="form-control" placeholder="وصف" 
+                                                            <textarea id="description" class="form-control" placeholder="وصف"  {{ $readonly }}
                                                                 name="description">{{$datas -> description}}</textarea>
                                                             @error('description')
                                                             <span class="text-danger">{{$message}}</span>
@@ -126,7 +132,7 @@
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="0" name="disabled"
                                                                    id="switcheryColor4"
-                                                                   class="switchery" data-color="success"
+                                                                   class="switchery" data-color="success" {{ $readonly }}
 
                                                                    @if($datas -> disabled  == 0 ) checked @endif
                                                             />
@@ -138,20 +144,37 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="1" name="site"
+                                                                   id="site"
+                                                                   class="switchery" data-color="success"
+                                                                   @if($datas -> site  == 1 ) checked @endif />
+                                                            <label for="site"
+                                                                   class="card-title ml-1">{{ __('site') }} </label>
+
+                                                            @error('site')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                             </div>
 
-
-                                            <div class="form-actions">
-                                                <button type="button" class="btn btn-warning mr-1"
-                                                        onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i>  تحديث
-                                                </button>
-                                            </div>
+                                            @if ($permissoin)
+                                                <div class="form-actions">
+                                                    <button type="button" class="btn btn-warning mr-1"
+                                                            onclick="history.back();">
+                                                        <i class="ft-x"></i> تراجع
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="la la-check-square-o"></i>  تحديث
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </form>
                                     </div>
                                 </div>

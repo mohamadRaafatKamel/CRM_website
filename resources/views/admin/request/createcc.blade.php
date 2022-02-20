@@ -255,8 +255,8 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="referral"> {{ __('Referral') }} </label>
+                                                        <div class="form-group" id="referral_dev">
+                                                            <label for="referral">{{ __('Add') }} {{ __('Referral') }} </label>
                                                             <input type="text" id="referral" 
                                                                    class="form-control"
                                                                     value="{{ old('referral') }}"
@@ -292,8 +292,8 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="corporate"> {{ __('Corporate') }} </label>
+                                                        <div class="form-group" id="corporate_dev">
+                                                            <label for="corporate">{{ __('Add') }} {{ __('Corporate') }} </label>
                                                             <input type="text" id="corporate" 
                                                                    class="form-control"
                                                                    value="{{ old('corporate') }}"
@@ -329,8 +329,8 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="package"> {{ __('Package') }} </label>
+                                                        <div class="form-group" id="package_dev">
+                                                            <label for="package">{{ __('Add') }} {{ __('Package') }} </label>
                                                             <input type="text" id="package" 
                                                                    class="form-control"
                                                                    placeholder="{{ __('Package') }}"
@@ -342,18 +342,23 @@
                                                     </div>
 
                                                 </div>
+
                                                 <div class="row">
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="physician"> {{ __('Physician') }} </label>
-                                                            <input type="text" id="physician" 
-                                                                   class="form-control"
-                                                                   @if(isset($myorder->physician))
-                                                                        value="{{ $myorder->physician }}"
-                                                                   @endif
-                                                                   placeholder="{{ __('Physician') }}"
-                                                                   name="physician">
+                                                            <label for="physician">{{ __('Physician') }}</label>
+                                                            <select class="select2 form-control" id="physician" name="physician">
+                                                                <option value="">-- {{ __('Select') }}  {{ __('Physician') }} --</option>
+                                                                @foreach($physicians as $physician)
+                                                                    <option value="{{ $physician->id }}"
+                                                                        @if(isset($myorder->physician))
+                                                                            @if($myorder->physician == $physician->id) selected @endif
+                                                                        @endif
+                                                                        @if(old('physician') == $physician->id) selected @endif
+                                                                    >{{ $physician->name}}</option>
+                                                                @endforeach
+                                                            </select>
                                                             @error('physician')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -361,22 +366,21 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <input type="checkbox"  value="1" name="covid19"
-                                                                   id="covid19"
-                                                                   class="switchery" data-color="success"
-
-                                                                   @if($myorder->covid19  == 1 ) checked @endif
-                                                            />
-                                                            <label for="covid19"
-                                                                   class="card-title ml-1">{{ __('Covid-19') }} </label>
-
-                                                            @error('covid19')
+                                                        <div class="form-group" id="physician_dev">
+                                                            <label for="physician_new">{{ __('Add') }} {{ __('Physician') }}  </label>
+                                                            <input type="text" id="physician" 
+                                                                   class="form-control"
+                                                                   placeholder="{{ __('Physician') }}"
+                                                                   name="physician_new">
+                                                            @error('physician_new')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
 
+                                                </div>
+
+                                                <div class="row">
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -447,6 +451,22 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="1" name="covid19"
+                                                                   id="covid19"
+                                                                   class="switchery" data-color="success"
+
+                                                                   @if($myorder->covid19  == 1 ) checked @endif
+                                                            />
+                                                            <label for="covid19"
+                                                                   class="card-title ml-1">{{ __('Covid-19') }} </label>
+
+                                                            @error('covid19')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
 
 
                                                     
@@ -480,34 +500,18 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="city_id"> {{ __('Area') }} </label>
-                                                            <select name="city_id" id="city_id" 
-                                                                    class="select2 form-control" >
-                                                                <option></option>
-                                                                @if($citys)
-                                                                    @foreach($citys as $city)
-                                                                    @if(old('city_id') == $city->id)
-                                                                        <option value="{{$city->id}}" class="{{ $city->governorate_id }}" selected>{{$city->city_name_ar}}</option>
-                                                                    @endif
+                                                            <label for="city_id">{{ __('Area') }} </label>
+                                                            <input type="text" 
                                                                     @if(isset($myorder->city_id))
-                                                                        @if($myorder->city_id == $city->id)
-                                                                            <option value="{{$city->id}}" class="{{ $city->governorate_id }}" selected>{{$city->city_name_ar}}</option>
-                                                                        @endif
-                                                                    @endif
-                                                                        {{-- <option value="{{$city->id}}" class="{{ $city->governorate_id }}"
-                                                                                @if(isset($myorder->city_id))
-                                                                                    @if($myorder->city_id == $city->id) selected @endif 
-                                                                                @endif
-                                                                                @if(old('city_id') == $city->id) selected @endif >
-                                                                            @if(app()->getLocale() == 'ar')
-                                                                                {{$city->city_name_ar}}
-                                                                            @else
-                                                                                {{$city->city_name_en}}
-                                                                            @endif
-                                                                        </option> --}}
-                                                                    @endforeach
-                                                                @endif
-                                                            </select>
+                                                                    value="{{$myorder->city_id }}" 
+                                                                    @endif 
+                                                                    id="city_id"
+                                                                   class="form-control"
+                                                                   placeholder="{{ __('Area') }}"
+                                                                   name="city_id">
+                                                            @error('city_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
                                                         </div>
                                                     </div>
 
@@ -930,6 +934,64 @@
                     // }
                 });
             }
+
+            // Referral
+            function referralDisplay(){
+                let ref = $('#referral_id').val();
+                if(ref !== null && ref !== ""){
+                    $('#referral_dev').hide();
+                }else{
+                    $('#referral_dev').show();
+                }
+            }
+            referralDisplay();
+            $('#referral_id').change(function () {
+                referralDisplay();
+            });
+
+            // Corporate
+            function referralCorporate(){
+                let cor = $('#corporate_id').val();
+                if(cor !== null && cor !== ""){
+                    $('#corporate_dev').hide();
+                }else{
+                    $('#corporate_dev').show();
+                }
+            }
+            referralCorporate();
+            $('#corporate_id').change(function () {
+                referralCorporate();
+            });
+
+            // Package
+            function referralPackage(){
+                let pack = $('#package_id').val();
+                if(pack !== null && pack !== ""){
+                    $('#package_dev').hide();
+                }else{
+                    $('#package_dev').show();
+                }
+            }
+            referralPackage();
+            $('#package_id').change(function () {
+                referralPackage();
+            });
+
+            // Physician
+            function referralPhysician(){
+                let phy = $('#physician').val();
+                if(phy !== null && phy !== ""){
+                    $('#physician_dev').hide();
+                }else{
+                    $('#physician_dev').show();
+                }
+            }
+            referralPhysician();
+            $('#physician').change(function () {
+                referralPhysician();
+            });
+
+
         });
     </script>
 @endsection

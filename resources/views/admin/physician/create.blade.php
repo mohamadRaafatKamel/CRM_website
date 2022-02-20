@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title','referral')
-@section('referral_cr','')
+@section('title',__('Physician') )
+@section('physician_cr','')
 @section('content')
 
     <div class="app-content content">
@@ -12,9 +12,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.referral')}}">  {{ __('Referral') }} </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.physician')}}">  {{ __('Physician') }} </a>
                                 </li>
-                                <li class="breadcrumb-item active">{{ __('Add') }}
+                                <li class="breadcrumb-item active">إضافة  
                                 </li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> {{ __('Add') }} </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> إضافة   </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -44,7 +44,7 @@
                                 @include('admin.include.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.referral.store')}}" method="POST"
+                                        <form class="form" action="{{route('admin.physician.store')}}" method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
 
@@ -55,25 +55,12 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> الاسم بالعربي </label>
-                                                            <input type="text" value="" id="name_ar"
-                                                                   class="form-control"
-                                                                   placeholder="الاسم بالعربي"
-                                                                   name="name_ar">
-                                                            @error('name_ar')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> الاسم بالانجليزي </label>
-                                                            <input type="text" value="" id="name_en"
-                                                                   class="form-control"
-                                                                   placeholder="الاسم بالانجليزي  "
-                                                                   name="name_en">
-                                                            @error('name_en')
+                                                            <label for="projectinput1"> الاسم  </label>
+                                                            <input type="text" value="" id="name"
+                                                                   class="form-control" required
+                                                                   placeholder="الاسم "
+                                                                   name="name">
+                                                            @error('name')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -93,28 +80,14 @@
 
                                                 </div>
 
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <input type="checkbox"  value="0" name="disabled"
-                                                                   id="switcheryColor4"
-                                                                   class="switchery" data-color="success"
-                                                                   checked/>
-                                                            <label for="switcheryColor4"
-                                                                   class="card-title ml-1">الحالة </label>
 
-                                                            @error('disabled')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </div>
+
                                             </div>
 
 
                                             <div class="form-actions">
                                                 
-                                                <a href="{{ route('admin.referral') }}" class="btn btn-warning">
+                                                <a href="{{ route('admin.physician') }}" class="btn btn-warning">
                                                     <i class="la la-check-square-o"></i> تراجع
                                                 </a>
                                                 
