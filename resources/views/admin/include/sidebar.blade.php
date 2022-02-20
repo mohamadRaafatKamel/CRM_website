@@ -237,6 +237,30 @@
                 </li>
             @endif
 
+            @if(\App\Models\Role::havePremission(['physician_view','physician_cr','physician_idt']))
+                <li class="nav-item">
+                    <a href=""><i class="la la-map-signs"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Physician') }} </span>
+                    </a>
+                    <ul class="menu-content">
+                        @if(\App\Models\Role::havePremission(['physician_view','physician_idt']))
+                        <li
+                        @if(View::hasSection('physician_view')) class="active" @endif
+                        ><a class="menu-item" href="{{route('admin.physician')}}"
+                            data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                        </li>
+                        @endif
+                        @if(\App\Models\Role::havePremission(['physician_cr']))
+                            <li
+                            @if(View::hasSection('physician_cr')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.physician.create')}}" data-i18n="nav.dash.crypto">
+                                    أضافه جديد </a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            @endif
+
             @if(\App\Models\Role::havePremission(['referral_view','referral_cr','referral_idt']))
                 <li class="nav-item">
                     <a href=""><i class="la la-map-signs"></i>

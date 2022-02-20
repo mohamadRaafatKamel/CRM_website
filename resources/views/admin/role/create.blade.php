@@ -298,6 +298,37 @@
                                                     </div>
                                                 </div>
 
+                                                <label><strong> {{ __('Physician') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="physician_view" name="role_info[]"
+                                                                   id="physician_view" 
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="physician_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="physician_cr" name="role_info[]"
+                                                                   id="physician_cr" 
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="physician_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="physician_idt" name="role_info[]"
+                                                                   id="physician_idt" 
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="physician_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <label><strong> {{ __('Referral') }} </strong></label>
                                                 <div class="row">
                                                     <div class="col-md-3">

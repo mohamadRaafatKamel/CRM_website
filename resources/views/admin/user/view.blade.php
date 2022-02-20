@@ -285,22 +285,13 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="city_id"> {{ __('City') }} </label>
-                                                            <select name="city_id" id="city_id"
-                                                                    class="form-control @error('city_id') is-invalid @enderror" >
-                                                                <option></option>
-                                                                @if($citys)
-                                                                    @foreach($citys as $city)
-                                                                        <option value="{{$city->id}}"
-                                                                                @if($city->id == $user->city_id) selected @endif>
-                                                                            @if(app()->getLocale() == 'ar')
-                                                                                {{$city->city_name_ar}}
-                                                                            @else
-                                                                                {{$city->city_name_en}}
-                                                                            @endif
-                                                                        </option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select>
+                                                            <input type="text" value="{{$user->city_id }}" id="city_id"
+                                                                   class="form-control"
+                                                                   placeholder="{{ __('City') }}"
+                                                                   name="city_id">
+                                                            @error('city_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
                                                         </div>
                                                     </div>
 

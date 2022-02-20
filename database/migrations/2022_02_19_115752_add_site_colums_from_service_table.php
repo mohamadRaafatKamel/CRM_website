@@ -14,7 +14,7 @@ class AddSiteColumsFromServiceTable extends Migration
     public function up()
     {
         Schema::table('service', function (Blueprint $table) {
-            $table->integer('site')->after('type')->nullable();
+            $table->integer('site')->after('type')->default(0);
         });
     }
 

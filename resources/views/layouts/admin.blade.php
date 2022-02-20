@@ -232,9 +232,9 @@
         }
         CountEmergency();
 
-        setInterval(function() {
-            CountEmergency();
-        }, 15 * 1000);
+        // setInterval(function() {
+        //     CountEmergency();
+        // }, 60 * 1000);
 
     });
 

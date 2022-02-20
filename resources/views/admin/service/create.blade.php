@@ -83,8 +83,8 @@
                                                         <div class="form-group">
                                                             <label for="type"> {{ __('Type') }} </label>
                                                             <select name="type" class="form-control" id="type" required>
-                                                                <option value="1">{{ __("Inpatient") }}</option>
-                                                                <option value="2">{{ __("Outpatient") }}</option>
+                                                                <option value="1">{{ __("InPatient") }}</option>
+                                                                <option value="2">{{ __("OutPatient") }}</option>
                                                             </select>
                                                             @error('type')
                                                             <span class="text-danger">{{$message}}</span>
@@ -120,6 +120,7 @@
                                                 </div>
 
                                                 <div class="row">
+
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="0" name="disabled"
@@ -134,7 +135,25 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="1" name="site"
+                                                                   id="site"
+                                                                   class="switchery" data-color="success"
+                                                                   checked/>
+                                                            <label for="site"
+                                                                   class="card-title ml-1">{{ __('site') }} </label>
+
+                                                            @error('site')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
                                                 </div>
+
+
                                             </div>
 
 

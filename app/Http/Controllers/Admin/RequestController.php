@@ -19,6 +19,7 @@ use App\Models\Setting;
 use App\Models\Specialty;
 use App\Models\User;
 use App\Mail\requestMail;
+use App\Models\Physician;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -56,10 +57,11 @@ class RequestController extends Controller
         $companys = CompanyInfo::select()->get();
         $referrals = Referral::select()->get();
         $packages = Package::select()->get();
+        $physicians = Physician::select()->get();
         $myorder = Requests::select()->find($req);
         $calls = RequestCall::select()->where('request_id',$req)->get();
 
-        return view('admin.request.createcc',compact('users','doctors','nurses','companys','referrals','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
+        return view('admin.request.createcc',compact('users','doctors','nurses','companys','referrals','physicians','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
     }
 
     public function store(Request $request)
@@ -109,6 +111,14 @@ class RequestController extends Controller
                 if ( $request->has('package')){
                     $packageID = $this->AddPackage( $request->package );
                     $request->request->add(['package_id' => $packageID ]);
+                }
+            }
+            
+            // Add Physician
+            if (!$request->has('physician') || $request->physician == null ){
+                if ( $request->has('physician_new')){
+                    $phyID = $this->AddPhysician( $request->physician_new );
+                    $request->request->add(['physician' => $phyID ]);
                 }
             }
              
@@ -167,6 +177,14 @@ class RequestController extends Controller
                 if ( $request->has('package')){
                     $packageID = $this->AddPackage( $request->package );
                     $request->request->add(['package_id' => $packageID ]);
+                }
+            }
+
+            // Add Physician
+            if (!$request->has('physician') || $request->physician == null ){
+                if ( $request->has('physician_new')){
+                    $phyID = $this->AddPhysician( $request->physician_new );
+                    $request->request->add(['physician' => $phyID ]);
                 }
             }
 
@@ -254,11 +272,10 @@ class RequestController extends Controller
         $referrals = Referral::select()->get();
         $packages = Package::select()->get();
         $governorates = Governorate::select()->get();
-        $citys = City::select()->get();
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $sheets = NurseSheet::select()->where('request_id',$req)->get();
         
-        return view('admin.request.createin',compact('users','nurses','sheets','packages','companys','referrals','calls','governorates','citys','specialtys','serves','myorder','doctors'));
+        return view('admin.request.createin',compact('users','nurses','sheets','packages','companys','referrals','calls','governorates','specialtys','serves','myorder','doctors'));
     }
 
     public function updateIN(Request $request, $id)
@@ -392,13 +409,13 @@ class RequestController extends Controller
         $serves = Service::select()->active()->get();
         $specialtys = Specialty::select()->active()->get();
         $users = User::select()->get();
+        $physicians = Physician::select()->get();
         $governorates = Governorate::select()->get();
-        $citys = City::select()->get();
         $companys = CompanyInfo::select()->get();
         $referrals = Referral::select()->get();
         $calls = RequestCall::select()->where('request_id',$req)->get();
         
-        return view('admin.request.createout',compact('users','opds','drivers','companys','referrals','calls','governorates','citys','specialtys','serves','myorder','doctors','nurses'));
+        return view('admin.request.createout',compact('users','opds','drivers','companys','referrals','calls','governorates','physicians','specialtys','serves','myorder','doctors','nurses'));
     }
 
     public function updateOut(Request $request, $id)
@@ -448,23 +465,25 @@ class RequestController extends Controller
 
              // Add Referral
             if (!$request->has('referral_id') || $request->referral_id == null ){
-                if ($request->has('referral') && $request->referral !=""){
-                    $reff = new Referral();
-                    $reff->name_ar = $request->referral;
-                    $reff->admin_id = Auth::user()->id;
-                    $reff->save();
-                    $request->request->add(['referral_id' => $reff->id ]);
+                if ( $request->has('referral')){
+                    $referralID = $this->AddReferral( $request->referral );
+                    $request->request->add(['referral_id' => $referralID ]);
                 }
-            }
+             }
 
             // Add Corporate
             if (!$request->has('corporate_id') || $request->corporate_id == null ){
-                if ($request->has('corporate') && $request->corporate !=""){
-                    $corp = new CompanyInfo();
-                    $corp->org_name = $request->corporate;
-                    $corp->admin_id = Auth::user()->id;
-                    $corp->save();
-                    $request->request->add(['corporate_id' => $corp->id ]);
+                if ( $request->has('corporate')){
+                    $corporateID = $this->AddCorporate( $request->corporate );
+                    $request->request->add(['corporate_id' => $corporateID ]);
+                }
+            }
+
+            // Add Physician
+            if (!$request->has('physician') || $request->physician == null ){
+                if ( $request->has('physician_new')){
+                    $phyID = $this->AddPhysician( $request->physician_new );
+                    $request->request->add(['physician' => $phyID ]);
                 }
             }
 
@@ -501,6 +520,8 @@ class RequestController extends Controller
         }
     }
  
+    //
+
     private function AddUser($name, $phone)
     {
         $user = new User([
@@ -513,8 +534,6 @@ class RequestController extends Controller
         $user->save();
         return $user->id;
     }
-
-    
 
     private function AddReferral($name)
     {
@@ -548,6 +567,18 @@ class RequestController extends Controller
             $pack->admin_id = Auth::user()->id;
             $pack->save();
             return $pack->id;
+        }
+        return null;
+    }
+
+    private function AddPhysician($name)
+    {
+        if ($name !=""){
+            $phy = new Physician();
+            $phy->name = $name;
+            $phy->admin_id = Auth::user()->id;
+            $phy->save();
+            return $phy->id;
         }
         return null;
     }

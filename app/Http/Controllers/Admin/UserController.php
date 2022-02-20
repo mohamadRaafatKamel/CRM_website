@@ -78,7 +78,6 @@ class UserController extends Controller
         $mainSpecialtis = Specialty::select()->Main()->get();
         $countrys = Country::select()->get();
         $governorates = Governorate::select()->get();
-        $citys = City::select()->get();
         $user = User::select()->find($id);
         if(!$user){
             return redirect()->route('admin.user')->with(['error'=>"غير موجود"]);
@@ -102,7 +101,7 @@ class UserController extends Controller
         foreach($docSpes as $dd){
             $mainSpecial[] = $dd['specialty_id'];
         }
-        return view('admin.user.view',compact('user','specialtis','mainSpecial','mainSpecialtis','doctor','countrys','governorates','citys','timeWork'));
+        return view('admin.user.view',compact('user','specialtis','mainSpecial','mainSpecialtis','doctor','countrys','governorates','timeWork'));
     }
 
     public function update($id, UserRequest $request)

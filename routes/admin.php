@@ -69,9 +69,21 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('edit/{id}','PackageController@edit')->name('admin.package.edit');
         Route::post('update/{id}','PackageController@update')->name('admin.package.update');
 
-        Route::get('delete/{id}','PackageController@destroy') -> name('admin.package.delete');
+        //Route::get('delete/{id}','PackageController@destroy') -> name('admin.package.delete');
     });
     ##################### End Package ########################
+
+    ##################### Physician ############################
+    Route::group(['prefix'=>'physician'],function (){
+        Route::get('/','PhysicianController@index')->name('admin.physician');
+        Route::get('create','PhysicianController@create')->name('admin.physician.create');
+        Route::post('store','PhysicianController@store')->name('admin.physician.store');
+
+        Route::get('edit/{id}','PhysicianController@edit')->name('admin.physician.edit');
+        Route::post('update/{id}','PhysicianController@update')->name('admin.physician.update');
+
+    });
+    ##################### End Physician ########################
 
     ##################### Referral ############################
     Route::group(['prefix'=>'referral'],function (){

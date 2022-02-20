@@ -29,12 +29,16 @@ class ServiceController extends Controller
     {
         if(! Role::havePremission(['serves_cr']))
             return redirect()->route('admin.dashboard');
+
         $request->validate([
             'name_en'=>"unique:service,name_en",
         ]);
         try {
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
+
+            if (!$request->has('site'))
+                $request->request->add(['site' => 0]);
 
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
 
@@ -71,6 +75,7 @@ class ServiceController extends Controller
     {
         if(! Role::havePremission(['serves_idt']))
             return redirect()->route('admin.dashboard');
+
         $vdata = Service::find($id);
         if ($request->name_en != $vdata->name_en ){
             $request->validate([
@@ -85,6 +90,8 @@ class ServiceController extends Controller
 
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
+            if (!$request->has('site'))
+                $request->request->add(['site' => 0]);
 
             if ($request->has('img')){
                 $image = $request->file('img');

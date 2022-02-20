@@ -86,8 +86,8 @@ else
                                                         <div class="form-group">
                                                             <label for="type"> {{ __('Type') }} </label>
                                                             <select name="type" class="form-control" id="type" {{ $readonly }} required>
-                                                                <option value="1" @if($datas -> type == '1') selected @endif>{{ __("Inpatient") }}</option>
-                                                                <option value="2" @if($datas -> type == '2') selected @endif>{{ __("Outpatient") }}</option>
+                                                                <option value="1" @if($datas -> type == '1') selected @endif>{{ __("InPatient") }}</option>
+                                                                <option value="2" @if($datas -> type == '2') selected @endif>{{ __("OutPatient") }}</option>
                                                             </select>
                                                             @error('type')
                                                             <span class="text-danger">{{$message}}</span>
@@ -144,6 +144,22 @@ else
                                                             @enderror
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="1" name="site"
+                                                                   id="site"
+                                                                   class="switchery" data-color="success"
+                                                                   @if($datas -> site  == 1 ) checked @endif />
+                                                            <label for="site"
+                                                                   class="card-title ml-1">{{ __('site') }} </label>
+
+                                                            @error('site')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                             </div>
