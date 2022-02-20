@@ -321,7 +321,9 @@
                            </li>
                            @endif
                             @if(\App\Models\Role::havePremission(['role_cr']))
-                           <li><a class="menu-item" href="{{route('admin.role.create')}}" data-i18n="nav.dash.crypto">
+                           <li
+                           @if(View::hasSection('role_cr')) class="active" @endif
+                           ><a class="menu-item" href="{{route('admin.role.create')}}" data-i18n="nav.dash.crypto">
                                    أضافه جديد </a>
                            </li>
                            @endif

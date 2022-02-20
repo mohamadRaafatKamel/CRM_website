@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Log;
 use App\Models\Package;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -35,7 +36,8 @@ class PackageController extends Controller
                 $request->request->add(['disabled' => 1]);
 
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
-            Package::create($request->except(['_token']));
+            $pck = Package::create($request->except(['_token']));
+            Log::setLog('create','package',$pck->id,"","");
             if(isset($request->btn))
                 if($request->btn =="saveAndNew")
                     return redirect()->route('admin.package.create')->with(['success'=>'تم الحفظ']);
@@ -71,6 +73,7 @@ class PackageController extends Controller
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
 
+            Log::setLog('update','package',$id,"",$request->except(['_token']) );
             $data->update($request->except(['_token']));
             return redirect()->route('admin.package')->with(['success' => 'تم التحديث بنجاح']);
 

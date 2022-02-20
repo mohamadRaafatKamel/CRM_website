@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\Admin;
 use App\Models\Emarh;
+use App\Models\Log;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -38,7 +39,8 @@ class AdminController extends Controller
         try {
             $pass = Hash::make($request->password);
             unset($request->password);
-            Admin::create(array_merge($request->except(['_token']),['password'=>$pass,'remember_token'=>'']));
+            $adm = Admin::create(array_merge($request->except(['_token']),['password'=>$pass,'remember_token'=>'']));
+            Log::setLog('create','admin',$adm->id,"","");
             if(isset($request->btn))
                 if($request->btn =="saveAndNew")
                     return redirect()->route('admin.admin.create')->with(['success'=>'تم الحفظ']);
@@ -73,22 +75,27 @@ class AdminController extends Controller
             if (!$admins) {
                 return redirect()->route('admin.admin.edit', $id)->with(['error' => '  غير موجوده']);
             }
+            $logID = Log::setLog('create','admin',$admins->id,"","");
             if(isset($request->password)){
                 $pass = Hash::make($request->password);
                 unset($request->password);
                 $admins->update(['password'=>$pass]);
+                Log::setLogInfo($admins->password,$pass,$logID,"");
             }
 
             if(isset($request->permission)){
                 $admins->update(['permission'=>$request->permission]);
+                Log::setLogInfo($admins->permission,$request->permission,$logID,"");
             }
 
             if(isset($request->name)){
                 $admins->update(['name'=>$request->name]);
+                Log::setLogInfo($admins->name,$request->name,$logID,"");
             }
 
             if(isset($request->email)){
                 $admins->update(['email'=>$request->email]);
+                Log::setLogInfo($admins->email,$request->email,$logID,"");
             }
 
             return redirect()->route('admin.admin')->with(['success' => 'تم التحديث بنجاح']);
@@ -107,6 +114,7 @@ class AdminController extends Controller
             if (!$admins) {
                 return redirect()->route('admin.admin', $id)->with(['error' => '  غير موجوده']);
             }
+            Log::setLog('delete','admin',$admins->id,"","");
             $admins->delete();
 
             return redirect()->route('admin.admin')->with(['success' => 'تم حذف  بنجاح']);
