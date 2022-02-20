@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyInfo;
+use App\Models\Log;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,8 @@ class CompanyController extends Controller
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
             
             // dd($request->post());
-            CompanyInfo::create($request->except(['_token']));
+            $comp = CompanyInfo::create($request->except(['_token']));
+            Log::setLog('create','company_info',$comp->id,"","");
             if(isset($request->btn))
                 if($request->btn =="saveAndNew")
                     return redirect()->route('admin.company.create')->with(['success'=>'تم الحفظ']);
@@ -64,6 +66,8 @@ class CompanyController extends Controller
             if (!$data) {
                 return redirect()->route('admin.company.edit', $id)->with(['error' => '  غير موجوده']);
             }
+            Log::setLog('update','company_info',$id,"",$request->except(['_token']) );
+
             $data->update($request->except(['_token']));
             return redirect()->route('admin.company')->with(['success' => 'تم التحديث بنجاح']);
         } catch (\Exception $ex) {

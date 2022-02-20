@@ -14,6 +14,7 @@ use App\Models\Role;
 use App\Models\Specialty;
 use App\Models\User;
 use App\Models\DocSpecialty;
+use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -115,7 +116,9 @@ class UserController extends Controller
                 return redirect()->route('admin.user')->with(['error' => '  غير موجوده']);
             }
             if(isset($request->btn)){
+                
                 if($request->btn == "GeneralInfo"){
+                    Log::setLog('update','users',$id,"",$request->except(['_token']) );
                     $user->update($request->except('_token'));
                 }else
                 if ($request->btn == "Doctor") {
@@ -157,7 +160,6 @@ class UserController extends Controller
                         $mydoctor['user_id'] = $id;
                         DoctorInfo::create($mydoctor);
                     }
-
                 }
             }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Models\Admin;
+use App\Models\Log;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
@@ -28,6 +29,7 @@ class LoginController extends Controller
 
         if (auth()->guard('admin')->attempt(['email' => $request->input("email"), 'password' => $request->input("password")], $remember_me)) {
             // notify()->success('تم الدخول بنجاح  ');
+            // Log::setLog('Login','admin',"","","");
             return redirect() -> route('admin.dashboard');
         }
         // notify()->error('خطا في البيانات  برجاء المجاولة مجدا ');

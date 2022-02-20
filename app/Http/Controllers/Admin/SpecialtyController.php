@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Log;
 use App\Models\Role;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
@@ -45,7 +46,9 @@ class SpecialtyController extends Controller
                 $request->request->add(['image' =>  "public/specialty/".$imageName ]);
             }
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
-            Specialty::create($request->except(['_token']));
+            $spc= Specialty::create($request->except(['_token']));
+            Log::setLog('create','specialty',$spc->id,"","");
+
             if(isset($request->btn))
                 if($request->btn =="saveAndNew")
                     return redirect()->route('admin.specialty.create')->with(['success'=>'تم الحفظ']);
@@ -92,6 +95,7 @@ class SpecialtyController extends Controller
             }
             $request->request->add(['image' => $imgPath]);
 
+            Log::setLog('update','specialty',$id,"",$request->except(['_token']) );
             $data->update($request->except(['_token']));
 
             return redirect()->route('admin.specialty')->with(['success' => 'تم التحديث بنجاح']);

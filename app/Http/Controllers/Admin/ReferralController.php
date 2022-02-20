@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Log;
 use App\Models\Referral;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -35,7 +36,8 @@ class ReferralController extends Controller
                 $request->request->add(['disabled' => 1]);
 
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
-            Referral::create($request->except(['_token']));
+            $ref = Referral::create($request->except(['_token']));
+            Log::setLog('create','referral',$ref->id,"","");
             if(isset($request->btn))
                 if($request->btn =="saveAndNew")
                     return redirect()->route('admin.referral.create')->with(['success'=>'تم الحفظ']);
@@ -72,6 +74,7 @@ class ReferralController extends Controller
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
 
+            Log::setLog('update','referral',$id,"",$request->except(['_token']) );
             $data->update($request->except(['_token']));
             return redirect()->route('admin.referral')->with(['success' => 'تم التحديث بنجاح']);
 

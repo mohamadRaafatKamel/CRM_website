@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Log;
 use App\Models\Physician;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class PhysicianController extends Controller
         try {
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
 
-            Physician::create($request->except(['_token']));
+            $phy = Physician::create($request->except(['_token']));
+            Log::setLog('create','physician',$phy->id,"","");
             if(isset($request->btn))
                 if($request->btn =="saveAndNew")
                     return redirect()->route('admin.physician.create')->with(['success'=>'تم الحفظ']);
@@ -64,6 +66,8 @@ class PhysicianController extends Controller
             if (!$data) {
                 return redirect()->route('admin.physician.edit', $id)->with(['error' => '  غير موجوده']);
             }
+
+            Log::setLog('update','physician',$id,"",$request->except(['_token']) );
 
             $data->update($request->except(['_token']));
 

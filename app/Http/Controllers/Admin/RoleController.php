@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use App\Models\Log;
 use App\Models\Role;
 use App\Models\RoleInfo;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class RoleController extends Controller
             $role = new Role();
             $role->name = $request->name;
             $role->save();
+            $logID = Log::setLog('create','role',$role->id,"","");
 
             if($request->role_info){
                 if(count($request->role_info)>0){
@@ -47,6 +49,8 @@ class RoleController extends Controller
                         $rroollee->have_permission = '1';
                         $rroollee->admin_id = Auth::user()->id;
                         $rroollee->save();
+                        
+                        Log::setLogInfo('',$info,$logID,"create Role Info");
                     }
                 }
             }
@@ -74,8 +78,6 @@ class RoleController extends Controller
                 $myRoleInfo[$rinfo->name] = $rinfo->have_permission;
             }
         }
-//        print_r($myRoleInfo);die();
-
         return view('admin.role.edit',compact('role','myRoleInfo'));
     }
 
@@ -93,6 +95,7 @@ class RoleController extends Controller
             $roleInfo = RoleInfo::select()->where('role_id',$role->id)->delete();
 
             // update name
+            $logID = Log::setLog('update','role',$role->id,"","");
             $role->update($request->except('_token'));
 
             if($request->role_info){
@@ -104,6 +107,8 @@ class RoleController extends Controller
                         $rroollee->have_permission = '1';
                         $rroollee->admin_id = Auth::user()->id;
                         $rroollee->save();
+
+                        Log::setLogInfo('',$info,$logID,"update Role Info");
                     }
                 }
             }
