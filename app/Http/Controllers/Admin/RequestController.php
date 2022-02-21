@@ -19,6 +19,7 @@ use App\Models\Setting;
 use App\Models\Specialty;
 use App\Models\User;
 use App\Mail\requestMail;
+use App\Models\Log;
 use App\Models\Physician;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -123,7 +124,16 @@ class RequestController extends Controller
             }
              
             $request->request->add(['cc_admin_id' =>  Auth::user()->id]);
-            Requests::create($request->except(['_token']));
+            $req = Requests::create($request->except(['_token']));
+            Log::setLog('create','request',$req->id,"","");
+
+            // add call
+            if ($request->has('time') || $request->has('note') ){
+                if($request->note != "" || $request->time != ""){
+                    $this->AddCall($request->time, $request->note, $req->id, '1');
+                }
+            }
+
             return redirect()->route('admin.request.cc')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.request.create.cc')->with(['error'=>'يوجد خطء']);
@@ -161,6 +171,7 @@ class RequestController extends Controller
                 if ( $request->has('referral')){
                     $referralID = $this->AddReferral( $request->referral );
                     $request->request->add(['referral_id' => $referralID ]);
+                    $request->request->remove('referral');
                 }
              }
 
@@ -169,6 +180,7 @@ class RequestController extends Controller
                 if ( $request->has('corporate')){
                     $corporateID = $this->AddCorporate( $request->corporate );
                     $request->request->add(['corporate_id' => $corporateID ]);
+                    $request->request->remove('corporate');
                 }
             }
 
@@ -177,6 +189,7 @@ class RequestController extends Controller
                 if ( $request->has('package')){
                     $packageID = $this->AddPackage( $request->package );
                     $request->request->add(['package_id' => $packageID ]);
+                    // $request->request->remove('package');
                 }
             }
 
@@ -185,6 +198,7 @@ class RequestController extends Controller
                 if ( $request->has('physician_new')){
                     $phyID = $this->AddPhysician( $request->physician_new );
                     $request->request->add(['physician' => $phyID ]);
+                    $request->request->remove('physician_new');
                 }
             }
 
@@ -210,21 +224,11 @@ class RequestController extends Controller
             // add call
             if ($request->has('time') || $request->has('note') ){
                 if($request->note != "" || $request->time != ""){
-                    $call = new RequestCall();
-                    if ($request->has('time')){
-                        $call->call_time = $request->time;
-                        $request->request->remove('time');
-                    }
-                    if ($request->has('note')){
-                        $call->note = $request->note;
-                        $request->request->remove('note');
-                    }
-                    $call->request_id = $id;
-                    $call->department = 2;
-                    $call->admin_id  = Auth::user()->id;
-                    $call->save();
+                    $this->AddCall($request->time, $request->note, $id, '1');
                 }
             }
+
+            Log::setLog('update','request',$id,"",$request->except(['_token']) );
             $data->update($request->except(['_token']));
 
             if($request->btn == "saveAndNew")
@@ -352,27 +356,17 @@ class RequestController extends Controller
                 }
             }
 
-             // add call
-             if ($request->has('time') || $request->has('note') ){
+            // add call
+            if ($request->has('time') || $request->has('note') ){
                 if($request->note != "" || $request->time != ""){
-                    $call = new RequestCall();
-                    if ($request->has('time')){
-                        $call->call_time = $request->time;
-                        $request->request->remove('time');
-                    }
-                    if ($request->has('note')){
-                        $call->note = $request->note;
-                        $request->request->remove('note');
-                    }
-                    $call->request_id = $id;
-                    $call->department = 3;
-                    $call->admin_id  = Auth::user()->id;
-                    $call->save();
+                    $this->AddCall($request->time, $request->note, $id, '3');
                 }
             }
 
             $request->request->add(['admin_id_in_out' =>  Auth::user()->id]);
             
+            Log::setLog('update','request',$id,"",$request->except(['_token']) );
+
             $data->update($request->except(['_token']));
 
             if($request->btn == "saveAndNew")
@@ -487,27 +481,17 @@ class RequestController extends Controller
                 }
             }
 
-             // add call
-             if ($request->has('time') || $request->has('note') ){
+            // add call
+            if ($request->has('time') || $request->has('note') ){
                 if($request->note != "" || $request->time != ""){
-                    $call = new RequestCall();
-                    if ($request->has('time')){
-                        $call->call_time = $request->time;
-                        $request->request->remove('time');
-                    }
-                    if ($request->has('note')){
-                        $call->note = $request->note;
-                        $request->request->remove('note');
-                    }
-                    $call->request_id = $id;
-                    $call->department = 2;
-                    $call->admin_id  = Auth::user()->id;
-                    $call->save();
+                    $this->AddCall($request->time, $request->note, $id, '2');
                 }
             }
 
             $request->request->add(['admin_id_in_out' =>  Auth::user()->id]);
-            
+
+            Log::setLog('update','request',$id,"",$request->except(['_token']) );
+
             $data->update($request->except(['_token']));
 
             if($request->btn == "saveAndNew")
@@ -532,6 +516,7 @@ class RequestController extends Controller
             'password' => Hash::make(rand(1000000000,9999999999)),
         ]);
         $user->save();
+        Log::setLog('create','users',$user->id,"","");
         return $user->id;
     }
 
@@ -542,6 +527,7 @@ class RequestController extends Controller
             $reff->name_ar = $name;
             $reff->admin_id = Auth::user()->id;
             $reff->save();
+            Log::setLog('create','referral',$reff->id,"","");
             return $reff->id;
         }
         return null;
@@ -554,6 +540,7 @@ class RequestController extends Controller
             $corp->org_name = $name;
             $corp->admin_id = Auth::user()->id;
             $corp->save();
+            Log::setLog('create','company_info',$corp->id,"","");
             return $corp->id;
         }
         return null;
@@ -566,6 +553,7 @@ class RequestController extends Controller
             $pack->name_ar = $name;
             $pack->admin_id = Auth::user()->id;
             $pack->save();
+            Log::setLog('create','package',$pack->id,"","");
             return $pack->id;
         }
         return null;
@@ -578,32 +566,27 @@ class RequestController extends Controller
             $phy->name = $name;
             $phy->admin_id = Auth::user()->id;
             $phy->save();
+            Log::setLog('create','physician',$phy->id,"","");
             return $phy->id;
         }
         return null;
     }
 
-    // public function AddCall($time, $note, $id)
-    // {
-    //     dd($time);
-    //     if(count($time) > 0 ){
-    //         for($i=0;$i < count($time); $i++ ){
-    //             if($time[$i] || $note[$i]){
-    //                 $call = new RequestCall();
-    //                 if ($time[$i] != ""){
-    //                     $call->call_time = $time[$i];
-    //                 }
-    //                 if ($note[$i] != ""){
-    //                     $call->note = $note[$i];
-    //                 }
-    //                 $call->request_id = $id;
-    //                 $call->department = 1;
-    //                 $call->admin_id  = Auth::user()->id;
-    //                 $call->save();
-    //             }
-    //         }
-    //     }
-    // }
+    public function AddCall($time, $note, $id, $depart)
+    {
+        $call = new RequestCall();
+        if ($time){
+            $call->call_time = $time;
+        }
+        if ($note){
+            $call->note = $note;
+        }
+        $call->request_id = $id;
+        $call->department = $depart;
+        $call->admin_id  = Auth::user()->id;
+        $call->save();
+        Log::setLog('create','request_call',$call->id,"","");
+    }
 
     // JSON
     public function getUserInfo($id = 0){
