@@ -709,7 +709,7 @@
                                                         <div class="form-group">
                                                             <label for="shift_date"> {{ __('Date') }} <span style="color: #ff4961;">*</span></label>
                                                             <input type="date" id="shift_date"
-                                                                   class="form-control" 
+                                                                   class="form-control"  value="{{ $datenaw }}"
                                                                    placeholder="{{ __('Date') }} "
                                                                    name="shift_date">
                                                             @error('shift_date')

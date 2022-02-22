@@ -267,6 +267,10 @@ class RequestController extends Controller
         if (!isset($myorder->id)) {
             return redirect()->route('admin.request.in')->with(['error' => '  غير موجوده']);
         }
+
+        date_default_timezone_set('Africa/Cairo');
+        $datenaw = date("Y-m-d");
+
         $doctors = User::select()->doctor()->Verification()->get();
         $nurses = User::select()->nurse()->get();
         $serves = Service::select()->active()->get();
@@ -279,7 +283,7 @@ class RequestController extends Controller
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $sheets = NurseSheet::select()->where('request_id',$req)->get();
         
-        return view('admin.request.createin',compact('users','nurses','sheets','packages','companys','referrals','calls','governorates','specialtys','serves','myorder','doctors'));
+        return view('admin.request.createin',compact('datenaw','users','nurses','sheets','packages','companys','referrals','calls','governorates','specialtys','serves','myorder','doctors'));
     }
 
     public function updateIN(Request $request, $id)

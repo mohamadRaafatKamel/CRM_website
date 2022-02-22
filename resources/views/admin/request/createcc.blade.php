@@ -735,7 +735,7 @@
                 </section>
                 <!-- // Basic form layout section end -->
 
-                @if (isset($myorder->id) && $myorder->id != 0)
+                {{-- @if (isset($myorder->id) && $myorder->id != 0) --}}
                 <!-- Basic form layout section start -->
                 <section id="basic-form-layouts">
                     <div class="row match-height">
@@ -790,6 +790,7 @@
                                                             <input type="datetime-local" id="time"
                                                                    class="form-control"
                                                                    placeholder="{{ __('Time') }} "
+                                                                   {{-- value="{{ $datenaw }}" --}}
                                                                    name="time">
                                                             @error('time')
                                                             <span class="text-danger">{{$message}}</span>
@@ -851,7 +852,7 @@
                         </div>
                     </div>
                 </section>
-                @endif
+                {{-- @endif --}}
                 <!-- // Basic form layout section end -->
 
 
