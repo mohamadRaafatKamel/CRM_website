@@ -49,7 +49,7 @@
                                         @endif
                                         <div class="table-responsive">
                                         <table
-                                            class="table table-striped table-bordered zero-configuration ">
+                                            class="table table-striped table-bordered responsive ordering-print ">
                                             <thead>
                                             <tr>
                                                 <th>اسم عربي</th>
