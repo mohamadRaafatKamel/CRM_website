@@ -24,6 +24,31 @@ $('.default-ordering').DataTable( {
     "order": [[ 0, "desc" ]]
 } );
 
+/**************************************
+*       js of ordering and print file       *
+**************************************/
+
+$('.ordering-print').DataTable( {
+    "order": [[ 0, "desc" ]],
+    dom: 'Bfrtip',
+    // dom: 'C<"clear">lfrtip',
+    // colVis: {
+    //     exclude: [ 0 ]
+    // },
+    buttons: [
+        'excel', 'pdf', 'print'
+    ]
+} );
+$('.buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+
+// $('.file-export').DataTable({
+//     dom: 'Bfrtip',
+//     buttons: [
+//         'copy', 'csv', 'excel', 'pdf', 'print'
+//     ]
+// });
+// $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+
 /************************************
 *       js of multi ordering        *
 ************************************/

@@ -49,7 +49,7 @@
                                         <div class="table-responsive">
                                             
                                                 <table
-                                                    class="table table-striped table-bordered default-ordering">
+                                                    class="table table-striped table-bordered default-ordering file-export">
                                                     <thead>
                                                     <tr>
                                                         <th> id</th>

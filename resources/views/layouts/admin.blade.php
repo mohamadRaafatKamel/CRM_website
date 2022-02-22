@@ -118,7 +118,7 @@
 
 <script src="{{asset('assets/admin/js/scripts/forms/checkbox-radio.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/admin/js/scripts/notify.min.js')}}" type="text/javascript"></script>
-
+{{-- <script src="{{asset('assets/admin/js/scripts/tables/datatables/datatable-advanced.min.js')}}" type="text/javascript"></script> --}}
 <script src="{{asset('assets/admin/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
 
 <script>
