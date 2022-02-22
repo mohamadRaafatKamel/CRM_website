@@ -141,24 +141,29 @@ class UserController extends Controller
                     }
                     // main specialty
                     if (isset($request->mainspecialty)) {
+                        $logIDDocSp = Log::setLog('update','doc_specialty',$id,"user_id","");
                         DocSpecialty::select()->where('user_id',$id)->delete();
                         foreach ($request->mainspecialty as $main){
                             $docSpc = new DocSpecialty();
                             $docSpc->user_id = $id;
                             $docSpc->specialty_id = $main;
                             $docSpc->save();
+                            Log::setLogInfo('',$main,$logIDDocSp,"create Doctor Specialty");
                         }
                     }else{
                         DocSpecialty::select()->where('user_id',$id)->delete();
+                        Log::setLog('delete','doc_specialty',$id,"user_id","Delete Doctor Specialty");
                     }
 //                    update or create doctor
 //                    DoctorInfo::updateOrCreate
                     $doctor = DoctorInfo::select()->where('user_id',$id)->first();
                     if(isset($doctor->id)){
                         $doctor->update($mydoctor);
+                        Log::setLog('update','doctor_info',$doctor->id,"",$mydoctor );
                     }else{
                         $mydoctor['user_id'] = $id;
-                        DoctorInfo::create($mydoctor);
+                        $dofo = DoctorInfo::create($mydoctor);
+                        Log::setLog('create','doctor_info',$dofo->id,"","");
                     }
                 }
             }
@@ -178,6 +183,7 @@ class UserController extends Controller
                 return redirect()->route('admin.user')->with(['error'=>"غير موجود"]);
             }
             if($type == '1001'){
+                Log::setLog('update','users',$id,"",['verification'=>'1'] );
                 $user->update(['verification'=>'1']);
             }else{
                 $user->update(['type'=>$type]);
@@ -218,7 +224,8 @@ class UserController extends Controller
             ]);
 
             $user->save();
-           
+            Log::setLog('create','users',$user->id,"","");
+            
             return redirect()->route('admin.user.create',$user -> id)->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.user.create')->with(['error'=>'يوجد خطء']);

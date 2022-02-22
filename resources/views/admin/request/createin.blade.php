@@ -709,7 +709,7 @@
                                                         <div class="form-group">
                                                             <label for="shift_date"> {{ __('Date') }} <span style="color: #ff4961;">*</span></label>
                                                             <input type="date" id="shift_date"
-                                                                   class="form-control" 
+                                                                   class="form-control"  value="{{ $datenaw }}"
                                                                    placeholder="{{ __('Date') }} "
                                                                    name="shift_date">
                                                             @error('shift_date')
@@ -825,44 +825,44 @@
                 });
             });
 
-            $('#governorate_id').change(function () {
-                var govern = $('#governorate_id').val();
-                if(govern !== null && govern !== ""){
-                    getCitySelect(govern);
-                }
-            });
+            // $('#governorate_id').change(function () {
+            //     var govern = $('#governorate_id').val();
+            //     if(govern !== null && govern !== ""){
+            //         getCitySelect(govern);
+            //     }
+            // });
 
-            function getCitySelect(govern) {
-                $.ajax({
-                    url: "../../getCityGevern/" + govern,
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (response) {
-                        if(response == null){
-                            console.log('Not Found');
-                        }else {
-                            if(response.length > 0){
-                                for (let i = 0; i < response.length; i++) { 
-                                    if(i == 0){
-                                        $('#city_id').html($('<option>', {
-                                            value: response[i].id,
-                                            text: response[i].city_name_ar
-                                        }));
-                                    }else{
-                                        $('#city_id').append($('<option>', {
-                                            value: response[i].id,
-                                            text: response[i].city_name_ar
-                                        }));
-                                    }
-                                }
-                            }
-                        }
-                    }
+            // function getCitySelect(govern) {
+            //     $.ajax({
+            //         url: "../../getCityGevern/" + govern,
+            //         type: 'get',
+            //         dataType: 'json',
+            //         success: function (response) {
+            //             if(response == null){
+            //                 console.log('Not Found');
+            //             }else {
+            //                 if(response.length > 0){
+            //                     for (let i = 0; i < response.length; i++) { 
+            //                         if(i == 0){
+            //                             $('#city_id').html($('<option>', {
+            //                                 value: response[i].id,
+            //                                 text: response[i].city_name_ar
+            //                             }));
+            //                         }else{
+            //                             $('#city_id').append($('<option>', {
+            //                                 value: response[i].id,
+            //                                 text: response[i].city_name_ar
+            //                             }));
+            //                         }
+            //                     }
+            //                 }
+            //             }
+            //         }
                     // error: function (xhr, ajaxOptions, thrownError) {
                     //     input.val(0);
                     // }
-                });
-            }
+            //     });
+            // }
 
             // Referral
             function referralDisplay(){

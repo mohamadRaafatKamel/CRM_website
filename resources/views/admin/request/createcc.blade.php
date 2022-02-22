@@ -735,7 +735,7 @@
                 </section>
                 <!-- // Basic form layout section end -->
 
-                @if (isset($myorder->id) && $myorder->id != 0)
+                {{-- @if (isset($myorder->id) && $myorder->id != 0) --}}
                 <!-- Basic form layout section start -->
                 <section id="basic-form-layouts">
                     <div class="row match-height">
@@ -790,6 +790,7 @@
                                                             <input type="datetime-local" id="time"
                                                                    class="form-control"
                                                                    placeholder="{{ __('Time') }} "
+                                                                   {{-- value="{{ $datenaw }}" --}}
                                                                    name="time">
                                                             @error('time')
                                                             <span class="text-danger">{{$message}}</span>
@@ -824,23 +825,31 @@
                                                 </div>
 
                                             </div>
-                                            @if(isset($myorder->status_cc) && $myorder->status_cc != 4)
+                                            @if (isset($myorder->id) && $myorder->id != 0)
+                                                @if(isset($myorder->status_cc) && $myorder->status_cc != 4)
+                                                    <div class="form-actions">
+                                                        
+                                                        
+                                                        <button type="submit" name="btn" value="done" class="btn btn-success">
+                                                            <i class="la la-check-square-o"></i> {{ __('DONE') }}
+                                                        </button>
+
+                                                        <button type="submit" name="btn" value="hold" class="btn btn-warning">
+                                                            <i class="la la-check-square-o"></i> {{ __('Hold') }}
+                                                        </button>
+                                                        <button type="submit" name="btn" value="approve" class="btn btn-warning">
+                                                            <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
+                                                        </button>
+
+                                                        <button type="submit" name="btn" value="cancel" class="btn btn-danger">
+                                                            <i class="la la-check-square-o"></i> {{ __('Cancel') }}
+                                                        </button>
+                                                    </div>
+                                                @endif
+                                            @else
                                                 <div class="form-actions">
-                                                    
-                                                    
-                                                    <button type="submit" name="btn" value="done" class="btn btn-success">
-                                                        <i class="la la-check-square-o"></i> {{ __('DONE') }}
-                                                    </button>
-
-                                                    <button type="submit" name="btn" value="hold" class="btn btn-warning">
-                                                        <i class="la la-check-square-o"></i> {{ __('Hold') }}
-                                                    </button>
-                                                    <button type="submit" name="btn" value="approve" class="btn btn-warning">
-                                                        <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
-                                                    </button>
-
-                                                    <button type="submit" name="btn" value="cancel" class="btn btn-danger">
-                                                        <i class="la la-check-square-o"></i> {{ __('Cancel') }}
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="la la-check-square-o"></i> {{ __('Save All') }}
                                                     </button>
                                                 </div>
                                             @endif
@@ -851,7 +860,7 @@
                         </div>
                     </div>
                 </section>
-                @endif
+                {{-- @endif --}}
                 <!-- // Basic form layout section end -->
 
 
@@ -896,44 +905,44 @@
                 });
             });
 
-            $('#governorate_id').change(function () {
-                var govern = $('#governorate_id').val();
-                if(govern !== null && govern !== ""){
-                    getCitySelect(govern);
-                }
-            });
+            // $('#governorate_id').change(function () {
+            //     var govern = $('#governorate_id').val();
+            //     if(govern !== null && govern !== ""){
+            //         getCitySelect(govern);
+            //     }
+            // });
 
-            function getCitySelect(govern) {
-                $.ajax({
-                    url: "../getCityGevern/" + govern,
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (response) {
-                        if(response == null){
-                            console.log('Not Found');
-                        }else {
-                            if(response.length > 0){
-                                for (let i = 0; i < response.length; i++) { 
-                                    if(i == 0){
-                                        $('#city_id').html($('<option>', {
-                                            value: response[i].id,
-                                            text: response[i].city_name_ar
-                                        }));
-                                    }else{
-                                        $('#city_id').append($('<option>', {
-                                            value: response[i].id,
-                                            text: response[i].city_name_ar
-                                        }));
-                                    }
-                                }
-                            }
-                        }
-                    }
+            // function getCitySelect(govern) {
+            //     $.ajax({
+            //         url: "../getCityGevern/" + govern,
+            //         type: 'get',
+            //         dataType: 'json',
+                    // success: function (response) {
+                    //     if(response == null){
+                    //         console.log('Not Found');
+                    //     }else {
+                    //         if(response.length > 0){
+                    //             for (let i = 0; i < response.length; i++) { 
+                    //                 if(i == 0){
+                    //                     $('#city_id').html($('<option>', {
+                    //                         value: response[i].id,
+                    //                         text: response[i].city_name_ar
+                    //                     }));
+                    //                 }else{
+                    //                     $('#city_id').append($('<option>', {
+                    //                         value: response[i].id,
+                    //                         text: response[i].city_name_ar
+                    //                     }));
+                    //                 }
+                    //             }
+                    //         }
+                    //     }
+                    // }
                     // error: function (xhr, ajaxOptions, thrownError) {
                     //     input.val(0);
                     // }
-                });
-            }
+            //     });
+            // }
 
             // Referral
             function referralDisplay(){

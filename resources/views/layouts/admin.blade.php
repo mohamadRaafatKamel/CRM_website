@@ -205,7 +205,8 @@
                                     '<h6 class="media-heading"> <span> New '+ response.newIN +'</span> <span> in InPatient </span> </h6>'+
                                 '</div></div></a>';
                         $.notify("New "+ response.newIN +" in InPatient", "info");
-
+                        // playPromise;
+                        // $.playSound( "{{ asset( 'assets/admin/sound/samsung_galaxy_s_iii.mp3' ) }}" );
                     }
                     if(response.newOUT != 0){
                         note_dev +='<a href="{{route("admin.request.out")}}"><div class="media">'+
@@ -226,20 +227,39 @@
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     // input.val(0);
-                    console.log('Error');
+                    // console.log('Error');
                 }
             });
         }
+        // const audio = new Audio("{{ asset( 'assets/admin/sound/samsung_galaxy_s_iii.mp3' ) }}");
+        // audio.play();
+
+
+        // $("#sound1").trigger("play");
+
+
         CountEmergency();
 
         setInterval(function() {
             CountEmergency();
-        }, 60 * 1000);
+        }, 120 * 1000);
+
+        // var audio = new Audio("{{ asset( 'assets/admin/sound/samsung_galaxy_s_iii.mp3' ) }}");
+        // var playPromise = audio.play();
 
     });
 
 
 </script>
+
+{{-- <audio id="sound123" autoplay="true">
+    <source src="{{ asset( 'assets/admin/sound/samsung_galaxy_s_iii.mp3' ) }}" type="audio/mp3">
+</audio> --}}
+{{-- <script>
+    document.getElementById('sound123').play();
+    // $("#sound123").trigger("play");
+</script> --}}
+
 @yield('script')
 </body>
 </html>

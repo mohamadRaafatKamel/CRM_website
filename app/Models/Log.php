@@ -37,18 +37,24 @@ class Log extends Model
             $log->action_table = $table;
             $log->action_id = $id;
             $log->notes = $note;
-            $log->admin_id  = Auth::user()->id;
+            $log->admin_id = Auth::user()->id;
             $log->save();
 
             if($action == 'update' && $request != ""){
                 $oldData = DB::select('select * from '.$table.' where id = ?', [$id])[0];
+                // print_r($oldData);
+                // print_r($request);
                 foreach ($request as $key => $val){
-                    if(isset($oldData->$key) || $oldData->$key == null || $oldData->$key == ""){
+                    // print_r($key);echo"**"; print_r($oldData->$key);echo"//////";
+                    if(property_exists($oldData, $key)){
+                    // if(isset($oldData->$key)){
+                        // print_r($key);echo"**"; print_r($oldData->$key);echo"//////";
                         if($oldData->$key != $val){
                             Log::setLogInfo($oldData->$key, $val, $log->id, $key);
                         }
                     }
                 }
+                // die();
             }elseif($action == 'delete'){
                 $oldData = DB::select('select * from '.$table.' where id = ?', [$id])[0];
                 foreach ($oldData as $key => $val){
@@ -70,8 +76,8 @@ class Log extends Model
             $loginfo->new_val = $new_val;
             $loginfo->log_id  = $log_id ;
             $loginfo->notes = $notes;
-            $loginfo->admin_id  = Auth::user()->id;
-            $loginfo->save();  
+            $loginfo->admin_id  = Auth::user()->id;        
+            $loginfo->save();
         } catch (\Exception $ex) {
             
         }
