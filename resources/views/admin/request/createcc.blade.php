@@ -825,23 +825,31 @@
                                                 </div>
 
                                             </div>
-                                            @if(isset($myorder->status_cc) && $myorder->status_cc != 4)
+                                            @if (isset($myorder->id) && $myorder->id != 0)
+                                                @if(isset($myorder->status_cc) && $myorder->status_cc != 4)
+                                                    <div class="form-actions">
+                                                        
+                                                        
+                                                        <button type="submit" name="btn" value="done" class="btn btn-success">
+                                                            <i class="la la-check-square-o"></i> {{ __('DONE') }}
+                                                        </button>
+
+                                                        <button type="submit" name="btn" value="hold" class="btn btn-warning">
+                                                            <i class="la la-check-square-o"></i> {{ __('Hold') }}
+                                                        </button>
+                                                        <button type="submit" name="btn" value="approve" class="btn btn-warning">
+                                                            <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
+                                                        </button>
+
+                                                        <button type="submit" name="btn" value="cancel" class="btn btn-danger">
+                                                            <i class="la la-check-square-o"></i> {{ __('Cancel') }}
+                                                        </button>
+                                                    </div>
+                                                @endif
+                                            @else
                                                 <div class="form-actions">
-                                                    
-                                                    
-                                                    <button type="submit" name="btn" value="done" class="btn btn-success">
-                                                        <i class="la la-check-square-o"></i> {{ __('DONE') }}
-                                                    </button>
-
-                                                    <button type="submit" name="btn" value="hold" class="btn btn-warning">
-                                                        <i class="la la-check-square-o"></i> {{ __('Hold') }}
-                                                    </button>
-                                                    <button type="submit" name="btn" value="approve" class="btn btn-warning">
-                                                        <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
-                                                    </button>
-
-                                                    <button type="submit" name="btn" value="cancel" class="btn btn-danger">
-                                                        <i class="la la-check-square-o"></i> {{ __('Cancel') }}
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="la la-check-square-o"></i> {{ __('Save All') }}
                                                     </button>
                                                 </div>
                                             @endif

@@ -134,6 +134,9 @@ class RequestController extends Controller
                 }
             }
 
+            if($request->btn == "saveAndNew")
+                return redirect()->route('admin.request.create.cc',['req'=>$req->id])->with(['success'=>'تم الحفظ']);
+
             return redirect()->route('admin.request.cc')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.request.create.cc')->with(['error'=>'يوجد خطء']);
