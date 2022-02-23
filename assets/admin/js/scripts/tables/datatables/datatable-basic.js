@@ -28,26 +28,60 @@ $('.default-ordering').DataTable( {
 *       js of ordering and print file       *
 **************************************/
 
-$('.ordering-print').DataTable( {
-    "order": [[ 0, "desc" ]],
-    dom: 'Bfrtip',
-    // dom: 'C<"clear">lfrtip',
-    // colVis: {
-    //     exclude: [ 0 ]
-    // },
-    buttons: [
-        'excel', 'pdf', 'print'
-    ]
+// Setup - add a text input to each footer cell
+$('.ordering-print tfoot th').each( function () {
+    var title = $(this).text();
+    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
 } );
-$('.buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
 
-// $('.file-export').DataTable({
-//     dom: 'Bfrtip',
-//     buttons: [
-//         'copy', 'csv', 'excel', 'pdf', 'print'
-//     ]
-// });
-// $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+var tableSearching =$('.ordering-print').DataTable( {
+    "order": [[ 0, "desc" ]],
+    // dom: 'Bfrtip',
+    // buttons: [
+    //     'excel', 'pdf', 'print'
+    // ]
+} );
+// Button style
+// $('.buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+
+// Apply the search
+tableSearching.columns().every( function () {
+    var that = this;
+
+    $( 'input', this.footer() ).on( 'keyup change', function () {
+        if ( that.search() !== this.value ) {
+            that
+                .search( this.value )
+                .draw();
+        }
+    } );
+} );
+
+/***************************************************************
+*       js of Individual column searching (text inputs)        *
+***************************************************************/
+
+// Setup - add a text input to each footer cell
+// $('.text-inputs-searching tfoot th').each( function () {
+//     var title = $(this).text();
+//     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+// } );
+
+// // DataTable
+// var tableSearching = $('.text-inputs-searching').DataTable();
+
+// // Apply the search
+// tableSearching.columns().every( function () {
+//     var that = this;
+
+//     $( 'input', this.footer() ).on( 'keyup change', function () {
+//         if ( that.search() !== this.value ) {
+//             that
+//                 .search( this.value )
+//                 .draw();
+//         }
+//     } );
+// } );
 
 /************************************
 *       js of multi ordering        *
