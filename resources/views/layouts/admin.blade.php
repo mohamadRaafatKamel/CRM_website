@@ -61,6 +61,9 @@
         body {
             font-family: 'Cairo', sans-serif;
         }
+        .mr15 {
+            margin-right: 15px;
+        }
     </style>
 </head>
 <body class="vertical-layout vertical-menu 2-columns  @if(Request::is('admin/users/tickets/reply*')) chat-application @endif menu-expanded fixed-navbar"
@@ -96,11 +99,11 @@
 
 <!-- BEGIN PAGE VENDOR JS-->
 
-<script src="{{asset('assets/admin/vendors/js/extensions/datedropper.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/admin/vendors/js/extensions/timedropper.min.js')}}" type="text/javascript"></script>
+{{-- <script src="{{asset('assets/admin/vendors/js/extensions/datedropper.min.js')}}" type="text/javascript"></script> --}}
+{{-- <script src="{{asset('assets/admin/vendors/js/extensions/timedropper.min.js')}}" type="text/javascript"></script> --}}
 
-<script src="{{asset('assets/admin/vendors/js/forms/icheck/icheck.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/admin/js/scripts/pages/chat-application.js')}}" type="text/javascript"></script>
+{{-- <script src="{{asset('assets/admin/vendors/js/forms/icheck/icheck.min.js')}}" type="text/javascript"></script> --}}
+{{-- <script src="{{asset('assets/admin/js/scripts/pages/chat-application.js')}}" type="text/javascript"></script> --}}
 <!-- END PAGE VENDOR JS-->
 <!-- BEGIN MODERN JS-->
 <script src="{{asset('assets/admin/js/core/app-menu.js')}}" type="text/javascript"></script>
@@ -111,14 +114,14 @@
 <script src="{{asset('assets/admin/js/scripts/pages/dashboard-crypto.js')}}" type="text/javascript"></script>
 
 
-<script src="{{asset('assets/admin/js/scripts/tables/datatables/datatable-basic.js')}}"
-        type="text/javascript"></script>
+<script src="{{asset('assets/admin/js/scripts/tables/datatables/datatable-basic.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/admin/js/scripts/tables/datatables/datatable-api.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('assets/admin/js/scripts/extensions/date-time-dropper.js')}}" type="text/javascript"></script>
 <!-- END PAGE LEVEL JS-->
 
 <script src="{{asset('assets/admin/js/scripts/forms/checkbox-radio.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/admin/js/scripts/notify.min.js')}}" type="text/javascript"></script>
-{{-- <script src="{{asset('assets/admin/js/scripts/tables/datatables/datatable-advanced.min.js')}}" type="text/javascript"></script> --}}
 <script src="{{asset('assets/admin/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
 
 <script>

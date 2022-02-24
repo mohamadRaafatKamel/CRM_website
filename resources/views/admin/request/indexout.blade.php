@@ -44,11 +44,11 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-danger mb-2" href="{{ route('admin.request.out') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
+                                        <a class="btn btn-danger mb-2b" href="{{ route('admin.request.out') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
                                         <div class="table-responsive">
                                             
                                                 <table
-                                                    class="table table-striped table-bordered default-ordering">
+                                                    class="table table-striped table-bordered ordering-print">
                                                     <thead>
                                                     <tr>
                                                         <th> id</th>
@@ -90,9 +90,18 @@
                                                             </tr>
                                                         @endforeach
                                                     @endisset
-
-
                                                     </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th> id</th>
+                                                            <th>العميل</th>
+                                                            <th> موبيل</th>
+                                                            <th> موبيل</th>
+                                                            <th> OPD</th>
+                                                            <th> {{ __('Date') }}</th>
+                                                            <th> الحاله</th>
+                                                        </tr>
+                                                    </tfoot>
                                                 </table>
                                             
                                             <div class="justify-content-center d-flex">

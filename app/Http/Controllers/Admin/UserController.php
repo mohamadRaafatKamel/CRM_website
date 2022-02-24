@@ -217,6 +217,7 @@ class UserController extends Controller
             $user = new User([
                 'username' => $request->username,
                 'quick' => "1",
+                'verification' => "1",
                 // 'email' => $request->email,
                 'phone' => $request->phone,
                 'type' => $request->btn,

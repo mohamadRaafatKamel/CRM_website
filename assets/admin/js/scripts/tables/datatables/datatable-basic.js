@@ -20,9 +20,9 @@ $('.zero-configuration').DataTable();
 *       js of default ordering        *
 **************************************/
 
-$('.default-ordering').DataTable( {
-    "order": [[ 0, "desc" ]]
-} );
+// $('.default-ordering').DataTable( {
+//     "order": [[ 0, "desc" ]]
+// } );
 
 /**************************************
 *       js of ordering and print file       *
@@ -31,18 +31,18 @@ $('.default-ordering').DataTable( {
 // Setup - add a text input to each footer cell
 $('.ordering-print tfoot th').each( function () {
     var title = $(this).text();
-    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    $(this).html( '<input type="text" placeholder="'+title+'" />' );
 } );
 
 var tableSearching =$('.ordering-print').DataTable( {
     "order": [[ 0, "desc" ]],
-    // dom: 'Bfrtip',
-    // buttons: [
-    //     'excel', 'pdf', 'print'
-    // ]
+    dom: 'Bfrtip',
+    buttons: [
+        'excel', 'pdf', 'print'
+    ]
 } );
 // Button style
-// $('.buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+$('.buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
 
 // Apply the search
 tableSearching.columns().every( function () {
@@ -54,7 +54,7 @@ tableSearching.columns().every( function () {
                 .search( this.value )
                 .draw();
         }
-    } );
+    } ); 
 } );
 
 /***************************************************************
