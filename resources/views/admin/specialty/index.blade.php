@@ -55,6 +55,7 @@
                                                 <th>اسم عربي</th>
                                                 <th> اسم انجليزي</th>
                                                 <th>{{ __('Parent') }}</th>
+                                                <th>صوره</th>
                                                 <th>الحالة</th>
                                                 <th></th>
                                             </tr>
@@ -91,6 +92,16 @@
 
 
                                             </tbody>
+
+                                            <tfoot>
+                                                <th>ID </th>
+                                                <th>اسم عربي</th>
+                                                <th> اسم انجليزي</th>
+                                                <th>{{ __('Parent') }}</th>
+                                                <th>صوره</th>
+                                                <th>الحالة</th>
+                                                <th></th>
+                                            </tfoot>
                                         </table>
                                         <div class="justify-content-center d-flex">
 
