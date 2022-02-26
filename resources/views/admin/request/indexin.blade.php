@@ -45,17 +45,20 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
                                         {{-- <a class="btn btn-primary mb-2" href="{{ route('admin.request.create.cc') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a> --}}
-                                        <a class="btn btn-danger mb-2" href="{{ route('admin.request.in') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
+                                        <a class="btn btn-danger mb-2 mr15" href="{{ route('admin.request.in') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
                                         <div class="table-responsive">
                                             
                                                 <table
-                                                    class="table table-striped table-bordered default-ordering">
+                                                    class="table table-striped table-bordered ordering-print">
                                                     <thead>
                                                     <tr>
                                                         <th> id</th>
                                                         <th>العميل</th>
+                                                        <th>{{ __('Name Of Care Giver') }}</th>
                                                         <th> موبيل</th>
-                                                        <th> موبيل</th>
+                                                        <th>{{ __('Adress') }}</th>
+                                                        <th>{{ __('Consultant') }}</th>
+                                                        <th>{{ __('Package') }}</th>
                                                         <th> {{ __('Date') }}</th>
                                                         <th> الحاله</th>
                                                     </tr>
@@ -78,9 +81,20 @@
                                                                         </a>
                                                                     @endif
                                                                 </td>
-                                                                <td>{{$request -> phone}}</td>
-                                                                <td>{{$request -> phone2 }}</td>
-                                                                <td>{{$request -> created_at}}</td>
+                                                                <td>{{$request ->name_caregiver}} </td>
+                                                                <td>{{$request ->phone}} <br/>{{$request ->phone2 }} </td>
+                                                                <td>
+                                                                    <?php 
+                                                                        if(isset($request->apartment)) echo __('Apartment').": ".$request->apartment."<br/>"; 
+                                                                        if(isset($request->floor)) echo __('Floor').": ".$request->floor."<br/>";
+                                                                        if(isset($request->land_mark)) echo $request->land_mark."<br/>";
+                                                                        if(isset($request->adress)) echo $request->adress."<br/>";
+                                                                        if(isset($request->city_id)) echo $request->city_id."<br/>";
+                                                                    ?>
+                                                                </td>
+                                                                <td>{{\App\Models\User::getDocName($request->doctor_id) }}</td>
+                                                                <td>{{\App\Models\Package::getName($request->package_id) }}</td>
+                                                                <td>{{$request ->created_at}}</td>
                                                                 <td>
                                                                     <span class="badge {{ \App\Models\Requests::getStateColor($request ->status_in_out) }}">
                                                                         {{ \App\Models\Requests::getRequestState($request -> status_in_out) }}
@@ -93,6 +107,19 @@
 
 
                                                     </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th> id</th>
+                                                            <th>العميل</th>
+                                                            <th>{{ __('Name Of Care Giver') }}</th>
+                                                            <th> موبيل</th>
+                                                            <th>{{ __('Adress') }}</th>
+                                                            <th>{{ __('Consultant') }}</th>
+                                                            <th>{{ __('Package') }}</th>
+                                                            <th> {{ __('Date') }}</th>
+                                                            <th> الحاله</th>
+                                                        </tr>
+                                                    </tfoot>
                                                 </table>
                                             
                                             <div class="justify-content-center d-flex">

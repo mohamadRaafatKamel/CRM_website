@@ -27,6 +27,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'gender',
         'quick',
         'type',
+        'land_mark',
+        'floor',
+        'apartment',
+        'whatapp',
+        'whatapp2',
+        'age',
+        'location',
         'verification',
         'title',
         'password',
@@ -117,14 +124,18 @@ class User extends Authenticatable implements MustVerifyEmail
     public static function getUserName($id)
     {
         $user = User::select('title','username')->find($id);
-        return $user['title']." ".$user['username'];
+        if(isset($user))
+            return $user['title']." ".$user['username'];
+        return "";
     }
 
     public static function getDocName($id)
     {
         // $user = User::select('title','fname','lname')->find($id);
         $user = User::select('username')->find($id);
-        return "Dr ".$user['username'];
+        if(isset($user))
+            return "Dr ".$user['username'];
+        return "";
     }
 
 }

@@ -48,9 +48,10 @@
                                         <a class="btn btn-primary mb-2" href="{{ route('admin.specialty.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
                                         @endif
                                         <table
-                                            class="table table-striped table-bordered zero-configuration ">
+                                            class="table table-striped table-bordered ordering-print ">
                                             <thead>
                                             <tr>
+                                                <th>ID </th>
                                                 <th>اسم عربي</th>
                                                 <th> اسم انجليزي</th>
                                                 <th>{{ __('Parent') }}</th>
@@ -63,6 +64,7 @@
                                             @isset($datas)
                                                 @foreach($datas as $data)
                                                     <tr>
+                                                        <td>{{$data -> id}}</td>
                                                         <td>{{$data -> name_ar}}</td>
                                                         <td>{{$data -> name_en}}</td>
                                                         <td>{{\App\Models\Specialty::getName($data->parent_id) }}</td>

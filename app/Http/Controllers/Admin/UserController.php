@@ -15,6 +15,8 @@ use App\Models\Specialty;
 use App\Models\User;
 use App\Models\DocSpecialty;
 use App\Models\Log;
+use App\Models\Referral;
+use App\Models\UsersReferral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -75,6 +77,11 @@ class UserController extends Controller
         if(! Role::havePremission(['user_patent','user_all','user_doctor','user_nurse','user_driver']))
             return redirect()->route('admin.dashboard');
 
+        $referrals = Referral::select()->get();
+        $usersReferrals =  UsersReferral::select('referral_id')->where('user_id',$id)->get();
+        // $usersReferrals = $usersReferrals->toArray();
+        // dd(in_array('1', $usersReferrals));
+        // dd($usersReferrals);
         $specialtis = Specialty::select()->General()->get();
         $mainSpecialtis = Specialty::select()->Main()->get();
         $countrys = Country::select()->get();
@@ -102,7 +109,7 @@ class UserController extends Controller
         foreach($docSpes as $dd){
             $mainSpecial[] = $dd['specialty_id'];
         }
-        return view('admin.user.view',compact('user','specialtis','mainSpecial','mainSpecialtis','doctor','countrys','governorates','timeWork'));
+        return view('admin.user.view',compact('user','referrals','usersReferrals','specialtis','mainSpecial','mainSpecialtis','doctor','countrys','governorates','timeWork'));
     }
 
     public function update($id, UserRequest $request)
@@ -119,6 +126,15 @@ class UserController extends Controller
                 
                 if($request->btn == "GeneralInfo"){
                     Log::setLog('update','users',$id,"",$request->except(['_token']) );
+
+                    if($request->has('referral_id'))
+                        // dd($request->referral_id);
+                        UsersReferral::setReferral($id,$request->referral_id);
+                    if (!$request->has('whatapp'))
+                        $request->request->add(['whatapp' => 0]);
+                    if (!$request->has('whatapp2'))
+                        $request->request->add(['whatapp2' => 0]);
+
                     $user->update($request->except('_token'));
                 }else
                 if ($request->btn == "Doctor") {
@@ -217,6 +233,7 @@ class UserController extends Controller
             $user = new User([
                 'username' => $request->username,
                 'quick' => "1",
+                'verification' => "1",
                 // 'email' => $request->email,
                 'phone' => $request->phone,
                 'type' => $request->btn,

@@ -63,10 +63,10 @@ class Service extends Model
     {
         switch ($type){
             case 1:
-                return "Inpatient";
+                return "InPatient";
                 break;
             case 2:
-                return "Outpatient";
+                return "OutPatient";
                 break;
         }
 //        return 0;

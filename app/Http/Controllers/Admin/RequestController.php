@@ -124,6 +124,7 @@ class RequestController extends Controller
             }
              
             $request->request->add(['cc_admin_id' =>  Auth::user()->id]);
+            $request->request->add(['status_cc' =>  '2']);
             $req = Requests::create($request->except(['_token']));
             Log::setLog('create','request',$req->id,"","");
 

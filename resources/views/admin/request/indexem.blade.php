@@ -44,12 +44,12 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-primary mb-2" href="{{ route('admin.request.create.cc') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a>
+                                        <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.request.create.cc') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a>
                                         <a class="btn btn-danger mb-2" href="{{ route('admin.request.emergency') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
                                         <div class="table-responsive">
                                             
                                                 <table
-                                                    class="table table-striped table-bordered default-ordering">
+                                                    class="table table-striped table-bordered ordering-print">
                                                     <thead>
                                                     <tr>
                                                         <th> id</th>
@@ -94,6 +94,17 @@
 
 
                                                     </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th> id</th>
+                                                            <th>العميل</th>
+                                                            <th> موبيل</th>
+                                                            <th> موبيل</th>
+                                                            <th> نوع الزياره</th>
+                                                            <th> {{ __('Date') }}</th>
+                                                            <th> الحاله</th>
+                                                        </tr>
+                                                    </tfoot>
                                                 </table>
                                             
                                             <div class="justify-content-center d-flex">
