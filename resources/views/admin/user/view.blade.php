@@ -162,16 +162,40 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="birth_date"> {{ __('Birth Date') }} </label>
-                                                            <input type="date" value="{{$user -> birth_date}}" id="birth_date"
+                                                            <label for="age"> {{ __('Age') }} </label>
+                                                            <input type="number" id="age" 
                                                                    class="form-control"
-                                                                   placeholder="{{ __('Birth Date') }}"
-                                                                   name="birth_date" required>
-                                                            @error('birth_date')
+                                                                   @if(isset($user->age))
+                                                                        value="{{ $user->age }}"
+                                                                        @else
+                                                                        value="{{ old('age') }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Age') }}"
+                                                                   name="age">
+                                                            @error('age')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
+{{--  
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="referral_id">{{ __('Referral') }}</label>
+                                                            <select class="select2 form-control" id="referral_id" name="referral_id[]" multiple>
+                                                                <option value="">-- {{ __('Select') }}  {{ __('Referral') }} --</option>
+                                                                @foreach($referrals as $referral)
+                                                                    <option value="{{ $referral->id }}"
+                                                                            @if(in_array($referral->id, $usersReferrals[0])) selected @endif
+                                                                        @if(old('referral_id') == $referral->id) selected @endif
+                                                                    >{{ $referral->name_ar}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('referral_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+--}}
                                                 </div>
                                             </div>
                                             <div class="form-actions">
@@ -228,6 +252,16 @@
                                                                    class="form-control"
                                                                    placeholder="{{ __('Phone') }}"
                                                                    name="phone" required>
+
+                                                            <input type="checkbox"  value="1" name="whatapp"
+                                                                   id="whatapp"
+                                                                   class="switchery" data-color="success"
+                                                                   @if (isset($user ->whatapp))
+                                                                    @if($user->whatapp  == 1 ) checked @endif
+                                                                   @endif
+                                                                   @if(old('whatapp') == 1) checked @endif />
+                                                            
+                                                            <label for="whatapp" class="card-title ml-1"> {{ __('Whatapp') }} </label>
                                                             @error('phone')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -236,11 +270,21 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="mobile"> {{ __('Mobile') }} </label>
+                                                            <label for="mobile"> {{ __('Phone') }} 2</label>
                                                             <input type="text" value="{{$user -> mobile }}" id="mobile"
                                                                    class="form-control"
                                                                    placeholder="{{ __('Mobile') }}"
                                                                    name="mobile">
+
+                                                            <input type="checkbox"  value="1" name="whatapp2"
+                                                                   id="whatapp2"
+                                                                   class="switchery" data-color="success"
+                                                                   @if (isset($user ->whatapp2))
+                                                                    @if($user->whatapp2  == 1 ) checked @endif
+                                                                   @endif
+                                                                   @if(old('whatapp2') == 1) checked @endif />
+                                                            
+                                                            <label for="whatapp2" class="card-title ml-1"> {{ __('Whatapp') }} </label>
                                                             @error('mobile')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -284,7 +328,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="city_id"> {{ __('City') }} </label>
+                                                            <label for="city_id"> {{ __('Area') }} </label>
                                                             <input type="text" value="{{$user->city_id }}" id="city_id"
                                                                    class="form-control"
                                                                    placeholder="{{ __('City') }}"
@@ -297,12 +341,86 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="land_mark"> {{ __('Land Mark') }}</label>
+                                                            <input type="text" id="land_mark" 
+                                                                   class="form-control"
+                                                                   @if(isset($user->land_mark))
+                                                                   value="{{ $user->land_mark }}"
+                                                                   @else
+                                                                   value="{{ old('land_mark') }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Land Mark') }}"
+                                                                   name="land_mark">
+                                                            @error('land_mark')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="floor"> {{ __('Floor') }}</label>
+                                                            <input type="text" id="floor" 
+                                                                   class="form-control"
+                                                                   @if(isset($user->floor))
+                                                                   value="{{ $user->floor }}"
+                                                                   @else
+                                                                   value="{{ old('floor') }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Floor') }}"
+                                                                   name="floor">
+                                                            @error('floor')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="apartment"> {{ __('Apartment') }}</label>
+                                                            <input type="text" id="apartment" 
+                                                                   class="form-control"
+                                                                   @if(isset($user->apartment))
+                                                                   value="{{ $user->apartment }}"
+                                                                   @else
+                                                                   value="{{ old('apartment') }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Apartment') }}"
+                                                                   name="apartment">
+                                                            @error('apartment')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="address"> {{ __('Address') }} </label>
-                                                            <input type="text" value="{{$user -> address }}" id="address"
+                                                            <input type="text" 
+                                                                    @if(isset($user->location))        
+                                                                        value="{{$user -> address }}" 
+                                                                    @endif
+                                                                    id="address"
                                                                    class="form-control"
                                                                    placeholder="{{ __('Address') }}"
                                                                    name="address">
                                                             @error('address')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="location"> {{ __('Location') }} </label>
+                                                            <input type="text" id="location"
+                                                                   class="form-control"
+                                                                   @if(isset($user->location))
+                                                                    value="{{ $user->location }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Location') }}"
+                                                                   name="location">
+                                                            @error('location')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>

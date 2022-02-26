@@ -14,12 +14,13 @@ class AddAddressToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('land_mark')->nullable();
-            $table->string('floor')->nullable();
-            $table->string('apartment')->nullable();
-            $table->integer('whatapp')->nullable();
-            $table->integer('whatapp2')->nullable();
-            $table->string('age')->nullable();
+            $table->string('land_mark')->after('adress2')->nullable();
+            $table->string('floor')->after('adress2')->nullable();
+            $table->string('apartment')->after('adress2')->nullable();
+            $table->integer('whatapp')->after('adress2')->nullable();
+            $table->integer('whatapp2')->after('adress2')->nullable();
+            $table->string('age')->after('adress2')->nullable();
+            $table->string('location')->after('adress2')->nullable();
         });
     }
 
@@ -31,12 +32,7 @@ class AddAddressToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('land_mark');
-            $table->dropColumn('floor');
-            $table->dropColumn('apartment');
-            $table->dropColumn('whatapp');
-            $table->dropColumn('whatapp2');
-            $table->dropColumn('age');
+            //
         });
     }
 }

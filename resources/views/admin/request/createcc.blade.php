@@ -233,11 +233,11 @@
 
                                                 </div>
                                                 <div class="row">
-
+{{-- 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="referral_id">{{ __('Referral') }}</label>
-                                                            <select class="select2 form-control" id="referral_id" name="referral_id">
+                                                            <select class="select2 form-control" id="referral_id" name="referral_id" multiple>
                                                                 <option value="">-- {{ __('Select') }}  {{ __('Referral') }} --</option>
                                                                 @foreach($referrals as $referral)
                                                                     <option value="{{ $referral->id }}"
@@ -267,7 +267,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-
+ --}}
                                                 </div>
                                                 <div class="row">
 

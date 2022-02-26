@@ -19,7 +19,7 @@ class Requests extends Model
     protected $fillable = [
         'id', 'user_id', 'doctor_id', 'nurse_id', 'fullname', 'name_caregiver', 'gender', 'location', 
         'governorate_id', 'city_id', 'adress', 'land_mark', 'floor', 'apartment', 'phone', 'phone2', 'whatapp', 
-        'whatapp2', 'whatsApp_group', 'age', 'referral_id', 'corporate_id', 'physician', 'type', 'covid19', 
+        'whatapp2', 'whatsApp_group', 'age', 'corporate_id', 'physician', 'type', 'covid19', 
         'specialty_id', 'service_id', 'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to', 
         'expectation_cost', 'real_cost', 'bill_serial', 'pay_or_not', 'code_zone_patient_id', 'bed_number', 
         'symptoms', 'doc_note', 'Feedback', 'doc_rate', 'user_rate', 'opd_admin_id', 'cc_admin_id', 
@@ -32,7 +32,7 @@ class Requests extends Model
         return $query -> select(
             'id', 'user_id', 'doctor_id', 'nurse_id', 'fullname', 'name_caregiver', 'gender', 'location', 
             'governorate_id', 'city_id', 'adress', 'land_mark', 'floor', 'apartment', 'phone', 'phone2', 'whatapp', 
-            'whatapp2', 'whatsApp_group', 'age', 'referral_id', 'corporate_id', 'physician', 'type', 'covid19', 
+            'whatapp2', 'whatsApp_group', 'age', 'corporate_id', 'physician', 'type', 'covid19', 
             'specialty_id', 'service_id', 'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to', 
             'expectation_cost', 'real_cost', 'bill_serial', 'pay_or_not', 'code_zone_patient_id', 'bed_number', 
             'symptoms', 'doc_note', 'Feedback', 'doc_rate', 'user_rate', 'opd_admin_id', 'cc_admin_id', 
