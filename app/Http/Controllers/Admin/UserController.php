@@ -78,10 +78,7 @@ class UserController extends Controller
             return redirect()->route('admin.dashboard');
 
         $referrals = Referral::select()->get();
-        $usersReferrals =  UsersReferral::select('referral_id')->where('user_id',$id)->get();
-        // $usersReferrals = $usersReferrals->toArray();
-        // dd(in_array('1', $usersReferrals));
-        // dd($usersReferrals);
+        $usersReferrals = UsersReferral::getReferral($id);
         $specialtis = Specialty::select()->General()->get();
         $mainSpecialtis = Specialty::select()->Main()->get();
         $countrys = Country::select()->get();

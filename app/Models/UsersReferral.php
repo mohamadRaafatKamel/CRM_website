@@ -52,4 +52,22 @@ class UsersReferral extends Model
         } catch (\Exception $ex) {
         }
     }
+
+    public static function getReferral($userId)
+    {
+        try{
+            $myref = [];
+            $referrals = UsersReferral::select('referral_id')->where('user_id',$userId)->get();
+
+            if($referrals){
+                if($referrals->count()>0){
+                    foreach ($referrals as $referral){
+                        $myref[]= $referral->referral_id;
+                    }
+                }
+                return $myref;
+            }
+        } catch (\Exception $ex) {
+        }
+    }
 }

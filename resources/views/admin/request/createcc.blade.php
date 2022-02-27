@@ -152,7 +152,7 @@
 
                                                             <input type="checkbox"  value="1" name="whatapp"
                                                                    id="whatapp"
-                                                                   class="switchery" data-color="success"
+                                                                   class="switchery0" data-color="success"
                                                                    @if (isset($myorder -> whatapp))
                                                                     @if($myorder -> whatapp  == 1 ) checked @endif
                                                                    @endif
@@ -178,8 +178,8 @@
                                                                    placeholder="{{ __('Phone') }}"
                                                                    name="phone2">
 
-                                                                   <input type="checkbox"  value="1" name="whatapp2"
-                                                                   id="whatapp2" class="switchery" data-color="success"
+                                                            <input type="checkbox"  value="1" name="whatapp2"
+                                                                   id="whatapp2" class="switchery0" data-color="success"
                                                                    @if (isset($myorder -> whatapp2))
                                                                     @if($myorder -> whatapp2  == 1 ) checked @endif
                                                                    @endif 
@@ -233,16 +233,16 @@
 
                                                 </div>
                                                 <div class="row">
-{{-- 
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="referral_id">{{ __('Referral') }}</label>
-                                                            <select class="select2 form-control" id="referral_id" name="referral_id" multiple>
+                                                            <select class="select2 form-control" id="referral_id" name="referral_id[]" multiple>
                                                                 <option value="">-- {{ __('Select') }}  {{ __('Referral') }} --</option>
                                                                 @foreach($referrals as $referral)
                                                                     <option value="{{ $referral->id }}"
-                                                                        @if(isset($myorder->referral_id))
-                                                                            @if($myorder->referral_id == $referral->id) selected @endif
+                                                                        @if (isset($usersReferrals))
+                                                                            @if(in_array($referral->id, $usersReferrals)) selected @endif
                                                                         @endif
                                                                         @if(old('referral_id') == $referral->id) selected @endif
                                                                     >{{ $referral->name_ar}}</option>
@@ -253,7 +253,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-
+{{-- 
                                                     <div class="col-md-6">
                                                         <div class="form-group" id="referral_dev">
                                                             <label for="referral">{{ __('Add') }} {{ __('Referral') }} </label>
@@ -266,8 +266,8 @@
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
-                                                    </div>
- --}}
+                                                    </div> --}}
+
                                                 </div>
                                                 <div class="row">
 
@@ -885,6 +885,7 @@
                         if(response == null){
                             console.log('Not Found');
                         }else {
+                            console.log(response);
                             $('#fullname').val(response.username);
                             if(response.address !== null){
                                 $('#adress').val(response.address);
@@ -895,9 +896,12 @@
                             $('#code_zone_patient_id').val(response.code_zone_patient_id);
                             $('#governorate_id').val(response.governorate_id).change();
                             $('#city_id').val(response.city_id);
-                            // $('#land_mark').val(response.land_mark);
-                            // $('#floor').val(response.floor);
-                            // $('#apartment').val(response.apartment);
+                            $('#land_mark').val(response.land_mark);
+                            $('#floor').val(response.floor);
+                            $('#apartment').val(response.apartment);
+                            $('#whatapp').prop( "checked",(response.whatapp)? true : false );
+                            $('#whatapp2').prop( "checked",(response.whatapp2)? true : false );
+                            
                         }
                     }
                     // error: function (xhr, ajaxOptions, thrownError) {
@@ -907,18 +911,18 @@
             });
 
             // Referral
-            function referralDisplay(){
-                let ref = $('#referral_id').val();
-                if(ref !== null && ref !== ""){
-                    $('#referral_dev').hide();
-                }else{
-                    $('#referral_dev').show();
-                }
-            }
-            referralDisplay();
-            $('#referral_id').change(function () {
-                referralDisplay();
-            });
+            // function referralDisplay(){
+            //     let ref = $('#referral_id').val();
+            //     if(ref !== null && ref !== ""){
+            //         $('#referral_dev').hide();
+            //     }else{
+            //         $('#referral_dev').show();
+            //     }
+            // }
+            // referralDisplay();
+            // $('#referral_id').change(function () {
+            //     referralDisplay();
+            // });
 
             // Corporate
             function referralCorporate(){
