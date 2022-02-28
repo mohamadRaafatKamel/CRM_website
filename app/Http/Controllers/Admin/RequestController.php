@@ -97,11 +97,12 @@ class RequestController extends Controller
                 $request->request->add(['whatapp2' => 0]);
 
             // Add Referral
-            if (!$request->has('referral_id') || $request->referral_id == null ){
+            if ($request->has('user_id') && $request->has('referral_id') ){
+                $referralID = [];
                 if ( $request->has('referral')){
-                    $referralID = $this->AddReferral( $request->referral );
-                    $request->request->add(['referral_id' => $referralID ]);
+                    $referralID[] = $this->AddReferral( $request->referral );
                 }
+                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
              }
 
             // Add Corporate
@@ -176,12 +177,12 @@ class RequestController extends Controller
                 $request->request->add(['whatapp2' => 0]);
 
             // Add Referral
-            if (!$request->has('referral_id') || $request->referral_id == null ){
+            if ($request->has('user_id') && $request->has('referral_id') ){
+                $referralID = [];
                 if ( $request->has('referral')){
-                    $referralID = $this->AddReferral( $request->referral );
-                    $request->request->add(['referral_id' => $referralID ]);
-                    $request->request->remove('referral');
+                    $referralID[] = $this->AddReferral( $request->referral );
                 }
+                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
              }
 
             // Add Corporate
@@ -349,11 +350,12 @@ class RequestController extends Controller
                 $request->request->add(['whatapp2' => 0]);
 
             // Add Referral
-            if (!$request->has('referral_id') || $request->referral_id == null ){
+            if ($request->has('user_id') && $request->has('referral_id') ){
+                $referralID = [];
                 if ( $request->has('referral')){
-                    $referralID = $this->AddReferral( $request->referral );
-                    $request->request->add(['referral_id' => $referralID ]);
+                    $referralID[] = $this->AddReferral( $request->referral );
                 }
+                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
              }
 
             // Add Corporate
@@ -477,11 +479,12 @@ class RequestController extends Controller
                 $request->request->add(['whatapp2' => 0]);
 
              // Add Referral
-            if (!$request->has('referral_id') || $request->referral_id == null ){
+             if ($request->has('user_id') && $request->has('referral_id') ){
+                $referralID = [];
                 if ( $request->has('referral')){
-                    $referralID = $this->AddReferral( $request->referral );
-                    $request->request->add(['referral_id' => $referralID ]);
+                    $referralID[] = $this->AddReferral( $request->referral );
                 }
+                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
              }
 
             // Add Corporate

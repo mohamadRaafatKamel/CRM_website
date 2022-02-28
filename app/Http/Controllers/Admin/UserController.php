@@ -121,16 +121,20 @@ class UserController extends Controller
             }
             if(isset($request->btn)){
                 
-                if($request->btn == "GeneralInfo"){
+                if($request->btn == "GeneralInfo" || $request->btn == "Generalcontact"){
                     Log::setLog('update','users',$id,"",$request->except(['_token']) );
 
                     if($request->has('referral_id'))
                         // dd($request->referral_id);
                         UsersReferral::setReferral($id,$request->referral_id);
-                    if (!$request->has('whatapp'))
-                        $request->request->add(['whatapp' => 0]);
-                    if (!$request->has('whatapp2'))
-                        $request->request->add(['whatapp2' => 0]);
+                        
+                    if($request->btn == "Generalcontact"){
+                        if (!$request->has('whatapp'))
+                            $request->request->add(['whatapp' => 0]);
+                        if (!$request->has('whatapp2'))
+                            $request->request->add(['whatapp2' => 0]);
+                    }
+                    
 
                     $user->update($request->except('_token'));
                 }else

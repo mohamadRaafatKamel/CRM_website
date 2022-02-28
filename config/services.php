@@ -30,4 +30,14 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'firebase' => [
+        'api_key' => 'AIzaSyDMjGboFWnZuPl_9ZWQU1zHhyFQMmr93JY',
+        'auth_domain' => 'carehub-notification.firebaseapp.com',
+        'project_id' => 'carehub-notification',
+        'storage_bucket' => 'carehub-notification.appspot.com',
+        'messaging_sender_id' => '558672562731',
+        'app_id' => '558672562731:web:b048a73b58bc2de1ecb86e',
+        'measurement_id' => 'G-EW55Z51RQ3',
+    ],
+
 ];

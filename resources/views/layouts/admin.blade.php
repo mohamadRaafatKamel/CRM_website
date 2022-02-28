@@ -124,6 +124,12 @@
 <script src="{{asset('assets/admin/js/scripts/notify.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/admin/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
 
+<!-- Firbase -->
+<script src="{{asset('assets/admin/js/scripts/firbase.js')}}" type="text/javascript"></script>
+
+{{-- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script> --}}
+
 <script>
     $('#meridians1').timeDropper({
         meridians: true,

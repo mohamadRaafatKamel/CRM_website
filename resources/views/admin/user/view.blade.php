@@ -435,7 +435,7 @@
                                                 {{--                                                        onclick="history.back();">--}}
                                                 {{--                                                    <i class="ft-x"></i> تراجع--}}
                                                 {{--                                                </button>--}}
-                                                <button type="submit" class="btn btn-primary" name="btn" value="GeneralInfo">
+                                                <button type="submit" class="btn btn-primary" name="btn" value="Generalcontact">
                                                     <i class="la la-check-square-o"></i> تحديث
                                                 </button>
                                             </div>
