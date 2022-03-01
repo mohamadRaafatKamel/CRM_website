@@ -125,7 +125,6 @@ class UserController extends Controller
                     Log::setLog('update','users',$id,"",$request->except(['_token']) );
 
                     if($request->has('referral_id'))
-                        // dd($request->referral_id);
                         UsersReferral::setReferral($id,$request->referral_id);
                         
                     if($request->btn == "Generalcontact"){
@@ -171,8 +170,6 @@ class UserController extends Controller
                         DocSpecialty::select()->where('user_id',$id)->delete();
                         Log::setLog('delete','doc_specialty',$id,"user_id","Delete Doctor Specialty");
                     }
-//                    update or create doctor
-//                    DoctorInfo::updateOrCreate
                     $doctor = DoctorInfo::select()->where('user_id',$id)->first();
                     if(isset($doctor->id)){
                         $doctor->update($mydoctor);
