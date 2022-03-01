@@ -20,6 +20,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
     Route::get('logout','DashboardController@logout')->name('admin.logout');
 
     Route::get('getnotification', 'DashboardController@notificationShow');
+    Route::get('savetoken', 'DashboardController@saveToken')->name('save.token');
 
     ##################### Specialty ############################
     Route::group(['prefix'=>'specialty'],function (){

@@ -78,10 +78,7 @@ class UserController extends Controller
             return redirect()->route('admin.dashboard');
 
         $referrals = Referral::select()->get();
-        $usersReferrals =  UsersReferral::select('referral_id')->where('user_id',$id)->get();
-        // $usersReferrals = $usersReferrals->toArray();
-        // dd(in_array('1', $usersReferrals));
-        // dd($usersReferrals);
+        $usersReferrals = UsersReferral::getReferral($id);
         $specialtis = Specialty::select()->General()->get();
         $mainSpecialtis = Specialty::select()->Main()->get();
         $countrys = Country::select()->get();
@@ -124,16 +121,19 @@ class UserController extends Controller
             }
             if(isset($request->btn)){
                 
-                if($request->btn == "GeneralInfo"){
+                if($request->btn == "GeneralInfo" || $request->btn == "Generalcontact"){
                     Log::setLog('update','users',$id,"",$request->except(['_token']) );
 
                     if($request->has('referral_id'))
-                        // dd($request->referral_id);
                         UsersReferral::setReferral($id,$request->referral_id);
-                    if (!$request->has('whatapp'))
-                        $request->request->add(['whatapp' => 0]);
-                    if (!$request->has('whatapp2'))
-                        $request->request->add(['whatapp2' => 0]);
+                        
+                    if($request->btn == "Generalcontact"){
+                        if (!$request->has('whatapp'))
+                            $request->request->add(['whatapp' => 0]);
+                        if (!$request->has('whatapp2'))
+                            $request->request->add(['whatapp2' => 0]);
+                    }
+                    
 
                     $user->update($request->except('_token'));
                 }else
@@ -170,8 +170,6 @@ class UserController extends Controller
                         DocSpecialty::select()->where('user_id',$id)->delete();
                         Log::setLog('delete','doc_specialty',$id,"user_id","Delete Doctor Specialty");
                     }
-//                    update or create doctor
-//                    DoctorInfo::updateOrCreate
                     $doctor = DoctorInfo::select()->where('user_id',$id)->first();
                     if(isset($doctor->id)){
                         $doctor->update($mydoctor);

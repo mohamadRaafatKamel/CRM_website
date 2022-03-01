@@ -46,7 +46,7 @@
                                     <div class="card-body card-dashboard">
                                         <div class="table-responsive">
                                         <table
-                                            class="table table-striped table-bordered zero-configuration ">
+                                            class="table table-striped table-bordered ordering-print ">
                                             <thead>
                                             <tr>
                                                 <th>User </th>

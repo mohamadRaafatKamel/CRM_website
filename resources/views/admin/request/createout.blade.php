@@ -181,7 +181,7 @@
 
                                                             <input type="checkbox"  value="1" name="whatapp"
                                                                    id="whatapp"
-                                                                   class="switchery" data-color="success"
+                                                                   class="switchery0" data-color="success"
                                                                    @if (isset($myorder -> whatapp))
                                                                     @if($myorder -> whatapp  == 1 ) checked @endif
                                                                    @endif
@@ -205,7 +205,7 @@
                                                                    name="phone2">
 
                                                                    <input type="checkbox"  value="1" name="whatapp2"
-                                                                   id="whatapp2" class="switchery" data-color="success"
+                                                                   id="whatapp2" class="switchery0" data-color="success"
                                                                    @if (isset($myorder -> whatapp2))
                                                                     @if($myorder -> whatapp2  == 1 ) checked @endif
                                                                    @endif />
@@ -261,12 +261,12 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="referral_id">{{ __('Referral') }}</label>
-                                                            <select class="select2 form-control" id="referral_id" name="referral_id">
-                                                                <option value="">-- {{ __('Select') }} {{ __('Referral') }} -- </option>
+                                                            <select class="select2 form-control" id="referral_id" name="referral_id[]" multiple>
+                                                                <option value="">-- {{ __('Select') }}  {{ __('Referral') }} --</option>
                                                                 @foreach($referrals as $referral)
                                                                     <option value="{{ $referral->id }}"
-                                                                        @if(isset($myorder->referral_id))
-                                                                            @if($myorder->referral_id == $referral->id) selected @endif
+                                                                        @if (isset($usersReferrals))
+                                                                            @if(in_array($referral->id, $usersReferrals)) selected @endif
                                                                         @endif
                                                                         @if(old('referral_id') == $referral->id) selected @endif
                                                                     >{{ $referral->name_ar}}</option>
@@ -283,13 +283,15 @@
                                                             <label for="referral">{{ __('Add') }} {{ __('Referral') }} </label>
                                                             <input type="text" id="referral" 
                                                                    class="form-control"
-                                                                   placeholder="{{ __('Referral') }}"
+                                                                    value="{{ old('referral') }}"
+                                                                   placeholder="{{__('Referral') }}"
                                                                    name="referral">
                                                             @error('referral')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
+
 
                                                 </div>
                                                 <div class="row">
@@ -766,7 +768,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> {{ __('Calls') }} </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> <b> <i class="ft-phone"></i> {{ __('Calls') }} </b>  </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -779,7 +781,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="card-content collapse show">
+                                <div class="card-content collapse">
                                     <div class="card-body">
 
                                             <div class="form-body">
@@ -903,9 +905,13 @@
                             $('#gender').val(response.gender);
                             $('#code_zone_patient_id').val(response.code_zone_patient_id);
                             $('#governorate_id').val(response.governorate_id).change();
-                            if(response.governorate_id !== null){
-                                setTimeout( function() { $('#city_id').val(response.city_id).change(); }, 1000);
-                            }
+                            $('#city_id').val(response.city_id);
+                            $('#land_mark').val(response.land_mark);
+                            $('#floor').val(response.floor);
+                            $('#apartment').val(response.apartment);
+                            $('#whatapp').prop( "checked",(response.whatapp)? true : false );
+                            $('#whatapp2').prop( "checked",(response.whatapp2)? true : false );
+                            $('#referral_id').val(response.fname).change();
                         }
                     }
                     // error: function (xhr, ajaxOptions, thrownError) {
@@ -953,19 +959,19 @@
             //     });
             // }
 
-            // Referral
-            function referralDisplay(){
-                let ref = $('#referral_id').val();
-                if(ref !== null && ref !== ""){
-                    $('#referral_dev').hide();
-                }else{
-                    $('#referral_dev').show();
-                }
-            }
-            referralDisplay();
-            $('#referral_id').change(function () {
-                referralDisplay();
-            });
+            // // Referral
+            // function referralDisplay(){
+            //     let ref = $('#referral_id').val();
+            //     if(ref !== null && ref !== ""){
+            //         $('#referral_dev').hide();
+            //     }else{
+            //         $('#referral_dev').show();
+            //     }
+            // }
+            // referralDisplay();
+            // $('#referral_id').change(function () {
+            //     referralDisplay();
+            // });
 
             // Corporate
             function referralCorporate(){

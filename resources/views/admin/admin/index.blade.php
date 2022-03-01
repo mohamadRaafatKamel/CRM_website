@@ -66,17 +66,19 @@
                                                         <td>{{$admin -> email}}</td>
                                                         <td>{{\App\Models\Admin::getRoleNamebyId($admin->permission)}}</td>
                                                         <td>
-                                                            <div class="btn-group" role="group"
-                                                                 aria-label="Basic example">
+                                                            @if ($admin->id != Auth::user()->id)
+                                                            <div class="btn-group" role="group" aria-label="Basic example">
                                                                 <a href="{{route('admin.admin.edit',['id'=> $admin->id ])}}"
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
+                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
 
-                                                                   @if(\App\Models\Role::havePremission(['admin_idt']))
+                                                                    {{-- @if(\App\Models\Role::havePremission(['admin_idt']))
                                                                         <a href="{{route('admin.admin.delete',$admin -> id)}}"
                                                                         class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
-                                                                    @endif
+                                                                    @endif --}}
 
                                                             </div>
+                                                            @endif
+                                                            
                                                         </td>
                                                     </tr>
                                                 @endforeach

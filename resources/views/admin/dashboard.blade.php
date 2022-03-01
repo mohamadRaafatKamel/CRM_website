@@ -7,116 +7,106 @@
             </div>
             <div class="content-body">
                 <div id="crypto-stats-3" class="row">
-                    {{-- <div class="col-xl-4 col-12">
-                        <div class="card crypto-card-3 pull-up">
-                            <div class="card-content">
-                                <div class="card-body pb-0">
-                                    <div class="row">
 
-                                        <div class="col-5 pl-2">
-                                            <h4>{{ __('All Emergency') }} </h4>
-                                        </div>
-                                        <div class="col-5 text-right">
-                                           <h4>{{App\Models\Requests::where('type',1)->count()}}</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <canvas id="btc-chartjs" class="height-75"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                    {{-- <div class="col-xl-4 col-12">
-                        <div class="card crypto-card-3 pull-up">
-                            <div class="card-content">
-                                <div class="card-body pb-0">
-                                    <div class="row">
-                                        <div class="col-5 pl-2">
-                                            <h4>{{ __('All Visit') }}</h4>
-                                        </div>
-                                        <div class="col-5 text-right">
-                                           <h4>{{App\Models\Requests::where('type',2)->count()}}</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <canvas id="eth-chartjs" class="height-75"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                    {{-- <div class="col-xl-4 col-12">
-                        <div class="card crypto-card-3 pull-up">
-                            <div class="card-content">
-                                <div class="card-body pb-0">
-                                    <div class="row">
+                    {{-- <center>
+                        <button id="btn-nft-enable" onclick="setnotificationtocken()" class="btn btn-danger btn-xs btn-flat">Notification</button>
+                        <input type="text" id="tokk"/>
+                    </center> --}}
 
-                                        <div class="col-5 pl-2">
-                                            <h4>{{ __('All Book') }}</h4>
-                                        </div>
-                                        <div class="col-5 text-right">
-                                           <h4>{{App\Models\Requests::where('type',3)->count()}}</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <canvas id="xrp-chartjs" class="height-75"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                   
                 </div>
                 <!-- Candlestick Multi Level Control Chart -->
             </div>
-            <section id="sortable-lists">
-                {{-- <div class="row">
-                  <div class="col-12 mt-1 mb-3">
-                    <h4>Sortable Lists</h4>
-                    <hr>
-                  </div>
-                </div>
-                <div class="row">
-                    <!-- List Group With Tags -->
-                    <div class="col-lg-6">
-                        <div class="mb-1">
-                        <h5 class="mb-0">List Group With Tags</h5>
-                        <small class="text-muted">The most basic list group is simply an unordered list with list items,
-                            and the proper classes.</small>
-                        </div>
-                        <div class="card">
-                        <ul class="list-group" id="list-group-tags">
-                            <li class="list-group-item">
-                            <span class="badge badge-primary badge-pill float-right">14</span>
-                            Cras justo odio
-                            </li>
-                            <li class="list-group-item">
-                            <span class="badge badge-primary badge-pill float-right">2</span>
-                            Dapibus ac facilisis in
-                            </li>
-                            <li class="list-group-item">
-                            <span class="badge badge-primary badge-pill float-right">1</span>
-                            Morbi leo risus
-                            </li>
-                            <li class="list-group-item">
-                            <span class="badge badge-primary badge-pill float-right">6</span>
-                            Porta ac consectetur ac
-                            </li>
-                            <li class="list-group-item">
-                            <span class="badge badge-primary badge-pill float-right">3</span>
-                            Vestibulum at eros
-                            </li>
-                        </ul>
-                        </div>
-                    </div>
-                </div> --}}
-            </section>
         </div>
     </div>
+@endsection
+
+@section('script')
+
+{{-- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-messaging.js"></script> --}}
+
+<script>
+    jQuery(document).ready(function ($) {
+
+        // Your web app's Firebase configuration
+        // const firebaseConfig = {
+        //     apiKey: "{{ config('services.firebase.api_key') }}",
+        //     authDomain: "{{ config('services.firebase.auth_domain') }}",
+        //     projectId: "{{ config('services.firebase.project_id') }}",
+        //     storageBucket: "{{ config('services.firebase.storage_bucket') }}",
+        //     messagingSenderId: "{{ config('services.firebase.messaging_sender_id') }}",
+        //     appId: "{{ config('services.firebase.app_id') }}",
+        //     measurementId: "{{ config('services.firebase.measurement_id') }}"
+        // };
+
+        // // Initialize Firebase
+        // const app = firebase.initializeApp(firebaseConfig);
+
+        // const messaging = firebase.messaging();
+        // $('#tokk').val("qqqqqqqqq");
+        // // messaging
+        // .requestPermission()
+        // .then(function () {
+        //     return messaging.getToken()
+        //     console.log("xxxxxxxxxxxx");
+        // })
+        // .then(function(token) {
+        //     console.log(token);
+        // }
+
+        // const audio = new Audio( 'https://dl.dropboxusercontent.com/s/h8pvqqol3ovyle8/tom.mp3' );
+        // audio.muted = true;
+
+        // const alert_elem = confirm('Are you sure ?');
+        // if (confirm('Are you sure ?')) {
+        //     console.log('ok');
+        // }else{
+        //     console.log('cancel')
+        // }
+        
+
+        // audio.play().then( () => {
+        //     // already allowed
+        //     alert_elem.remove();
+        //     resetAudio();
+        // } )
+        // .catch( () => {
+        // // need user interaction
+        // alert_elem.addEventListener( 'click', ({ target }) => {
+        //     if( target.matches('button') ) {
+        //         const allowed = target.value === "1";
+        //         if( allowed ) {
+        //             audio.play()
+        //             .then( resetAudio );
+        //         }
+        //         alert_elem.remove();
+        //         }
+        //     } );
+        // } );
+
+
+        // document.getElementById( 'btn' ).addEventListener( 'click', (e) => {
+        // if( audio.muted ) {
+        //     console.log( 'silent notification' );
+        // }
+        // else {
+        //     audio.play();
+        // }
+        // } );
+
+        // function resetAudio() {
+        //     audio.pause();
+        //     audio.currentTime = 0;
+        //     audio.muted = false;
+        // }
+
+        // setInterval(function() {
+        //     audio.play();
+        // }, 20 * 1000);
+
+        
+
+    });
+</script>
 @endsection

@@ -45,7 +45,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
                                         @if(\App\Models\Role::havePremission(['specialty_cr']))
-                                        <a class="btn btn-primary mb-2" href="{{ route('admin.specialty.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
+                                        <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.specialty.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
                                         @endif
                                         <table
                                             class="table table-striped table-bordered ordering-print ">

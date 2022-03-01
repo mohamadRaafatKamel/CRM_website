@@ -124,52 +124,58 @@
 <script src="{{asset('assets/admin/js/scripts/notify.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/admin/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
 
+<!-- Firbase -->
+
+{{-- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script> --}}
+{{-- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-messaging.js"></script> --}}
+{{-- <script src="{{asset('assets/admin/js/scripts/firebase.js')}}" type="text/javascript"></script> --}}
+
 <script>
-    $('#meridians1').timeDropper({
-        meridians: true,
-        setCurrentTime: false
-    });
-    $('#meridians2').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
-    $('#meridians3').timeDropper({
-        meridians: true,
-        setCurrentTime: false
-    });
-    $('#meridians4').timeDropper({
-        meridians: true,
-        setCurrentTime: false
-    });
-    $('#meridians5').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
-    $('#meridians6').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
-    $('#meridians7').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
-    $('#meridians8').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
-    $('#meridians9').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
-    $('#meridians10').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
-    $('#meridians11').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
-    $('#meridians12').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
-    $('#meridians13').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
-    $('#meridians14').timeDropper({
-        meridians: true,setCurrentTime: false
-    });
+    // $('#meridians1').timeDropper({
+    //     meridians: true,
+    //     setCurrentTime: false
+    // });
+    // $('#meridians2').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
+    // $('#meridians3').timeDropper({
+    //     meridians: true,
+    //     setCurrentTime: false
+    // });
+    // $('#meridians4').timeDropper({
+    //     meridians: true,
+    //     setCurrentTime: false
+    // });
+    // $('#meridians5').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
+    // $('#meridians6').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
+    // $('#meridians7').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
+    // $('#meridians8').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
+    // $('#meridians9').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
+    // $('#meridians10').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
+    // $('#meridians11').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
+    // $('#meridians12').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
+    // $('#meridians13').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
+    // $('#meridians14').timeDropper({
+    //     meridians: true,setCurrentTime: false
+    // });
 </script>
 
 <script>
@@ -234,34 +240,17 @@
                 }
             });
         }
-        // const audio = new Audio("{{ asset( 'assets/admin/sound/samsung_galaxy_s_iii.mp3' ) }}");
-        // audio.play();
-
-
-        // $("#sound1").trigger("play");
-
-
+        
         CountEmergency();
 
         setInterval(function() {
             CountEmergency();
         }, 120 * 1000);
 
-        // var audio = new Audio("{{ asset( 'assets/admin/sound/samsung_galaxy_s_iii.mp3' ) }}");
-        // var playPromise = audio.play();
-
     });
 
 
 </script>
-
-{{-- <audio id="sound123" autoplay="true">
-    <source src="{{ asset( 'assets/admin/sound/samsung_galaxy_s_iii.mp3' ) }}" type="audio/mp3">
-</audio> --}}
-{{-- <script>
-    document.getElementById('sound123').play();
-    // $("#sound123").trigger("play");
-</script> --}}
 
 @yield('script')
 </body>

@@ -49,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'bank_name',
         'identity_id',
         'passport_id',
+        'device_token',
     ];
 
     /**

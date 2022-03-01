@@ -39,15 +39,35 @@ class UsersReferral extends Model
             if($referrals){
                 if(count($referrals)>0){
                     foreach ($referrals as $referral){
-                        $rroollee = new UsersReferral();
-                        $rroollee->referral_id = $referral;
-                        $rroollee->user_id  = $userId;
-                        $rroollee->admin_id = Auth::user()->id;
-                        $rroollee->save();
-
-                        Log::setLogInfo('',$referral,$logID,"update Users Referral");
+                        if($referral != null || $referral!=""){
+                            $rroollee = new UsersReferral();
+                            $rroollee->referral_id = $referral;
+                            $rroollee->user_id  = $userId;
+                            $rroollee->admin_id = Auth::user()->id;
+                            $rroollee->save();
+    
+                            Log::setLogInfo('',$referral,$logID,"update Users Referral");
+                        }
                     }
                 }
+            }
+        } catch (\Exception $ex) {
+        }
+    }
+
+    public static function getReferral($userId)
+    {
+        try{
+            $myref = [];
+            $referrals = UsersReferral::select('referral_id')->where('user_id',$userId)->get();
+
+            if($referrals){
+                if($referrals->count()>0){
+                    foreach ($referrals as $referral){
+                        $myref[]= $referral->referral_id;
+                    }
+                }
+                return $myref;
             }
         } catch (\Exception $ex) {
         }

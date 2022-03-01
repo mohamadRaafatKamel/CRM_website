@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
 
             // DataEntry
             OutpatientTableSeeder::class,
+            DoctorTableSeeder::class,
         ]);
     }
 }

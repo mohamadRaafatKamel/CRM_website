@@ -43,8 +43,9 @@
                                 @include('admin.include.alerts.errors')
 
                                 <div class="card-content collapse show">
+
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-danger mb-2b" href="{{ route('admin.request.out') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
+                                        <a class="btn btn-danger mb-2 mr15" href="{{ route('admin.request.out') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
                                         <div class="table-responsive">
                                             
                                                 <table

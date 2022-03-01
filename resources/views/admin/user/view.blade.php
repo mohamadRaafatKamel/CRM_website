@@ -177,7 +177,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-{{--  
+ 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="referral_id">{{ __('Referral') }}</label>
@@ -185,7 +185,7 @@
                                                                 <option value="">-- {{ __('Select') }}  {{ __('Referral') }} --</option>
                                                                 @foreach($referrals as $referral)
                                                                     <option value="{{ $referral->id }}"
-                                                                            @if(in_array($referral->id, $usersReferrals[0])) selected @endif
+                                                                            @if(in_array($referral->id, $usersReferrals)) selected @endif
                                                                         @if(old('referral_id') == $referral->id) selected @endif
                                                                     >{{ $referral->name_ar}}</option>
                                                                 @endforeach
@@ -195,7 +195,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
---}}
+
                                                 </div>
                                             </div>
                                             <div class="form-actions">
@@ -435,7 +435,7 @@
                                                 {{--                                                        onclick="history.back();">--}}
                                                 {{--                                                    <i class="ft-x"></i> تراجع--}}
                                                 {{--                                                </button>--}}
-                                                <button type="submit" class="btn btn-primary" name="btn" value="GeneralInfo">
+                                                <button type="submit" class="btn btn-primary" name="btn" value="Generalcontact">
                                                     <i class="la la-check-square-o"></i> تحديث
                                                 </button>
                                             </div>
