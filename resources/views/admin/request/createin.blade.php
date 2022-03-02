@@ -739,7 +739,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="shift_date"> {{ __('Date') }} <span style="color: #ff4961;">*</span></label>
-                                                            <input type="date" id="shift_date"
+                                                            <input type="date" id="shift_date" 
                                                                    class="form-control"  value="{{ $datenaw }}"
                                                                    placeholder="{{ __('Date') }} "
                                                                    name="shift_date">
@@ -752,12 +752,14 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="nurse_id">{{ __('Nurse Name') }} <span style="color: #ff4961;">*</span></label>
-                                                            <select class="select2 form-control" name="nurse_id" id="nurse_id"  >
+                                                            <select class="select2 form-control" name="nurse_id" id="nurse_id" required >
                                                                 <option value="">{{ __('Choose Nurse Name') }}</option>
                                                                 @foreach($nurses as $nurse)
                                                                     <option value="{{ $nurse->id }}"
                                                                             @if(isset($myorder->nurse_id))
-                                                                            @if($myorder->nurse_id == $nurse->id) selected @endif @endif
+                                                                                @if($myorder->nurse_id == $nurse->id) selected @endif 
+                                                                                @if(old('nurse_id') == $myorder->nurse_id) selected @endif
+                                                                            @endif
                                                                     >
                                                                         {{ $nurse->username }}</option>
                                                                 @endforeach
@@ -771,11 +773,11 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="shift_type"> {{ __('Type Sheft') }} <span style="color: #ff4961;">*</span></label>
-                                                            <select name="shift_type" id="shift_type" 
+                                                            <select name="shift_type" id="shift_type" required
                                                                     class="form-control @error('shift_type') is-invalid @enderror">
                                                                 <option value=""></option>
-                                                                <option value="1">{{ __('Long') }}</option>
-                                                                <option value="2">{{ __('Night') }}</option>
+                                                                <option value="1" @if(old('shift_type') == '1') selected @endif>{{ __('Long') }}</option>
+                                                                <option value="2" @if(old('shift_type') == '2') selected @endif>{{ __('Night') }}</option>
                                                             </select>
                                                             @error('shift_type')
                                                             <span class="text-danger">{{$message}}</span>
@@ -787,13 +789,21 @@
                                                         <div class="form-group">
                                                             <label for="issues"> {{ __('Customer Issues') }} <span style="color: #ff4961;">*</span></label>
                                                             <textarea id="issues" class="form-control" placeholder=" {{ __('Customer Issues') }}"  
-                                                                name="issues"></textarea>
+                                                                name="issues">{{ old('issues') }}</textarea>
                                                             @error('issues')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
 
+                                                </div>
+
+                                                <div class="form-actions">
+                                               
+                                                    <button type="submit" name="btn" value="nurseSheet" class="btn btn-success">
+                                                        <i class="la la-check-square-o"></i> {{ __('Add Nurse Only') }}
+                                                    </button>
+    
                                                 </div>
 
                                                 @if (isset($sheets))
@@ -830,13 +840,7 @@
                                             </div>
 
 
-                                            <div class="form-actions">
-                                               
-                                                <button type="submit" name="btn" value="nurseSheet" class="btn btn-success">
-                                                    <i class="la la-check-square-o"></i> {{ __('Add Nurse Only') }}
-                                                </button>
-
-                                            </div>
+                                            
                                         </form>
                                     </div>
                                 </div>

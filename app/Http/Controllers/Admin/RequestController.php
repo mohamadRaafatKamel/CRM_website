@@ -325,18 +325,6 @@ class RequestController extends Controller
                 return redirect()->route('admin.request.create.in')->with(['error' => '  غير موجوده']);
             }
 
-            // add Nurse Sheet
-            if ($request->has('btn') && $request->btn == "nurseSheet" ){
-                $sheet = new NurseSheet();
-                $sheet->nurse_id = $request->nurse_id;
-                $sheet->shift_date = $request->shift_date;
-                $sheet->issues = $request->issues;
-                $sheet->shift_type = $request->shift_type;
-                $sheet->admin_id  = Auth::user()->id;
-                $sheet->request_id  = $id;
-                $sheet->save();
-                return redirect()->route('admin.request.in')->with(['success'=>'تم الحفظ']);
-            }
 
             if($request->btn == "done")
                 $request->request->add(['status_in_out' => 4]);
@@ -639,24 +627,25 @@ class RequestController extends Controller
             return redirect()->route('admin.dashboard');
 
         $request->validate([
-            'shift_date'=>"unique:users,phone|required",
+            'shift_date'=>"required",
             'nurse_id'=>"required",
             'shift_type'=>"required",
-            'issues'=>"required",
+            // 'issues'=>"required",
         ]);
-
+        
         try {
-            $data = NurseSheet::find($id);
-            if (!$data) {
-                return redirect()->route('admin.dashboard', $id)->with(['error' => '  غير موجوده']);
-            }
+            $sheet = new NurseSheet();
+            $sheet->nurse_id = $request->nurse_id;
+            $sheet->shift_date = $request->shift_date;
+            $sheet->issues = $request->issues;
+            $sheet->shift_type = $request->shift_type;
+            $sheet->admin_id  = Auth::user()->id;
+            $sheet->request_id  = $id;
+            $sheet->save();
 
-            if (!$request->has('disabled'))
-                $request->request->add(['disabled' => 1]);
+            Log::setLog('create','nurse_sheet',$sheet->id,"","");
 
-            Log::setLog('update','package',$id,"",$request->except(['_token']) );
-            $data->update($request->except(['_token']));
-            return redirect()->back()->with(['success' => 'تم التحديث بنجاح']);
+            return redirect()->route('admin.request.create.in', $id)->with(['success' => 'تم التحديث بنجاح']);
 
         } catch (\Exception $ex) {
             return redirect()->route('admin.dashboard')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
