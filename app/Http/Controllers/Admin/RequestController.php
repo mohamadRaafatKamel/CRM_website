@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Prophecy\Call\Call;
 
 class RequestController extends Controller
 {
@@ -62,6 +63,7 @@ class RequestController extends Controller
         $physicians = Physician::select()->get();
         $myorder = Requests::select()->find($req);
         $calls = RequestCall::select()->where('request_id',$req)->get();
+        $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
@@ -292,6 +294,7 @@ class RequestController extends Controller
         $governorates = Governorate::select()->get();
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $sheets = NurseSheet::select()->where('request_id',$req)->get();
+        $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
@@ -322,18 +325,6 @@ class RequestController extends Controller
                 return redirect()->route('admin.request.create.in')->with(['error' => '  غير موجوده']);
             }
 
-            // add Nurse Sheet
-            if ($request->has('btn') && $request->btn == "nurseSheet" ){
-                $sheet = new NurseSheet();
-                $sheet->nurse_id = $request->nurse_id;
-                $sheet->shift_date = $request->shift_date;
-                $sheet->issues = $request->issues;
-                $sheet->shift_type = $request->shift_type;
-                $sheet->admin_id  = Auth::user()->id;
-                $sheet->request_id  = $id;
-                $sheet->save();
-                return redirect()->route('admin.request.in')->with(['success'=>'تم الحفظ']);
-            }
 
             if($request->btn == "done")
                 $request->request->add(['status_in_out' => 4]);
@@ -426,6 +417,7 @@ class RequestController extends Controller
         $companys = CompanyInfo::select()->get();
         $referrals = Referral::select()->get();
         $calls = RequestCall::select()->where('request_id',$req)->get();
+        $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
@@ -608,6 +600,75 @@ class RequestController extends Controller
         $call->admin_id  = Auth::user()->id;
         $call->save();
         Log::setLog('create','request_call',$call->id,"","");
+    }
+
+    public function destroyCall($id)
+    {
+        if(! Role::havePremission(['request_all','request_emergency','request_out','request_in']))
+            return redirect()->route('admin.dashboard');
+
+        try {
+            $data = RequestCall::find($id);
+            if (!$data) {
+                return redirect()->route('admin.dashboard')->with(['error' => '  غير موجوده']);
+            }
+            $data->delete();
+
+            return redirect()->back()->with(['success' => 'تم حذف  بنجاح']);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.dashboard')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        }
+    }
+
+    public function storeSheet($id, Request $request)
+    {
+        if(! Role::havePremission(['request_in']))
+            return redirect()->route('admin.dashboard');
+
+        $request->validate([
+            'shift_date'=>"required",
+            'nurse_id'=>"required",
+            'shift_type'=>"required",
+            // 'issues'=>"required",
+        ]);
+        
+        try {
+            $sheet = new NurseSheet();
+            $sheet->nurse_id = $request->nurse_id;
+            $sheet->shift_date = $request->shift_date;
+            $sheet->issues = $request->issues;
+            $sheet->shift_type = $request->shift_type;
+            $sheet->admin_id  = Auth::user()->id;
+            $sheet->request_id  = $id;
+            $sheet->save();
+
+            Log::setLog('create','nurse_sheet',$sheet->id,"","");
+
+            return redirect()->route('admin.request.create.in', $id)->with(['success' => 'تم التحديث بنجاح']);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.dashboard')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        }
+    }
+
+    public function destroySheet($id)
+    {
+        if(! Role::havePremission(['request_in']))
+            return redirect()->route('admin.dashboard');
+
+        try {
+            $data = NurseSheet::find($id);
+            if (!$data) {
+                return redirect()->route('admin.dashboard')->with(['error' => '  غير موجوده']);
+            }
+            $data->delete();
+
+            return redirect()->back()->with(['success' => 'تم حذف  بنجاح']);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.dashboard')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        }
     }
 
     // JSON

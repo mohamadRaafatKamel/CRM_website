@@ -546,50 +546,30 @@
                 </section>
                 <!-- // Basic form layout section end -->
 
+
                 <!-- Basic form layout section start -->
                 <section id="basic-form-layouts">
                     <div class="row match-height">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> <b> <i class="ft-phone"></i> {{ __('Calls') }} </b>  </h4>
+                                    <h4 class="card-title" id="basic-layout-form"><b> <i class="ft-phone"></i> {{ __('Calls') }} </b> </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
                                             <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                             <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
                                             <li><a data-action="close"><i class="ft-x"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
-                                
-                                <div class="card-content collapse">
+                                <div class="card-content collapse show">
                                     <div class="card-body">
 
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
-
-                                                @if (isset($calls))
-                                                    @foreach ($calls as $call)
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            {{ \App\Models\Admin::getAdminNamebyId($call->admin_id)  }}
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            {{ \App\Models\RequestCall::getDepartment($call->department) }}
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            {{ $call->call_time }}
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            {{ $call->note }}
-                                                        </div>
-                                                    </div>
-                                                    @endforeach
-                                                    
-                                                @endif
+                                                
+                                                
 
                                                 <div class="row">
 
@@ -599,6 +579,7 @@
                                                             <input type="datetime-local" id="time"
                                                                    class="form-control"
                                                                    placeholder="{{ __('Time') }} "
+                                                                   {{-- value="{{ $datenaw }}" --}}
                                                                    name="time">
                                                             @error('time')
                                                             <span class="text-danger">{{$message}}</span>
@@ -618,6 +599,7 @@
                                                         </div>
                                                     </div>
 
+                                                   
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label style=" height: 49px;"> </label>
@@ -626,30 +608,95 @@
                                                             </button>
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <label style=" height: 49px;"> </label>
+                                                            
+                                                        </div>
+                                                    </div>
                                                 </div>
-
+                                                
+                                                    @if (isset($calls))
+                                                    @if (count($calls) > 0)
+                                                    <div class="row">
+                                                        <table class="table table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th> الاجنت</th>
+                                                                    <th>القسم</th>
+                                                                    <th> وقت المكالمه</th>
+                                                                    <th> ملحوظة</th>
+                                                                    <th> وقت الادخال</th>
+                                                                    <th> </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @foreach ($calls as $call)
+                                                                <tr>
+                                                                    <td>{{ \App\Models\Admin::getAdminNamebyId($call->admin_id)  }}</td>
+                                                                    <td>{{ \App\Models\RequestCall::getDepartment($call->department) }}</td>
+                                                                    <td>{{ $call->call_time }}</td>
+                                                                    <td>{{ $call->note }}</td>
+                                                                    <td>{{ $call->created_at }}</td>
+                                                                    <td>
+                                                                        <a href="{{route('admin.call.delete',$call->id)}}" class="btn btn-danger" ><i class="ft-trash-2"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    @endif
+                                                    @endif
+                                                
                                             </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {{-- @endif --}}
 
+                
+                <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="heading-elements-toggle"><i
+                                            class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
 
-                                            <div class="form-actions">
+                                        <div class="form-actions">
                                                
-                                                <button type="submit" name="btn" value="done" class="btn btn-success">
-                                                    <i class="la la-check-square-o"></i> {{ __('DONE') }}
-                                                </button>
+                                            <button type="submit" name="btn" value="done" class="btn btn-success">
+                                                <i class="la la-check-square-o"></i> {{ __('DONE') }}
+                                            </button>
 
-                                                <button type="submit" name="btn" value="hold" class="btn btn-warning">
-                                                    <i class="la la-check-square-o"></i> {{ __('Hold') }}
-                                                </button>
-                                                {{-- <button type="submit" name="btn" value="approve" class="btn btn-warning">
-                                                    <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
-                                                </button> --}}
+                                            <button type="submit" name="btn" value="hold" class="btn btn-warning">
+                                                <i class="la la-check-square-o"></i> {{ __('Hold') }}
+                                            </button>
+                                            {{-- <button type="submit" name="btn" value="approve" class="btn btn-warning">
+                                                <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
+                                            </button> --}}
 
-                                                <button type="submit" name="btn" value="cancel" class="btn btn-danger">
-                                                    <i class="la la-check-square-o"></i> {{ __('Cancel') }}
-                                                </button>
+                                            <button type="submit" name="btn" value="cancel" class="btn btn-danger">
+                                                <i class="la la-check-square-o"></i> {{ __('Cancel') }}
+                                            </button>
 
-                                            </div>
-                                        
+                                        </div>
+                                    </form>
                                     </div>
                                 </div>
                             </div>
@@ -683,34 +730,16 @@
                                     <div class="card-body">
 
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
-
-                                                @if (isset($sheets))
-                                                    @foreach ($sheets as $sheet)
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            {{ $sheet->shift_date }}
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            {{ \App\Models\User::getUserName($sheet->nurse_id)  }}
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            {{ \App\Models\NurseSheet::getType($sheet->shift_type) }}
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            {{ $sheet->issues }}
-                                                        </div>
-                                                    </div>
-                                                    @endforeach
-                                                    
-                                                @endif
-
+                                                
+                                            <form class="form" action="{{route('admin.sheet.store', $myorder->id)}}" 
+                                                method="POST" enctype="multipart/form-data">
+                                                @csrf
                                                 <div class="row">
 
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="shift_date"> {{ __('Date') }} <span style="color: #ff4961;">*</span></label>
-                                                            <input type="date" id="shift_date"
+                                                            <input type="date" id="shift_date" 
                                                                    class="form-control"  value="{{ $datenaw }}"
                                                                    placeholder="{{ __('Date') }} "
                                                                    name="shift_date">
@@ -723,12 +752,14 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="nurse_id">{{ __('Nurse Name') }} <span style="color: #ff4961;">*</span></label>
-                                                            <select class="select2 form-control" name="nurse_id" id="nurse_id"  >
+                                                            <select class="select2 form-control" name="nurse_id" id="nurse_id" required >
                                                                 <option value="">{{ __('Choose Nurse Name') }}</option>
                                                                 @foreach($nurses as $nurse)
                                                                     <option value="{{ $nurse->id }}"
                                                                             @if(isset($myorder->nurse_id))
-                                                                            @if($myorder->nurse_id == $nurse->id) selected @endif @endif
+                                                                                @if($myorder->nurse_id == $nurse->id) selected @endif 
+                                                                                @if(old('nurse_id') == $myorder->nurse_id) selected @endif
+                                                                            @endif
                                                                     >
                                                                         {{ $nurse->username }}</option>
                                                                 @endforeach
@@ -741,12 +772,12 @@
 
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="shift_type"> {{ __('Type') }} <span style="color: #ff4961;">*</span></label>
-                                                            <select name="shift_type" id="shift_type" 
+                                                            <label for="shift_type"> {{ __('Type Sheft') }} <span style="color: #ff4961;">*</span></label>
+                                                            <select name="shift_type" id="shift_type" required
                                                                     class="form-control @error('shift_type') is-invalid @enderror">
                                                                 <option value=""></option>
-                                                                <option value="1">{{ __('Long') }}</option>
-                                                                <option value="2">{{ __('Night') }}</option>
+                                                                <option value="1" @if(old('shift_type') == '1') selected @endif>{{ __('Long') }}</option>
+                                                                <option value="2" @if(old('shift_type') == '2') selected @endif>{{ __('Night') }}</option>
                                                             </select>
                                                             @error('shift_type')
                                                             <span class="text-danger">{{$message}}</span>
@@ -758,7 +789,7 @@
                                                         <div class="form-group">
                                                             <label for="issues"> {{ __('Customer Issues') }} <span style="color: #ff4961;">*</span></label>
                                                             <textarea id="issues" class="form-control" placeholder=" {{ __('Customer Issues') }}"  
-                                                                name="issues"></textarea>
+                                                                name="issues">{{ old('issues') }}</textarea>
                                                             @error('issues')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -767,16 +798,49 @@
 
                                                 </div>
 
-                                            </div>
-
-
-                                            <div class="form-actions">
+                                                <div class="form-actions">
                                                
-                                                <button type="submit" name="btn" value="nurseSheet" class="btn btn-success">
-                                                    <i class="la la-check-square-o"></i> {{ __('Add Nurse Only') }}
-                                                </button>
+                                                    <button type="submit" name="btn" value="nurseSheet" class="btn btn-success">
+                                                        <i class="la la-check-square-o"></i> {{ __('Add Nurse Only') }}
+                                                    </button>
+    
+                                                </div>
+
+                                                @if (isset($sheets))
+                                                    @if (count($sheets) > 0)
+                                                    <div class="row">
+                                                        <table class="table table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th> {{ __('Date') }}</th>
+                                                                    <th> {{ __('Nurse Name') }}</th>
+                                                                    <th> {{ __('Type Sheft') }}</th>
+                                                                    <th> {{ __('Customer Issues') }} </th>
+                                                                    <th> </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @foreach ($sheets as $sheet)
+                                                                <tr>
+                                                                    <td>{{ $sheet->shift_date }}</td>
+                                                                    <td>{{ \App\Models\User::getUserName($sheet->nurse_id)  }}</td>
+                                                                    <td>{{ \App\Models\NurseSheet::getType($sheet->shift_type) }}</td>
+                                                                    <td>{{ $sheet->issues }}</td>
+                                                                    <td>
+                                                                        <a href="{{route('admin.sheet.delete',$sheet->id)}}" class="btn btn-danger" ><i class="ft-trash-2"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    @endif
+                                                    @endif
 
                                             </div>
+
+
+                                            
                                         </form>
                                     </div>
                                 </div>
@@ -830,59 +894,6 @@
                     // }
                 });
             });
-
-            // $('#governorate_id').change(function () {
-            //     var govern = $('#governorate_id').val();
-            //     if(govern !== null && govern !== ""){
-            //         getCitySelect(govern);
-            //     }
-            // });
-
-            // function getCitySelect(govern) {
-            //     $.ajax({
-            //         url: "../../getCityGevern/" + govern,
-            //         type: 'get',
-            //         dataType: 'json',
-            //         success: function (response) {
-            //             if(response == null){
-            //                 console.log('Not Found');
-            //             }else {
-            //                 if(response.length > 0){
-            //                     for (let i = 0; i < response.length; i++) { 
-            //                         if(i == 0){
-            //                             $('#city_id').html($('<option>', {
-            //                                 value: response[i].id,
-            //                                 text: response[i].city_name_ar
-            //                             }));
-            //                         }else{
-            //                             $('#city_id').append($('<option>', {
-            //                                 value: response[i].id,
-            //                                 text: response[i].city_name_ar
-            //                             }));
-            //                         }
-            //                     }
-            //                 }
-            //             }
-            //         }
-                    // error: function (xhr, ajaxOptions, thrownError) {
-                    //     input.val(0);
-                    // }
-            //     });
-            // }
-
-            // Referral
-            // function referralDisplay(){
-            //     let ref = $('#referral_id').val();
-            //     if(ref !== null && ref !== ""){
-            //         $('#referral_dev').hide();
-            //     }else{
-            //         $('#referral_dev').show();
-            //     }
-            // }
-            // referralDisplay();
-            // $('#referral_id').change(function () {
-            //     referralDisplay();
-            // });
 
             // Corporate
             function referralCorporate(){
