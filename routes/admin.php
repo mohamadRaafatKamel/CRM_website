@@ -172,7 +172,6 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::post('store','RequestController@store')->name('admin.request.store');
         Route::post('update/{id}','RequestController@update')->name('admin.request.update');
         
-        
         // Emergency
         Route::get('/emergency','RequestController@indexEm')->name('admin.request.emergency');
 
@@ -190,6 +189,13 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         
 //        Route::get('view/{id}','RequestController@view')->name('admin.user.view');
 //        Route::post('update/{id}','RequestController@update')->name('admin.user.update');
+
+        // Call
+        Route::get('/call/delete/{id}','RequestController@destroyCall') -> name('admin.call.delete');
+
+        // Nurse Sheet
+        Route::post('/sheet/store/{id}','RequestController@storeSheet')->name('admin.sheet.store');
+        Route::get('/sheet/delete/{id}','RequestController@destroySheet') -> name('admin.sheet.delete');
 
         // ajax
         Route::get('/getUserInfo/{id}', 'RequestController@getUserInfo');

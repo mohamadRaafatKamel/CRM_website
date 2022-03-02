@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Prophecy\Call\Call;
 
 class RequestController extends Controller
 {
@@ -62,6 +63,7 @@ class RequestController extends Controller
         $physicians = Physician::select()->get();
         $myorder = Requests::select()->find($req);
         $calls = RequestCall::select()->where('request_id',$req)->get();
+        $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
@@ -292,6 +294,7 @@ class RequestController extends Controller
         $governorates = Governorate::select()->get();
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $sheets = NurseSheet::select()->where('request_id',$req)->get();
+        $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
@@ -426,6 +429,7 @@ class RequestController extends Controller
         $companys = CompanyInfo::select()->get();
         $referrals = Referral::select()->get();
         $calls = RequestCall::select()->where('request_id',$req)->get();
+        $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
@@ -608,6 +612,74 @@ class RequestController extends Controller
         $call->admin_id  = Auth::user()->id;
         $call->save();
         Log::setLog('create','request_call',$call->id,"","");
+    }
+
+    public function destroyCall($id)
+    {
+        if(! Role::havePremission(['request_all','request_emergency','request_out','request_in']))
+            return redirect()->route('admin.dashboard');
+
+        try {
+            $data = RequestCall::find($id);
+            if (!$data) {
+                return redirect()->route('admin.dashboard')->with(['error' => '  غير موجوده']);
+            }
+            $data->delete();
+
+            return redirect()->back()->with(['success' => 'تم حذف  بنجاح']);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.dashboard')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        }
+    }
+
+    public function storeSheet($id, Request $request)
+    {
+        if(! Role::havePremission(['request_in']))
+            return redirect()->route('admin.dashboard');
+
+        $request->validate([
+            'shift_date'=>"unique:users,phone|required",
+            'nurse_id'=>"required",
+            'shift_type'=>"required",
+            'issues'=>"required",
+        ]);
+
+        try {
+            $data = NurseSheet::find($id);
+            if (!$data) {
+                return redirect()->route('admin.dashboard', $id)->with(['error' => '  غير موجوده']);
+            }
+
+            if (!$request->has('disabled'))
+                $request->request->add(['disabled' => 1]);
+
+            Log::setLog('update','package',$id,"",$request->except(['_token']) );
+            $data->update($request->except(['_token']));
+            return redirect()->back()->with(['success' => 'تم التحديث بنجاح']);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.dashboard')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        }
+    }
+
+    public function destroySheet($id)
+    {
+        if(! Role::havePremission(['request_in']))
+            return redirect()->route('admin.dashboard');
+
+        try {
+            $data = NurseSheet::find($id);
+            if (!$data) {
+                return redirect()->route('admin.dashboard')->with(['error' => '  غير موجوده']);
+            }
+            $data->delete();
+
+            return redirect()->back()->with(['success' => 'تم حذف  بنجاح']);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.dashboard')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        }
     }
 
     // JSON

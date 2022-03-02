@@ -34,7 +34,6 @@
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
                                             <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                             <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
                                             <li><a data-action="close"><i class="ft-x"></i></a></li>
                                         </ul>
@@ -768,44 +767,23 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> <b> <i class="ft-phone"></i> {{ __('Calls') }} </b>  </h4>
+                                    <h4 class="card-title" id="basic-layout-form"><b> <i class="ft-phone"></i> {{ __('Calls') }} </b> </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
                                             <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                             <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
                                             <li><a data-action="close"><i class="ft-x"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
-                                
                                 <div class="card-content collapse">
                                     <div class="card-body">
 
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
-
-                                                @if (isset($calls))
-                                                    @foreach ($calls as $call)
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            {{ \App\Models\Admin::getAdminNamebyId($call->admin_id)  }}
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            {{ \App\Models\RequestCall::getDepartment($call->department) }}
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            {{ $call->call_time }}
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            {{ $call->note }}
-                                                        </div>
-                                                    </div>
-                                                    @endforeach
-                                                    
-                                                @endif
+                                                
+                                                
 
                                                 <div class="row">
 
@@ -815,6 +793,7 @@
                                                             <input type="datetime-local" id="time"
                                                                    class="form-control"
                                                                    placeholder="{{ __('Time') }} "
+                                                                   {{-- value="{{ $datenaw }}" --}}
                                                                    name="time">
                                                             @error('time')
                                                             <span class="text-danger">{{$message}}</span>
@@ -834,6 +813,7 @@
                                                         </div>
                                                     </div>
 
+                                                   
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label style=" height: 49px;"> </label>
@@ -843,33 +823,98 @@
                                                         </div>
                                                     </div>
 
-
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <label style=" height: 49px;"> </label>
+                                                            
+                                                        </div>
+                                                    </div>
                                                 </div>
-
-                                            </div>
-
-
-                                            <div class="form-actions">
-                                            
-                                                <button type="submit" name="btn" value="done" class="btn btn-success">
-                                                    <i class="la la-check-square-o"></i> {{ __('DONE') }}
-                                                </button>
-
-                                                <button type="submit" name="btn" value="hold" class="btn btn-warning">
-                                                    <i class="la la-check-square-o"></i> {{ __('Hold') }}
-                                                </button>
-                                                {{-- <button type="submit" name="btn" value="approve" class="btn btn-warning">
-                                                    <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
-                                                </button> --}}
-
-                                                <button type="submit" name="btn" value="cancel" class="btn btn-danger">
-                                                    <i class="la la-check-square-o"></i> {{ __('Cancel') }}
-                                                </button>
+                                                
+                                                    @if (isset($calls))
+                                                    @if (count($calls) > 0)
+                                                    <div class="row">
+                                                        <table class="table table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th> الاجنت</th>
+                                                                    <th>القسم</th>
+                                                                    <th> وقت المكالمه</th>
+                                                                    <th> ملحوظة</th>
+                                                                    <th> وقت الادخال</th>
+                                                                    <th> </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @foreach ($calls as $call)
+                                                                <tr>
+                                                                    <td>{{ \App\Models\Admin::getAdminNamebyId($call->admin_id)  }}</td>
+                                                                    <td>{{ \App\Models\RequestCall::getDepartment($call->department) }}</td>
+                                                                    <td>{{ $call->call_time }}</td>
+                                                                    <td>{{ $call->note }}</td>
+                                                                    <td>{{ $call->created_at }}</td>
+                                                                    <td>
+                                                                        <a href="{{route('admin.call.delete',$call->id)}}" class="btn btn-danger" ><i class="ft-trash-2"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    @endif
+                                                    @endif
                                                 
                                             </div>
                                         </form>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {{-- @endif --}}
+
+                
+                <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="heading-elements-toggle"><i
+                                            class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+
+                                        <div class="form-actions">
+                                               
+                                            <button type="submit" name="btn" value="done" class="btn btn-success">
+                                                <i class="la la-check-square-o"></i> {{ __('DONE') }}
+                                            </button>
+
+                                            <button type="submit" name="btn" value="hold" class="btn btn-warning">
+                                                <i class="la la-check-square-o"></i> {{ __('Hold') }}
+                                            </button>
+                                            {{-- <button type="submit" name="btn" value="approve" class="btn btn-warning">
+                                                <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
+                                            </button> --}}
+
+                                            <button type="submit" name="btn" value="cancel" class="btn btn-danger">
+                                                <i class="la la-check-square-o"></i> {{ __('Cancel') }}
+                                            </button>
+
+                                        </div>
+                                           
+                                    </div>
+                                </div>
+                            </form>
                             </div>
                         </div>
                     </div>
