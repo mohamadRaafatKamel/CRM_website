@@ -612,6 +612,7 @@ class RequestController extends Controller
             if (!$data) {
                 return redirect()->route('admin.dashboard')->with(['error' => '  غير موجوده']);
             }
+            Log::setLog('delete','request_call',$id,"","");
             $data->delete();
 
             return redirect()->back()->with(['success' => 'تم حذف  بنجاح']);
@@ -621,8 +622,7 @@ class RequestController extends Controller
         }
     }
 
-    public function storeSheet($id, Request $request)
-    {
+    public function storeSheet($id, Request $request){
         if(! Role::havePremission(['request_in']))
             return redirect()->route('admin.dashboard');
 
@@ -652,8 +652,7 @@ class RequestController extends Controller
         }
     }
 
-    public function destroySheet($id)
-    {
+    public function destroySheet($id){
         if(! Role::havePremission(['request_in']))
             return redirect()->route('admin.dashboard');
 
@@ -662,6 +661,7 @@ class RequestController extends Controller
             if (!$data) {
                 return redirect()->route('admin.dashboard')->with(['error' => '  غير موجوده']);
             }
+            Log::setLog('delete','nurse_sheet',$id,"","");
             $data->delete();
 
             return redirect()->back()->with(['success' => 'تم حذف  بنجاح']);
