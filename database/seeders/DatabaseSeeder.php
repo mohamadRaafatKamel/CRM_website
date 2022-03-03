@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleTableSeeder::class,
-            AdminTableSeeder::class,
+            // AdminTableSeeder::class,
             RequestTableSeeder::class,
             DocInfoTableSeeder::class,
             
@@ -24,8 +24,10 @@ class DatabaseSeeder extends Seeder
             CitiesTableSeeder::class,
 
             // DataEntry
-            OutpatientTableSeeder::class,
-            DoctorTableSeeder::class,
+            // OutpatientTableSeeder::class,
+            // DoctorTableSeeder::class,
+
+            InitDataLiveSeeder::class,
         ]);
     }
 }
