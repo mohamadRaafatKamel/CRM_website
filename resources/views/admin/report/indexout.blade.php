@@ -79,6 +79,7 @@
                                                     <tbody>
 
                                                     @isset($requests)
+                                                        @if (count($requests) > 0)
                                                         @foreach($requests as $request)
                                                             <tr>
                                                                 <td>{{$request->id}}</td>
@@ -89,7 +90,7 @@
                                                                 <td>{{$request->phone}}</td>
                                                                 <td>
                                                                     @foreach ($usersReferrals as $usersReferral)
-                                                                        {{ $usersReferral }},<br/>
+                                                                        {{ $usersReferral }},
                                                                     @endforeach
                                                                 </td>
                                                                 <td>{{$request->service_id}}</td>
@@ -106,7 +107,7 @@
                                                                 <th>{{$request->doctor_id}} </th>
                                                                 <td>
                                                                     @foreach ($usersCalls as $usersCall)
-                                                                        {{ $usersCall }},<br/>
+                                                                        {{ $usersCall }},
                                                                     @endforeach
                                                                 </td>
                                                                 <td>{{$request->real_cost}}</td>
@@ -121,6 +122,7 @@
                                                                 
                                                             </tr>
                                                         @endforeach
+                                                        @endif
                                                     @endisset
                                                     </tbody>
                                                     {{-- <tfoot>
