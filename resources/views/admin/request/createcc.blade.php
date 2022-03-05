@@ -637,7 +637,63 @@
 
                                                 </div>
 
+                                                
                                                 <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="co"> {{ __('C/O') }} </label>
+                                                            <input type="text" id="co"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->co))
+                                                                    value="{{ $myorder->co }}"
+                                                                    @else
+                                                                   value="{{ old('co') }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('C/O') }}"
+                                                                   name="co">
+                                                            @error('co')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="history"> {{ __('History') }} </label>
+                                                            <input type="text" id="history"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->history))
+                                                                    value="{{ $myorder->history }}"
+                                                                    @else
+                                                                   value="{{ old('history') }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('History') }}"
+                                                                   name="history">
+                                                            @error('history')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="diagnose"> {{ __('Diagnose') }} </label>
+                                                            <input type="text" id="diagnose"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->diagnose))
+                                                                    value="{{ $myorder->diagnose }}"
+                                                                    @else
+                                                                   value="{{ old('diagnose') }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('diagnose') }}"
+                                                                   name="diagnose">
+                                                            @error('diagnose')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="code_zone_patient_id"> {{ __('Code Zone Patient ID') }} </label>
@@ -662,14 +718,85 @@
                                                             <textarea id="symptoms" placeholder="{{ __('Symptoms') }}" 
                                                                     class="form-control" name="symptoms"
                                                                     >@if(isset($myorder->symptoms)){{ $myorder->symptoms }}@else {{ old('symptoms') }} @endif</textarea>
-                                                            @error('code_zone_patient_id')
+                                                            @error('symptoms')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
 
                                                 </div>
+                                                <hr/>
                                                 <div class="row">
+
+                                                    {{-- <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="date_in"> {{ __('Date In') }} </label>
+                                                            <input type="date" id="date_in"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->date_in))
+                                                                        value="{{ $myorder->date_in }}"
+                                                                   @else
+                                                                        value="{{ old('date_in') }}"
+                                                                   @endif
+                                                                   @if($myorder->date_in== null)
+                                                                        name="date_in"
+                                                                   @else
+                                                                        readonly
+                                                                   @endif
+                                                                   placeholder="{{ __('Date In') }}" >
+                                                            @error('date_in')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div> --}}
+
+                                                    {{-- <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="date_out"> {{ __('Date Out') }} </label>
+                                                            <input type="date" id="date_out"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->date_out))
+                                                                   value="{{ $myorder->date_out }}"
+                                                                   @else
+                                                                   value="{{ old('date_out') }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Date Out') }}"
+                                                                   name="date_out">
+                                                            @error('date_out')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div> --}}
+
+                                                    {{-- <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="Long"> {{ __('Long') }} </label>
+                                                            <input type="text" id="Long" readonly
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->Long))
+                                                                   value="{{ $myorder->Long }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Long') }}">
+                                                        </div>
+                                                    </div> --}}
+
+                                                    {{-- <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="reason_out"> {{ __('Reason Out') }} </label>
+                                                            <textarea id="reason_out" placeholder="{{ __('Reason Out') }}" 
+                                                                    class="form-control" name="reason_out"
+                                                                    >@if(isset($myorder->reason_out)){{ $myorder->reason_out }}@else {{ old('reason_out') }} @endif</textarea>
+                                                            @error('reason_out')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div> --}}
+
+
+                                                </div>
+                                                {{-- <hr/> --}}
+                                                <div class="row">
+
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">

@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\Types\Null_;
 use Prophecy\Call\Call;
 
 class RequestController extends Controller
@@ -279,6 +280,20 @@ class RequestController extends Controller
         if (!isset($myorder->id)) {
             return redirect()->route('admin.request.in')->with(['error' => '  غير موجوده']);
         }
+        
+        // how long stay in
+        $long = '';
+        if(empty($myorder->Long) ){  dd('fffff');
+            if(isset($myorder->date_in) && isset($myorder->date_out)){
+                if($myorder->date_in != Null && $myorder->date_out != Null ){
+                    $interval = date_diff(date_create($myorder->date_in),date_create($myorder->date_out));
+                    $long = $interval->days;
+                    $myorder->update(['Long'=>$long ]);
+                }
+            }
+        }else{
+            $long = $myorder->Long;
+        }
 
         date_default_timezone_set('Africa/Cairo');
         $datenaw = date("Y-m-d");
@@ -299,7 +314,7 @@ class RequestController extends Controller
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
         
-        return view('admin.request.createin',compact('datenaw','usersReferrals','users','nurses','sheets','packages','companys','referrals','calls','governorates','specialtys','serves','myorder','doctors'));
+        return view('admin.request.createin',compact('datenaw','long','usersReferrals','users','nurses','sheets','packages','companys','referrals','calls','governorates','specialtys','serves','myorder','doctors'));
     }
 
     public function updateIN(Request $request, $id)
