@@ -853,7 +853,7 @@
                                                             <select name="shift_type" id="shift_type" required
                                                                     class="form-control @error('shift_type') is-invalid @enderror">
                                                                 <option value=""></option>
-                                                                <option value="1" @if(old('shift_type') == '1') selected @endif>{{ __('Long') }}</option>
+                                                                <option value="1" @if(old('shift_type') == '1') selected @endif>{{ __('Long Sheft') }}</option>
                                                                 <option value="2" @if(old('shift_type') == '2') selected @endif>{{ __('Night') }}</option>
                                                             </select>
                                                             @error('shift_type')

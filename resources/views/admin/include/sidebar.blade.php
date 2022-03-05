@@ -284,6 +284,20 @@
                     </ul>
                 </li>
             @endif
+
+            @if(\App\Models\Role::havePremission(['report_view']))
+                <li class="nav-item">
+                    <a href=""><i class="la la-map-signs"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Report') }} </span>
+                    </a>
+                    <ul class="menu-content">
+                        <li @if(View::hasSection('report_out')) class="active" @endif >
+                            <a class="menu-item" href="{{route('admin.report.out')}}" data-i18n="nav.dash.ecommerce"> {{ __('OutPatient') }} </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+
             @if(\App\Models\Role::havePremission(['admin_view','admin_cr','admin_idt']))
             <li class="nav-item">
                 <a href=""><i class="la la-user"></i>

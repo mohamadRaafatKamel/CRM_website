@@ -204,6 +204,14 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
     });
     ##################### End Request ##########################
 
+    ##################### Report ###############################
+    Route::group(['prefix'=>'report'],function (){
+
+        Route::get('/out','ReportController@indexOut')->name('admin.report.out');
+
+    });
+    ##################### End Report ###########################
+
      ##################### Order ##############################
     //  Route::group(['prefix'=>'order'],function (){
     //     Route::get('/','OrderController@index')->name('admin.order');

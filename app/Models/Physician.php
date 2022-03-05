@@ -30,9 +30,9 @@ class Physician extends Model
 
     public static function getName($id)
     {
-        $data = Service::select()->find($id);
-        if(isset($data->id)){
-            return $data['name'];
+        $data = Physician::select('name')->find($id);
+        if(isset($data->name)){
+            return $data->name;
         }
         return "";
     }

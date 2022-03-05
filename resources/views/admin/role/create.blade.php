@@ -421,6 +421,20 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <label><strong> {{ __('Report') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="report_view" name="role_info[]"
+                                                                   id="report_view" {{ $readonly }}
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="report_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
                                                 
                                                 <label><strong> {{ __('Setting') }} </strong></label>
                                                 <div class="row">

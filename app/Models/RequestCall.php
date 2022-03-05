@@ -44,4 +44,22 @@ class RequestCall extends Model
         return 0;
     }
 
+    public static function getCallsTime($id)
+    {
+        try{
+            $mycall = [];
+            $calls = RequestCall::select()->where('request_id',$id)->get();
+
+            if($calls){
+                if($calls->count()>0){
+                    foreach ($calls as $call){
+                        $mycall[]= $call->call_time;
+                    }
+                }
+                return $mycall;
+            }
+        } catch (\Exception $ex) {
+        }
+    }
+
 }
