@@ -283,13 +283,11 @@ class RequestController extends Controller
         
         // how long stay in
         $long = '';
-        if(empty($myorder->Long) ){  dd('fffff');
+        if(empty($myorder->Long) ){  
             if(isset($myorder->date_in) && isset($myorder->date_out)){
-                if($myorder->date_in != Null && $myorder->date_out != Null ){
-                    $interval = date_diff(date_create($myorder->date_in),date_create($myorder->date_out));
-                    $long = $interval->days;
-                    $myorder->update(['Long'=>$long ]);
-                }
+                $interval = date_diff(date_create($myorder->date_in),date_create($myorder->date_out));
+                $long = $interval->days;
+                $myorder->update(['Long'=>$long ]);
             }
         }else{
             $long = $myorder->Long;
