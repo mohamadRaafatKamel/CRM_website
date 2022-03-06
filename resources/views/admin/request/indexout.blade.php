@@ -55,6 +55,7 @@
                                                         <th>العميل</th>
                                                         <th> موبيل</th>
                                                         <th> موبيل</th>
+                                                        <th> {{ __('Real Cost') }}</th>
                                                         <th> OPD</th>
                                                         <th> {{ __('Date') }}</th>
                                                         <th> الحاله</th>
@@ -80,6 +81,7 @@
                                                                 </td>
                                                                 <td>{{$request -> phone}}</td>
                                                                 <td>{{$request -> phone2 }}</td>
+                                                                <td>{{$request -> real_cost }}</td>
                                                                 <td>{{ \App\Models\Admin::getAdminNamebyId($request ->opd_admin_id ) }}</td>
                                                                 <td>{{$request -> created_at}}</td>
                                                                 <td>
@@ -97,6 +99,7 @@
                                                             <th>العميل</th>
                                                             <th> موبيل</th>
                                                             <th> موبيل</th>
+                                                            <th> {{ __('Real Cost') }}</th>
                                                             <th> OPD</th>
                                                             <th> {{ __('Date') }}</th>
                                                             <th> الحاله</th>

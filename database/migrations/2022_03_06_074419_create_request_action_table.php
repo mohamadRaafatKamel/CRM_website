@@ -15,9 +15,13 @@ class CreateRequestActionTable extends Migration
     {
         Schema::create('request_action', function (Blueprint $table) {
             $table->id();
-            $table->string('plan')->nullable();
-            $table->string('plan_date')->nullable();
-            $table->string('state')->nullable();
+            $table->unsignedBigInteger('service_id')->nullable();
+            $table->foreign('service_id')->references('id')->on('service')->onDelete('cascade');
+            $table->unsignedBigInteger('request_id');
+            $table->foreign('request_id')->references('id')->on('request')->onDelete('cascade');
+            $table->date('action_date')->nullable();
+            $table->string('state')->nullable()->default(0);
+            $table->string('note')->nullable();
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
             $table->timestamps();

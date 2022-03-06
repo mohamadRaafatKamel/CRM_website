@@ -193,6 +193,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         // Call
         Route::get('/call/delete/{id}','RequestController@destroyCall') -> name('admin.call.delete');
 
+        // Action
+        Route::get('/action/delete/{id}','RequestController@destroyAction') -> name('admin.action.delete');
+
         // Nurse Sheet
         Route::post('/sheet/store/{id}','RequestController@storeSheet')->name('admin.sheet.store');
         Route::get('/sheet/delete/{id}','RequestController@destroySheet') -> name('admin.sheet.delete');

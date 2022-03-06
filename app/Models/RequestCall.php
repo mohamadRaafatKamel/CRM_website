@@ -56,8 +56,8 @@ class RequestCall extends Model
                         $mycall[]= $call->call_time;
                     }
                 }
-                return $mycall;
             }
+            return $mycall;
         } catch (\Exception $ex) {
         }
     }

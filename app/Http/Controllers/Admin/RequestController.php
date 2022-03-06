@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Mail\requestMail;
 use App\Models\Log;
 use App\Models\Physician;
+use App\Models\RequestAction;
 use App\Models\UsersReferral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -430,12 +431,13 @@ class RequestController extends Controller
         $companys = CompanyInfo::select()->get();
         $referrals = Referral::select()->get();
         $calls = RequestCall::select()->where('request_id',$req)->get();
+        $actions = RequestAction::select()->where('request_id',$req)->get();
         $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
         
-        return view('admin.request.createout',compact('users','usersReferrals','opds','drivers','companys','referrals','calls','governorates','physicians','specialtys','serves','myorder','doctors','nurses'));
+        return view('admin.request.createout',compact('users','usersReferrals','actions','opds','drivers','companys','referrals','calls','governorates','physicians','specialtys','serves','myorder','doctors','nurses'));
     }
 
     public function updateOut(Request $request, $id)
@@ -483,6 +485,23 @@ class RequestController extends Controller
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
+            // Action
+            if(isset($request->service_id)){
+                $btn = null;
+                if(isset($request->actionbtn)){
+                    if($request->actionbtn == 'takeit') $btn = 1;
+                    if($request->actionbtn == 'nottakeit') $btn = 0;
+                }
+                $this->AddAction($request->action_date,$request->service_id,$id,$request->state,$btn);
+                $request->request->remove('service_id');
+                $request->request->remove('state');
+                $request->request->remove('action_date');
+            }
+
+            if(isset($request->actionbox) && isset($request->actionbtn)){
+                $this->ChangeAction($request->actionbox,$request->actionbtn);
+            }
+            
              // Add Referral
              if ($request->has('user_id') && $request->has('referral_id') ){
                 $referralID = [];
@@ -521,7 +540,7 @@ class RequestController extends Controller
 
             $data->update($request->except(['_token']));
 
-            if($request->btn == "saveAndNew")
+            if($request->btn == "saveAndNew" || isset($request->actionbtn))
                 return redirect()->route('admin.request.create.out',$id)->with(['success'=>'تم الحفظ']);
 
 
@@ -626,6 +645,74 @@ class RequestController extends Controller
                 return redirect()->route('admin.dashboard')->with(['error' => '  غير موجوده']);
             }
             Log::setLog('delete','request_call',$id,"","");
+            $data->delete();
+
+            return redirect()->back()->with(['success' => 'تم حذف  بنجاح']);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.dashboard')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        }
+    }
+
+    public function AddAction($date, $serv, $reqid, $state, $btn = null)
+    {
+        $action = new RequestAction();
+        if (isset($date)){
+            $action->action_date = $date;
+        }else
+            $action->action_date = date("Y-m-d");
+        if (isset($btn)){
+            $action->state = $btn;
+        }else
+            $action->state = $state;
+        $action->request_id = $reqid;
+        $action->service_id = $serv;
+        
+        $action->admin_id  = Auth::user()->id;
+        $action->save();
+        Log::setLog('create','request_action',$action->id,"","");
+    }
+
+    public function ChangeAction($data, $btn)
+    {
+        foreach($data as $id){
+            if($btn == "delete") $this->destroyAction($id);
+            elseif($btn == "takeit") $this->updateStateAction($id,'1');
+            elseif($btn == "nottakeit") $this->updateStateAction($id,'0');
+        }
+        return redirect()->back();
+    }
+
+    public function updateStateAction($id,$val)
+    {
+        if(! Role::havePremission(['request_all','request_emergency','request_out','request_in']))
+            return redirect()->route('admin.dashboard');
+
+        try {
+            $data = RequestAction::find($id);
+            if (!$data) {
+                return redirect()->route('admin.dashboard')->with(['error' => '  غير موجوده']);
+            }
+            $logID = Log::setLog('update','request_action',$id,"","");
+            Log::setLogInfo($data->state, $val, $logID,"");
+            $data->update(['state'=> $val]);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.dashboard')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        }
+    }
+
+    public function destroyAction($id)
+    {
+        if(! Role::havePremission(['request_all','request_emergency','request_out','request_in']))
+            return redirect()->route('admin.dashboard');
+
+        try {
+            $data = RequestAction::find($id);
+            if (!$data) {
+                return redirect()->route('admin.dashboard')->with(['error' => '  غير موجوده']);
+            }
+            Log::setLog('delete','request_action',$id,"","");
             $data->delete();
 
             return redirect()->back()->with(['success' => 'تم حذف  بنجاح']);
