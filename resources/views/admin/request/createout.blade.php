@@ -55,52 +55,25 @@
                                                     
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="user_id">{{ __('Patient Name') }}</label>
-                                                            <select class="select2 form-control" name="user_id" id="user_id">
-                                                                <option value=""></option>
-                                                                @foreach($users as $user)
-                                                                    <option value="{{ $user->id }}"
-                                                                            @if(isset($myorder->user_id))
-                                                                                @if($myorder->user_id == $user->id) selected @endif @endif >
-                                                                        {{ $user->username." [ ".$user->phone." ]"}}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('user_id')
-                                                                <span class="text-danger">{{$message}}</span>--}}
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
                                                             <label for="fullname"> {{ __('Full Name') }} <span style="color: #ff4961;">*</span></label>
-                                                            <input type="text" id="fullname" required
+                                                            <input type="text" id="fullname" readonly
                                                                    class="form-control"
                                                                    @if(isset($myorder->fullname))
                                                                         value="{{ $myorder->fullname }}"
                                                                    @endif
-                                                                   placeholder="{{ __('Full Name') }}"
-                                                                   name="fullname">
-                                                            @error('fullname')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
+                                                                   placeholder="{{ __('Full Name') }}">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="name_caregiver"> {{ __('Name Of Care Giver') }} </label>
-                                                            <input type="text" id="name_caregiver" 
+                                                            <input type="text" id="name_caregiver"  readonly
                                                                    class="form-control"
                                                                    @if(isset($myorder->name_caregiver))
                                                                         value="{{ $myorder->name_caregiver }}"
                                                                    @endif
-                                                                   placeholder="{{ __('Name Of Care Giver') }}"
-                                                                   name="name_caregiver">
-                                                            @error('name_caregiver')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
+                                                                   placeholder="{{ __('Name Of Care Giver') }}" >
                                                         </div>
                                                     </div>
 
@@ -170,25 +143,21 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="phone"> {{ __('Phone') }} <span style="color: #ff4961;">*</span></label>
-                                                            <input type="text" id="phone" required
+                                                            <input type="text" id="phone"  readonly
                                                                    class="form-control"
                                                                    @if(isset($myorder->phone))
                                                                    value="{{ $myorder->phone }}"
                                                                    @endif
-                                                                   placeholder="{{ __('Phone') }}"
-                                                                   name="phone">
+                                                                   placeholder="{{ __('Phone') }}" >
 
-                                                            <input type="checkbox"  value="1" name="whatapp"
+                                                            <input type="checkbox"  value="1" readonly
                                                                    id="whatapp"
-                                                                   class="switchery0" data-color="success"
+                                                                   class="switchery" data-color="success"
                                                                    @if (isset($myorder -> whatapp))
                                                                     @if($myorder -> whatapp  == 1 ) checked @endif
                                                                    @endif
                                                             />
                                                             <label for="whatapp" class="card-title ml-1"> {{ __('Whatapp') }} </label>
-                                                            @error('phone')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
                                                         </div>
                                                     </div>
 
@@ -200,18 +169,14 @@
                                                                    @if(isset($myorder->phone2))
                                                                    value="{{ $myorder->phone2 }}"
                                                                    @endif
-                                                                   placeholder="{{ __('Phone') }}"
-                                                                   name="phone2">
+                                                                   placeholder="{{ __('Phone') }}" readonly>
 
-                                                                   <input type="checkbox"  value="1" name="whatapp2"
-                                                                   id="whatapp2" class="switchery0" data-color="success"
+                                                                   <input type="checkbox"  value="1" readonly
+                                                                   id="whatapp2" class="switchery" data-color="success"
                                                                    @if (isset($myorder -> whatapp2))
                                                                     @if($myorder -> whatapp2  == 1 ) checked @endif
                                                                    @endif />
                                                             <label for="whatapp2" class="card-title ml-1"> {{ __('Whatapp') }} </label>
-                                                            @error('phone2')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -219,16 +184,13 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="age"> {{ __('Age') }} </label>
-                                                            <input type="number" id="age" 
+                                                            <input type="number" id="age"  readonly
                                                                    class="form-control"
                                                                    @if(isset($myorder->age))
                                                                         value="{{ $myorder->age }}"
                                                                    @endif
-                                                                   placeholder="{{ __('Age') }}"
-                                                                   name="age">
-                                                            @error('age')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
+                                                                   placeholder="{{ __('Age') }}" >
+                                                           
                                                         </div>
                                                     </div>
 
@@ -260,7 +222,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="referral_id">{{ __('Referral') }}</label>
-                                                            <select class="select2 form-control" id="referral_id" name="referral_id[]" multiple>
+                                                            <select class="select2 form-control" id="referral_id" disabled  multiple>
                                                                 <option value="">-- {{ __('Select') }}  {{ __('Referral') }} --</option>
                                                                 @foreach($referrals as $referral)
                                                                     <option value="{{ $referral->id }}"
@@ -276,21 +238,6 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group" id="referral_dev">
-                                                            <label for="referral">{{ __('Add') }} {{ __('Referral') }} </label>
-                                                            <input type="text" id="referral" 
-                                                                   class="form-control"
-                                                                    value="{{ old('referral') }}"
-                                                                   placeholder="{{__('Referral') }}"
-                                                                   name="referral">
-                                                            @error('referral')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
 
                                                 </div>
                                                 <div class="row">
@@ -411,7 +358,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="governorate_id"> {{ __('Governorate') }} </label>
-                                                            <select name="governorate_id" id="governorate_id" 
+                                                            <select id="governorate_id"  disabled
                                                                     class="select2 form-control ">
                                                                 <option value="">-- {{ __('Select') }} {{ __('Governorate') }} --</option>
                                                                 @if($governorates)
@@ -441,7 +388,7 @@
                                                                     id="city_id"
                                                                    class="form-control"
                                                                    placeholder="{{ __('Area') }}"
-                                                                   name="city_id">
+                                                                   readonly>
                                                             @error('city_id')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -457,7 +404,7 @@
                                                                    value="{{ $myorder->land_mark }}"
                                                                    @endif
                                                                    placeholder="{{ __('Land Mark') }}"
-                                                                   name="land_mark">
+                                                                   readonly>
                                                             @error('land_mark')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -473,7 +420,7 @@
                                                                    value="{{ $myorder->floor }}"
                                                                    @endif
                                                                    placeholder="{{ __('Floor') }}"
-                                                                   name="floor">
+                                                                   readonly>
                                                             @error('floor')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -489,7 +436,7 @@
                                                                    value="{{ $myorder->apartment }}"
                                                                    @endif
                                                                    placeholder="{{ __('Apartment') }}"
-                                                                   name="apartment">
+                                                                   readonly>
                                                             @error('apartment')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -505,8 +452,21 @@
                                                                    value="{{ $myorder->adress }}"
                                                                    @endif
                                                                    placeholder="{{ __('Address') }}"
-                                                                   name="adress">
-                                                            @error('adress')
+                                                                   readonly>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="adress2"> {{ __('Address') }} </label>
+                                                            <input type="text" id="adress2"
+                                                                   class="form-control"
+                                                                   @if(isset($myorder->adress2))
+                                                                    value="{{ $myorder->adress2 }}"
+                                                                   @endif
+                                                                   placeholder="{{ __('Address') }}"
+                                                                   name="adress2">
+                                                            @error('adress2')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>

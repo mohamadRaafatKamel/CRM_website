@@ -23,11 +23,26 @@
 
 @section('script')
 
-{{-- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-messaging.js"></script> --}}
+{{-- <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-messaging.js"></script> --}}
 
 <script>
     jQuery(document).ready(function ($) {
+        // console.log("123456");
+        // messaging.getToken({ vapidKey: 'BETYgBkKbhosE_P53uzEFZWCs5shhvV92QAshApvlyC6w-E3H7YKrp1RQAECHNvsBtMUF8R0be8IIGJC-KNNkYg' }).then((currentToken) => {
+        //     if (currentToken) {
+        //         console.log(currentToken);
+        //         // Send the token to your server and update the UI if necessary
+        //         // ...
+        //     } else {
+        //         // Show permission request UI
+        //         console.log('No registration token available. Request permission to generate one.');
+        //         // ...
+        //     }
+        //     }).catch((err) => {
+        //     console.log('An error occurred while retrieving token. ', err);
+        //     // ...
+        // });
 
         // Your web app's Firebase configuration
         // const firebaseConfig = {
