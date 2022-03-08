@@ -526,6 +526,25 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="opd2_admin_id">{{ __('OPD') }} 2</label>
+                                                            <select class="select2 form-control" name="opd2_admin_id" id="opd2_admin_id">
+                                                                <option value=""></option>
+                                                                @foreach($opds as $opd)
+                                                                    <option value="{{ $opd->id }}"
+                                                                            @if(isset($myorder->opd2_admin_id))
+                                                                                @if($myorder->opd2_admin_id == $opd->id) selected @endif @endif >
+                                                                        {{ $opd->name." [ ".$opd->email." ]"}}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('opd2_admin_id')
+                                                                <span class="text-danger">{{$message}}</span>--}}
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="whatsApp_group"> {{ __('Name of whatsApp Group') }} </label>
                                                             <input type="text" id="whatsApp_group"
                                                                    class="form-control"
@@ -798,6 +817,7 @@
                                                                     <th>{{ __('Service') }}</th>
                                                                     <th>{{ __('Take It') }}</th>
                                                                     <th>{{ __('Date') }}</th>
+                                                                    <th> وقت الادخال</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -808,6 +828,7 @@
                                                                     <td>{{ \App\Models\Service::getName($action->service_id)  }}</td>
                                                                     <td>{{ $action->getState($action->state) }}</td>
                                                                     <td>{{ $action->action_date }}</td>
+                                                                    <td>{{ $action->created_at }}</td>
                                                                     <td>
                                                                         <a href="{{route('admin.action.delete',$action->id)}}" class="btn btn-danger" ><i class="ft-trash-2"></i></a>
                                                                     </td>
@@ -843,7 +864,7 @@
                 </section>
                 {{-- section Action End --}}
 
-                <!-- Basic form layout section start -->
+                <!-- section Call start -->
                 <section id="basic-form-layouts">
                     <div class="row match-height">
                         <div class="col-md-12">

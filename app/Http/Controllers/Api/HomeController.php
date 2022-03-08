@@ -77,7 +77,9 @@ class HomeController extends Controller
             $req = new Requests();
             if (Auth::guard('api')->check()) {
                 $req->user_id = Auth::guard('api')->user()->id;
-            }
+                $req->created_by = "WebUser";
+            }else
+                $req->created_by = "WebGuest";
             $req->phone = $request->phone;
             $req->specialty_id = $request->specialty_id;
             $req->fullname = $request->fullname;
@@ -98,7 +100,9 @@ class HomeController extends Controller
             $req = new Requests();
             if (Auth::guard('api')->check()) {
                 $req->user_id = Auth::guard('api')->user()->id;
-            }
+                $req->created_by = "WebUser";
+            }else
+                $req->created_by = "WebGuest";
             $req->governorate_id = $request->governorate_id;
             $req->city_id = $request->city_id;
             $req->adress = $request->adress;
@@ -125,7 +129,9 @@ class HomeController extends Controller
             $req = new Requests();
             if (Auth::guard('api')->check()) {
                 $req->user_id = Auth::guard('api')->user()->id;
-            }
+                $req->created_by = "WebUser";
+            }else
+                $req->created_by = "WebGuest";
             $req->governorate_id = $request->governorate_id;
             $req->city_id = $request->city_id;
             $req->adress = $request->adress;

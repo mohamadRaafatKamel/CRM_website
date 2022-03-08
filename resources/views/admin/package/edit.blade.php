@@ -84,6 +84,19 @@ else
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="price"> {{  __('Price') }} </label>
+                                                            <input type="number" step="0.01" value="{{$datas->price}}" id="price"
+                                                                   class="form-control" required {{ $readonly }}
+                                                                   placeholder="{{ __('Price') }} 0.00"
+                                                                   name="price">
+                                                            @error('price')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="projectinput1"> وصف </label>
                                                             <textarea id="description" class="form-control" placeholder="وصف"  {{ $readonly }}
                                                                 name="description">{{$datas -> description}}</textarea>

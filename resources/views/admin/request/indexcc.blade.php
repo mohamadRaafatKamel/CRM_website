@@ -56,6 +56,7 @@
                                                         <th> موبيل</th>
                                                         <th> موبيل</th>
                                                         <th> نوع الزياره</th>
+                                                        <th> </th>
                                                         <th> {{ __('Date') }}</th>
                                                         <th> الحاله</th>
                                                     </tr>
@@ -80,6 +81,7 @@
                                                                 <td>{{$request -> phone}}</td>
                                                                 <td>{{$request -> phone2 }}</td>
                                                                 <td>{{ __(\App\Models\Requests::getRequestType($request -> type)) }}</td>
+                                                                <td>{{$request ->getCreateBy($request ->created_by)}}</td>
                                                                 <td>{{$request -> created_at}}</td>
                                                                 <td>
                                                                     <span class="badge {{ \App\Models\Requests::getStateColor($request -> status_cc) }}">
@@ -98,6 +100,7 @@
                                                             <th> موبيل</th>
                                                             <th> موبيل</th>
                                                             <th> نوع الزياره</th>
+                                                            <th> </th>
                                                             <th> {{ __('Date') }}</th>
                                                             <th> الحاله</th>
                                                         </tr>

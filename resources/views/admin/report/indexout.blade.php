@@ -88,10 +88,7 @@
                                                                 <td>{{$request->age}}</td>
                                                                 <td>{{$request->name_caregiver}}</td>
                                                                 <td>{{$request->phone}}</td>
-                                                                <td>
-                                                                    @foreach ($usersReferrals as $usersReferral)
-                                                                        {{ $usersReferral }},
-                                                                    @endforeach
+                                                                <td>@foreach ($usersReferrals as $usersReferral) {{ $usersReferral }}; @endforeach
                                                                 </td>
                                                                 <td>{{$request->service_id}}</td>
                                                                 <td>{{$request->physician}}</td>
@@ -105,10 +102,7 @@
                                                                 <th>{{$request->symptoms}} </th>
                                                                 <th>{{$request->nurse_id}} </th>
                                                                 <th>{{$request->doctor_id}} </th>
-                                                                <td>
-                                                                    @foreach ($usersCalls as $usersCall)
-                                                                        {{ $usersCall }},
-                                                                    @endforeach
+                                                                <td> @foreach ($usersCalls as $usersCall) {{ $usersCall }}; @endforeach
                                                                 </td>
                                                                 <td>{{$request->real_cost}}</td>
                                                                 <td>{{$request->bill_serial}}</td>

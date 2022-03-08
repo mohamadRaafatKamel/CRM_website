@@ -18,12 +18,12 @@ class RequestAction extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'service_id', 'request_id', 'action_date', 'state', 'note', 'admin_id', 'created_at', 'updated_at'
+        'id', 'service_id', 'request_id', 'action_date', 'price', 'state', 'note', 'admin_id', 'created_at', 'updated_at'
     ];
 
     public function  scopeSelection($query){
         return $query -> select(
-            'id', 'service_id', 'request_id', 'action_date', 'state', 'note', 'admin_id', 'created_at', 'updated_at'
+            'id', 'service_id', 'request_id', 'action_date', 'price', 'state', 'note', 'admin_id', 'created_at', 'updated_at'
         );
     }
 

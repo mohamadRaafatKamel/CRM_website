@@ -81,6 +81,19 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="price"> {{  __('Price') }} </label>
+                                                            <input type="number" step="0.01" id="price"
+                                                                   class="form-control" required
+                                                                   placeholder="{{ __('Price') }} 0.00"
+                                                                   name="price">
+                                                            @error('price')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="type"> {{ __('Type') }} </label>
                                                             <select name="type" class="form-control" id="type" required>
                                                                 <option value="1">{{ __("InPatient") }}</option>

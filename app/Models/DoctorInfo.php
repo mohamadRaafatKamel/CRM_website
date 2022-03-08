@@ -17,13 +17,15 @@ class DoctorInfo extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'user_id', 'specialty', 'cv', 'phone1', 'phone2', 'photo', 'description', 'available_time', 'updated_at','created_at'
+        'id', 'user_id', 'specialty', 'slot_time', 'over_slot', 'degree', 'cv', 'phone1', 'phone2', 'photo', 'description', 
+        'available_time', 'updated_at','created_at'
     ];
 
     public function  scopeSelection($query){
 
         return $query -> select(
-            'id', 'user_id', 'specialty', 'cv', 'phone1', 'phone2', 'photo', 'description', 'available_time', 'updated_at','created_at'
+            'id', 'user_id', 'specialty', 'slot_time', 'over_slot', 'degree', 'cv', 'phone1', 'phone2', 'photo', 'description', 
+            'available_time', 'updated_at','created_at'        
         );
     }
 

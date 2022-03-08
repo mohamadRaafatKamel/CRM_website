@@ -84,6 +84,19 @@ else
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="price"> {{  __('Price') }} </label>
+                                                            <input type="number" step="0.01" value="{{$datas->price}}" id="price"
+                                                                   class="form-control" required {{ $readonly }}
+                                                                   placeholder="{{ __('Price') }} 0.00"
+                                                                   name="price">
+                                                            @error('price')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="type"> {{ __('Type') }} </label>
                                                             <select name="type" class="form-control" id="type" {{ $readonly }} required>
                                                                 <option value="1" @if($datas -> type == '1') selected @endif>{{ __("InPatient") }}</option>
@@ -97,23 +110,26 @@ else
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="projectinput1"> وصف </label>
+                                                            <textarea id="description" class="form-control" placeholder="وصف"  {{ $readonly }}
+                                                                name="description">{{$datas -> description}}</textarea>
+                                                            @error('description')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="img">  اضف صوره </label>
                                                             <input type="file" id="img" {{ $readonly }}
                                                                    class="form-control" value=""
                                                                    accept="image/*"
                                                                    name="img">
                                                             @error('img')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> وصف </label>
-                                                            <textarea id="description" class="form-control" placeholder="وصف"  {{ $readonly }}
-                                                                name="description">{{$datas -> description}}</textarea>
-                                                            @error('description')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
