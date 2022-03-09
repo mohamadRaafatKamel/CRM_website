@@ -403,26 +403,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="service_id">{{ __('Service') }}</label>
-                                                            <select class="select2 form-control" name="service_id">
-                                                                <option value="">-- {{ __('Select') }} {{ __('Service') }} -- </option>
-                                                                @foreach($serves as $serve)
-                                                                    <option value="{{ $serve->id }}"
-                                                                         @if(isset($myorder->service_id))
-                                                                            @if($myorder->service_id == $serve->id) selected @endif
-                                                                        @endif
-                                                                        @if(old('service_id') == $serve->id) selected @endif
-                                                                    >{{ $serve->name_ar}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('service_id')
-                                                            <span class="text-danger">{{$message}}</span>--}}
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
+                                                    
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="type"> {{ __('Out/In') }} <span style="color: #ff4961;">*</span></label>
@@ -1019,7 +1000,7 @@
                 </section>
                 {{-- section Action End --}}
 
-                
+
                 {{-- @if (isset($myorder->id) && $myorder->id != 0) --}}
                 <!-- Basic form layout section start -->
                 <section id="basic-form-layouts">

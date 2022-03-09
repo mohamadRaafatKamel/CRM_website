@@ -54,6 +54,7 @@
                                                 <th>ID</th>
                                                 <th>اسم عربي</th>
                                                 <th> اسم انجليزي</th>
+                                                <th> {{ __('Price') }}</th>
                                                 <th>  وصف </th>
                                                 <th> {{ __('Type') }}</th>
                                                 <th> صوره</th>
@@ -71,6 +72,7 @@
                                                         </td>
                                                         <td>{{$data -> name_ar}}</td>
                                                         <td>{{$data -> name_en}}</td>
+                                                        <td>{{$data -> price}}</td>
                                                         <td>{{$data -> description}}</td>
                                                         <td>{{ __(\App\Models\Service::getServiceType($data -> type)) }}</td>
                                                         <td>
