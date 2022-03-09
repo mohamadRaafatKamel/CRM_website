@@ -59,6 +59,15 @@ class Service extends Model
         return "";
     }
 
+    public static function getPrice($id)
+    {
+        $data = Service::select()->find($id);
+        if(isset($data->price)){
+            return $data['price'];
+        }
+        return "0";
+    }
+
     static public function getServiceType($type)
     {
         switch ($type){

@@ -202,6 +202,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
 
         // ajax
         Route::get('/getUserInfo/{id}', 'RequestController@getUserInfo');
+        Route::get('/getServPrice/{id}', 'RequestController@getServPric');
         Route::get('/getCityGevern/{id}', 'RequestController@getCityGevern');
         
     });

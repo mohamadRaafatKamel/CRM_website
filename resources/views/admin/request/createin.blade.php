@@ -736,8 +736,8 @@
                 </section>
                 {{-- section Call End --}}
 
-                 <!-- Action section start -->
-                 <section id="basic-form-layouts">
+                <!-- Action section start -->
+                <section id="basic-form-layouts">
                     <div class="row match-height">
                         <div class="col-md-12">
                             <div class="card">
@@ -760,16 +760,28 @@
 
                                                 <div class="row">
 
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="service_id">{{ __('Service') }}</label>
-                                                            <select class="select2 form-control" name="service_id">
+                                                            <select class="select2 form-control" name="service_id" id="service_id"> 
                                                                 <option value="">-- {{ __('Select') }} {{ __('Service') }} --</option>
                                                                 @foreach($serves as $serve)
-                                                                    <option value="{{ $serve->id }}">{{ $serve->name_ar}}</option>
+                                                                    <option value="{{ $serve->id }}"> [ {{ $serve->price}} ] {{ $serve->name_ar}}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('service_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="action_price"> {{ __('Price') }} </label>
+                                                            <input type="number" step="0.01" id="action_price" 
+                                                                   class="form-control"
+                                                                   placeholder="{{ __('Price') }} " readonly>
+                                                            @error('price')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -789,7 +801,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="action_date"> {{ __('Date') }} </label>
                                                             <input type="date" id="action_date"
@@ -830,8 +842,10 @@
                                                                 <tr>
                                                                     <th></th>
                                                                     <th>{{ __('Service') }}</th>
+                                                                    <th>{{ __('Price') }}</th>
                                                                     <th>{{ __('Take It') }}</th>
                                                                     <th>{{ __('Date') }}</th>
+                                                                    <th> وقت الادخال</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -840,8 +854,10 @@
                                                                 <tr>
                                                                     <th><input type="checkbox" value="{{ $action->id }}" name="actionbox[]" /></th>
                                                                     <td>{{ \App\Models\Service::getName($action->service_id)  }}</td>
+                                                                    <td>{{ $action->price }}</td>
                                                                     <td>{{ $action->getState($action->state) }}</td>
                                                                     <td>{{ $action->action_date }}</td>
+                                                                    <td>{{ $action->created_at }}</td>
                                                                     <td>
                                                                         <a href="{{route('admin.action.delete',$action->id)}}" class="btn btn-danger" ><i class="ft-trash-2"></i></a>
                                                                     </td>
@@ -1110,6 +1126,23 @@
                     // error: function (xhr, ajaxOptions, thrownError) {
                     //     input.val(0);
                     // }
+                });
+            });
+
+            // service 
+            $('#service_id').change(function () {
+                $.ajax({
+                    url: '../../getServPrice/' + $('#service_id').val(),
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        // console.log(response)
+                        if(response == null){
+                            console.log('Not Found');
+                        }else {
+                            $('#action_price').val(response.price);
+                        }
+                    }
                 });
             });
 

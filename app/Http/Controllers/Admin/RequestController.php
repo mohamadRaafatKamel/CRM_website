@@ -65,13 +65,14 @@ class RequestController extends Controller
         $physicians = Physician::select()->get();
         $myorder = Requests::select()->find($req);
         $calls = RequestCall::select()->where('request_id',$req)->get();
+        $actions = RequestAction::select()->where('request_id',$req)->get();
         $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
         
 
-        return view('admin.request.createcc',compact('users','usersReferrals','doctors','nurses','companys','referrals','physicians','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
+        return view('admin.request.createcc',compact('users','actions','usersReferrals','doctors','nurses','companys','referrals','physicians','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
     }
 
     public function store(Request $request)
@@ -139,6 +140,24 @@ class RequestController extends Controller
             $req = Requests::create($request->except(['_token']));
             Log::setLog('create','request',$req->id,"","");
 
+
+             // Action
+             if(isset($request->service_id)){
+                $btn = null;
+                if(isset($request->actionbtn)){
+                    if($request->actionbtn == 'takeit') $btn = 1;
+                    if($request->actionbtn == 'nottakeit') $btn = 0;
+                }
+                $this->AddAction($request->action_date,$request->service_id,$req->id,$request->state,$btn);
+                $request->request->remove('service_id');
+                $request->request->remove('state');
+                $request->request->remove('action_date');
+            }
+
+            if(isset($request->actionbox) && isset($request->actionbtn)){
+                $this->ChangeAction($request->actionbox,$request->actionbtn);
+            }
+
             // add call
             if ($request->has('time') || $request->has('note') ){
                 if($request->note != "" || $request->time != ""){
@@ -189,6 +208,23 @@ class RequestController extends Controller
                 }
                     UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
              }
+
+              // Action
+            if(isset($request->service_id)){
+                $btn = null;
+                if(isset($request->actionbtn)){
+                    if($request->actionbtn == 'takeit') $btn = 1;
+                    if($request->actionbtn == 'nottakeit') $btn = 0;
+                }
+                $this->AddAction($request->action_date,$request->service_id,$id,$request->state,$btn);
+                $request->request->remove('service_id');
+                $request->request->remove('state');
+                $request->request->remove('action_date');
+            }
+
+            if(isset($request->actionbox) && isset($request->actionbtn)){
+                $this->ChangeAction($request->actionbox,$request->actionbtn);
+            }
 
             // Add Corporate
             if (!$request->has('corporate_id') || $request->corporate_id == null ){
@@ -309,12 +345,13 @@ class RequestController extends Controller
         $governorates = Governorate::select()->get();
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $sheets = NurseSheet::select()->where('request_id',$req)->get();
+        $actions = RequestAction::select()->where('request_id',$req)->get();
         $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
         
-        return view('admin.request.createin',compact('datenaw','long','usersReferrals','users','nurses','sheets','packages','companys','referrals','calls','governorates','specialtys','serves','myorder','doctors'));
+        return view('admin.request.createin',compact('datenaw','long','actions','usersReferrals','users','nurses','sheets','packages','companys','referrals','calls','governorates','specialtys','serves','myorder','doctors'));
     }
 
     public function updateIN(Request $request, $id)
@@ -354,6 +391,24 @@ class RequestController extends Controller
                 $request->request->add(['whatapp' => 0]);
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
+
+            
+            // Action
+            if(isset($request->service_id)){
+                $btn = null;
+                if(isset($request->actionbtn)){
+                    if($request->actionbtn == 'takeit') $btn = 1;
+                    if($request->actionbtn == 'nottakeit') $btn = 0;
+                }
+                $this->AddAction($request->action_date,$request->service_id,$id,$request->state,$btn);
+                $request->request->remove('service_id');
+                $request->request->remove('state');
+                $request->request->remove('action_date');
+            }
+
+            if(isset($request->actionbox) && isset($request->actionbtn)){
+                $this->ChangeAction($request->actionbox,$request->actionbtn);
+            }
 
             // Add Referral
             if ($request->has('user_id') && $request->has('referral_id') ){
@@ -668,6 +723,7 @@ class RequestController extends Controller
             $action->state = $state;
         $action->request_id = $reqid;
         $action->service_id = $serv;
+        $action->price = Service::getPrice($serv);
         
         $action->admin_id  = Auth::user()->id;
         $action->save();
@@ -779,6 +835,17 @@ class RequestController extends Controller
             $arr = User::select('username','address','phone','mobile','gender','code_zone_patient_id','governorate_id','city_id',
                                 'land_mark','floor','apartment','whatapp','whatapp2','birth_date','fname')->find($id);
             $arr->fname = UsersReferral::getReferral($id);
+        }else{
+            $arr['price'] = 0;
+        }
+        echo json_encode($arr);
+        exit;
+    }
+
+    public function getServPric($id = 0){
+        // get records from database
+        if($id!=0){
+            $arr['price'] = Service::getPrice($id);
         }else{
             $arr['price'] = 0;
         }

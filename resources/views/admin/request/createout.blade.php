@@ -745,16 +745,28 @@
 
                                                 <div class="row">
 
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="service_id">{{ __('Service') }}</label>
-                                                            <select class="select2 form-control" name="service_id">
+                                                            <select class="select2 form-control" name="service_id" id="service_id"> 
                                                                 <option value="">-- {{ __('Select') }} {{ __('Service') }} --</option>
                                                                 @foreach($serves as $serve)
-                                                                    <option value="{{ $serve->id }}">{{ $serve->name_ar}}</option>
+                                                                    <option value="{{ $serve->id }}"> [ {{ $serve->price}} ] {{ $serve->name_ar}}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('service_id')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="action_price"> {{ __('Price') }} </label>
+                                                            <input type="number" step="0.01" id="action_price" 
+                                                                   class="form-control"
+                                                                   placeholder="{{ __('Price') }} " readonly>
+                                                            @error('price')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -774,7 +786,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="action_date"> {{ __('Date') }} </label>
                                                             <input type="date" id="action_date"
@@ -815,6 +827,7 @@
                                                                 <tr>
                                                                     <th></th>
                                                                     <th>{{ __('Service') }}</th>
+                                                                    <th>{{ __('Price') }}</th>
                                                                     <th>{{ __('Take It') }}</th>
                                                                     <th>{{ __('Date') }}</th>
                                                                     <th> وقت الادخال</th>
@@ -826,6 +839,7 @@
                                                                 <tr>
                                                                     <th><input type="checkbox" value="{{ $action->id }}" name="actionbox[]" /></th>
                                                                     <td>{{ \App\Models\Service::getName($action->service_id)  }}</td>
+                                                                    <td>{{ $action->price }}</td>
                                                                     <td>{{ $action->getState($action->state) }}</td>
                                                                     <td>{{ $action->action_date }}</td>
                                                                     <td>{{ $action->created_at }}</td>
@@ -1030,6 +1044,10 @@
 @endsection
 
 @section('script')
+
+{{-- <script src="{{asset('assets/admin/vendors/js/forms/repeater/jquery.repeater.min.js')}}" type="text/javascript"></script> --}}
+{{-- <script src="{{asset('assets/admin/js/scripts/forms/form-repeater.js')}}" type="text/javascript"></script> --}}
+
     <script>
         jQuery(document).ready(function ($) {
 
@@ -1067,6 +1085,22 @@
                 });
             });
 
+            $('#service_id').change(function () {
+                $.ajax({
+                    url: '../../getServPrice/' + $('#service_id').val(),
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        // console.log(response)
+                        if(response == null){
+                            console.log('Not Found');
+                        }else {
+                            $('#action_price').val(response.price);
+                        }
+                    }
+                });
+            });
+
             // $('#governorate_id').change(function () {
             //     var govern = $('#governorate_id').val();
             //     if(govern !== null && govern !== ""){
@@ -1074,37 +1108,6 @@
             //     }
             // });
 
-            // function getCitySelect(govern) {
-            //     $.ajax({
-            //         url: "../../getCityGevern/" + govern,
-            //         type: 'get',
-            //         dataType: 'json',
-            //         success: function (response) {
-            //             if(response == null){
-            //                 console.log('Not Found');
-            //             }else {
-            //                 if(response.length > 0){
-            //                     for (let i = 0; i < response.length; i++) { 
-            //                         if(i == 0){
-            //                             $('#city_id').html($('<option>', {
-            //                                 value: response[i].id,
-            //                                 text: response[i].city_name_ar
-            //                             }));
-            //                         }else{
-            //                             $('#city_id').append($('<option>', {
-            //                                 value: response[i].id,
-            //                                 text: response[i].city_name_ar
-            //                             }));
-            //                         }
-            //                     }
-            //                 }
-            //             }
-            //         }
-                    // error: function (xhr, ajaxOptions, thrownError) {
-                    //     input.val(0);
-                    // }
-            //     });
-            // }
 
             // // Referral
             // function referralDisplay(){

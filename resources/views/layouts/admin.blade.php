@@ -130,53 +130,6 @@
 {{-- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-messaging.js"></script> --}}
 {{-- <script src="{{asset('assets/admin/js/scripts/firebase.js')}}" type="text/javascript"></script> --}}
 
-<script>
-    // $('#meridians1').timeDropper({
-    //     meridians: true,
-    //     setCurrentTime: false
-    // });
-    // $('#meridians2').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-    // $('#meridians3').timeDropper({
-    //     meridians: true,
-    //     setCurrentTime: false
-    // });
-    // $('#meridians4').timeDropper({
-    //     meridians: true,
-    //     setCurrentTime: false
-    // });
-    // $('#meridians5').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-    // $('#meridians6').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-    // $('#meridians7').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-    // $('#meridians8').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-    // $('#meridians9').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-    // $('#meridians10').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-    // $('#meridians11').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-    // $('#meridians12').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-    // $('#meridians13').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-    // $('#meridians14').timeDropper({
-    //     meridians: true,setCurrentTime: false
-    // });
-</script>
 
 <script>
     // Notification 
