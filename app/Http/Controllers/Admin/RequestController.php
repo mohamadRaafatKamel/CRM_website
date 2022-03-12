@@ -52,7 +52,8 @@ class RequestController extends Controller
         date_default_timezone_set('Africa/Cairo');
         $datenaw = date("Y-m-d")."T".date("H:i:s");
 
-        $doctors = User::select()->doctor()->Verification()->get();
+        $doctors = User::select('users.id','users.username','doctor_info.degree')->doctor()->Verification()->
+                        leftJoin('doctor_info', 'users.id', '=', 'doctor_info.user_id')->get();
         $nurses = User::select()->nurse()->get();
         $serves = Service::select()->active()->get();
         $specialtys = Specialty::select()->active()->get();
@@ -235,15 +236,6 @@ class RequestController extends Controller
                 }
             }
 
-            // Add Package
-            if (!$request->has('package_id') || $request->package_id == null ){
-                if ( $request->has('package')){
-                    $packageID = $this->AddPackage( $request->package );
-                    $request->request->add(['package_id' => $packageID ]);
-                    // $request->request->remove('package');
-                }
-            }
-
             // Add Physician
             if (!$request->has('physician') || $request->physician == null ){
                 if ( $request->has('physician_new')){
@@ -300,6 +292,247 @@ class RequestController extends Controller
         return view('admin.request.indexem', compact('requests'));
     }
 
+    public function createEM()
+    {
+        if(! Role::havePremission(['request_emergency']))
+            return redirect()->route('admin.dashboard');
+
+        if(isset($_GET['req'])) $req=$_GET['req']; else $req=0;
+
+        date_default_timezone_set('Africa/Cairo');
+        $datenaw = date("Y-m-d")."T".date("H:i:s");
+
+        $doctors = User::select('users.id','users.username','doctor_info.degree')->doctor()->Verification()->
+                        leftJoin('doctor_info', 'users.id', '=', 'doctor_info.user_id')->get();
+        $nurses = User::select()->nurse()->get();
+        $serves = Service::select()->active()->get();
+        $specialtys = Specialty::select()->active()->get();
+        $users = User::select()->get();
+        $governorates = Governorate::select()->get();
+        $citys = City::select()->get();
+        $companys = CompanyInfo::select()->get();
+        $referrals = Referral::select()->get();
+        $packages = Package::select()->get();
+        $physicians = Physician::select()->get();
+        $myorder = Requests::select()->find($req);
+        $calls = RequestCall::select()->where('request_id',$req)->get();
+        $actions = RequestAction::select()->where('request_id',$req)->get();
+        $usersReferrals= [];
+        if(isset($myorder->user_id)){
+            $usersReferrals = UsersReferral::getReferral($myorder->user_id);
+        }
+        
+
+        return view('admin.request.createem',compact('users','actions','usersReferrals','doctors','nurses','companys','referrals','physicians','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
+    }
+
+    public function storeEM(Request $request)
+    {
+        if(! Role::havePremission(['request_all','request_emergency']))
+            return redirect()->route('admin.dashboard');
+
+        // Add User
+        if (!$request->has('user_id') || $request->user_id == null ){ 
+            if ($request->has('phone')){
+                $request->validate([
+                    'phone'=>"unique:users,phone|required",
+                    'fullname'=>"required",
+                ]);
+                $userID = $this->addUser($request->fullname,$request->phone);
+                $request->request->add(['user_id' => $userID ]);
+            }
+        }
+
+        try {
+
+            if (!$request->has('covid19'))
+                $request->request->add(['covid19' => 0]);
+            if (!$request->has('whatapp'))
+                $request->request->add(['whatapp' => 0]);
+            if (!$request->has('whatapp2'))
+                $request->request->add(['whatapp2' => 0]);
+
+            // Add Referral
+            if ($request->has('user_id') && $request->has('referral_id') ){
+                $referralID = [];
+                if ( $request->has('referral')){
+                    $referralID[] = $this->AddReferral( $request->referral );
+                }
+                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
+             }
+
+            // Add Corporate
+            if (!$request->has('corporate_id') || $request->corporate_id == null ){
+                if ( $request->has('corporate')){
+                    $corporateID = $this->AddCorporate( $request->corporate );
+                    $request->request->add(['corporate_id' => $corporateID ]);
+                }
+            }
+
+            // Add Package
+            if (!$request->has('package_id') || $request->package_id == null ){
+                if ( $request->has('package')){
+                    $packageID = $this->AddPackage( $request->package );
+                    $request->request->add(['package_id' => $packageID ]);
+                }
+            }
+            
+            // Add Physician
+            if (!$request->has('physician') || $request->physician == null ){
+                if ( $request->has('physician_new')){
+                    $phyID = $this->AddPhysician( $request->physician_new );
+                    $request->request->add(['physician' => $phyID ]);
+                }
+            }
+             
+            $request->request->add(['cc_admin_id' =>  Auth::user()->id]);
+            $request->request->add(['created_by' =>  Auth::user()->id]);
+            $request->request->add(['status_cc' =>  '2']);
+            $req = Requests::create($request->except(['_token']));
+            Log::setLog('create','request',$req->id,"","");
+
+
+             // Action
+             if(isset($request->service_id)){
+                $btn = null;
+                if(isset($request->actionbtn)){
+                    if($request->actionbtn == 'takeit') $btn = 1;
+                    if($request->actionbtn == 'nottakeit') $btn = 0;
+                }
+                $this->AddAction($request->action_date,$request->service_id,$req->id,$request->state,$btn);
+                $request->request->remove('service_id');
+                $request->request->remove('state');
+                $request->request->remove('action_date');
+            }
+
+            if(isset($request->actionbox) && isset($request->actionbtn)){
+                $this->ChangeAction($request->actionbox,$request->actionbtn);
+            }
+
+            // add call
+            if ($request->has('time') || $request->has('note') ){
+                if($request->note != "" || $request->time != ""){
+                    $this->AddCall($request->time, $request->note, $req->id, '1');
+                }
+            }
+
+            if($request->btn == "saveAndNew")
+                return redirect()->route('admin.request.create.em',['req'=>$req->id])->with(['success'=>'تم الحفظ']);
+
+            return redirect()->route('admin.request.emergency')->with(['success'=>'تم الحفظ']);
+        }catch (\Exception $ex){
+            return redirect()->route('admin.request.create.em')->with(['error'=>'يوجد خطء']);
+        }
+    }
+
+    public function updateEM(Request $request, $id)
+    {
+        if(! Role::havePremission(['request_emergency']))
+            return redirect()->route('admin.dashboard');
+
+        // Add User
+        if (!$request->has('user_id') || $request->user_id == null ){ 
+            if ($request->has('phone')){
+                $request->validate([
+                    'phone'=>"unique:users,phone|required",
+                    'fullname'=>"required",
+                ]);
+                $userID = $this->addUser($request->fullname,$request->phone);
+                $request->request->add(['user_id' => $userID ]);
+            }
+        }
+
+        try {
+
+            if (!$request->has('covid19'))
+                $request->request->add(['covid19' => 0]);
+            if (!$request->has('whatapp'))
+                $request->request->add(['whatapp' => 0]);
+            if (!$request->has('whatapp2'))
+                $request->request->add(['whatapp2' => 0]);
+
+            // Add Referral
+            if ($request->has('user_id') && $request->has('referral_id') ){
+                $referralID = [];
+                if ( $request->has('referral')){
+                    $referralID[] = $this->AddReferral( $request->referral );
+                }
+                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
+             }
+
+              // Action
+            if(isset($request->service_id)){
+                $btn = null;
+                if(isset($request->actionbtn)){
+                    if($request->actionbtn == 'takeit') $btn = 1;
+                    if($request->actionbtn == 'nottakeit') $btn = 0;
+                }
+                $this->AddAction($request->action_date,$request->service_id,$id,$request->state,$btn);
+                $request->request->remove('service_id');
+                $request->request->remove('state');
+                $request->request->remove('action_date');
+            }
+
+            if(isset($request->actionbox) && isset($request->actionbtn)){
+                $this->ChangeAction($request->actionbox,$request->actionbtn);
+            }
+
+            // Add Corporate
+            if (!$request->has('corporate_id') || $request->corporate_id == null ){
+                if ( $request->has('corporate')){
+                    $corporateID = $this->AddCorporate( $request->corporate );
+                    $request->request->add(['corporate_id' => $corporateID ]);
+                    $request->request->remove('corporate');
+                }
+            }
+
+            // Add Physician
+            if (!$request->has('physician') || $request->physician == null ){
+                if ( $request->has('physician_new')){
+                    $phyID = $this->AddPhysician( $request->physician_new );
+                    $request->request->add(['physician' => $phyID ]);
+                    $request->request->remove('physician_new');
+                }
+            }
+
+            $request->request->add(['cc_admin_id' =>  Auth::user()->id]);
+            $data = Requests::find($id);
+            if (!$data) {
+                return redirect()->route('admin.request.create.em')->with(['error' => '  غير موجوده']);
+            }
+
+            if($request->btn == "done"){
+                $request->request->add(['status_cc' => 4]);
+                if($request->type == '2')
+                    $this->requestMail($request, "InPatient");
+                if($request->type == '3')
+                    $this->requestMail($request, "OutPatient");
+            }elseif($request->btn == "hold")
+                $request->request->add(['status_cc' => 2]);
+            elseif($request->btn == "cancel")
+                $request->request->add(['status_cc' => 5]);
+            elseif($request->btn == "approve")
+                $request->request->add(['status_cc' => 6]);
+
+            // add call
+            if ($request->has('time') || $request->has('note') ){
+                if($request->note != "" || $request->time != ""){
+                    $this->AddCall($request->time, $request->note, $id, '1');
+                }
+            }
+
+            Log::setLog('update','request',$id,"",$request->except(['_token']) );
+            $data->update($request->except(['_token']));
+
+            if($request->btn == "saveAndNew")
+                return redirect()->route('admin.request.create.em',['req'=>$id])->with(['success'=>'تم الحفظ']);
+
+            return redirect()->route('admin.request.emergency')->with(['success'=>'تم الحفظ']);
+        }catch (\Exception $ex){
+            return redirect()->route('admin.request.emergency')->with(['error'=>'يوجد خطء']);
+        }
+    }
+
     //  IN 
     public function indexIN()
     {
@@ -333,8 +566,8 @@ class RequestController extends Controller
 
         date_default_timezone_set('Africa/Cairo');
         $datenaw = date("Y-m-d");
-
-        $doctors = User::select()->doctor()->Verification()->get();
+        $doctors = User::select('users.id','users.username','doctor_info.degree')->doctor()->Verification()->
+                        leftJoin('doctor_info', 'users.id', '=', 'doctor_info.user_id')->get();
         $nurses = User::select()->nurse()->get();
         $serves = Service::select()->active()->get();
         $specialtys = Specialty::select()->active()->get();
@@ -476,7 +709,8 @@ class RequestController extends Controller
             return redirect()->route('admin.request.out')->with(['error' => '  غير موجوده']);
         }
         $opds = Admin::select()->where('permission', Auth::user()->permission )->get();
-        $doctors = User::select()->doctor()->Verification()->get();
+        $doctors = User::select('users.id','users.username','doctor_info.degree')->doctor()->Verification()->
+                        leftJoin('doctor_info', 'users.id', '=', 'doctor_info.user_id')->get();
         $nurses = User::select()->nurse()->get();
         $drivers = User::select()->driver()->get();
         $serves = Service::select()->active()->get();
@@ -500,19 +734,7 @@ class RequestController extends Controller
     {
         if(! Role::havePremission(['request_out']))
             return redirect()->route('admin.dashboard');
-            
-        // Add User
-        if (!$request->has('user_id') || $request->user_id == null ){ 
-            if ($request->has('phone')){
-                $request->validate([
-                    'phone'=>"unique:users,phone|required",
-                    'fullname'=>"required",
-                ]);
-                $userID = $this->addUser($request->fullname,$request->phone);
-                $request->request->add(['user_id' => $userID ]);
-            }
-        }
-
+      
         try {
             $data = Requests::find($id);
             if (!$data) {
@@ -523,9 +745,10 @@ class RequestController extends Controller
             if($data->opd_admin_id == null)
                 $request->request->add(['opd_admin_id' =>  Auth::user()->id]);
 
-            if($request->btn == "done")
+            if($request->btn == "done"){
                 $request->request->add(['status_in_out' => 4]);
-            elseif($request->btn == "hold")
+                $request->request->add(['date_out' => date("Y-m-d")]);
+            }elseif($request->btn == "hold")
                 $request->request->add(['status_in_out' => 2]);
             elseif($request->btn == "cancel")
                 $request->request->add(['status_in_out' => 5]);
@@ -558,23 +781,6 @@ class RequestController extends Controller
                 $this->ChangeAction($request->actionbox,$request->actionbtn);
             }
             
-             // Add Referral
-             if ($request->has('user_id') && $request->has('referral_id') ){
-                $referralID = [];
-                if ( $request->has('referral')){
-                    $referralID[] = $this->AddReferral( $request->referral );
-                }
-                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
-             }
-
-            // Add Corporate
-            if (!$request->has('corporate_id') || $request->corporate_id == null ){
-                if ( $request->has('corporate')){
-                    $corporateID = $this->AddCorporate( $request->corporate );
-                    $request->request->add(['corporate_id' => $corporateID ]);
-                }
-            }
-
             // Add Physician
             if (!$request->has('physician') || $request->physician == null ){
                 if ( $request->has('physician_new')){

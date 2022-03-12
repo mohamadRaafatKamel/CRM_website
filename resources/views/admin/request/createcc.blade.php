@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title','Request CC')
-{{-- @section('request_all','') --}}
+@section('request_all','')
 @section('content')
 
     <div class="app-content content">
@@ -60,7 +60,7 @@
                         @endif
                             @csrf
 
-                            <div class="form-body">ا
+                            <div class="form-body">
                                 <h4 class="form-section"><i class="ft-user"></i> البيانات الشخصية   </h4>
 
                             
@@ -122,23 +122,23 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="doctor_id">{{ __('Consultant') }}</label>
+                                {{-- <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="doctor_id">{{ __('CareHub Doctor') }}</label>
                                     <div class="col-md-6">
                                         <select class="select2 form-control" name="doctor_id" id="doctor_id">
-                                            <option value="">{{ __('Consultant') }}</option>
+                                            <option value="">{{ __('CareHub Doctor') }}</option>
                                             @foreach($doctors as $doctor)
                                                 <option value="{{ $doctor->id }}"
                                                         @if(isset($myorder->doctor_id))
                                                         @if($myorder->doctor_id == $doctor->id) selected @endif @endif >
-                                                    {{ $doctor->username }}</option>
+                                                        {{ $doctor->username }} - {{ $doctor->getDocDegree($doctor->degree) }}</option>
                                             @endforeach
                                         </select>
                                         @error('doctor_id')
-                                        <span class="text-danger">{{$message}}</span>--}}
+                                        <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="age">{{ __('Age') }}</label>
@@ -638,6 +638,8 @@
                                     </div>
                                 </div>
 
+                                <h4 class="form-section"><i class="ft-paperclip"></i> بيانات التكلفه</h4>
+
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="expectation_cost">{{ __('Expectation Cost') }}</label>
                                     <div class="col-md-6">
@@ -816,9 +818,9 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label for="doctor_id">{{ __('Consultant') }}</label>
+                                                            <label for="doctor_id">{{ __('CareHub Doctor') }}</label>
                                                             <select class="select2 form-control" name="doctor_id" id="doctor_id">
-                                                                <option value="">{{ __('Consultant') }}</option>
+                                                                <option value="">{{ __('CareHub Doctor') }}</option>
                                                                 @foreach($doctors as $doctor)
                                                                     <option value="{{ $doctor->id }}"
                                                                             @if(isset($myorder->doctor_id))

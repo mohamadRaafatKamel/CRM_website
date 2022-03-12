@@ -174,6 +174,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         
         // Emergency
         Route::get('/emergency','RequestController@indexEm')->name('admin.request.emergency');
+        Route::get('/em/create','RequestController@createEM')->name('admin.request.create.em');
+        Route::post('/em/store','RequestController@storeEM')->name('admin.request.store.em');
+        Route::post('/em/update/{id}','RequestController@updateEM')->name('admin.request.update.em');
 
         // in
         Route::get('/in','RequestController@indexIN')->name('admin.request.in');

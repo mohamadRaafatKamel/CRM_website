@@ -139,4 +139,20 @@ class User extends Authenticatable implements MustVerifyEmail
         return "";
     }
 
+    static public function getDocDegree($degree)
+    {
+        switch ($degree){
+            case 1:
+                return __("Specialist");
+                break;
+            case 2:
+                return __("Consultant");
+                break;
+            case 3:
+                return __("Professor Doctor");
+                break;
+        }
+        return " ";
+    }
+
 }

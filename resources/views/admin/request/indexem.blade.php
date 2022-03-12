@@ -43,7 +43,7 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.request.create.cc') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a>
+                                        <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.request.create.em') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create Order') }}</a>
                                         <a class="btn btn-danger mb-2" href="{{ route('admin.request.emergency') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
                                         <div class="table-responsive">
                                             
@@ -66,7 +66,7 @@
                                                         @foreach($requests as $request)
                                                             <tr>
                                                                 <td>
-                                                                    <a href="{{route('admin.request.create.cc',['req'=>$request -> id])}}">
+                                                                    <a href="{{route('admin.request.create.em',['req'=>$request -> id])}}">
                                                                         {{$request -> id}}</a></td>
                                                                 <td>
                                                                     @if($request -> user_id == null )

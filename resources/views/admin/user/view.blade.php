@@ -668,6 +668,24 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="degree"> {{ __('Degree') }} </label>
+                                                            <select name="degree" id="degree"
+                                                                    class="form-control @error('degree') is-invalid @enderror">
+                                                                <option value="1"
+                                                                        @if($user ->degree == "1") selected @endif>{{ __('Specialist') }}</option>
+                                                                <option value="2"
+                                                                        @if($user ->degree == "2") selected @endif>{{ __('Consultant') }}</option>
+                                                                <option value="3"
+                                                                        @if($user ->degree == "3") selected @endif>{{ __('Professor Doctor') }}</option>
+                                                            </select>
+                                                            @error('degree')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="phone1"> {{ __('Phone') }} 1</label>
                                                             <input type="text" value="{{$doctor -> phone1}}" id="phone1"
                                                                    class="form-control"
