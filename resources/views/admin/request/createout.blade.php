@@ -89,60 +89,6 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="doctor_id">{{ __('CareHub Doctor') }}</label>
-                                    <div class="col-md-6">
-                                        <select class="select2 form-control" name="doctor_id" id="doctor_id">
-                                            <option value="">{{ __('Choose Doctor Name') }}</option>
-                                            @foreach($doctors as $doctor)
-                                                <option value="{{ $doctor->id }}"
-                                                        @if(isset($myorder->doctor_id))
-                                                        @if($myorder->doctor_id == $doctor->id) selected @endif @endif >
-                                                    {{ $doctor->username }} - {{ $doctor->getDocDegree($doctor->degree) }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('doctor_id')
-                                        <span class="text-danger">{{$message}}</span>--}}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="nurse_id">{{ __('Nurse Name') }}</label>
-                                    <div class="col-md-6">
-                                        <select class="select2 form-control" name="nurse_id" id="nurse_id" >
-                                            <option value="">{{ __('Choose Nurse Name') }}</option>
-                                            @foreach($nurses as $nurse)
-                                                <option value="{{ $nurse->id }}"
-                                                        @if(isset($myorder->nurse_id))
-                                                        @if($myorder->nurse_id == $nurse->id) selected @endif @endif >
-                                                    {{ $nurse->username }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('nurse_id')
-                                        <span class="text-danger">{{$message}}</span>--}}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="driver_id">{{ __('Driver Name') }}</label>
-                                    <div class="col-md-6">
-                                        <select class="select2 form-control" name="driver_id" id="driver_id" >
-                                            <option value="">{{ __('Choose Driver Name') }}</option>
-                                            @foreach($drivers as $driver)
-                                                <option value="{{ $driver->id }}"
-                                                        @if(isset($myorder->driver_id))
-                                                        @if($myorder->driver_id == $driver->id) selected @endif @endif >
-                                                    {{ $driver->username }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('driver_id')
-                                        <span class="text-danger">{{$message}}</span>--}}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label class="col-md-2 label-control" for="age">{{ __('Age') }}</label>
                                     <div class="col-md-2">
                                         <input type="number" id="age" 
@@ -248,22 +194,6 @@
                                         <label for="whatapp" class="card-title ml-1"> {{ __('Whatapp') }} </label>
                                     </div>
                                 </div>
-
-                                {{-- <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="whatsApp_group">{{ __('Name of whatsApp Group') }}</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="whatsApp_group"
-                                                class="form-control"
-                                                @if(isset($myorder->whatsApp_group))
-                                                value="{{ $myorder->whatsApp_group }}"
-                                                @endif
-                                                placeholder="{{ __('Name of whatsApp Group') }}"
-                                                name="whatsApp_group">
-                                        @error('whatsApp_group')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
 
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="governorate_id">{{ __('Governorate') }}</label>
@@ -422,6 +352,60 @@
                                         </select>
                                         @error('specialty_id')
                                         <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="doctor_id">{{ __('CareHub Doctor') }}</label>
+                                    <div class="col-md-6">
+                                        <select class="select2 form-control" name="doctor_id" id="doctor_id">
+                                            <option value="">{{ __('Choose Doctor Name') }}</option>
+                                            @foreach($doctors as $doctor)
+                                                <option value="{{ $doctor->id }}"
+                                                        @if(isset($myorder->doctor_id))
+                                                        @if($myorder->doctor_id == $doctor->id) selected @endif @endif >
+                                                    {{ $doctor->username }} - {{ $doctor->getDocDegree($doctor->degree) }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('doctor_id')
+                                        <span class="text-danger">{{$message}}</span>--}}
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="nurse_id">{{ __('Nurse Name') }}</label>
+                                    <div class="col-md-6">
+                                        <select class="select2 form-control" name="nurse_id" id="nurse_id" >
+                                            <option value="">{{ __('Choose Nurse Name') }}</option>
+                                            @foreach($nurses as $nurse)
+                                                <option value="{{ $nurse->id }}"
+                                                        @if(isset($myorder->nurse_id))
+                                                        @if($myorder->nurse_id == $nurse->id) selected @endif @endif >
+                                                    {{ $nurse->username }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('nurse_id')
+                                        <span class="text-danger">{{$message}}</span>--}}
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="driver_id">{{ __('Driver Name') }}</label>
+                                    <div class="col-md-6">
+                                        <select class="select2 form-control" name="driver_id" id="driver_id" >
+                                            <option value="">{{ __('Choose Driver Name') }}</option>
+                                            @foreach($drivers as $driver)
+                                                <option value="{{ $driver->id }}"
+                                                        @if(isset($myorder->driver_id))
+                                                        @if($myorder->driver_id == $driver->id) selected @endif @endif >
+                                                    {{ $driver->username }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('driver_id')
+                                        <span class="text-danger">{{$message}}</span>--}}
                                         @enderror
                                     </div>
                                 </div>
@@ -1810,35 +1794,6 @@
             //         getCitySelect(govern);
             //     }
             // });
-
-
-            // // Referral
-            // function referralDisplay(){
-            //     let ref = $('#referral_id').val();
-            //     if(ref !== null && ref !== ""){
-            //         $('#referral_dev').hide();
-            //     }else{
-            //         $('#referral_dev').show();
-            //     }
-            // }
-            // referralDisplay();
-            // $('#referral_id').change(function () {
-            //     referralDisplay();
-            // });
-
-            // Corporate
-            function referralCorporate(){
-                let cor = $('#corporate_id').val();
-                if(cor !== null && cor !== ""){
-                    $('#corporate_dev').hide();
-                }else{
-                    $('#corporate_dev').show();
-                }
-            }
-            referralCorporate();
-            $('#corporate_id').change(function () {
-                referralCorporate();
-            });
 
             // Physician
             function referralPhysician(){

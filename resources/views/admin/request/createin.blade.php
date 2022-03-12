@@ -117,24 +117,6 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="doctor_id">{{ __('CareHub Doctor') }}</label>
-                                    <div class="col-md-6">
-                                        <select class="select2 form-control" name="doctor_id" id="doctor_id">
-                                            <option value="">{{ __('CareHub Doctor') }}</option>
-                                            @foreach($doctors as $doctor)
-                                                <option value="{{ $doctor->id }}"
-                                                        @if(isset($myorder->doctor_id))
-                                                        @if($myorder->doctor_id == $doctor->id) selected @endif @endif >
-                                                        {{ $doctor->username }} - {{ $doctor->getDocDegree($doctor->degree) }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('doctor_id')
-                                        <span class="text-danger">{{$message}}</span>--}}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label class="col-md-2 label-control" for="age">{{ __('Age') }}</label>
                                     <div class="col-md-2">
                                         <input type="number" id="age" 
@@ -387,8 +369,26 @@
                                 <h4 class="form-section"><i class="ft-paperclip"></i> بيانات الخدمه</h4>
 
                                 <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="doctor_id">{{ __('CareHub Doctor') }}</label>
+                                    <div class="col-md-6">
+                                        <select class="select2 form-control" name="doctor_id" id="doctor_id">
+                                            <option value="">{{ __('CareHub Doctor') }}</option>
+                                            @foreach($doctors as $doctor)
+                                                <option value="{{ $doctor->id }}"
+                                                        @if(isset($myorder->doctor_id))
+                                                        @if($myorder->doctor_id == $doctor->id) selected @endif @endif >
+                                                        {{ $doctor->username }} - {{ $doctor->getDocDegree($doctor->degree) }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('doctor_id')
+                                        <span class="text-danger">{{$message}}</span>--}}
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-md-2 label-control" for="referral_id">{{ __('Referral') }}</label>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <select class="select2 form-control" id="referral_id" name="referral_id[]" multiple>
                                             @foreach($referrals as $referral)
                                                 <option value="{{ $referral->id }}"
@@ -400,16 +400,6 @@
                                             @endforeach
                                         </select>
                                         @error('referral_id')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-2">
-                                        <input type="text" id="referral" 
-                                                class="form-control"
-                                                value="{{ old('referral') }}"
-                                                placeholder="{{ __('Add') }} {{ __('Referral') }} "
-                                                name="referral">
-                                        @error('referral')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
@@ -1726,6 +1716,23 @@
     <script>
         jQuery(document).ready(function ($) {
 
+            // service 
+            $('#service_id').change(function () {
+                $.ajax({
+                    url: '../../getServPrice/' + $('#service_id').val(),
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        // console.log(response)
+                        if(response == null){
+                            console.log('Not Found');
+                        }else {
+                            $('#action_price').val(response.price);
+                        }
+                    }
+                });
+            });
+
             $('#user_id').change(function () {
                 $.ajax({
                     url: '../../getUserInfo/' + $('#user_id').val(),
@@ -1760,50 +1767,6 @@
                 });
             });
 
-            // service 
-            $('#service_id').change(function () {
-                $.ajax({
-                    url: '../../getServPrice/' + $('#service_id').val(),
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (response) {
-                        // console.log(response)
-                        if(response == null){
-                            console.log('Not Found');
-                        }else {
-                            $('#action_price').val(response.price);
-                        }
-                    }
-                });
-            });
-
-            // Corporate
-            function referralCorporate(){
-                let cor = $('#corporate_id').val();
-                if(cor !== null && cor !== ""){
-                    $('#corporate_dev').hide();
-                }else{
-                    $('#corporate_dev').show();
-                }
-            }
-            referralCorporate();
-            $('#corporate_id').change(function () {
-                referralCorporate();
-            });
-
-            // Package
-            function referralPackage(){
-                let pack = $('#package_id').val();
-                if(pack !== null && pack !== ""){
-                    $('#package_dev').hide();
-                }else{
-                    $('#package_dev').show();
-                }
-            }
-            referralPackage();
-            $('#package_id').change(function () {
-                referralPackage();
-            });
         });
     </script>
 @endsection

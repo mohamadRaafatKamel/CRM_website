@@ -102,31 +102,6 @@ class RequestController extends Controller
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
-            // Add Referral
-            if ($request->has('user_id') && $request->has('referral_id') ){
-                $referralID = [];
-                if ( $request->has('referral')){
-                    $referralID[] = $this->AddReferral( $request->referral );
-                }
-                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
-             }
-
-            // Add Corporate
-            if (!$request->has('corporate_id') || $request->corporate_id == null ){
-                if ( $request->has('corporate')){
-                    $corporateID = $this->AddCorporate( $request->corporate );
-                    $request->request->add(['corporate_id' => $corporateID ]);
-                }
-            }
-
-            // Add Package
-            if (!$request->has('package_id') || $request->package_id == null ){
-                if ( $request->has('package')){
-                    $packageID = $this->AddPackage( $request->package );
-                    $request->request->add(['package_id' => $packageID ]);
-                }
-            }
-            
             // Add Physician
             if (!$request->has('physician') || $request->physician == null ){
                 if ( $request->has('physician_new')){
@@ -201,15 +176,6 @@ class RequestController extends Controller
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
-            // Add Referral
-            if ($request->has('user_id') && $request->has('referral_id') ){
-                $referralID = [];
-                if ( $request->has('referral')){
-                    $referralID[] = $this->AddReferral( $request->referral );
-                }
-                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
-             }
-
               // Action
             if(isset($request->service_id)){
                 $btn = null;
@@ -225,15 +191,6 @@ class RequestController extends Controller
 
             if(isset($request->actionbox) && isset($request->actionbtn)){
                 $this->ChangeAction($request->actionbox,$request->actionbtn);
-            }
-
-            // Add Corporate
-            if (!$request->has('corporate_id') || $request->corporate_id == null ){
-                if ( $request->has('corporate')){
-                    $corporateID = $this->AddCorporate( $request->corporate );
-                    $request->request->add(['corporate_id' => $corporateID ]);
-                    $request->request->remove('corporate');
-                }
             }
 
             // Add Physician
@@ -351,31 +308,6 @@ class RequestController extends Controller
                 $request->request->add(['whatapp' => 0]);
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
-
-            // Add Referral
-            if ($request->has('user_id') && $request->has('referral_id') ){
-                $referralID = [];
-                if ( $request->has('referral')){
-                    $referralID[] = $this->AddReferral( $request->referral );
-                }
-                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
-             }
-
-            // Add Corporate
-            if (!$request->has('corporate_id') || $request->corporate_id == null ){
-                if ( $request->has('corporate')){
-                    $corporateID = $this->AddCorporate( $request->corporate );
-                    $request->request->add(['corporate_id' => $corporateID ]);
-                }
-            }
-
-            // Add Package
-            if (!$request->has('package_id') || $request->package_id == null ){
-                if ( $request->has('package')){
-                    $packageID = $this->AddPackage( $request->package );
-                    $request->request->add(['package_id' => $packageID ]);
-                }
-            }
             
             // Add Physician
             if (!$request->has('physician') || $request->physician == null ){
@@ -451,15 +383,6 @@ class RequestController extends Controller
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
-            // Add Referral
-            if ($request->has('user_id') && $request->has('referral_id') ){
-                $referralID = [];
-                if ( $request->has('referral')){
-                    $referralID[] = $this->AddReferral( $request->referral );
-                }
-                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
-             }
-
               // Action
             if(isset($request->service_id)){
                 $btn = null;
@@ -475,15 +398,6 @@ class RequestController extends Controller
 
             if(isset($request->actionbox) && isset($request->actionbtn)){
                 $this->ChangeAction($request->actionbox,$request->actionbtn);
-            }
-
-            // Add Corporate
-            if (!$request->has('corporate_id') || $request->corporate_id == null ){
-                if ( $request->has('corporate')){
-                    $corporateID = $this->AddCorporate( $request->corporate );
-                    $request->request->add(['corporate_id' => $corporateID ]);
-                    $request->request->remove('corporate');
-                }
             }
 
             // Add Physician
@@ -641,31 +555,6 @@ class RequestController extends Controller
 
             if(isset($request->actionbox) && isset($request->actionbtn)){
                 $this->ChangeAction($request->actionbox,$request->actionbtn);
-            }
-
-            // Add Referral
-            if ($request->has('user_id') && $request->has('referral_id') ){
-                $referralID = [];
-                if ( $request->has('referral')){
-                    $referralID[] = $this->AddReferral( $request->referral );
-                }
-                    UsersReferral::setReferral($request->user_id,array_merge($request->referral_id, $referralID));
-             }
-
-            // Add Corporate
-            if (!$request->has('corporate_id') || $request->corporate_id == null ){
-                if ( $request->has('corporate')){
-                    $corporateID = $this->AddCorporate( $request->corporate );
-                    $request->request->add(['corporate_id' => $corporateID ]);
-                }
-            }
-
-            // Add Package
-            if (!$request->has('package_id') || $request->package_id == null ){
-                if ( $request->has('package')){
-                    $packageID = $this->AddPackage( $request->package );
-                    $request->request->add(['package_id' => $packageID ]);
-                }
             }
 
             // add call
@@ -826,45 +715,6 @@ class RequestController extends Controller
         $user->save();
         Log::setLog('create','users',$user->id,"","");
         return $user->id;
-    }
-
-    private function AddReferral($name)
-    {
-        if ($name !=""){
-            $reff = new Referral();
-            $reff->name_ar = $name;
-            $reff->admin_id = Auth::user()->id;
-            $reff->save();
-            Log::setLog('create','referral',$reff->id,"","");
-            return $reff->id;
-        }
-        return null;
-    }
-
-    private function AddCorporate($name)
-    {
-        if ($name !=""){
-            $corp = new CompanyInfo();
-            $corp->org_name = $name;
-            $corp->admin_id = Auth::user()->id;
-            $corp->save();
-            Log::setLog('create','company_info',$corp->id,"","");
-            return $corp->id;
-        }
-        return null;
-    }
-
-    private function AddPackage($name)
-    {
-        if ($name !=""){
-            $pack = new Package();
-            $pack->name_ar = $name;
-            $pack->admin_id = Auth::user()->id;
-            $pack->save();
-            Log::setLog('create','package',$pack->id,"","");
-            return $pack->id;
-        }
-        return null;
     }
 
     private function AddPhysician($name)
