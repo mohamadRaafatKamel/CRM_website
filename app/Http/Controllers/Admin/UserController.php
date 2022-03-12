@@ -29,7 +29,7 @@ class UserController extends Controller
         if(! Role::havePremission(['user_all']))
             return redirect()->route('admin.dashboard');
 
-        $users = User::select()->where('quick','!=',1)->paginate(PAGINATION_COUNT);
+        $users = User::select()->where('quick','!=',1)->orWhere('quick',Null)->paginate(PAGINATION_COUNT);
         $info = ['name' => "All User", 'type' => '0', 'sidename'=>"all_user"];
         return view('admin.user.index', compact('users','info'));
     }
