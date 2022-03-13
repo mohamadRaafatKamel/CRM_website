@@ -47,6 +47,8 @@ Route::group(['prefix' => 'v1'], function () {
 
         // registration
         Route::post('/registration', 'AuthController@registration');
+        Route::post('/driver/registration', 'AuthController@registrationDriver');
+        
         // login
         Route::post('/login', 'AuthController@login');
 

@@ -12,15 +12,14 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function registration(Request $request)
-    {
+    public function registration(Request $request, $type = 1)
+    {   
         $request->validate([
             'username' => ['required', 'string', 'max:255'],
             'email' => ['string', 'email', 'max:255', 'unique:users'],
             // 'phone' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'gender' => ['integer'],
-            'type' => ['integer'],
         ]);
         try {
             // check if add quick or not
@@ -45,13 +44,13 @@ class AuthController extends Controller
                 }
             }else{
                 // new user
-                if(isset($request->type)){
-                    if($request->type > 3 or $request->type < 1 ){
-                        $request->type = 1;
-                    }
-                }else{
-                    $request->request->add(['type' => '1' ]);
-                }               
+                // if(isset($request->type)){
+                //     if($request->type > 3 or $request->type < 1 ){
+                //         $request->type = 1;
+                //     }
+                // }else{
+                //     $request->request->add(['type' => '1' ]);
+                // }               
                 $user = new User([
                     'username' => $request->username,
                     'email' => $request->email,
@@ -61,7 +60,7 @@ class AuthController extends Controller
                     'birth_date' => $request->birth_date,
                     'phone' => $request->phone,
                     'gender' => $request->gender,
-                    'type' => $request->type,
+                    'type' => $type,
                     'password' => Hash::make($request->password),
                 ]);    
                 $user->save();
@@ -70,6 +69,11 @@ class AuthController extends Controller
         } catch (\Exception $ex) {
             return response()->json(['data' => ['success' => "0", 'error' => "Something Error"]]);
         }
+    }
+
+    public function registrationDriver(Request $request)
+    {   
+        return $this->registration($request, 5);
     }
 
     public function login(Request $request)
