@@ -61,12 +61,13 @@ class RequestController extends Controller
         $governorates = Governorate::select()->get();
         $citys = City::select()->get();
         $companys = CompanyInfo::select()->get();
-        $referrals = Referral::select()->get();
         $packages = Package::select()->get();
         $physicians = Physician::select()->get();
         $myorder = Requests::select()->find($req);
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $actions = RequestAction::select()->where('request_id',$req)->get();
+        $referrals = Referral::getAllReferral();
+        
         $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
@@ -116,6 +117,11 @@ class RequestController extends Controller
             $req = Requests::create($request->except(['_token']));
             Log::setLog('create','request',$req->id,"","");
 
+            // Referral
+            if(isset($request->referral_id)){
+                UsersReferral::setReferral($req->id, $request->referral_id);
+                $request->request->remove('referral_id');
+            }
 
              // Action
              if(isset($request->service_id)){
@@ -193,6 +199,12 @@ class RequestController extends Controller
                 $this->ChangeAction($request->actionbox,$request->actionbtn);
             }
 
+            // Referral
+            if(count($request->referral_id) > 0){
+                UsersReferral::setReferral($request->user_id, $request->referral_id);
+                $request->request->remove('referral_id');
+            }
+
             // Add Physician
             if (!$request->has('physician') || $request->physician == null ){
                 if ( $request->has('physician_new')){
@@ -268,7 +280,7 @@ class RequestController extends Controller
         $governorates = Governorate::select()->get();
         $citys = City::select()->get();
         $companys = CompanyInfo::select()->get();
-        $referrals = Referral::select()->get();
+        $referrals = Referral::getAllReferral();
         $packages = Package::select()->get();
         $physicians = Physician::select()->get();
         $myorder = Requests::select()->find($req);
@@ -316,16 +328,20 @@ class RequestController extends Controller
                     $request->request->add(['physician' => $phyID ]);
                 }
             }
-             
             $request->request->add(['cc_admin_id' =>  Auth::user()->id]);
             $request->request->add(['created_by' =>  Auth::user()->id]);
             $request->request->add(['status_cc' =>  '2']);
             $req = Requests::create($request->except(['_token']));
             Log::setLog('create','request',$req->id,"","");
 
+            // Referral
+            if(isset($request->referral_id)){
+                UsersReferral::setReferral($req->id, $request->referral_id);
+                $request->request->remove('referral_id');
+            }
 
-             // Action
-             if(isset($request->service_id)){
+            // Action
+            if(isset($request->service_id)){
                 $btn = null;
                 if(isset($request->actionbtn)){
                     if($request->actionbtn == 'takeit') $btn = 1;
@@ -383,7 +399,7 @@ class RequestController extends Controller
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
-              // Action
+            // Action
             if(isset($request->service_id)){
                 $btn = null;
                 if(isset($request->actionbtn)){
@@ -398,6 +414,12 @@ class RequestController extends Controller
 
             if(isset($request->actionbox) && isset($request->actionbtn)){
                 $this->ChangeAction($request->actionbox,$request->actionbtn);
+            }
+
+            // Referral
+            if(count($request->referral_id) > 0){
+                UsersReferral::setReferral($request->user_id, $request->referral_id);
+                $request->request->remove('referral_id');
             }
 
             // Add Physician
@@ -487,7 +509,7 @@ class RequestController extends Controller
         $specialtys = Specialty::select()->active()->get();
         $users = User::select()->get();
         $companys = CompanyInfo::select()->get();
-        $referrals = Referral::select()->get();
+        $referrals = Referral::getAllReferral();
         $packages = Package::select()->get();
         $governorates = Governorate::select()->get();
         $calls = RequestCall::select()->where('request_id',$req)->get();
@@ -553,6 +575,12 @@ class RequestController extends Controller
                 $request->request->remove('action_date');
             }
 
+            // Referral
+            if(count($request->referral_id) > 0){
+                UsersReferral::setReferral($request->user_id, $request->referral_id);
+                $request->request->remove('referral_id');
+            }
+
             if(isset($request->actionbox) && isset($request->actionbtn)){
                 $this->ChangeAction($request->actionbox,$request->actionbtn);
             }
@@ -608,7 +636,7 @@ class RequestController extends Controller
         $physicians = Physician::select()->get();
         $governorates = Governorate::select()->get();
         $companys = CompanyInfo::select()->get();
-        $referrals = Referral::select()->get();
+        $referrals = Referral::getAllReferral();
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $actions = RequestAction::select()->where('request_id',$req)->get();
         $usersReferrals= [];
@@ -676,6 +704,12 @@ class RequestController extends Controller
                     $phyID = $this->AddPhysician( $request->physician_new );
                     $request->request->add(['physician' => $phyID ]);
                 }
+            }
+
+            // Referral
+            if(count($request->referral_id) > 0){
+                UsersReferral::setReferral($request->user_id, $request->referral_id);
+                $request->request->remove('referral_id');
             }
 
             // add call

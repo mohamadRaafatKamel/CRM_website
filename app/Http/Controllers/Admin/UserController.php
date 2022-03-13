@@ -77,7 +77,7 @@ class UserController extends Controller
         if(! Role::havePremission(['user_patent','user_all','user_doctor','user_nurse','user_driver']))
             return redirect()->route('admin.dashboard');
 
-        $referrals = Referral::select()->get();
+        $referrals = Referral::getAllReferral();
         $usersReferrals = UsersReferral::getReferral($id);
         $specialtis = Specialty::select()->General()->get();
         $mainSpecialtis = Specialty::select()->Main()->get();

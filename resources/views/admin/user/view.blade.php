@@ -153,7 +153,7 @@
                                                             <input type="text" value="{{$user -> code_zone_patient_id}}" id="code_zone_patient_id"
                                                                    class="form-control"
                                                                    placeholder="{{ __('Zone Patient ID') }}"
-                                                                   name="code_zone_patient_id" required>
+                                                                   name="code_zone_patient_id" >
                                                             @error('code_zone_patient_id')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -184,10 +184,10 @@
                                                             <select class="select2 form-control" id="referral_id" name="referral_id[]" multiple>
                                                                 <option value="">-- {{ __('Select') }}  {{ __('Referral') }} --</option>
                                                                 @foreach($referrals as $referral)
-                                                                    <option value="{{ $referral->id }}"
-                                                                            @if(in_array($referral->id, $usersReferrals)) selected @endif
-                                                                        @if(old('referral_id') == $referral->id) selected @endif
-                                                                    >{{ $referral->name_ar}}</option>
+                                                                    <option value="{{ $referral['id'] }}"
+                                                                            @if(in_array($referral['id'], $usersReferrals)) selected @endif
+                                                                        @if(old('referral_id') == $referral['id']) selected @endif
+                                                                    >{{ $referral['name']}}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('referral_id')

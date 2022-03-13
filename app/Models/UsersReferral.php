@@ -29,6 +29,16 @@ class UsersReferral extends Model
         );
     }
 
+    public static function fromIDtoReferral()
+    {
+        $refs = UsersReferral::select()->get();
+        foreach ($refs as $ref){ 
+            if(isset($ref->referral_id)){
+                UsersReferral::where('id', $ref->id)->update(['referral' => "ref_".$ref->referral_id, 'referral_id'=> Null ]);
+            }
+        }
+    }
+
     public static function setReferral($userId,$referrals)
     {
         try{
@@ -41,7 +51,7 @@ class UsersReferral extends Model
                     foreach ($referrals as $referral){
                         if($referral != null || $referral!=""){
                             $rroollee = new UsersReferral();
-                            $rroollee->referral_id = $referral;
+                            $rroollee->referral = $referral;
                             $rroollee->user_id  = $userId;
                             $rroollee->admin_id = Auth::user()->id;
                             $rroollee->save();
@@ -58,13 +68,14 @@ class UsersReferral extends Model
     public static function getReferral($userId)
     {
         try{
+            self::fromIDtoReferral();
             $myref = [];
-            $referrals = UsersReferral::select('referral_id')->where('user_id',$userId)->get();
+            $referrals = UsersReferral::select('referral')->where('user_id',$userId)->get();
 
             if($referrals){
                 if($referrals->count()>0){
                     foreach ($referrals as $referral){
-                        $myref[]= $referral->referral_id;
+                        $myref[]= $referral->referral;
                     }
                 }
                 return $myref;

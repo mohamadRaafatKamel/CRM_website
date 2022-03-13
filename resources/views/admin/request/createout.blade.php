@@ -413,15 +413,14 @@
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="referral_id">{{ __('Referral') }}</label>
                                     <div class="col-md-6">
-                                        <select class="select2 form-control" id="referral_id" disabled  multiple>
-                                            <option value="">-- {{ __('Select') }}  {{ __('Referral') }} --</option>
+                                        <select class="select2 form-control" id="referral_id" name="referral_id[]" multiple>
                                             @foreach($referrals as $referral)
-                                                <option value="{{ $referral->id }}"
+                                                <option value="{{ $referral['id'] }}"
                                                     @if (isset($usersReferrals))
-                                                        @if(in_array($referral->id, $usersReferrals)) selected @endif
+                                                        @if(in_array($referral['id'], $usersReferrals)) selected @endif
                                                     @endif
-                                                    @if(old('referral_id') == $referral->id) selected @endif
-                                                >{{ $referral->name_ar}}</option>
+                                                    @if(old('referral_id') == $referral['id']) selected @endif
+                                                >{{ $referral['name']}}</option>
                                             @endforeach
                                         </select>
                                         @error('referral_id')

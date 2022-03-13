@@ -35,6 +35,38 @@ class Referral extends Model
         return   $this -> disabled == 0 ? 'مفعل'  : 'غير مفعل';
     }
 
+    public static function getAllReferral()
+    {
+        try{
+            $myref = [];
+            $referrals = Referral::select('id', 'name_ar')->get();
+            $doctors = User::select('id', 'username')->doctor()->get();
+            if($referrals){
+                if($referrals->count()>0){
+                    foreach ($referrals as $referral){
+                        $row = [];
+                        $row['id']= "ref_".$referral->id;
+                        $row['name']= $referral->name_ar;
+                        $myref[]= $row;
+                    }
+                }
+                
+            }
+            if($doctors){
+                if($doctors->count()>0){
+                    foreach ($doctors as $doctor){
+                        $row = [];
+                        $row['id']= "doc_".$doctor->id;
+                        $row['name']= $doctor->username;
+                        $myref[]= $row;
+                    }
+                }
+            }
+            return $myref;
+        } catch (\Exception $ex) {
+        }
+    }
+
     public static function getName($id)
     {
         $data = Referral::select()->find($id);
