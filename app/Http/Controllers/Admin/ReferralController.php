@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Log;
+use App\Models\ReferalCat;
 use App\Models\Referral;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -24,7 +25,9 @@ class ReferralController extends Controller
     {
         if(! Role::havePremission(['referral_cr']))
             return redirect()->route('admin.dashboard');
-        return view('admin.referral.create');
+
+        $cats = ReferalCat::select()->get();
+        return view('admin.referral.create',compact('cats'));
     }
 
     public function store(Request $request)
@@ -53,11 +56,12 @@ class ReferralController extends Controller
         if(! Role::havePremission(['referral_view','referral_idt']))
             return redirect()->route('admin.dashboard');
 
+        $cats = ReferalCat::select()->get();
         $datas = Referral::select()->find($id);
         if(!$datas){
             return redirect()->route('admin.referral')->with(['error'=>"غير موجود"]);
         }
-        return view('admin.referral.edit',compact('datas'));
+        return view('admin.referral.edit',compact('datas','cats'));
     }
 
     public function update($id, Request $request)
@@ -83,20 +87,47 @@ class ReferralController extends Controller
         }
     }
 
-    // public function destroy($id)
-    // {
+    public function refCat()
+    {
+        if(! Role::havePremission(['referral_cat']))
+            return redirect()->route('admin.dashboard');
 
-    //     try {
-    //         $data = Referral::find($id);
-    //         if (!$data) {
-    //             return redirect()->route('admin.referral', $id)->with(['error' => '  غير موجوده']);
-    //         }
-    //         $data->delete();
+        $cats = ReferalCat::select()->paginate(PAGINATION_COUNT);
+        return view('admin.referral.indexcat', compact('cats'));
+    }
 
-    //         return redirect()->route('admin.referral')->with(['success' => 'تم حذف  بنجاح']);
+    public function refCatStore(Request $request)
+    {
+        if(! Role::havePremission(['referral_cat']))
+            return redirect()->route('admin.dashboard');
+        try {
+            
+            $request->request->add(['admin_id' =>  Auth::user()->id ]);
+            $ref = ReferalCat::create($request->except(['_token']));
+            Log::setLog('create','referal_cat',$ref->id,"","");
 
-    //     } catch (\Exception $ex) {
-    //         return redirect()->route('admin.referral')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
-    //     }
-    // }
+            return redirect()->route('admin.referral.cat')->with(['success'=>'تم الحفظ']);
+        }catch (\Exception $ex){
+            return redirect()->route('admin.referral.cat')->with(['error'=>'يوجد خطء']);
+        }
+    }
+
+    public function refCatDelete($id)
+    {
+        if(! Role::havePremission(['referral_cat_del']))
+            return redirect()->route('admin.dashboard');
+        try {
+            $data = ReferalCat::find($id);
+            if (!$data) {
+                return redirect()->route('admin.referral.cat', $id)->with(['error' => '  غير موجوده']);
+            }
+            Log::setLog('Delete','referal_cat',$id,$data->name,"");
+            $data->delete();
+
+            return redirect()->route('admin.referral.cat')->with(['success' => 'تم حذف  بنجاح']);
+
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.referral.cat')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+        }
+    }
 }

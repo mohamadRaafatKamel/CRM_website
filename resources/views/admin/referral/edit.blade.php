@@ -93,6 +93,25 @@ else
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="cat_id">{{ __('Category Name') }}</label>
+                                                            <select class="select2 form-control" name="cat_id" id="cat_id" required >
+                                                                <option value="">{{ __('Choose Nurse Name') }}</option>
+                                                                @foreach($cats as $cat)
+                                                                    <option value="{{ $cat->id }}"
+                                                                            @if(isset($datas->cat_id ))
+                                                                                @if($datas->cat_id == $cat->id) selected @endif 
+                                                                            @endif
+                                                                    > {{ $cat->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('cat_id')
+                                                            <span class="text-danger">{{$message}}</span>--}}
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="row">

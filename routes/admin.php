@@ -95,7 +95,12 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('edit/{id}','ReferralController@edit')->name('admin.referral.edit');
         Route::post('update/{id}','ReferralController@update')->name('admin.referral.update');
 
-        Route::get('delete/{id}','ReferralController@destroy') -> name('admin.referral.delete');
+        // Category
+        Route::get('ref/cat','ReferralController@refCat')->name('admin.referral.cat');
+        Route::post('ref/cat/store','ReferralController@refCatStore')->name('admin.referral.cat.store');
+        Route::get('ref/cat/delete/{id}','ReferralController@refCatDelete')->name('admin.referral.cat.delete');
+
+        // Route::get('delete/{id}','ReferralController@destroy') -> name('admin.referral.delete');
     });
     ##################### End Referral ########################
 

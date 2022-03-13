@@ -281,6 +281,15 @@
                                     أضافه جديد </a>
                             </li>
                         @endif
+
+                        @if(\App\Models\Role::havePremission(['referral_cat']))
+                            <li
+                            @if(View::hasSection('referral_cat')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.referral.cat')}}" data-i18n="nav.dash.crypto">
+                                {{ __('Referral Category') }} </a>
+                            </li>
+                        @endif
+
                     </ul>
                 </li>
             @endif

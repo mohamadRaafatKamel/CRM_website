@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReferralCategoryTable extends Migration
+class CreateReferalCatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,12 @@ class CreateReferralCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('referral_category', function (Blueprint $table) {
+        Schema::create('referal_cat', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
             $table->timestamps();
-        });
-
-        Schema::table('users_referral', function (Blueprint $table) {
-            $table->string('referral')->after('referral_id')->nullable();
-            $table->string('cat_id')->after('referral')->nullable();
-            $table->foreign('cat_id')->references('id')->on('referral_category')->onDelete('cascade');
-            $table->dropForeign(['referral_id']);
-            $table->dropColumn('referral_id');
         });
     }
 
@@ -37,6 +29,6 @@ class CreateReferralCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('referal_category');
+        Schema::dropIfExists('referal_cat');
     }
 }

@@ -360,6 +360,28 @@
                                                     </div>
                                                 </div>
 
+                                                <label><strong> {{ __('Referral Category') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="referral_cat" name="role_info[]"
+                                                                   id="referral_cat"
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="referral_cat" 
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="referral_cat_del" name="role_info[]"
+                                                                   id="referral_cat_del" 
+                                                                   class="switchery" data-color="danger"/>
+                                                            <label for="referral_cat_del" 
+                                                                   class="card-title ml-1">مسح الاقسام  و مصادر التحويل الخاصه بيه </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <label><strong> {{ __('Admin') }} </strong></label>
                                                 <div class="row">
                                                     <div class="col-md-3">
@@ -427,7 +449,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="report_view" name="role_info[]"
-                                                                   id="report_view" {{ $readonly }}
+                                                                   id="report_view"
                                                                    class="switchery" data-color="success"/>
                                                             <label for="report_view"
                                                                    class="card-title ml-1">{{ __('View') }} </label>

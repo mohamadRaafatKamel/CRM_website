@@ -452,6 +452,34 @@ else
                                                     </div>
                                                 </div>
 
+                                                <label><strong> {{ __('Referral Category') }} </strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="referral_cat" name="role_info[]"
+                                                                   id="referral_cat" {{ $readonly }}
+                                                                   @if(isset($myRoleInfo['referral_cat']) and $myRoleInfo['referral_cat'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="referral_cat" 
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="referral_cat_del" name="role_info[]"
+                                                                   id="referral_cat_del" {{ $readonly }}
+                                                                   @if(isset($myRoleInfo['referral_cat_del']) and $myRoleInfo['referral_cat_del'] == 1)
+                                                                   checked
+                                                                   @endif
+                                                                   class="switchery" data-color="danger"/>
+                                                            <label for="referral_cat_del" 
+                                                                    class="card-title ml-1">مسح الاقسام  و مصادر التحويل الخاصه بيه </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <label><strong> {{ __('Admin') }} </strong></label>
                                                 <div class="row">
                                                     <div class="col-md-3">

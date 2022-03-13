@@ -19,13 +19,13 @@ class UsersReferral extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'referral_id', 'user_id', 'admin_id', 'created_at', 'updated_at'
+        'id', 'referral_id', 'referral', 'user_id', 'admin_id', 'created_at', 'updated_at'
     ];
 
     public function  scopeSelection($query){
 
         return $query -> select(
-            'id', 'referral_id', 'user_id', 'admin_id', 'created_at', 'updated_at'
+            'id', 'referral_id', 'referral', 'user_id', 'admin_id', 'created_at', 'updated_at'
         );
     }
 

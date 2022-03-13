@@ -90,8 +90,20 @@
                                                         </div>
                                                     </div>
 
-
-                                                </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="cat_id">{{ __('Category Name') }}</label>
+                                                            <select class="select2 form-control" name="cat_id" id="cat_id" required >
+                                                                <option value="">{{ __('Category Name') }}</option>
+                                                                @foreach($cats as $cat)
+                                                                    <option value="{{ $cat->id }}" > {{ $cat->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('cat_id')
+                                                            <span class="text-danger">{{$message}}</span>--}}
+                                                            @enderror
+                                                        </div>
+                                                    </div>
 
                                                 <div class="row">
                                                     <div class="col-md-6">
