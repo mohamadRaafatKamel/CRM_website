@@ -175,7 +175,7 @@ class RequestController extends Controller
             }
         }
 
-        try {
+        // try {
 
             if (!$request->has('covid19'))
                 $request->request->add(['covid19' => 0]);
@@ -251,9 +251,9 @@ class RequestController extends Controller
                 return redirect()->route('admin.request.create.cc',['req'=>$id])->with(['success'=>'تم الحفظ']);
 
             return redirect()->route('admin.request.cc')->with(['success'=>'تم الحفظ']);
-        }catch (\Exception $ex){
-            return redirect()->route('admin.request.cc')->with(['error'=>'يوجد خطء']);
-        }
+        // }catch (\Exception $ex){
+        //     return redirect()->route('admin.request.cc')->with(['error'=>'يوجد خطء']);
+        // }
     }
 
     //  Em 

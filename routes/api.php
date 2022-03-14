@@ -52,6 +52,11 @@ Route::group(['prefix' => 'v1'], function () {
         // login
         Route::post('/login', 'AuthController@login');
 
+        // FaceBook
+        Route::group(['prefix' => 'fb'], function () {
+            // Route::get('auth', 'AuthMediaController@loginUsingFacebook');
+            // Route::get('callback', 'AuthMediaController@callbackFromFacebook');
+        });
 
         Route::group(['middleware'=>'checkPassword'], function () {
             // request Emergency

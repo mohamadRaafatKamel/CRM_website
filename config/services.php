@@ -40,4 +40,10 @@ return [
         'measurement_id' => 'G-EW55Z51RQ3',
     ],
 
+    'facebook' => [
+        'client_id' => env('Facebook_CLIENT_ID'),
+        'client_secret' => env('Facebook_CLIENT_SECRET'),
+        'redirect' => env('Facebook_REDIRECT'),
+    ],
+
 ];
