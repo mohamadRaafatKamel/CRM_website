@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Physician;
+use App\Models\ReferalCat;
+use App\Models\Referral;
 use App\Models\RequestCall;
 use App\Models\Requests;
 use App\Models\Role;
@@ -65,18 +67,55 @@ class ReportController extends Controller
                 // Referral
                 $usersReferrals= [];
                 if(isset($request->user_id)){
-                    $usersReferrals = UsersReferral::getReferralsName($request->user_id);
+                    $usersReferrals = $this->reportReferral(UsersReferral::getReferral($request->user_id));
                 }
-                // Calls
-                $usersCalls= [];
-                if(isset($request->id)){
-                    $usersCalls = RequestCall::getCallsTime($request->id);
+                $request -> status_cc = $usersReferrals;
+                // dd($request -> status_cc);
+
+                // Referral Category
+                $cats = [
+                    "Doctor" => "Doctor",
+                    "Other" => "Other"
+                ];
+                $allCats= ReferalCat::select('id', 'name')->get();
+                foreach($allCats as $allCat){
+                    $cats[$allCat->id] = $allCat->name;
                 }
             }
             
             
         }
-        return view('admin.report.indexout', compact('requests','usersReferrals','usersCalls'));
+        return view('admin.report.indexout', compact('requests','usersReferrals','cats'));
+    }
+
+    public function reportReferral($Referrals)
+    {
+        $cats = [
+            "Doctor" => "",
+            "Other" => ""
+        ];
+        if(count($Referrals) > 0){
+            $allCats= ReferalCat::select('id', 'name')->get();
+            foreach($allCats as $allCat){
+                $cats[$allCat->id] = "";
+            }
+            foreach($Referrals as $Referral){
+                $x = explode("_", $Referral);
+                if($x[0] == "doc"){
+                    $cats['Doctor'] .= User::getDocName($x[1]).";";
+                }elseif($x[0] == "ref"){
+                    $myref = Referral::select('id', 'name_ar','cat_id')->find($x[1]);
+                    if(isset($myref->id)){
+                        if(isset($myref->cat_id)){
+                            $cats[$myref->cat_id] .= $myref->name_ar.";";
+                        }else{
+                            $cats['Other'] .= $myref->name_ar.";";
+                        }
+                    }
+                }
+            }
+        }
+        return $cats;
     }
 
 }

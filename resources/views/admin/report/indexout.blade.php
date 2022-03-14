@@ -49,31 +49,29 @@
                                                     class="table table-striped table-bordered ordering-print">
                                                     <thead>
                                                     <tr>
-                                                        <th> id</th>
-                                                        <th> Code Zone</th>
+                                                        <th>{{ __('Created at') }}</th>
+                                                        <th>{{ __('Request End Date') }}</th>
                                                         <th>الاسم</th>
-                                                        <th>العمر</th>
                                                         <th>القائم بالرعاية</th>
                                                         <th>الهاتف</th>
-                                                        <th>مصدر التحويل</th>
-                                                        <th> خدمه</th>
+                                                        @foreach ($cats as $cat)
+                                                            <th>{{ $cat }}</th>
+                                                        @endforeach
                                                         <th> الطبيب المعالج</th>
                                                         <th> كوفيد19</th>
+                                                        <th> Time</th>
                                                         <th> العنوان</th>
-                                                        <th> وكيل الكول سينتر</th>
+                                                        <th> {{ __('CC Agent') }}</th>
                                                         <th> OPD</th>
-                                                        <th> ملاحظات الطبيب</th>
-                                                        <th> تعليق</th>
-                                                        <th> تشخيص </th>
-                                                        <th> الاعراض</th>
-                                                        <th> الممرضة</th>
-                                                        <th> الدكتور</th>
-                                                        <th> المكالمات</th>
-                                                        <th> التكلفه</th>
-                                                        <th> رقم الفتوره</th>
-                                                        <th> دفع</th>
-                                                        <th> {{ __('Date') }}</th>
-                                                        <th> الحاله</th>
+                                                        <th> {{ __('Feedback') }}</th>
+                                                        <th> {{ __('request state') }}</th>
+                                                        <th> {{ __('name of nurse') }}</th>
+                                                        <th> {{ __('name of doc') }}</th>
+                                                        <th> {{ __('notes') }}</th>
+                                                        <th> {{ __('fees') }}</th>
+                                                        <th> {{ __('bill serial number') }}</th>
+                                                        <th> {{ __('paid') }}</th>
+                                                        <th> {{ __('is codezone') }}</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -82,38 +80,34 @@
                                                         @if (count($requests) > 0)
                                                         @foreach($requests as $request)
                                                             <tr>
-                                                                <td>{{$request->id}}</td>
-                                                                <td>{{$request->code_zone_patient_id}}</td>
+                                                                <th>{{$request->created_at}}</th>
+                                                                <th>{{$request->date_out}}</th>
                                                                 <td>{{$request->fullname}}</td>
-                                                                <td>{{$request->age}}</td>
                                                                 <td>{{$request->name_caregiver}}</td>
                                                                 <td>{{$request->phone}}</td>
-                                                                <td>@foreach ($usersReferrals as $usersReferral) {{ $usersReferral }}; @endforeach
-                                                                </td>
-                                                                <td>{{$request->service_id}}</td>
-                                                                <td>{{$request->physician}}</td>
+                                                                @foreach ($cats as $id => $cat)
+                                                                    @if (isset($request ->status_cc[$id]))
+                                                                        <th>{{ $request ->status_cc[$id] }}</th>
+                                                                    @else
+                                                                        <th></th>
+                                                                    @endif
+                                                                @endforeach
+                                                                <th>{{$request->physician}}</th>
                                                                 <td>{{ __($request->covid19)}}</td>
+                                                                <th> ___</th>
                                                                 <td>{{$request->adress}}</td>
                                                                 <td>{{$request->cc_admin_id }}</td>
                                                                 <td>{{$request->opd_admin_id }}</td>
-                                                                <td>{{$request->doc_note}}</td>
                                                                 <th>{{$request->feedback}}</th>
-                                                                <th>{{$request->diagnose}} </th>
-                                                                <th>{{$request->symptoms}} </th>
+                                                                <td>{{$request->getRequestState($request -> status_in_out) }}</td>
                                                                 <th>{{$request->nurse_id}} </th>
                                                                 <th>{{$request->doctor_id}} </th>
-                                                                <td> @foreach ($usersCalls as $usersCall) {{ $usersCall }}; @endforeach
-                                                                </td>
+                                                                <td>{{$request->doc_note}}</td>
                                                                 <td>{{$request->real_cost}}</td>
                                                                 <td>{{$request->bill_serial}}</td>
-                                                                <td>{{ __($request->pay_or_not)}}</td>
-                                                                <td>{{$request->created_at}}</td>
-                                                                <td>
-                                                                    <span class="badge {{ $request->getStateColor($request ->status_in_out) }}">
-                                                                        {{ $request->getRequestState($request -> status_in_out) }}
-                                                                    </span>
-                                                                </td>
-                                                                
+                                                                <th>{{ __($request->pay_or_not)}}</th>
+                                                                <th>{{$request->code_zone_patient_id}}</th>
+
                                                             </tr>
                                                         @endforeach
                                                         @endif

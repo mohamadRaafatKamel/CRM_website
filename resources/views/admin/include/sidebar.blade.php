@@ -8,7 +8,7 @@
 
             @if(\App\Models\Role::havePremission(['request_all','request_emergency','request_out','request_in']))
             <li class="nav-item"> {{-- active --}}
-                <a href=""><i class="la la-certificate"></i>
+                <a href=""><i class="ft-list"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Request') }} </span>
                 </a>
                 <ul class="menu-content">
@@ -92,7 +92,7 @@
 
             @if(\App\Models\Role::havePremission(['user_doctor','user_nurse','user_driver']))
             <li class="nav-item">
-                <a href=""><i class="la la-certificate"></i>
+                <a href=""><i class="ft-users"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Stuff') }} </span>
                 </a>
                 <ul class="menu-content" >
@@ -147,7 +147,7 @@
 
             @if(\App\Models\Role::havePremission(['serves_view','serves_cr','serves_idt']))
                 <li class="nav-item">
-                    <a href=""><i class="la la-map-signs"></i>
+                    <a href=""><i class="la la-server"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> الخدمات </span>
                     </a>
                     <ul class="menu-content">
@@ -171,7 +171,7 @@
 
             @if(\App\Models\Role::havePremission(['survey_view']))
                 <li class="nav-item">
-                    <a href=""><i class="la la-map-signs"></i>
+                    <a href=""><i class="la la-bar-chart"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Survey') }} </span>
                     </a>
                     <ul class="menu-content">
@@ -191,7 +191,7 @@
 
             @if(\App\Models\Role::havePremission(['company_view','company_cr','company_idt']))
                 <li class="nav-item">
-                    <a href=""><i class="la la-map-signs"></i>
+                    <a href=""><i class="la la-pencil-square"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Company') }} </span>
                     </a>
                     <ul class="menu-content">
@@ -215,7 +215,7 @@
 
             @if(\App\Models\Role::havePremission(['package_view','package_cr','package_idt']))
                 <li class="nav-item">
-                    <a href=""><i class="la la-map-signs"></i>
+                    <a href=""><i class="la la-inbox"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Package') }} </span>
                     </a>
                     <ul class="menu-content">
@@ -239,7 +239,7 @@
 
             @if(\App\Models\Role::havePremission(['physician_view','physician_cr','physician_idt']))
                 <li class="nav-item">
-                    <a href=""><i class="la la-map-signs"></i>
+                    <a href=""><i class="la la-stethoscope"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Physician') }} </span>
                     </a>
                     <ul class="menu-content">
@@ -263,7 +263,7 @@
 
             @if(\App\Models\Role::havePremission(['referral_view','referral_cr','referral_idt']))
                 <li class="nav-item">
-                    <a href=""><i class="la la-map-signs"></i>
+                    <a href=""><i class="la la-undo"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Referral') }} </span>
                     </a>
                     <ul class="menu-content">
@@ -296,7 +296,7 @@
 
             @if(\App\Models\Role::havePremission(['report_view']))
                 <li class="nav-item">
-                    <a href=""><i class="la la-map-signs"></i>
+                    <a href=""><i class="la la-folder-open"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Report') }} </span>
                     </a>
                     <ul class="menu-content">
@@ -309,7 +309,7 @@
 
             @if(\App\Models\Role::havePremission(['admin_view','admin_cr','admin_idt']))
             <li class="nav-item">
-                <a href=""><i class="la la-user"></i>
+                <a href=""><i class="la la-user-secret"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Admin') }} </span>
                 </a>
                 <ul class="menu-content">
@@ -358,7 +358,7 @@
             @endif
             @if(\App\Models\Role::havePremission(['setting_view']))
                 <li class="nav-item">
-                    <a href=""><i class="la la-map-signs"></i>
+                    <a href=""><i class="ft-settings"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Setting') }} </span>
                     </a>
                     <ul class="menu-content">

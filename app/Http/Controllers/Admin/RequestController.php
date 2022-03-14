@@ -119,8 +119,10 @@ class RequestController extends Controller
 
             // Referral
             if(isset($request->referral_id)){
-                UsersReferral::setReferral($req->id, $request->referral_id);
-                $request->request->remove('referral_id');
+                if(count($request->referral_id) > 0){
+                    UsersReferral::setReferral($request->user_id, $request->referral_id);
+                    $request->request->remove('referral_id');
+                }
             }
 
              // Action
@@ -200,9 +202,11 @@ class RequestController extends Controller
             }
 
             // Referral
-            if(count($request->referral_id) > 0){
-                UsersReferral::setReferral($request->user_id, $request->referral_id);
-                $request->request->remove('referral_id');
+            if(isset($request->referral_id)){
+                if(count($request->referral_id) > 0){
+                    UsersReferral::setReferral($request->user_id, $request->referral_id);
+                    $request->request->remove('referral_id');
+                }
             }
 
             // Add Physician
@@ -336,8 +340,10 @@ class RequestController extends Controller
 
             // Referral
             if(isset($request->referral_id)){
-                UsersReferral::setReferral($req->id, $request->referral_id);
-                $request->request->remove('referral_id');
+                if(count($request->referral_id) > 0){
+                    UsersReferral::setReferral($request->user_id, $request->referral_id);
+                    $request->request->remove('referral_id');
+                }
             }
 
             // Action
@@ -417,9 +423,11 @@ class RequestController extends Controller
             }
 
             // Referral
-            if(count($request->referral_id) > 0){
-                UsersReferral::setReferral($request->user_id, $request->referral_id);
-                $request->request->remove('referral_id');
+            if(isset($request->referral_id)){
+                if(count($request->referral_id) > 0){
+                    UsersReferral::setReferral($request->user_id, $request->referral_id);
+                    $request->request->remove('referral_id');
+                }
             }
 
             // Add Physician
@@ -576,9 +584,11 @@ class RequestController extends Controller
             }
 
             // Referral
-            if(count($request->referral_id) > 0){
-                UsersReferral::setReferral($request->user_id, $request->referral_id);
-                $request->request->remove('referral_id');
+            if(isset($request->referral_id)){
+                if(count($request->referral_id) > 0){
+                    UsersReferral::setReferral($request->user_id, $request->referral_id);
+                    $request->request->remove('referral_id');
+                }
             }
 
             if(isset($request->actionbox) && isset($request->actionbtn)){
@@ -707,9 +717,11 @@ class RequestController extends Controller
             }
 
             // Referral
-            if(count($request->referral_id) > 0){
-                UsersReferral::setReferral($request->user_id, $request->referral_id);
-                $request->request->remove('referral_id');
+            if(isset($request->referral_id)){
+                if(count($request->referral_id) > 0){
+                    UsersReferral::setReferral($request->user_id, $request->referral_id);
+                    $request->request->remove('referral_id');
+                }
             }
 
             // add call
