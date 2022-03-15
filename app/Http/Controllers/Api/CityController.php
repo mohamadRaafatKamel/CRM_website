@@ -16,7 +16,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        return CityResource::collection(City::all());
+        return(CityResource::collection(City::all()))->response()->setStatusCode(200);
     }
 
     /**

@@ -21,4 +21,10 @@ class CityResource extends JsonResource
             "city_name_en" => $this->city_name_en,
         ];
     }
+
+    public function with($request){
+        return [
+          'status'=>'success'
+        ];
+    }
 }

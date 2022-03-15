@@ -19,13 +19,22 @@ use Illuminate\Support\Facades\Route;
     // Route::redirect('/', 'ar');
 // }
 
-Route::redirect('/', 'admin');
+// Route::group(['prefix' => 'fb'], function () {
+    Route::get('/', 'App\Http\Controllers\Api\AuthMediaController@loginUsingFacebook');
+    Route::get('callback', 'App\Http\Controllers\Api\AuthMediaController@callbackFromFacebook');
+// });
 
-Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ], function () {
-    // Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
+// Route::redirect('/', 'admin');
 
-    //     Route::get('/', 'HomeController@index')->name('home');
-    //     Route::post('callme', 'HomeController@callme')->name('home.callme');
+// Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ], function () {
+    Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
+
+        // test 
+        // Route::get('/', 'HomeController@index')->name('home');
+
+
+        // Route::get('/', 'HomeController@index')->name('home');
+        // Route::post('callme', 'HomeController@callme')->name('home.callme');
 
     //     Route::group(['middleware'=>'auth'], function () {
 
@@ -42,8 +51,8 @@ Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ]
 
     //     });
 
-    // });
+    });
 
     // Auth::routes();
 
-});
+// });
