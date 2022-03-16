@@ -17,7 +17,7 @@ class RequestsController extends Controller
     public function userRequest(Request $request)
     {
         $myRequests = Requests::select()->where('user_id', $request->user()->id )->Where('state', '0')->get();
-        return RequestResource::collection($myRequests);
+        return(RequestResource::collection($myRequests) )->response()->setStatusCode(200);
     }
 
     /**
@@ -50,9 +50,9 @@ class RequestsController extends Controller
     public function show(Requests $requests, Request $request)
     {
         if ($requests->user_id == $request->user()->id)
-            return new RequestResource($requests);
+            return(new RequestResource($requests) )->response()->setStatusCode(200);
         else
-            return response()->json([ 'data'=>['success' => "0", 'error' => "Not Owner"] ]);
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Not Owner", 'message' => "Error Not Owner"] ], 400);
     }
 
     /**
@@ -81,12 +81,12 @@ class RequestsController extends Controller
     public function cancelState(Request $request, Requests $requests){
         if ($requests->user_id == $request->user()->id) {
             if ($requests->state != '0'){
-                return response()->json([ 'data'=>['success' => "0", 'massage' => "can't Updated"] ]);
+                return response()->json([ 'data'=>['success' => "0", 'massage' => "Error can't Updated"] ], 400);
             }
             $requests->update(['state' => '5']);
-            return response()->json(['data' => ['success' => "1", 'massage' => "Success Updated"]]);
+            return response()->json(['data' => ['success' => "1", 'massage' => "Success Updated"]], 200);
         }else
-            return response()->json([ 'data'=>['success' => "0", 'massage' => "Not Owner"] ]);
+            return response()->json([ 'data'=>['success' => "0", 'massage' => "Error Not Owner"] ], 400);
     }
 
     /**

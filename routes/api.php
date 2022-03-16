@@ -95,10 +95,10 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/cancel_requests/{requests}', 'RequestsController@cancelState');
 
             // show Doctor Requests
-            Route::get('/doctor/order', 'OrderController@doctorRequest');
-            Route::get('/doctor/order/{order}', 'OrderController@show');
+            // Route::get('/doctor/order', 'OrderController@doctorRequest');
+            // Route::get('/doctor/order/{order}', 'OrderController@show');
             // change state
-            Route::get('/doctor/cancel_order/{order}', 'OrderController@cancelState');
+            // Route::get('/doctor/cancel_order/{order}', 'OrderController@cancelState');
 
 //            Route::get('/userinfo', 'HomeController@userinfo')->name('home.user.info');
 //            Route::post('userinfoupdate','HomeController@userInfoUpdate')->name('home.myuser.info.update');

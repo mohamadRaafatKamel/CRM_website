@@ -17,19 +17,19 @@ class SpecialtyController extends Controller
      */
     public function index()
     {
-        return SpecialtyResource::collection(Specialty::all());
+        return (SpecialtyResource::collection(Specialty::all()) )->response()->setStatusCode(200);
     }
 
     // General Specialty
     public function indexGeneral()
     {
-        return SpecialtyResource::collection(Specialty::General()->get());
+        return (SpecialtyResource::collection(Specialty::General()->get()) )->response()->setStatusCode(200);
     }
 
     // Main Specialty
     public function indexMain()
     {
-        return SpecialtyResource::collection(Specialty::Main()->get());
+        return (SpecialtyResource::collection(Specialty::Main()->get()) )->response()->setStatusCode(200);
     }
 
     /**
@@ -61,7 +61,7 @@ class SpecialtyController extends Controller
      */
     public function show(Specialty $specialty)
     {
-        return new SpecialtyResource($specialty);
+        return (new SpecialtyResource($specialty) )->response()->setStatusCode(200);
     }
 
     /**

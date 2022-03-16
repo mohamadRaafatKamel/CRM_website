@@ -16,12 +16,13 @@ class UserController extends Controller
 
     public function userinfo(Request $request)
     {
-        return new UserResource($request);
+        return(new UserResource($request) )->response()->setStatusCode(200);
     }
 
     public function doctorTimeWork($doctor_id)
     {
         $timeWork = [];
+        $ResponsStatus = 200;
         $doctor = DoctorInfo::select()->where('user_id', $doctor_id)->first();
         if (isset($doctor->id)) {
             $docWorks = DoctorWorkDay::select()->where('user_id', $doctor_id)->get();
@@ -31,13 +32,17 @@ class UserController extends Controller
                     $timeWork[$docWork->day . '_from'] = $docWork->time_from;
                     $timeWork[$docWork->day . '_to'] = $docWork->time_to;
                 }
-                $timeWork = [ 'data'=>['success' => "1", 'time' => $timeWork] ];
-            }else
-                $timeWork = [ 'data'=>['success' => "0", 'error' => "No any Doctor Work Time"] ];
-        }else
-            $timeWork = [ 'data'=>['success' => "0", 'error' => "No any Doctor profile"] ];
-
-        return response()->json($timeWork);
+                $timeWork = [ 'data'=>['success' => "1", 'message' => "Error Not Owner", 'time' => $timeWork] ];
+                $ResponsStatus = 200;
+            }else{
+                $timeWork = [ 'data'=>['success' => "0", 'message' => "No any Doctor Work Time" , 'error' => "No any Doctor Work Time"] ];
+                $ResponsStatus = 400;
+            }
+        }else{
+            $timeWork = [ 'data'=>['success' => "0", 'message' => "No profile for Doctor", 'error' => "No any Doctor profile"] ];
+            $ResponsStatus = 400;
+        }
+        return response()->json($timeWork)->setStatusCode( $ResponsStatus );
     }
 
     public function updateInfo(Request $request)
@@ -45,12 +50,12 @@ class UserController extends Controller
         try{
             $user = User::select()->find(Auth::user()->id);
             if (!$user->id) {
-                return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
+                return response()->json([ 'data'=>['success' => "0", 'error' => "Error User Not Found", 'message' => "Error User Not Found"] ], 400);
             }
             $user->update($request->except('_token'));
-            return response()->json([ 'data'=>['success' => "1"] ]);
+            return response()->json([ 'data'=>['success' => "1", 'message' => "Success"] ],200);
         } catch (\Exception $ex) {
-            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error", 'message' => "Error"] ], 400);
         }
     }
 

@@ -24,8 +24,8 @@ class WebSuvayRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|max:250',
-            'phone' => 'string|max:50',
+            'name' => 'required|string|max:250',
+            'phone' => 'required|string|max:50',
             'age' => 'integer|in:1,2,3,4',
             'opinion_carehub' => 'integer|in:1,2,3,4',
             'know_carehub' => 'integer|in:1,2',

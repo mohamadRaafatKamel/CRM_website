@@ -40,7 +40,7 @@ class AuthController extends Controller
                     ]);
                     return response()->json(['data' => ['success' => "1", 'massage' => "User has been Registration"]], 200);
                 }else{
-                    return response()->json(['data' => ['success' => "0", 'error' => "This Phone Exists"]]);
+                    return response()->json(['data' => ['success' => "0", 'error' => "This Phone Exists", 'message' => "This Phone Exists"]], 400);
                 }
             }else{
                 // new user
@@ -64,10 +64,10 @@ class AuthController extends Controller
                     'password' => Hash::make($request->password),
                 ]);    
                 $user->save();
-                return response()->json(['data' => ['success' => "1", 'massage' => "User has been Registration"]], 200);
+                return response()->json(['data' => ['success' => "1", 'message' => "User has been Registration"]], 200);
             }           
         } catch (\Exception $ex) {
-            return response()->json(['data' => ['success' => "0", 'error' => "Something Error"]]);
+            return response()->json(['data' => ['success' => "0", 'error' => "Something Error", 'message' => "Error"]], 400);
         }
     }
 
@@ -92,7 +92,7 @@ class AuthController extends Controller
             }
 
             if (!Auth::attempt($credentials)){
-                return response()->json(["message" => "Unauthenticated."], 401 );
+                return response()->json(['success' => "0", "message" => "Unauthenticated."], 401 );
             }
             // Auth success
 
@@ -103,12 +103,14 @@ class AuthController extends Controller
             $token->save();
 
             return response()->json(['data' => [
+                'success' => "1",
+                'message' => "Success",
                 'token_type' => 'Bearer',
                 'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateString(),
                 'access_token' => $tokenResult->accessToken,
-            ]]);
+            ]],200);
         } catch (\Exception $ex) {
-            return response()->json(['data' => ['success' => "0", 'error' => "Something Error"]]);
+            return response()->json(['data' => ['success' => "0", 'error' => "Something Error", 'message' => "Error"]]);
         }
     }
 
@@ -116,9 +118,9 @@ class AuthController extends Controller
     {
         try {
             $request->user()->token()->revoke();
-            return response()->json(['data' => ['massage' => "User Logout"]], 200);
+            return response()->json(['data' => ['success' => "1", 'message' => "User Logout"]], 200);
         } catch (\Exception $ex) {
-            return response()->json(['data' => ['success' => "0", 'error' => "Something Error"]]);
+            return response()->json(['data' => ['success' => "0", 'error' => "Something Error", 'message' => "Error"]], 400);
         }
     }
 }

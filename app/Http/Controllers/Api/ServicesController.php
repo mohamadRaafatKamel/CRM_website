@@ -17,7 +17,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        return ServicesResource::collection(Service::all());
+        return(ServicesResource::collection(Service::all()) )->response()->setStatusCode(200);
     }
 
     /**
@@ -55,7 +55,7 @@ class ServicesController extends Controller
      */
     public function show(Service $service)
     {
-        return new ServicesResource($service);
+        return(new ServicesResource($service) )->response()->setStatusCode(200);
     }
 
     /**

@@ -39,8 +39,9 @@ class HomeController extends Controller
                 'slider_1' => (isset($slider['sliderImage1']))? $slider['sliderImage1'] : "",
                 'slider_2' => (isset($slider['sliderImage2']))? $slider['sliderImage2'] : "",
                 'slider_3' => (isset($slider['sliderImage3']))? $slider['sliderImage3'] : "",
-            ]
-        ]);
+            ],
+            'message'=>"success"
+        ],200);
     }
 
     public function SocialLinks()
@@ -67,8 +68,9 @@ class HomeController extends Controller
                 'FaceBook' => $link['FaceBook'],
                 'Twitter' => $link['Twitter'],
                 'LinkedIn' => $link['LinkedIn'],
-            ]
-        ]);
+            ],
+            'message'=>"success"
+        ],200);
     }
 
     public function callmeEmergency(EmergancyRequest $request)
@@ -88,9 +90,9 @@ class HomeController extends Controller
 
             $this->requestMail($request, "Emergency");
 
-            return response()->json([ 'data'=>['success' => "1"] ]);
+            return response()->json([ 'data'=>['success' => "1", 'message'=>"success"] ],200);
         } catch (\Exception $ex) {
-            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error", 'message'=>"Error"] ],400);
         }
     }
 
@@ -117,9 +119,9 @@ class HomeController extends Controller
             $req->save();
 
             $this->requestMail($request, "CallCenter");
-            return response()->json([ 'data'=>['success' => "1"] ]);
+            return response()->json([ 'data'=>['success' => "1", 'message'=>"Success"] ], 200);
         } catch (\Exception $ex) {
-            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error", 'message'=>"Error"] ], 400);
         }
     }
 
@@ -145,9 +147,9 @@ class HomeController extends Controller
             $req->save();
             
             $this->requestMail($request, "CallCenter");
-            return response()->json([ 'data'=>['success' => "1"] ]);
+            return response()->json([ 'data'=>['success' => "1", 'message'=>"Success"] ], 200);
         } catch (\Exception $ex) {
-            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error", 'message'=>"Error"] ], 400);
         }
     }
 
@@ -172,9 +174,9 @@ class HomeController extends Controller
                         
             Mail::To($mailTo)->send(new joinus($request->post()));
             
-            return response()->json([ 'data'=>['success' => "1"] ]);
+            return response()->json([ 'data'=>['success' => "1", 'message'=>"Success"] ], 200);
         } catch (\Exception $ex) {
-            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error"] ]);
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error", 'message'=>"Error"] ], 400);
         }
     }
 
@@ -191,16 +193,16 @@ class HomeController extends Controller
                 }
             } 
             Mail::To($mailTo)->send(new requestMail($request->post()));
-            return response()->json([ 'data'=>['success' => "1"] ]);
+            return response()->json([ 'data'=>['success' => "1", 'message'=>"Success"] ], 200);
         } catch (\Exception $ex) {
-            return response()->json([ 'data'=>['success' => "0", 'error' => "Email Error"] ]);
+            return response()->json([ 'data'=>['success' => "0", 'error' => "Email Error", 'message'=>"Error"] ], 400);
         }
     }
 
     
     // Not for API /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+/*
     public function userInfoUpdate(Request $request)
     {
         try {
@@ -303,6 +305,6 @@ class HomeController extends Controller
         else
             return redirect()->route('user.view.request', ['language'=>app()->getLocale(),'msg'=>'order','id'=>$id]);
     }
-
+*/
 
 }

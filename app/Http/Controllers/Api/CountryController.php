@@ -16,7 +16,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        return CountryResource::collection(Country::all());
+        return(CountryResource::collection(Country::all()) )->response()->setStatusCode(200);
     }
 
     /**
@@ -48,7 +48,7 @@ class CountryController extends Controller
      */
     public function show(Country $country)
     {
-        return new CountryResource($country);
+        return(new CountryResource($country) )->response()->setStatusCode(200);
     }
 
     /**

@@ -16,7 +16,7 @@ class GovernorateController extends Controller
      */
     public function index()
     {
-        return GovernorateResource::collection(Governorate::all());
+        return(GovernorateResource::collection(Governorate::all()) )->response()->setStatusCode(200);
     }
 
     /**
@@ -48,7 +48,7 @@ class GovernorateController extends Controller
      */
     public function show(Governorate $governorate)
     {
-        return new GovernorateResource($governorate);
+        return(new GovernorateResource($governorate) )->response()->setStatusCode(200);
     }
 
     /**

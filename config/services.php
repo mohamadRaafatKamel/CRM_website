@@ -44,6 +44,8 @@ return [
         'client_id' => env('Facebook_CLIENT_ID'),
         'client_secret' => env('Facebook_CLIENT_SECRET'),
         'redirect' => env('Facebook_REDIRECT'),
+        'proxy' => true,
+        'profileFields' => ['id', 'email', 'name', 'phone']
     ],
 
 ];

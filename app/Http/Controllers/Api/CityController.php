@@ -48,7 +48,7 @@ class CityController extends Controller
      */
     public function show(City $city)
     {
-        return new CityResource($city);
+        return(new CityResource($city))->response()->setStatusCode(200);
     }
 
     /**
