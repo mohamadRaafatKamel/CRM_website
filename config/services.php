@@ -40,12 +40,18 @@ return [
         'measurement_id' => 'G-EW55Z51RQ3',
     ],
 
-    'facebook' => [
-        'client_id' => env('Facebook_CLIENT_ID'),
-        'client_secret' => env('Facebook_CLIENT_SECRET'),
-        'redirect' => env('Facebook_REDIRECT'),
-        'proxy' => true,
-        'profileFields' => ['id', 'email', 'name', 'phone']
-    ],
+    // 'facebook' => [
+    //     'client_id' => env('Facebook_CLIENT_ID'),
+    //     'client_secret' => env('Facebook_CLIENT_SECRET'),
+    //     'redirect' => env('Facebook_REDIRECT'),
+    //     'proxy' => true,
+    //     'profileFields' => ['id', 'email', 'name', 'phone']
+    // ],
+
+    'google' => [
+        'client_id' => env('Google_CLIENT_ID'),
+        'client_secret' => env('Google_CLIENT_ID'),
+        'redirect' => env('Google_CLIENT_ID'),
+      ],
 
 ];

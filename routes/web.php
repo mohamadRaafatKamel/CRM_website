@@ -22,11 +22,16 @@ use Illuminate\Support\Facades\Route;
 
 // face book test
 // Route::group(['prefix' => 'fb'], function () {
-    // Route::get('/', 'App\Http\Controllers\Api\AuthMediaController@loginUsingFacebook');
-    // Route::get('callback', 'App\Http\Controllers\Api\AuthMediaController@callbackFromFacebook');
+//     Route::get('/', 'App\Http\Controllers\Api\AuthMediaController@loginUsingFacebook');
+//     Route::get('callback', 'App\Http\Controllers\Api\AuthMediaController@callbackFromFacebook');
 // });
 
-Route::redirect('/', 'admin');
+// Route::group(['prefix' => 'gg'], function () {
+    Route::get('/', 'App\Http\Controllers\Api\AuthMediaController@loginUsingGoogle');
+    Route::get('callback', 'App\Http\Controllers\Api\AuthMediaController@callbackFromGoogle');
+// });
+
+// Route::redirect('/', 'admin');
 
 // Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ], function () {
     Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
