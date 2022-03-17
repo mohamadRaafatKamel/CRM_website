@@ -26,6 +26,17 @@ use Illuminate\Support\Facades\Route;
 //     Route::get('callback', 'App\Http\Controllers\Api\AuthMediaController@callbackFromFacebook');
 // });
 
+// Facebook URL
+Route::prefix('facebook')->name('facebook.')->group( function(){
+    Route::get('login', function () {
+        return Socialite::driver('facebook')->redirect();
+    })->name('login');
+
+    Route::any('callback', function () {
+        $user = Socialite::driver('facebook')->user();
+        dd($user);
+    })->name('callback');
+});
 
 // Google URL
 Route::prefix('google')->name('google.')->group( function(){
@@ -41,7 +52,7 @@ Route::prefix('google')->name('google.')->group( function(){
     Route::any('callback', 'AuthMediaController@callbackFromGoogle')->name('callback');
 });
 
-// Route::redirect('/', 'admin');
+Route::redirect('/', 'admin');
 
 // Route::group(['prefix' => '{language}' ,'where' => ['language' =>  '(ar|en)' ] ], function () {
     Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
