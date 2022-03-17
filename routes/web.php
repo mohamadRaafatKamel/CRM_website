@@ -26,10 +26,24 @@ use Illuminate\Support\Facades\Route;
 //     Route::get('callback', 'App\Http\Controllers\Api\AuthMediaController@callbackFromFacebook');
 // });
 
-// Route::group(['prefix' => 'gg'], function () {
+Route::group(['prefix' => 'gg'], function () {
     Route::get('/', 'App\Http\Controllers\Api\AuthMediaController@loginUsingGoogle');
     Route::get('callback', 'App\Http\Controllers\Api\AuthMediaController@callbackFromGoogle');
-// });
+});
+
+// Google URL
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', function () {
+        return Socialite::driver('google')->redirect();
+    })->name('login');
+
+    Route::any('callback', function () {
+        $user = Socialite::driver('google')->user();
+        dd($user);
+    })->name('callback');
+    // Route::get('login', 'AuthMediaController@loginUsingGoogle')->name('login');
+    // Route::any('callback', 'AuthMediaController@callbackFromGoogle')->name('callback');
+});
 
 // Route::redirect('/', 'admin');
 
