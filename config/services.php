@@ -48,6 +48,12 @@ return [
     //     'profileFields' => ['id', 'email', 'name', 'phone']
     // ],
 
+    'facebook' => [
+        'client_id' => '7201276706581273',
+        'client_secret' => '37a5266217cb6d2c7d68e089abd5b694',
+        'redirect' => 'https://staging-backend.care-hub.net/facebook/callback/',
+    ],
+
     'google' => [
         'client_id' => env('Google_CLIENT_ID'),
         'client_secret' => env('Google_CLIENT_SECRET'),
