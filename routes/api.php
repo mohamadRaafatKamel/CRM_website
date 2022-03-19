@@ -46,7 +46,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/country/{country}', 'CountryController@show');
 
         // registration
-        Route::post('/registration', 'AuthController@registration');
+        Route::post('/registration', 'AuthController@registrationUser');
         Route::post('/driver/registration', 'AuthController@registrationDriver');
         
         // login

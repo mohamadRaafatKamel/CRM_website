@@ -76,6 +76,11 @@ class AuthController extends Controller
         return $this->registration($request, 5);
     }
 
+    public function registrationUser(Request $request)
+    {   
+        return $this->registration($request, 1);
+    }
+
     public function login(Request $request)
     {
         $request->validate([
