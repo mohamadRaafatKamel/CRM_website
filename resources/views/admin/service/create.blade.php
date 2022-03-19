@@ -119,10 +119,10 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="category_id">{{ __('Category Parent') }}</label>
+                                                    <label class="col-md-2 label-control" for="category_id">{{ __('Category') }}</label>
                                                     <div class="col-md-6">
                                                         <select class="select2 form-control" name="category_id">
-                                                            <option value="">-- {{ __('Category Parent') }} --</option>
+                                                            <option value="">-- {{ __('Category') }} --</option>
                                                             @foreach($categorys as $category)
                                                                 <option value="{{ $category->id }}">
                                                                     @if (App::getLocale() == 'ar')

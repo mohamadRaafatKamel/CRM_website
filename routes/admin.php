@@ -44,7 +44,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('edit/{id}','CategoryController@edit')->name('admin.category.edit');
         Route::post('update/{id}','CategoryController@update')->name('admin.category.update');
 
-        Route::get('delete/{id}','CategoryController@destroy') -> name('admin.category.delete');
+        // Route::get('delete/{id}','CategoryController@destroy') -> name('admin.category.delete');
     });
     ##################### End Category ########################
 
@@ -57,9 +57,22 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('edit/{id}','ServiceController@edit')->name('admin.service.edit');
         Route::post('update/{id}','ServiceController@update')->name('admin.service.update');
 
-        Route::get('delete/{id}','ServiceController@destroy') -> name('admin.service.delete');
+        // Route::get('delete/{id}','ServiceController@destroy') -> name('admin.service.delete');
     });
     ##################### End Service ########################
+
+    ##################### PriceList ############################
+    Route::group(['prefix'=>'pricelist'],function (){
+        Route::get('/','PriceListController@index')->name('admin.pricelist');
+        Route::get('create','PriceListController@create')->name('admin.pricelist.create');
+        Route::post('store','PriceListController@store')->name('admin.pricelist.store');
+
+        Route::get('edit/{id}','PriceListController@edit')->name('admin.pricelist.edit');
+        Route::post('update/{id}','PriceListController@update')->name('admin.pricelist.update');
+
+        // Route::get('delete/{id}','PriceListController@destroy') -> name('admin.pricelist.delete');
+    });
+    ##################### End PriceList ########################
 
     ##################### Company ############################
     Route::group(['prefix'=>'company'],function (){

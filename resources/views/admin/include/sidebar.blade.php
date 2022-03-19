@@ -145,6 +145,30 @@
                 </li>
             @endif
 
+            @if(\App\Models\Role::havePremission(['pricelist_view','pricelist_cr','pricelist_idt']))
+                <li class="nav-item">
+                    <a href=""><i class="la la-map-signs"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Price List') }} </span>
+                    </a>
+                    <ul class="menu-content">
+                        @if(\App\Models\Role::havePremission(['pricelist_view','pricelist_idt']))
+                            <li
+                            @if(View::hasSection('pricelist_view')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.pricelist')}}"
+                                data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                            </li>
+                        @endif
+                        @if(\App\Models\Role::havePremission(['pricelist_cr']))
+                            <li
+                            @if(View::hasSection('pricelist_cr')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.pricelist.create')}}" data-i18n="nav.dash.crypto">
+                                    أضافه جديد </a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            @endif
+
             @if(\App\Models\Role::havePremission(['category_view','category_cr','category_idt']))
                 <li class="nav-item">
                     <a href=""><i class="la la-map-signs"></i>
