@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Log;
 use App\Models\Role;
 use App\Models\Service;
@@ -23,7 +24,9 @@ class ServiceController extends Controller
     {
         if(! Role::havePremission(['serves_cr']))
             return redirect()->route('admin.dashboard');
-        return view('admin.service.create');
+
+        $categorys = Category::selection()->get();
+        return view('admin.service.create',compact('categorys'));
     }
 
     public function store(Request $request)
@@ -68,10 +71,11 @@ class ServiceController extends Controller
         if(! Role::havePremission(['serves_view','serves_idt']))
             return redirect()->route('admin.dashboard');
         $datas = Service::select()->find($id);
+        $categorys = Category::selection()->get();
         if(!$datas){
             return redirect()->route('admin.service')->with(['error'=>"غير موجود"]);
         }
-        return view('admin.service.edit',compact('datas'));
+        return view('admin.service.edit',compact('datas','categorys'));
     }
 
     public function update($id, Request $request)

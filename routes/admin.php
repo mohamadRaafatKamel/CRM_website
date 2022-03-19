@@ -35,6 +35,19 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
     });
     ##################### End Specialty ########################
 
+    ##################### Category ############################
+    Route::group(['prefix'=>'category'],function (){
+        Route::get('/','CategoryController@index')->name('admin.category');
+        Route::get('create','CategoryController@create')->name('admin.category.create');
+        Route::post('store','CategoryController@store')->name('admin.category.store');
+
+        Route::get('edit/{id}','CategoryController@edit')->name('admin.category.edit');
+        Route::post('update/{id}','CategoryController@update')->name('admin.category.update');
+
+        Route::get('delete/{id}','CategoryController@destroy') -> name('admin.category.delete');
+    });
+    ##################### End Category ########################
+
     ##################### Service ############################
     Route::group(['prefix'=>'service'],function (){
         Route::get('/','ServiceController@index')->name('admin.service');

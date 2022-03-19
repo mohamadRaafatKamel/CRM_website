@@ -81,19 +81,6 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="price"> {{  __('Price') }} </label>
-                                                            <input type="number" step="0.01" id="price"
-                                                                   class="form-control" required
-                                                                   placeholder="{{ __('Price') }} 0.00"
-                                                                   name="price">
-                                                            @error('price')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
                                                             <label for="type"> {{ __('Type') }} </label>
                                                             <select name="type" class="form-control" id="type" required>
                                                                 <option value="1">{{ __("InPatient") }}</option>
@@ -118,18 +105,39 @@
                                                         </div>
                                                     </div>
 
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="parent_id">وصف</label>
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> وصف </label>
-                                                            <textarea id="description" class="form-control" placeholder="وصف" 
-                                                                name="description"></textarea>
-                                                            @error('description')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
+                                                        <textarea id="description" class="form-control" placeholder="وصف" 
+                                                            name="description"></textarea>
+                                                        @error('description')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
+                                                </div>
 
-
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="category_id">{{ __('Category Parent') }}</label>
+                                                    <div class="col-md-6">
+                                                        <select class="select2 form-control" name="category_id">
+                                                            <option value="">-- {{ __('Category Parent') }} --</option>
+                                                            @foreach($categorys as $category)
+                                                                <option value="{{ $category->id }}">
+                                                                    @if (App::getLocale() == 'ar')
+                                                                        {{ $category->name_ar}}
+                                                                    @else
+                                                                        {{ $category->name_en}}
+                                                                    @endif
+                                                                    
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('category_id')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
 
                                                 <div class="row">

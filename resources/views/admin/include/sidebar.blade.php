@@ -145,6 +145,30 @@
                 </li>
             @endif
 
+            @if(\App\Models\Role::havePremission(['category_view','category_cr','category_idt']))
+                <li class="nav-item">
+                    <a href=""><i class="la la-map-signs"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main"> {{ __('Category') }} </span>
+                    </a>
+                    <ul class="menu-content">
+                        @if(\App\Models\Role::havePremission(['category_view','category_idt']))
+                            <li
+                            @if(View::hasSection('category_view')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.category')}}"
+                                data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                            </li>
+                        @endif
+                        @if(\App\Models\Role::havePremission(['category_cr']))
+                            <li
+                            @if(View::hasSection('category_cr')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.category.create')}}" data-i18n="nav.dash.crypto">
+                                    أضافه جديد </a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            @endif
+
             @if(\App\Models\Role::havePremission(['serves_view','serves_cr','serves_idt']))
                 <li class="nav-item">
                     <a href=""><i class="la la-server"></i>

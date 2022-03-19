@@ -84,19 +84,6 @@ else
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="price"> {{  __('Price') }} </label>
-                                                            <input type="number" step="0.01" value="{{$datas->price}}" id="price"
-                                                                   class="form-control" required {{ $readonly }}
-                                                                   placeholder="{{ __('Price') }} 0.00"
-                                                                   name="price">
-                                                            @error('price')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
                                                             <label for="type"> {{ __('Type') }} </label>
                                                             <select name="type" class="form-control" id="type" {{ $readonly }} required>
                                                                 <option value="1" @if($datas -> type == '1') selected @endif>{{ __("InPatient") }}</option>
@@ -142,6 +129,30 @@ else
                                                     </div>
 
                                                 </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="category_id">{{ __('Category Parent') }}</label>
+                                                    <div class="col-md-6">
+                                                        <select class="select2 form-control" name="category_id"  {{ $readonly }} >
+                                                            <option value="">-- {{ __('Category Parent') }} --</option>
+                                                            @foreach($categorys as $general)
+                                                                <option @if ($datas ->category_id == $general->id) selected @endif 
+                                                                    value="{{ $general->id }}">
+                                                                    @if (App::getLocale() == 'ar')
+                                                                        {{ $general->name_ar}}
+                                                                    @else
+                                                                        {{ $general->name_en}}
+                                                                    @endif
+                                                                    
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('category_id')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
 
                                                 <div class="row">
                                                     <div class="col-md-6">

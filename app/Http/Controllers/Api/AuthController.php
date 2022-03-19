@@ -12,7 +12,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function registration(Request $request, $type = 1)
+    private function registration(Request $request, $type = 1)
     {   
         $request->validate([
             'username' => ['required', 'string', 'max:255'],
