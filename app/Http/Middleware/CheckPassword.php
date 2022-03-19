@@ -17,7 +17,7 @@ class CheckPassword
     public function handle(Request $request, Closure $next)
     {
         if ($request->api_password !== "WvxEe95Sqn+OADxWtLg/QV4WEyyATQ="){
-            return response()->json(['massage'=> 'Unauthenticated.'], 401);
+            return response()->json(['massage'=> 'Unauthenticated2.'], 401);
         }
 
         return $next($request);

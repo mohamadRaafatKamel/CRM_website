@@ -27,19 +27,21 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Facebook URL
-Route::prefix('facebook')->name('facebook.')->group( function(){
-    Route::get('login', function () {
-        return Socialite::driver('facebook')->redirect();
-    })->name('login');
+// Route::prefix('facebook')->name('facebook.')->group( function(){
+//     Route::get('login', function () {
+//         return Socialite::driver('facebook')->redirect();
+//     })->name('login');
 
-    Route::any('callback', function () {
-        $user = Socialite::driver('facebook')->user();
-        dd($user);
-    })->name('callback');
-});
+//     Route::any('callback', function () {
+//         $user = Socialite::driver('facebook')->user();
+//         dd($user);
+//     })->name('callback');
+// });
+// https://staging-backend.care-hub.net/facebook/login
+
 
 // Google URL
-Route::prefix('google')->name('google.')->group( function(){
+// Route::prefix('google')->name('google.')->group( function(){
     // Route::get('login', function () {
     //     return Socialite::driver('google')->redirect();
     // })->name('login');
@@ -48,9 +50,9 @@ Route::prefix('google')->name('google.')->group( function(){
     //     $user = Socialite::driver('google')->user();
     //     dd($user);
     // })->name('callback');
-    Route::get('login', 'AuthMediaController@loginUsingGoogle')->name('login');
-    Route::any('callback', 'AuthMediaController@callbackFromGoogle')->name('callback');
-});
+    // Route::get('login', 'AuthMediaController@loginUsingGoogle')->name('login');
+    // Route::any('callback', 'AuthMediaController@callbackFromGoogle')->name('callback');
+// });
 
 Route::redirect('/', 'admin');
 
