@@ -28,4 +28,12 @@ class PriceListInfo extends Model
         );
     }
 
+    public function getService (){
+        return   Service::getName($this -> service_id) ;
+    }
+
+    public function getPackage (){
+        return   Package::getName($this -> package_id) ;
+    }
+
 }

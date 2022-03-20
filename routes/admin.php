@@ -70,7 +70,13 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('edit/{id}','PriceListController@edit')->name('admin.pricelist.edit');
         Route::post('update/{id}','PriceListController@update')->name('admin.pricelist.update');
 
-        // Route::get('delete/{id}','PriceListController@destroy') -> name('admin.pricelist.delete');
+        // ajax
+        Route::post('/setroll', 'PriceListController@setRoll')->name('ajax.pricelist.set.roll');
+        Route::post('/setservice', 'PriceListController@setService')->name('ajax.pricelist.set.service');
+        // Route::post('/setpackage', 'PriceListController@setPackage')->name('ajax.pricelist.set.package');
+
+        Route::get('delete/{plid}/{id}','PriceListController@destroyRoll') -> name('admin.pricelist.roll.delete');
+        Route::get('deletesrv/{plid}/{id}','PriceListController@destroyService') -> name('admin.pricelist.service.delete');
     });
     ##################### End PriceList ########################
 
@@ -236,7 +242,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
 
         // ajax
         Route::get('/getUserInfo/{id}', 'RequestController@getUserInfo');
-        Route::get('/getServPrice/{id}', 'RequestController@getServPric');
+        Route::post('/getServPrice', 'RequestController@getServPric')->name('ajax.service.get.price');
+        Route::post('/getPackagePrice', 'RequestController@getPackagePrice')->name('ajax.package.get.price');
         Route::get('/getCityGevern/{id}', 'RequestController@getCityGevern');
         
     });

@@ -28,4 +28,16 @@ class PriceListRole extends Model
         );
     }
 
+    public function getUpDown(){
+        return   $this -> up_down == 1 ? 'Down'  : 'Up';
+    }
+
+    public function getPercentageCash(){
+        return   $this -> percentage_cash == 1 ? 'Percentage'  : 'Cash';
+    }
+
+    public function getCategory (){
+        return   Category::getName($this -> category_id) ;
+    }
+
 }

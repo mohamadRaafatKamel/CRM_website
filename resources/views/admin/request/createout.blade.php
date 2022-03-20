@@ -1737,6 +1737,31 @@
     <script>
         jQuery(document).ready(function ($) {
 
+            // service Price
+            $('#service_id').change(function () {
+                let service_id = $("#service_id option:selected").val();
+                let price_list_id= 0;
+                let _token = '{{ csrf_token() }}';
+                $.ajax({
+                    url: "{{ route('ajax.service.get.price') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    data:{
+                        service_id :service_id,
+                        price_list_id :price_list_id,
+                        _token: _token
+                    },
+                    success: function (response) {
+                        // console.log(response)
+                        if(response == null){
+                            console.log('Not Found');
+                        }else {
+                            $('#action_price').val(response.price);
+                        }
+                    }
+                });
+            });
+
             $('#user_id').change(function () {
                 $.ajax({
                     url: '../../getUserInfo/' + $('#user_id').val(),
@@ -1768,22 +1793,6 @@
                     // error: function (xhr, ajaxOptions, thrownError) {
                     //     input.val(0);
                     // }
-                });
-            });
-
-            $('#service_id').change(function () {
-                $.ajax({
-                    url: '../../getServPrice/' + $('#service_id').val(),
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (response) {
-                        // console.log(response)
-                        if(response == null){
-                            console.log('Not Found');
-                        }else {
-                            $('#action_price').val(response.price);
-                        }
-                    }
                 });
             });
 

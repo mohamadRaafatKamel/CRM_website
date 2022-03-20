@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Mail\requestMail;
 use App\Models\Log;
 use App\Models\Physician;
+use App\Models\PriceList;
 use App\Models\RequestAction;
 use App\Models\UsersReferral;
 use Illuminate\Http\Request;
@@ -825,7 +826,7 @@ class RequestController extends Controller
             $action->state = $state;
         $action->request_id = $reqid;
         $action->service_id = $serv;
-        $action->price = Service::getPrice($serv);
+        $action->price = Service::getPrice(0, $serv);
         
         $action->admin_id  = Auth::user()->id;
         $action->save();
@@ -944,10 +945,21 @@ class RequestController extends Controller
         exit;
     }
 
-    public function getServPric($id = 0){
+    public function getServPric(Request $request){
         // get records from database
-        if($id!=0){
-            $arr['price'] = Service::getPrice($id);
+        if(isset($request->price_list_id) && isset($request->service_id)){
+            $arr['price'] = Service::getPrice($request->price_list_id, $request->service_id);
+        }else{
+            $arr['price'] = 0;
+        }
+        echo json_encode($arr);
+        exit;
+    }
+
+    public function getPackagePrice(Request $request){
+        // get records from database
+        if(isset($request->price_list_id) && isset($request->package_id)){
+            $arr['price'] = Package::getPrice($request->price_list_id, $request->package_id);
         }else{
             $arr['price'] = 0;
         }

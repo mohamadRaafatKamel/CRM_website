@@ -18,13 +18,13 @@ class PriceList extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'main_pl', 'copy_from', 'admin_id', 'disabled', 'created_at', 'updated_at'
+        'id', 'name', 'main_pl', 'copy_from', 'admin_id', 'status', 'disabled', 'created_at', 'updated_at'
     ];
 
     public function  scopeSelection($query){
 
         return $query -> select(
-            'id', 'name', 'main_pl', 'copy_from', 'admin_id', 'disabled', 'created_at', 'updated_at'
+            'id', 'name', 'main_pl', 'copy_from', 'admin_id', 'status', 'disabled', 'created_at', 'updated_at'
         );
     }
 

@@ -16,11 +16,12 @@ class CreatePriceListTable extends Migration
         Schema::create('price_list', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('main_pl')->unique();
+            $table->string('main_pl')->default(0);
             $table->unsignedBigInteger('copy_from')->nullable();
             $table->foreign('copy_from')->references('id')->on('price_list')->onDelete('cascade');
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
+            $table->integer('status')->default(0);
             $table->integer('disabled')->default(0);
             $table->timestamps();
         });

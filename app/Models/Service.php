@@ -59,11 +59,15 @@ class Service extends Model
         return "";
     }
 
-    public static function getPrice($id)
+    public static function getPrice($pl, $id)
     {
-        $data = Service::select()->find($id);
+        if($pl == 0){
+            $data = PriceList::select('id')->where('main_pl',1)->first();
+            $pl = $data->id;
+        }
+        $data = PriceListInfo::select('price')->where('service_id',$id)->where('price_list_id',$pl)->first();
         if(isset($data->price)){
-            return $data['price'];
+            return $data->price;
         }
         return "0";
     }

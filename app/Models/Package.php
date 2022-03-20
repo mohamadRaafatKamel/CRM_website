@@ -35,6 +35,10 @@ class Package extends Model
         return   $this -> disabled == 0 ? 'مفعل'  : 'غير مفعل';
     }
 
+    public function getMyName(){
+        return   $this->getName($this -> id);
+    }
+
     public static function getName($id)
     {
         $data = Package::select()->find($id);
@@ -56,6 +60,15 @@ class Package extends Model
             return $data['name_en'];
         }
         return "_";
+    }
+
+    public static function getPrice($pl, $id)
+    {
+        $data = PriceListInfo::select('price')->where('package_id',$id)->where('price_list_id',$pl)->first();
+        if(isset($data->price)){
+            return $data->price;
+        }
+        return "0";
     }
 
 
