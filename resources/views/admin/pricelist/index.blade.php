@@ -66,7 +66,7 @@
                                                         @else
                                                             <td>{{$data -> id}}</td>
                                                         @endif
-                                                        <td>{{$data -> name}}</td>
+                                                        <td @if ($data->main_pl == 1) style="color: red;" @endif>{{$data -> name}}</td>
                                                         <td>{{$data -> getActive()}}</td>
                                                     </tr>
                                                 @endforeach

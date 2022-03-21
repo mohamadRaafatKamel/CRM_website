@@ -47,6 +47,8 @@ class PriceListController  extends Controller
                 foreach($pls as $pl){
                     $pl->update(['main_pl'=> '0']);
                 }
+            }elseif(PriceList::Count() == 0){
+                $request->request->add(['main_pl' =>  1 ]);
             }
 
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
