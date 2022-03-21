@@ -1,18 +1,18 @@
 @extends('layouts.admin')
-@section('title',__('Category'))
-@section('category_view','')
+@section('title',__('Medical Type'))
+@section('medicaltype_view','')
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">  {{ __('Category') }} </h3>
+                    <h3 class="content-header-title">  {{ __('Medical Type') }} </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active">  {{ __('Category') }}
+                                <li class="breadcrumb-item active">  {{ __('Medical Type') }}
                                 </li>
                             </ol>
                         </div>
@@ -26,7 +26,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">  </h4>
+                                    <h4 class="card-title">    </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -44,17 +44,15 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        @if(\App\Models\Role::havePremission(['category_cr']))
-                                        <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.category.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
+                                        @if(\App\Models\Role::havePremission(['medicaltype_cr']))
+                                        <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.medicaltype.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
                                         @endif
                                         <table
                                             class="table table-striped table-bordered ordering-print ">
                                             <thead>
                                             <tr>
-                                                <th>ID </th>
                                                 <th>اسم عربي</th>
                                                 <th> اسم انجليزي</th>
-                                                <th>{{ __('Parent') }}</th>
                                                 <th>الحالة</th>
                                                 <th></th>
                                             </tr>
@@ -64,17 +62,14 @@
                                             @isset($datas)
                                                 @foreach($datas as $data)
                                                     <tr>
-                                                        <td>{{$data['id']}}</td>
-                                                        <td>{{$data['name_ar']}}</td>
-                                                        <td>{{$data['name_en']}}</td>
-                                                        <td>{{$data['parent_id']}}</td>
-                                                        
-                                                        <td>{{$data['disabled']}}</td>
+                                                        <td>{{$data->name_ar}}</td>
+                                                        <td>{{$data->name_en}}</td>
+                                                        <td>{{$data->disabled}}</td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                 @if(\App\Models\Role::havePremission(['category_idt']))
-                                                                <a href="{{route('admin.category.edit',['id'=> $data['id'] ])}}"
+                                                                 @if(\App\Models\Role::havePremission(['medicaltype_idt']))
+                                                                <a href="{{route('admin.medicaltype.edit',['id'=> $data->id ])}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
                                                                    @endif
                                                             </div>
@@ -87,10 +82,8 @@
                                             </tbody>
 
                                             <tfoot>
-                                                <th>ID </th>
                                                 <th>اسم عربي</th>
                                                 <th> اسم انجليزي</th>
-                                                <th>{{ __('Parent') }}</th>
                                                 <th>الحالة</th>
                                                 <th></th>
                                             </tfoot>

@@ -48,6 +48,19 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
     });
     ##################### End Category ########################
 
+    ##################### MedicalType ############################
+    Route::group(['prefix'=>'medicaltype'],function (){
+        Route::get('/','MedicalTypeController@index')->name('admin.medicaltype');
+        Route::get('create','MedicalTypeController@create')->name('admin.medicaltype.create');
+        Route::post('store','MedicalTypeController@store')->name('admin.medicaltype.store');
+
+        Route::get('edit/{id}','MedicalTypeController@edit')->name('admin.medicaltype.edit');
+        Route::post('update/{id}','MedicalTypeController@update')->name('admin.medicaltype.update');
+
+        // Route::get('delete/{id}','MedicalTypeController@destroy') -> name('admin.medicaltype.delete');
+    });
+    ##################### End MedicalType ########################
+
     ##################### Service ############################
     Route::group(['prefix'=>'service'],function (){
         Route::get('/','ServiceController@index')->name('admin.service');

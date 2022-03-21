@@ -36,4 +36,5 @@ class PriceList extends Model
         return   $this -> disabled == 0 ? 'مفعل'  : 'غير مفعل';
     }
 
+
 }

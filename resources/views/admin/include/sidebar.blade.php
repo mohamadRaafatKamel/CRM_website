@@ -169,6 +169,30 @@
                 </li>
             @endif
 
+            @if(\App\Models\Role::havePremission(['medicaltype_view','medicaltype_cr','medicaltype_idt']))
+                <li class="nav-item">
+                    <a href=""><i class="la la-map-signs"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Medical Type') }} </span>
+                    </a>
+                    <ul class="menu-content">
+                        @if(\App\Models\Role::havePremission(['medicaltype_view','medicaltype_idt']))
+                            <li
+                            @if(View::hasSection('medicaltype_view')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.medicaltype')}}"
+                                data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                            </li>
+                        @endif
+                        @if(\App\Models\Role::havePremission(['medicaltype_cr']))
+                            <li
+                            @if(View::hasSection('medicaltype_cr')) class="active" @endif
+                            ><a class="menu-item" href="{{route('admin.medicaltype.create')}}" data-i18n="nav.dash.crypto">
+                                    أضافه جديد </a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            @endif
+
             @if(\App\Models\Role::havePremission(['category_view','category_cr','category_idt']))
                 <li class="nav-item">
                     <a href=""><i class="la la-map-signs"></i>
