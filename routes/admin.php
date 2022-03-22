@@ -41,6 +41,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('create','CategoryController@create')->name('admin.category.create');
         Route::post('store','CategoryController@store')->name('admin.category.store');
 
+        Route::get('import','CategoryController@import')->name('admin.category.import');
+        Route::post('importstore','CategoryController@importstore')->name('admin.category.importstore');
+
         Route::get('edit/{id}','CategoryController@edit')->name('admin.category.edit');
         Route::post('update/{id}','CategoryController@update')->name('admin.category.update');
 
@@ -79,6 +82,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('/','PriceListController@index')->name('admin.pricelist');
         Route::get('create','PriceListController@create')->name('admin.pricelist.create');
         Route::post('store','PriceListController@store')->name('admin.pricelist.store');
+
+        Route::get('import','PriceListController@import')->name('admin.pricelist.import');
+        Route::post('storeimport','PriceListController@storeimport')->name('admin.pricelist.storeimport');
 
         Route::get('edit/{id}','PriceListController@edit')->name('admin.pricelist.edit');
         Route::post('update/{id}','PriceListController@update')->name('admin.pricelist.update');

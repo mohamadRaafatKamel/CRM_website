@@ -25,6 +25,7 @@ class PriceListController  extends Controller
         return view('admin.pricelist.index', compact('datas'));
     }
 
+    // Create
     public function create()
     {
         if(! Role::havePremission(['pricelist_cr']))
@@ -61,6 +62,48 @@ class PriceListController  extends Controller
         }
     }
 
+    // Import
+    public function import()
+    {
+        if(! Role::havePremission(['pricelist_cr']))
+            return redirect()->route('admin.dashboard');
+        return view('admin.pricelist.import');
+    }
+
+    public function storeimport(Request $request)
+    {
+        if(! Role::havePremission(['pricelist_cr']))
+            return redirect()->route('admin.dashboard');
+
+        $request->validate([
+            'csvfile'=>"required|mimes:csv,txt",
+        ]);
+
+        dd($request->all());
+        // try {
+            if (!$request->has('disabled'))
+                $request->request->add(['disabled' => 1]);
+
+            if ($request->has('main_pl')){
+                $pls = PriceList::all();
+                foreach($pls as $pl){
+                    $pl->update(['main_pl'=> '0']);
+                }
+            }elseif(PriceList::Count() == 0){
+                $request->request->add(['main_pl' =>  1 ]);
+            }
+
+            $request->request->add(['admin_id' =>  Auth::user()->id ]);
+            $PL= PriceList::create($request->except(['_token']));
+            Log::setLog('create','price_list',$PL->id,"","");
+
+            return redirect()->route('admin.pricelist.edit',$PL->id)->with(['success'=>'تم الحفظ']);
+        // }catch (\Exception $ex){
+        //     return redirect()->route('admin.pricelist.create')->with(['error'=>'يوجد خطء']);
+        // }
+    }
+
+    // update
     public function edit($id)
     {
         if(! Role::havePremission(['pricelist_view','pricelist_idt']))

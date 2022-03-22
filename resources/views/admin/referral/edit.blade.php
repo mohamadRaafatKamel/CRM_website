@@ -97,7 +97,7 @@ else
                                                         <div class="form-group">
                                                             <label for="cat_id">{{ __('Category Name') }}</label>
                                                             <select class="select2 form-control" name="cat_id" id="cat_id" required >
-                                                                <option value="">{{ __('Choose Nurse Name') }}</option>
+                                                                <option value="">{{ __('Category Name') }}</option>
                                                                 @foreach($cats as $cat)
                                                                     <option value="{{ $cat->id }}"
                                                                             @if(isset($datas->cat_id ))

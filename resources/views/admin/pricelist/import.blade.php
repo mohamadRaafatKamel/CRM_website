@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">{{ __('Add') }}</h4>
+                                    <h4 class="card-title" id="basic-layout-form">{{ __('Add') }} </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -44,7 +44,7 @@
                                 @include('admin.include.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form form-horizontal" action="{{route('admin.pricelist.store')}}" method="POST"
+                                        <form class="form form-horizontal" action="{{route('admin.pricelist.storeimport')}}" method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
 
@@ -52,30 +52,12 @@
                                                 <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="name">الاسم </label>
+                                                    <label class="col-md-2 label-control" for="name">{{ __('Add File') }} </label>
                                                     <div class="col-md-6">
-                                                        <input type="text" value="" id="name"
+                                                        <input type="file" value="" id="csvfile"
                                                                 class="form-control" required
-                                                                placeholder="الاسم "
-                                                                name="name">
-                                                        @error('name')
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="copy_from">{{ __('Copy From') }}</label>
-                                                    <div class="col-md-6">
-                                                        <select class="select2 form-control" name="copy_from">
-                                                            <option value="">-- {{ __('Copy From') }} --</option>
-                                                            @foreach($priceLists as $priceList)
-                                                                <option value="{{ $priceList->id }}">
-                                                                        {{ $priceList->name}}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('copy_from')
+                                                                name="csvfile">
+                                                        @error('csvfile')
                                                         <span class="text-danger">{{$message}}</span>
                                                         @enderror
                                                     </div>
@@ -113,7 +95,7 @@
                                                 </a>
                                                 
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> {{ __('Next') }}
+                                                    <i class="la la-check-square-o"></i> {{ __('Save') }}
                                                 </button>
 
                                                 

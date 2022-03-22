@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title',__('Price List'))
-@section('pricelist_cr','')
+@section('title',__('Category'))
+@section('category_cr','')
 @section('content')
 
     <div class="app-content content">
@@ -12,7 +12,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.pricelist')}}">  {{ __('Price List') }} </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.category')}}">  {{ __('Category') }} </a>
                                 </li>
                                 <li class="breadcrumb-item active">{{ __('Add') }}
                                 </li>
@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">{{ __('Add') }}</h4>
+                                    <h4 class="card-title" id="basic-layout-form"> {{ __('Add') }}   </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -44,7 +44,7 @@
                                 @include('admin.include.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form form-horizontal" action="{{route('admin.pricelist.store')}}" method="POST"
+                                        <form class="form form-horizontal" action="{{route('admin.category.importstore')}}" method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
 
@@ -52,68 +52,43 @@
                                                 <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="name">الاسم </label>
+                                                    <label class="col-md-2 label-control" for="name">{{ __('Add File') }} </label>
                                                     <div class="col-md-6">
-                                                        <input type="text" value="" id="name"
+                                                        <input type="file" value="" id="csvfile"
                                                                 class="form-control" required
-                                                                placeholder="الاسم "
-                                                                name="name">
-                                                        @error('name')
+                                                                name="csvfile">
+                                                        @error('csvfile')
                                                         <span class="text-danger">{{$message}}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="copy_from">{{ __('Copy From') }}</label>
+                                                    <label class="col-md-2 label-control" for="old">{{ __('Disapled old row') }}</label>
                                                     <div class="col-md-6">
-                                                        <select class="select2 form-control" name="copy_from">
-                                                            <option value="">-- {{ __('Copy From') }} --</option>
-                                                            @foreach($priceLists as $priceList)
-                                                                <option value="{{ $priceList->id }}">
-                                                                        {{ $priceList->name}}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('copy_from')
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="disabled">الحالة</label>
-                                                    <div class="col-md-6">
-                                                        <input type="checkbox" value="0" name="disabled" id="disabled"
+                                                        <input type="checkbox" value="1" name="old" id="old"
                                                                 class="switchery" data-color="success" checked/>
-                                                        @error('disabled')
+                                                        @error('old')
                                                         <span class="text-danger">{{$message}}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="main_pl">main</label>
-                                                    <div class="col-md-6">
-                                                        <input type="checkbox"  value="1" name="main_pl"
-                                                                id="main_pl" class="switchery" data-color="success" />
-                                                        @error('main_pl')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
+                                                
+                                              
                                             </div>
 
 
                                             <div class="form-actions">
                                                 
-                                                <a href="{{ route('admin.pricelist') }}" class="btn btn-warning">
+                                                <a href="{{ route('admin.category') }}" class="btn btn-warning">
                                                     <i class="la la-check-square-o"></i> تراجع
                                                 </a>
                                                 
+                                                <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
+                                                    <i class="la la-check-square-o"></i> حفظ و جديد
+                                                </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> {{ __('Next') }}
+                                                    <i class="la la-check-square-o"></i> حفظ
                                                 </button>
 
                                                 
@@ -126,8 +101,6 @@
                     </div>
                 </section>
                 <!-- // Basic form layout section end -->
-
-                
             </div>
         </div>
     </div>

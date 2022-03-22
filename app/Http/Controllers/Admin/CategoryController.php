@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\CategoryImport;
 use App\Models\Log;
 use App\Models\Role;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
@@ -54,6 +56,80 @@ class CategoryController extends Controller
             return redirect()->route('admin.category.create')->with(['error'=>'يوجد خطء']);
         }
     }
+
+    public function import()
+    {
+        if(! Role::havePremission(['category_cr']))
+            return redirect()->route('admin.dashboard');
+        return view('admin.category.import');
+    }
+
+    public function importstore(Request $request)
+    {
+        if(! Role::havePremission(['category_cr']))
+            return redirect()->route('admin.dashboard');
+
+        $request->validate([
+            'csvfile'=>"required|mimes:xlsx",
+        ],[ 'mimes'=>"Must Excel",'required'=>"Required" ]);
+
+        Excel::import(new CategoryImport, request()->file('csvfile'));
+
+        // dd($request->post(['csvfile']));
+        // $header = null;
+        // $delimiter =',';
+        // $filename = $request->file('csvfile');
+        // $handle = fopen($filename, 'r');
+        // while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+        // {
+        //     if (!$header)
+        //         // $header = $row;
+        //         echo iconv( "Windows-1252", "utf8mb4", $row[0]);
+        //     // else
+        //     //     $data[] = array_combine($header, $row);
+        // }
+        // fclose($handle);
+        // dd(fgetcsv($handle, 1000, ','));
+        // try {
+        //     if (!$request->has('disabled'))
+        //         $request->request->add(['disabled' => 1]);
+
+        //     $request->request->add(['admin_id' =>  Auth::user()->id ]);
+        //     $spc= Category::create($request->except(['_token']));
+        //     Log::setLog('create','category',$spc->id,"","");
+
+        //     if(isset($request->btn))
+        //         if($request->btn =="saveAndNew")
+        //             return redirect()->route('admin.category.create')->with(['success'=>'تم الحفظ']);
+        
+        //     return redirect()->route('admin.category')->with(['success'=>'تم الحفظ']);
+        // }catch (\Exception $ex){
+        //     return redirect()->route('admin.category.create')->with(['error'=>'يوجد خطء']);
+        // }
+    }
+
+    // function csvToArray($filename = '', $delimiter = ',')
+    // {
+    //     if (!file_exists($filename) || !is_readable($filename))
+    //         return false;
+
+    //     $header = null;
+    //     $data = array();
+    //     if (($handle = fopen($filename, 'r')) !== false)
+    //     {
+    //         while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+    //         {
+    //             if (!$header)
+    //                 $header = $row;
+    //                 echo iconv( "Windows-1252", "UTF-8", $row[$c]);
+    //             else
+    //                 $data[] = array_combine($header, $row);
+    //         }
+    //         fclose($handle);
+    //     }
+
+    //     return $data;
+    // }
 
     public function edit($id)
     {

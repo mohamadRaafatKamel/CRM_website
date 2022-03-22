@@ -28,9 +28,9 @@ class UserResource extends JsonResource
             'birth_date' => $this->user()->birth_date,
             'email' => $this->user()->email,
             'phone' => $this->user()->phone,
+            'mobile' => $this->user()->mobile,
             'type' => ($this->user()->type != null)? User::getUserType($this->user()->type) : "",
             'verification' => $this->user()->verification,
-            'mobile' => $this->user()->mobile,
             'gender' => ($this->user()->gender != null)? User::getGenderType($this->user()->gender) : "",
             'title' => $this->user()->title,
             'nationality_code' => $this->user()->nationality_code,
@@ -38,11 +38,11 @@ class UserResource extends JsonResource
             'city_id' => ($this->user()->city_id != null)? City::getNameEN($this->user()->city_id) : "",
             'address' => $this->user()->address,
             'adress2' => $this->user()->adress2,
-            'account_owner_name' => $this->user()->account_owner_name,
-            'account_num' => $this->user()->account_num,
-            'bank_name' => $this->user()->bank_name,
-            'identity_id' => $this->user()->identity_id,
-            'passport_id' => $this->user()->passport_id,
+            // 'account_owner_name' => $this->user()->account_owner_name,
+            // 'account_num' => $this->user()->account_num,
+            // 'bank_name' => $this->user()->bank_name,
+            // 'identity_id' => $this->user()->identity_id,
+            // 'passport_id' => $this->user()->passport_id,
         ];
         // Doctor
         if ($this->user()->type == '2'){

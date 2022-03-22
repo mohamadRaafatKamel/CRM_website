@@ -39,7 +39,7 @@ class Referral extends Model
     {
         try{
             $myref = [];
-            $referrals = Referral::select('id', 'name_ar')->get();
+            $referrals = Referral::select('id', 'name_ar')->active()->get();
             $doctors = User::select('id', 'username')->doctor()->get();
             if($referrals){
                 if($referrals->count()>0){
