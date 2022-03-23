@@ -190,6 +190,24 @@ else
 
                                                 </div>
 
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="price_list_id">{{ __('Price List') }}</label>
+                                                    <div class="col-md-6">
+                                                        <select class="select2 form-control" name="price_list_id">
+                                                            <option value="">-- {{ __('Price List') }} --</option>
+                                                            @foreach($priceLists as $priceList)
+                                                                <option value="{{ $priceList->id }}" 
+                                                                    @if ($datas ->price_list_id == $priceList->id) selected @endif>
+                                                                        {{ $priceList->name}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('price_list_id')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                             @if ($permissoin)

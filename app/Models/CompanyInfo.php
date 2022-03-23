@@ -17,13 +17,13 @@ class CompanyInfo extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'org_name', 'email', 'phone', 'website', 'contact_person_name', 'registration_num', 'tax_certificate_num', 'type', 'pay', 'description', 'admin_id', 'created_at', 'updated_at'
+        'id', 'org_name', 'email', 'phone', 'price_list_id', 'website', 'contact_person_name', 'registration_num', 'tax_certificate_num', 'type', 'pay', 'description', 'admin_id', 'created_at', 'updated_at'
     ];
 
     public function  scopeSelection($query){
 
         return $query -> select(
-            'id', 'org_name', 'email', 'phone', 'website', 'contact_person_name', 'registration_num', 'tax_certificate_num', 'type', 'pay', 'description', 'admin_id', 'created_at', 'updated_at'
+            'id', 'org_name', 'email', 'phone', 'price_list_id', 'website', 'contact_person_name', 'registration_num', 'tax_certificate_num', 'type', 'pay', 'description', 'admin_id', 'created_at', 'updated_at'
         );
     }
 

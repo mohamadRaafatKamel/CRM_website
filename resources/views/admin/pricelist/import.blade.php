@@ -51,6 +51,8 @@
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
 
+                                                <p class="text-center">Please import file as Service Eng name , Price </p>
+
                                                 <div class="form-group row">
                                                     <label class="col-md-2 label-control" for="name">الاسم </label>
                                                     <div class="col-md-6">

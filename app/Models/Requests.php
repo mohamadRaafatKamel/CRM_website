@@ -19,11 +19,11 @@ class Requests extends Model
     protected $fillable = [
         'id', 'user_id', 'doctor_id', 'nurse_id', 'fullname', 'name_caregiver', 'gender', 'location', 
         'governorate_id', 'city_id', 'adress', 'land_mark', 'floor', 'apartment', 'phone', 'phone2', 'whatapp', 
-        'whatapp2', 'whatsApp_group', 'age', 'corporate_id', 'physician', 'type', 'covid19', 
-        'specialty_id', 'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to',  // 'service_id',
+        'whatapp2', 'whatsApp_group', 'age', 'corporate_id', 'physician', 'type',  'medical_type_id',
+        'specialty_id', 'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to',  // 'service_id', 'covid19',
         'expectation_cost', 'real_cost', 'bill_serial', 'pay_or_not', 'code_zone_patient_id', 'bed_number', 
         'symptoms', 'doc_note', 'come_from', 'reason_out', 'Long', 'date_out', 'date_in', 'diagnose', 'history', 'co', 
-        'Feedback', 'doc_rate', 'user_rate', 'opd_admin_id', 'opd2_admin_id', 'cc_admin_id', 'adress2', 
+        'Feedback', 'doc_rate', 'user_rate', 'opd_admin_id', 'opd2_admin_id', 'cc_admin_id', 'adress2', 'price_list_id',
         'admin_id_in_out', 'status_doc', 'status_user', 'status_cc', 'status_in_out', 'created_at', 
         'updated_at','driver_id', 'created_by'
     ];
@@ -33,11 +33,11 @@ class Requests extends Model
         return $query -> select(
             'id', 'user_id', 'doctor_id', 'nurse_id', 'fullname', 'name_caregiver', 'gender', 'location', 
             'governorate_id', 'city_id', 'adress', 'land_mark', 'floor', 'apartment', 'phone', 'phone2', 'whatapp', 
-            'whatapp2', 'whatsApp_group', 'age', 'corporate_id', 'physician', 'type', 'covid19', 
-            'specialty_id', 'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to',  // 'service_id',
+            'whatapp2', 'whatsApp_group', 'age', 'corporate_id', 'physician', 'type',  'medical_type_id',
+            'specialty_id', 'package_id', 'visit_time_day', 'visit_time_from', 'visit_time_to',  // 'service_id', 'covid19',
             'expectation_cost', 'real_cost', 'bill_serial', 'pay_or_not', 'code_zone_patient_id', 'bed_number', 
             'symptoms', 'doc_note', 'come_from', 'reason_out', 'Long', 'date_out', 'date_in', 'diagnose', 'history', 'co', 
-            'Feedback', 'doc_rate', 'user_rate', 'opd_admin_id', 'opd2_admin_id', 'cc_admin_id', 'adress2', 
+            'Feedback', 'doc_rate', 'user_rate', 'opd_admin_id', 'opd2_admin_id', 'cc_admin_id', 'adress2', 'price_list_id',
             'admin_id_in_out', 'status_doc', 'status_user', 'status_cc', 'status_in_out', 'created_at', 
             'updated_at','driver_id', 'created_by'
         );

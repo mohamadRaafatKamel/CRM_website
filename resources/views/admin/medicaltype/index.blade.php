@@ -64,7 +64,7 @@
                                                     <tr>
                                                         <td>{{$data->name_ar}}</td>
                                                         <td>{{$data->name_en}}</td>
-                                                        <td>{{$data->disabled}}</td>
+                                                        <td>{{$data->getActive()}}</td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">

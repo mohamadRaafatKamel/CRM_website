@@ -46,7 +46,7 @@ class MedicalType extends Model
 
     public static function getName($id)
     {
-        $data = Category::select()->find($id);
+        $data = MedicalType::select()->find($id);
         if(isset($data->id)){
             if (App::getLocale() == 'ar')
                 return $data['name_ar'];
@@ -60,7 +60,7 @@ class MedicalType extends Model
 
     public static function getNameEN($id)
     {
-        $data = Specialty::select()->find($id);
+        $data = MedicalType::select()->find($id);
         if(isset($data->id)){
             return $data['name_en'];
         }

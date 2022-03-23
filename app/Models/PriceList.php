@@ -36,5 +36,32 @@ class PriceList extends Model
         return   $this -> disabled == 0 ? 'مفعل'  : 'غير مفعل';
     }
 
+    public static function getMainPL(){
+        $data = PriceList::select('id')->where('main_pl',1)->first();
+        return $data->id;
+    }
+
+    public static function getPriceList($medType, $company)
+    {
+        if($company == null && $medType == null){
+            return "0";
+        }
+        if($company != null && $medType != null){
+            return PriceList::getMainPL();
+        }
+        if($company == null && $medType != null){
+            $type = MedicalType::select()->find($medType);
+            if(isset($type->id))
+                return $type->price_list_id;
+        }else
+        if($company != null && $medType == null){
+            $comp = CompanyInfo::select()->find($company);
+            if(isset($comp->id))
+                return $comp->price_list_id;
+        }
+        
+        return "0";
+    }
+
 
 }

@@ -20,6 +20,7 @@ use App\Models\Specialty;
 use App\Models\User;
 use App\Mail\requestMail;
 use App\Models\Log;
+use App\Models\MedicalType;
 use App\Models\Physician;
 use App\Models\PriceList;
 use App\Models\RequestAction;
@@ -68,6 +69,7 @@ class RequestController extends Controller
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $actions = RequestAction::select()->where('request_id',$req)->get();
         $referrals = Referral::getAllReferral();
+        $medicalTypes = MedicalType::select()->get();
         
         $usersReferrals= [];
         if(isset($myorder->user_id)){
@@ -75,7 +77,7 @@ class RequestController extends Controller
         }
         
 
-        return view('admin.request.createcc',compact('users','actions','usersReferrals','doctors','nurses','companys','referrals','physicians','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
+        return view('admin.request.createcc',compact('users','medicalTypes','actions','usersReferrals','doctors','nurses','companys','referrals','physicians','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
     }
 
     public function store(Request $request)
@@ -947,11 +949,15 @@ class RequestController extends Controller
 
     public function getServPric(Request $request){
         // get records from database
-        if(isset($request->price_list_id) && isset($request->service_id)){
+        if(isset($request->service_id)){
+            if( $request->price_list_id == 0 && ( isset($request->medical_type_id) || isset($request->corporate_id) ) ){
+                $request->price_list_id = PriceList::getPriceList($request->medical_type_id,$request->corporate_id);
+            }
             $arr['price'] = Service::getPrice($request->price_list_id, $request->service_id);
         }else{
             $arr['price'] = 0;
         }
+        
         echo json_encode($arr);
         exit;
     }

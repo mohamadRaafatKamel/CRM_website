@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyInfo;
 use App\Models\Log;
+use App\Models\PriceList;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,8 @@ class CompanyController extends Controller
     {
         if(! Role::havePremission(['company_cr']))
             return redirect()->route('admin.dashboard');
-        return view('admin.company.create');
+        $priceLists = PriceList::selection()->get();
+        return view('admin.company.create',compact('priceLists'));
     }
 
     public function store(Request $request)
@@ -54,7 +56,8 @@ class CompanyController extends Controller
         if(!$datas){
             return redirect()->route('admin.company')->with(['error'=>"غير موجود"]);
         }
-        return view('admin.company.edit',compact('datas'));
+        $priceLists = PriceList::selection()->get();
+        return view('admin.company.edit',compact('datas','priceLists'));
     }
 
     public function update($id, Request $request)
