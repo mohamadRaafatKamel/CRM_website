@@ -45,7 +45,7 @@
                                     <div class="card-body card-dashboard">
                                         @if(\App\Models\Role::havePremission(['pricelist_cr']))
                                             <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.pricelist.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
-                                            <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.pricelist.import') }}"><i class="ft-plus"></i>&nbsp; {{ __('CSV Import') }}</a>
+                                            <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.pricelist.import') }}"><i class="ft-plus"></i>&nbsp; {{ __('Import') }}</a>
                                         @endif
                                         <table
                                             class="table table-striped table-bordered ordering-print ">

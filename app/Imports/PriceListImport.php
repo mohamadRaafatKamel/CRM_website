@@ -2,27 +2,29 @@
 
 namespace App\Imports;
 
+use App\Models\PriceList;
+use App\Models\PriceListInfo;
 use App\Models\Service;
-use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
-class ServiceImport implements ToModel, WithStartRow, WithCustomCsvSettings
+class PriceListImport implements ToModel, WithStartRow, WithCustomCsvSettings
 {
     public $errors = [];
     private $row = 3;
+    private $prListID ;
 
     /**
     * UsersImport constructor.
     * @param StoreEntity $store
     */
-    public function __construct($errors = [])
+    public function __construct($prListID, $errors = [])
     {
         $this->errors = $errors;
+        $this->prListID = $prListID;
     }
 
     public function startRow(): int
@@ -53,48 +55,34 @@ class ServiceImport implements ToModel, WithStartRow, WithCustomCsvSettings
         }
     
         $validator = Validator::make($row, [
-            '0' => [ // en
+            '0' => [ // service eng name
                 'required',
-                'unique:service,name_en',
+                'exists:service,name_en',
                 'string',
                 'max:255',
             ],
-            '1' => [ // ar
+            '1' => [ // service price
                 'required',
-                'string',
                 'max:255',
             ],
-            '2' => [ // category
-                'required',
-                'nullable',
-                'exists:category,name_en',
-            ],
-            '3' => [
-                'required',
-                Rule::in(['in', 'out']),
-            ],
-            '4' => [
-                'required',
-                Rule::in(['site', 'notsite']),
-            ],
+            
         ]);
     
         //   print_r($row);
 
         
         if ($validator->fails()) {
-            $this->errors[] = $validator->errors();
+            // $this->errors[] = $validator->errors();
+            $this->errors[] = $row[0];
             // dd($validator->errors());
             return null;
         }
 
         try {
-            return new Service([
-                'name_en'     => $row[0],
-                'name_ar'    => $row[1],
-                'category_id'    => Category::getIDformNameEN($row[2]),
-                'type' => ($row[3] == 'in')? 1 : 2 ,
-                'site' => ($row[4] == 'site')? 1 : 0 ,
+            return new PriceListInfo([
+                'service_id'     => Service::getIDformNameEN($row[0]),
+                'price'    => $row[1],
+                'price_list_id'    => $this->prListID,
                 'admin_id' =>  Auth::user()->id
             ]);
         } catch (\Exception $e) {
@@ -117,5 +105,4 @@ class ServiceImport implements ToModel, WithStartRow, WithCustomCsvSettings
         //       Log::debug($e);
         //   }
     }
-
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\PriceListImport;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\Package;
@@ -13,6 +14,7 @@ use App\Models\PriceListRole;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PriceListController  extends Controller
 {
@@ -38,6 +40,10 @@ class PriceListController  extends Controller
     {
         if(! Role::havePremission(['pricelist_cr']))
             return redirect()->route('admin.dashboard');
+
+            $request->validate([
+                'name'=>"unique:price_list,name",
+            ]);
 
         try {
             if (!$request->has('disabled'))
@@ -76,7 +82,7 @@ class PriceListController  extends Controller
             return redirect()->route('admin.dashboard');
 
         $request->validate([
-            'csvfile'=>"required|mimes:csv,txt",
+            'csvfile'=>"required|mimes:xlsx",
         ]);
 
         dd($request->all());
@@ -100,6 +106,46 @@ class PriceListController  extends Controller
             return redirect()->route('admin.pricelist.edit',$PL->id)->with(['success'=>'تم الحفظ']);
         // }catch (\Exception $ex){
         //     return redirect()->route('admin.pricelist.create')->with(['error'=>'يوجد خطء']);
+        // }
+    }
+
+    public function importstore(Request $request)
+    {
+        if(! Role::havePremission(['pricelist_cr']))
+            return redirect()->route('admin.dashboard');
+
+        $request->validate([
+            'name'=>"required|unique:price_list,name",
+            'csvfile'=>"required|mimes:xlsx",
+        ],[ 'mimes'=>"Must Excel",'required'=>"Required" ]);
+
+        // try{
+            $pl = new PriceList();
+            $pl->name = $request->name;
+            $pl->main_pl = 0 ;
+            $pl->admin_id = Auth::user()->id;
+            $pl->save();
+
+            $validator = new PriceListImport($pl->id);
+
+            Excel::import($validator, request()->file('csvfile'));
+
+            // dd($validator->errors);
+            if (count($validator->errors)) {
+                $errors = [];
+                foreach ($validator->errors as $key => $error) {
+                    $errors[$key] = $error;
+                }
+        
+                // return redirect()->route('admin.pricelist')->with('error', count($validator->errors).'rows incorrect data');
+                return redirect()->route('admin.pricelist')->with('error', 'row  ' . implode(', ', $errors) . ' contain incorrect data');
+            } elseif (!$validator->isValidFile) {
+                return redirect()->route('admin.pricelist')->with(['success'=>'تم الحفظ']);
+            }
+
+            //     return redirect()->route('admin.pricelist')->with(['success'=>'تم الحفظ']);
+        // }catch (\Exception $ex){
+        //     return redirect()->route('admin.pricelist.import')->with(['error'=>"Try other time"]);
         // }
     }
 

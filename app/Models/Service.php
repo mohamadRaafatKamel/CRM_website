@@ -59,6 +59,15 @@ class Service extends Model
         return "";
     }
 
+    public static function getIDformNameEN($name)
+    {
+        $data = Service::select('id')->where('name_en',$name)->first();
+        if(isset($data->id)){
+            return $data['id'];
+        }
+        return null;
+    }
+
     public static function getPrice($pl, $id)
     {
         if($pl == 0){

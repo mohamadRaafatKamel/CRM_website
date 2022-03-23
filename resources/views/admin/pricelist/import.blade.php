@@ -52,6 +52,19 @@
                                                 <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
 
                                                 <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="name">الاسم </label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" value="{{ old('name') }}" id="name"
+                                                                class="form-control" required
+                                                                placeholder="الاسم "
+                                                                name="name">
+                                                        @error('name')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
                                                     <label class="col-md-2 label-control" for="name">{{ __('Add File') }} </label>
                                                     <div class="col-md-6">
                                                         <input type="file" value="" id="csvfile"
@@ -59,28 +72,6 @@
                                                                 name="csvfile">
                                                         @error('csvfile')
                                                         <span class="text-danger">{{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="disabled">الحالة</label>
-                                                    <div class="col-md-6">
-                                                        <input type="checkbox" value="0" name="disabled" id="disabled"
-                                                                class="switchery" data-color="success" checked/>
-                                                        @error('disabled')
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="main_pl">main</label>
-                                                    <div class="col-md-6">
-                                                        <input type="checkbox"  value="1" name="main_pl"
-                                                                id="main_pl" class="switchery" data-color="success" />
-                                                        @error('main_pl')
-                                                            <span class="text-danger">{{$message}}</span>
                                                         @enderror
                                                     </div>
                                                 </div>

@@ -87,7 +87,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::post('store','PriceListController@store')->name('admin.pricelist.store');
 
         Route::get('import','PriceListController@import')->name('admin.pricelist.import');
-        Route::post('storeimport','PriceListController@storeimport')->name('admin.pricelist.storeimport');
+        Route::post('storeimport','PriceListController@importstore')->name('admin.pricelist.storeimport');
 
         Route::get('edit/{id}','PriceListController@edit')->name('admin.pricelist.edit');
         Route::post('update/{id}','PriceListController@update')->name('admin.pricelist.update');
