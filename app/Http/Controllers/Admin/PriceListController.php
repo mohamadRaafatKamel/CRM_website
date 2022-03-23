@@ -44,7 +44,6 @@ class PriceListController  extends Controller
             $request->validate([
                 'name'=>"unique:price_list,name",
             ]);
-
         try {
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
@@ -54,10 +53,9 @@ class PriceListController  extends Controller
                 foreach($pls as $pl){
                     $pl->update(['main_pl'=> '0']);
                 }
-            }elseif(PriceList::Count() == 0){
-                $request->request->add(['main_pl' =>  1 ]);
             }
 
+            $request->request->add(['main_pl' => 0]);
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
             $PL= PriceList::create($request->except(['_token']));
             Log::setLog('create','price_list',$PL->id,"","");
@@ -119,7 +117,7 @@ class PriceListController  extends Controller
             'csvfile'=>"required|mimes:xlsx",
         ],[ 'mimes'=>"Must Excel",'required'=>"Required" ]);
 
-        // try{
+        try{
             $pl = new PriceList();
             $pl->name = $request->name;
             $pl->main_pl = 0 ;
@@ -144,9 +142,9 @@ class PriceListController  extends Controller
             }
 
             //     return redirect()->route('admin.pricelist')->with(['success'=>'تم الحفظ']);
-        // }catch (\Exception $ex){
-        //     return redirect()->route('admin.pricelist.import')->with(['error'=>"Try other time"]);
-        // }
+        }catch (\Exception $ex){
+            return redirect()->route('admin.pricelist.import')->with(['error'=>"Try other time"]);
+        }
     }
 
     // update
