@@ -70,6 +70,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('create','ServiceController@create')->name('admin.service.create');
         Route::post('store','ServiceController@store')->name('admin.service.store');
 
+        Route::get('import','ServiceController@import')->name('admin.service.import');
+        Route::post('importstore','ServiceController@importstore')->name('admin.service.importstore');
+
         Route::get('edit/{id}','ServiceController@edit')->name('admin.service.edit');
         Route::post('update/{id}','ServiceController@update')->name('admin.service.update');
 

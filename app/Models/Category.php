@@ -78,11 +78,20 @@ class Category extends Model
 
     public static function getNameEN($id)
     {
-        $data = Specialty::select()->find($id);
+        $data = Category::select()->find($id);
         if(isset($data->id)){
             return $data['name_en'];
         }
         return "_";
+    }
+
+    public static function getIDformNameEN($name)
+    {
+        $data = Category::select('id')->where('name_en',$name)->first();
+        if(isset($data->id)){
+            return $data['id'];
+        }
+        return null;
     }
 
 }

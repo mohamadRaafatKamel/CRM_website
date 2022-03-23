@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
@@ -10,8 +11,8 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryImport implements ToModel, WithStartRow, WithCustomCsvSettings
 {
-    private $errors;
-    private $row = 1;
+    public $errors = [];
+    private $row = 3;
 
     /**
     * UsersImport constructor.
@@ -24,7 +25,7 @@ class CategoryImport implements ToModel, WithStartRow, WithCustomCsvSettings
 
     public function startRow(): int
     {
-        return 2;
+        return 3;
     }
 
     public function chunkSize(): int
@@ -43,63 +44,79 @@ class CategoryImport implements ToModel, WithStartRow, WithCustomCsvSettings
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public function model2(array $row)
-    {
-        // return new Category([
-        //     'name_ar'     => $row[0],
-        //     'name_en'    => $row[1],
-        //     'parent_id'    => $row[2],
-        // ]);
-            print_r($row);
-    }
+    // public function model2(array $row)
+    // {
+    //     // return new Category([
+    //     //     'name_ar'     => $row[0],
+    //     //     'name_en'    => $row[1],
+    //     //     'parent_id'    => $row[2],
+    //     // ]);
+    //         print_r($row);
+    // }
 
     public function model(array $row)
-  {
-      if (array_key_exists(++$this->row, $this->errors)) {
-          return null;
-      }
- 
-      $validator = Validator::make($row, [
-          '0' => [
-              'required',
-              'string',
-              'max:255',
-          ],
-          '1' => [
-              'required',
-              'string',
-              'max:255',
-          ],
-          '2' => [
-            'required',
-              'string',
-              'min:6',
-              'nullable',
-          ],
-      ]);
- 
-      print_r($row);
+    {
+        if (array_key_exists(++$this->row, $this->errors)) {
+            return null;
+        }
+    
+        $validator = Validator::make($row, [
+            '0' => [ // en
+                'required',
+                'unique:category,name_en',
+                'string',
+                'max:255',
+            ],
+            '1' => [ // ar
+                'required',
+                'string',
+                'max:255',
+            ],
+            '2' => [
+                'nullable',
+                'exists:category,name_en',
+            ],
+        ],[
+            'exists'=> "Parant :input not found",
+            'unique'=> "Eng name :input added before"
+        ]);
+    
+        //   print_r($row);
 
-      if ($validator->fails()) {
-          return null;
-      }
+        
+        if ($validator->fails()) {
+            $this->errors[] = $validator->errors();
+            // dd($validator->errors());
+            return null;
+        }
+        
+        try {
+            return new Category([
+                'name_en'     => $row[0],
+                'name_ar'    => $row[1],
+                'parent_id'    => Category::getIDformNameEN($row[2]),
+                'admin_id' =>  Auth::user()->id
+            ]);
+        } catch (\Exception $e) {
+            return null;
+        }
 
 
- 
-    //   DB::beginTransaction();
-    //   try {
-    //       User::create([
-    //           'name' => $row[0],
-    //           'email' => $row[1],
-    //           'password' => $row[2],
-    //       ]);
- 
-    //       DB::commit();
-    //   } catch (Exceptions $e) {
-    //       DB::rollBack();
-    //       Log::debug($e);
-    //   }
-  }
+    
+        //   DB::beginTransaction();
+        //   try {
+        //       User::create([
+        //           'name' => $row[0],
+        //           'email' => $row[1],
+        //           'password' => $row[2],
+        //       ]);
+    
+        //       DB::commit();
+        //   } catch (Exceptions $e) {
+        //       DB::rollBack();
+        //       Log::debug($e);
+        //   }
+    }
 
 
 }
