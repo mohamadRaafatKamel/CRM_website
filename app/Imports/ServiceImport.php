@@ -2,14 +2,16 @@
 
 namespace App\Imports;
 
+use App\Models\Service;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
-class CategoryImport implements ToModel, WithStartRow, WithCustomCsvSettings
+class ServiceImport implements ToModel, WithStartRow, WithCustomCsvSettings
 {
     public $errors = [];
     private $row = 3;
@@ -53,7 +55,7 @@ class CategoryImport implements ToModel, WithStartRow, WithCustomCsvSettings
         $validator = Validator::make($row, [
             '0' => [ // en
                 'required',
-                'unique:category,name_en',
+                'unique:service,name_en',
                 'string',
                 'max:255',
             ],
@@ -62,9 +64,18 @@ class CategoryImport implements ToModel, WithStartRow, WithCustomCsvSettings
                 'string',
                 'max:255',
             ],
-            '2' => [
+            '2' => [ // category
+                'required',
                 'nullable',
                 'exists:category,name_en',
+            ],
+            '3' => [
+                'required',
+                Rule::in(['in', 'out']),
+            ],
+            '4' => [
+                'required',
+                Rule::in(['site', 'notsite']),
             ],
         ],[
             'exists'=> "Parant :input not found",
@@ -81,10 +92,12 @@ class CategoryImport implements ToModel, WithStartRow, WithCustomCsvSettings
         }
 
         try {
-            return new Category([
+            return new Service([
                 'name_en'     => $row[0],
                 'name_ar'    => $row[1],
-                'parent_id'    => Category::getIDformNameEN($row[2]),
+                'category_id'    => Category::getIDformNameEN($row[2]),
+                'type' => ($row[3] == 'in')? 1 : 2 ,
+                'site' => ($row[4] == 'site')? 1 : 0 ,
                 'admin_id' =>  Auth::user()->id
             ]);
         } catch (\Exception $e) {
@@ -107,6 +120,5 @@ class CategoryImport implements ToModel, WithStartRow, WithCustomCsvSettings
         //       Log::debug($e);
         //   }
     }
-
 
 }

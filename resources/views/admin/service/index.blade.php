@@ -45,6 +45,7 @@
                                     <div class="card-body card-dashboard">
                                         @if(\App\Models\Role::havePremission(['serves_cr']))
                                         <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.service.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
+                                        <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.service.import') }}"><i class="ft-plus"></i>&nbsp; {{ __('Import') }}</a>
                                         @endif
                                         <div class="table-responsive">
                                         <table
@@ -52,8 +53,8 @@
                                             <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>اسم عربي</th>
                                                 <th> اسم انجليزي</th>
+                                                <th>اسم عربي</th>
                                                 <th>  وصف </th>
                                                 <th> {{ __('Type') }}</th>
                                                 <th> صوره</th>
@@ -69,8 +70,8 @@
                                                         <td>
                                                             <a href="{{route('admin.service.edit',['id'=> $data->id ])}}" >{{$data ->id}}</a>
                                                         </td>
-                                                        <td>{{$data -> name_ar}}</td>
                                                         <td>{{$data -> name_en}}</td>
+                                                        <td>{{$data -> name_ar}}</td>
                                                         <td>{{$data -> description}}</td>
                                                         <td>{{ __(\App\Models\Service::getServiceType($data -> type)) }}</td>
                                                         <td>
@@ -89,8 +90,8 @@
                                             <tfoot>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>اسم عربي</th>
                                                     <th> اسم انجليزي</th>
+                                                    <th>اسم عربي</th>
                                                     <th>  وصف </th>
                                                     <th> {{ __('Type') }}</th>
                                                     <th> صوره</th>

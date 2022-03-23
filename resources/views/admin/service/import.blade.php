@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title',__('Category'))
-@section('category_cr','')
+@section('title',__('Service'))
+@section('serves_cr','')
 @section('content')
 
     <div class="app-content content">
@@ -12,7 +12,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.category')}}">  {{ __('Category') }} </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.service')}}">  {{ __('Service') }} </a>
                                 </li>
                                 <li class="breadcrumb-item active">{{ __('Add') }}
                                 </li>
@@ -44,14 +44,14 @@
                                 @include('admin.include.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form form-horizontal" action="{{route('admin.category.importstore')}}" method="POST"
+                                        <form class="form form-horizontal" action="{{route('admin.service.importstore')}}" method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
 
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
 
-                                                <p class="text-center">Please import file as Eng name , Ar name, Parent Eng name </p>
+                                                <p class="text-center">Please import file as Eng name , Ar name, Category Eng name, in or out, site or notsite </p>
 
                                                 <div class="form-group row">
                                                     <label class="col-md-2 label-control" for="name">{{ __('Add File') }} </label>
@@ -71,7 +71,7 @@
 
                                             <div class="form-actions">
                                                 
-                                                <a href="{{ route('admin.category') }}" class="btn btn-warning">
+                                                <a href="{{ route('admin.service') }}" class="btn btn-warning">
                                                     <i class="la la-check-square-o"></i> تراجع
                                                 </a>
                                               

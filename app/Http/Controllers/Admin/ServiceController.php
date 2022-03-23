@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ServiceImport;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\Role;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceController extends Controller
 {
@@ -63,6 +65,45 @@ class ServiceController extends Controller
             return redirect()->route('admin.service')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.service.create')->with(['error'=>'يوجد خطء']);
+        }
+    }
+
+    public function import()
+    {
+        if(! Role::havePremission(['serves_cr']))
+            return redirect()->route('admin.dashboard');
+        return view('admin.service.import');
+    }
+
+    public function importstore(Request $request)
+    {
+        if(! Role::havePremission(['serves_cr']))
+            return redirect()->route('admin.dashboard');
+
+        $request->validate([
+            'csvfile'=>"required|mimes:xlsx",
+        ],[ 'mimes'=>"Must Excel",'required'=>"Required" ]);
+
+        try{
+            $validator = new ServiceImport();
+            Excel::import($validator, request()->file('csvfile'));
+
+            // dd($validator->errors);
+            if (count($validator->errors)) {
+                // $errors = [];
+                // foreach ($validator->errors as $key => $error) {
+                //     $errors[$key] = $key;
+                // }
+        
+                return redirect()->route('admin.service')->with('error', count($validator->errors).'rows incorrect data');
+                // return redirect()->back()->with('error', 'row number ' . implode(',', $errors) . ' contain incorrect data');
+            } elseif (!$validator->isValidFile) {
+                return redirect()->route('admin.service')->with(['success'=>'تم الحفظ']);
+            }
+
+            //     return redirect()->route('admin.service')->with(['success'=>'تم الحفظ']);
+        }catch (\Exception $ex){
+            return redirect()->route('admin.service.import')->with(['error'=>"Try other time"]);
         }
     }
 
