@@ -251,22 +251,6 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="whatsApp_group">{{ __('Name of whatsApp Group') }}</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="whatsApp_group"
-                                                class="form-control"
-                                                @if(isset($myorder->whatsApp_group))
-                                                value="{{ $myorder->whatsApp_group }}"
-                                                @endif
-                                                placeholder="{{ __('Name of whatsApp Group') }}"
-                                                name="whatsApp_group">
-                                        @error('whatsApp_group')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label class="col-md-2 label-control" for="governorate_id">{{ __('Governorate') }}</label>
                                     <div class="col-md-6">
                                         <select name="governorate_id" id="governorate_id" 
@@ -395,33 +379,13 @@
 
                                 <h4 class="form-section"><i class="ft-paperclip"></i> بيانات الخدمه</h4>
 
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="specialty_id">{{ __('Specialty') }}</label>
-                                    <div class="col-md-6">
-                                        <select class="select2 form-control" id="specialty_id" name="specialty_id">
-                                            <option value="">-- {{ __('Select') }} {{ __('Specialty') }} -- </option>
-                                            {{-- <option value="2">222</option> --}}
-                                            @foreach($specialtys as $specialty)
-                                                <option value="{{ $specialty->id }}"
-                                                    @if(isset($myorder->specialty_id))
-                                                        @if($myorder->specialty_id == $specialty->id) selected @endif
-                                                    @endif
-                                                    @if(old('specialty_id') == $specialty->id) selected @endif
-                                                >{{ $specialty->name_ar}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('specialty_id')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="type">{{ __('Out/In') }} <span style="color: #ff4961;">*</span></label>
+                                    <label class="col-md-2 label-control" for="type">{{ __('Request Type') }} <span style="color: #ff4961;">*</span></label>
                                     <div class="col-md-6">
                                         <select name="type" id="type" required
                                                 class="form-control @error('type') is-invalid @enderror">
-                                            <option value=""></option>
+                                            <option value="">-- {{ __('Request Type') }} --</option>
                                             @if(isset($myorder -> type))
                                             <option value="1"
                                                     @if($myorder -> type == "1") selected @endif
@@ -533,40 +497,6 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="bed_number">{{ __('Bed Number') }}</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="bed_number"
-                                                class="form-control"
-                                                @if(isset($myorder->bed_number))
-                                                value="{{ $myorder->bed_number }}"
-                                                @endif
-                                                placeholder="{{ __('Bed Number') }}"
-                                                name="bed_number">
-                                        @error('bed_number')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="co">{{ __('C/O') }}</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="co"
-                                                class="form-control"
-                                                @if(isset($myorder->co))
-                                                value="{{ $myorder->co }}"
-                                                @else
-                                                value="{{ old('co') }}"
-                                                @endif
-                                                placeholder="{{ __('C/O') }}"
-                                                name="co">
-                                        @error('co')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label class="col-md-2 label-control" for="history">{{ __('History') }}</label>
                                     <div class="col-md-6">
                                         <input type="text" id="history"
@@ -614,6 +544,22 @@
                                                 placeholder="{{ __('Code Zone Patient ID') }}"
                                                 name="code_zone_patient_id">
                                         @error('code_zone_patient_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="bed_number">{{ __('Bed Number') }}</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="bed_number"
+                                                class="form-control"
+                                                @if(isset($myorder->bed_number))
+                                                value="{{ $myorder->bed_number }}"
+                                                @endif
+                                                placeholder="{{ __('Bed Number') }}"
+                                                name="bed_number">
+                                        @error('bed_number')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
@@ -692,163 +638,6 @@
     </div>
 </section>
 <!-- // Basic form layout section end -->
-
-                <!-- Action section start -->
-                <section id="basic-form-layouts">
-                    <div class="row match-height">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"><b> <i class="ft-aperture"></i> {{ __('Actions') }} </b> </h4>
-                                    <a class="heading-elements-toggle"><i
-                                            class="la la-ellipsis-v font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        <ul class="list-inline mb-0">
-                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="card-content collapse show">
-                                    <div class="card-body">
-
-                                            <div class="form-body">
-
-                                                <div class="row">
-
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="service_id">{{ __('Service') }}</label>
-                                                            <select class="select2 form-control" name="service_id" id="service_id"> 
-                                                                <option value="">-- {{ __('Select') }} {{ __('Service') }} --</option>
-                                                                @foreach($serves as $serve)
-                                                                    <option value="{{ $serve->id }}"> {{ $serve->name_ar}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('service_id')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="action_price"> {{ __('Price') }} </label>
-                                                            <input type="number" step="0.01" id="action_price" 
-                                                                   class="form-control"
-                                                                   placeholder="{{ __('Price') }} " readonly>
-                                                            @error('price')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="state"> {{ __('Done') }} </label>
-                                                            <select name="state" id="state" required
-                                                                    class="form-control @error('state') is-invalid @enderror">
-                                                                <option value="0" >{{ __('No') }}</option>
-                                                                <option value="1" >{{ __('Yes') }}</option>
-                                                            </select>
-                                                            @error('state')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="action_date"> {{ __('Date') }} </label>
-                                                            <input type="date" id="action_date"
-                                                                   class="form-control"
-                                                                   placeholder="{{ __('Date') }} "
-                                                                   {{-- value="{{ $datenaw }}" --}}
-                                                                   name="action_date">
-                                                            @error('action_date')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-
-                                                   
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label style=" height: 49px;"> </label>
-                                                            <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
-                                                                <i class="la la-plus"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label style=" height: 49px;"> </label>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                    @if (isset($actions))
-                                                    @if (count($actions) > 0)
-                                                    <div class="row">
-                                                        <table class="table table-striped table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th>{{ __('Service') }}</th>
-                                                                    <th>{{ __('Price') }}</th>
-                                                                    <th>{{ __('Take It') }}</th>
-                                                                    <th>{{ __('Date') }}</th>
-                                                                    <th> وقت الادخال</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            @foreach ($actions as $action)
-                                                                <tr>
-                                                                    <th><input type="checkbox" value="{{ $action->id }}" name="actionbox[]" /></th>
-                                                                    <td>{{ \App\Models\Service::getName($action->service_id)  }}</td>
-                                                                    <td>{{ $action->price }}</td>
-                                                                    <td>{{ $action->getState($action->state) }}</td>
-                                                                    <td>{{ $action->action_date }}</td>
-                                                                    <td>{{ $action->created_at }}</td>
-                                                                    <td>
-                                                                        <a href="{{route('admin.action.delete',$action->id)}}" class="btn btn-danger" ><i class="ft-trash-2"></i></a>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                            </tbody>
-                                                        </table>
-
-                                                        <div class="form-actions">
-                                               
-                                                            <button type="submit" name="actionbtn" value="takeit" class="btn btn-success">
-                                                                <i class="la la-check-square-o"></i> {{ __('Take It') }}
-                                                            </button>
-                                                            <button type="submit" name="actionbtn" value="nottakeit" class="btn btn-warning">
-                                                                <i class="la la-check-square-o"></i> {{ __('Not Take It') }}
-                                                            </button>
-                                                            <button type="submit" name="actionbtn" value="delete" class="btn btn-danger">
-                                                                <i class="ft-trash-2"></i> {{ __('Delete') }}
-                                                            </button>
-                
-                                                        </div>
-
-                                                    </div>
-                                                    @endif
-                                                    @endif
-                                                
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                {{-- section Action End --}}
 
 
                 {{-- @if (isset($myorder->id) && $myorder->id != 0) --}}

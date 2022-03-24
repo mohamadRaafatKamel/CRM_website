@@ -61,7 +61,7 @@
 
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="user_id">
-                                        {{ __('Full Name') }} <span style="color: #ff4961;">*</span>
+                                        {{ __('Full Name') }} 
                                     </label>
                                     <div class="col-md-6">
                                         <input type="text" id="fullname" readonly
@@ -142,23 +142,19 @@
                                 <h4 class="form-section"><i class="ft-phone"></i> بيانات التواصل</h4>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="phone">{{ __('Phone') }} <span style="color: #ff4961;">*</span></label>
+                                    <label class="col-md-2 label-control" for="phone">{{ __('Phone') }}</label>
                                     <div class="col-md-2">
-                                        <input type="text" id="phone" required
+                                        <input type="text" id="phone" readonly
                                             class="form-control"
                                             @if(isset($myorder->phone))
                                             value="{{ $myorder->phone }}"
                                             @else
                                                 value="{{ old('phone') }}"
                                             @endif
-                                            placeholder="{{ __('Phone') }}"
-                                            name="phone">
-                                            @error('phone')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
+                                            placeholder="{{ __('Phone') }}" >
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="checkbox"  value="1" name="whatapp"
+                                        <input type="checkbox"  value="1" readonly
                                             id="whatapp" class="switchery0" data-color="success"
                                             @if (isset($myorder -> whatapp))
                                             @if($myorder -> whatapp  == 1 ) checked @endif
@@ -291,7 +287,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="adress">{{ __('Address') }} CC</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="adress" required
+                                        <input type="text" id="adress"
                                                class="form-control"
                                                @if(isset($myorder->adress))
                                                value="{{ $myorder->adress }}"
@@ -413,7 +409,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="referral_id">{{ __('Referral') }}</label>
                                     <div class="col-md-6">
-                                        <select class="select2 form-control" id="referral_id" name="referral_id[]" multiple>
+                                        <select class="select2 form-control" id="referral_id" disabled multiple>
                                             @foreach($referrals as $referral)
                                                 <option value="{{ $referral['id'] }}"
                                                     @if (isset($usersReferrals))

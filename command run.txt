@@ -4,3 +4,65 @@ php artisan passport:install
 
 composer require laravel/socialite
 composer require maatwebsite/excel
+
+
+//////////////////////////////////////////////////////////////
+
+
+·        Upload pricelist sheet to the database and disable the old services
+
+·        Changing some field labels :
+
+اللقب: الاسم الثالث
+
+زرار تحديث : يتم تغييره الى حفظ في كل الشاشات
+
+Request id : رقم الطلب
+
+
+
+·  Adding type validations on the following fields :
+
+o   Phone number : accept only number strings
+
+o   Name : accept only Arabic characters , numbers and symbols are not allowed
+
+o   Age : accept number string
+
+·        Adding search for patient feature like the following design:
+
+ 
+
+·        Remove check box icon from save button on request detail
+
+ 
+
+·        Adding a field for cancelation reasons (سبب الالغاء
+
+ 
+
+·        Changing the type of Input Region {المنطقة}   to drop list {select between regions}
+
+·        Make a new page for Laboratory {المعمل}
+
+·        Adding a feature to schedule a request by the following steps:
+
+o   Adding a field for request date and it is by default the date of  today
+
+o   Sorting the request data in the table with the above date field
+
+·        View the patient id number in requests to search for
+
+·        Applying the template of the email notification that Anas has sent to you
+
+·        Making a route api for other type of join us
+
+·        Show the number of previous request from the patient in callcenter and outpatient and in patient { all request details pages}
+
+·        Appling windows notification feature
+
+·        Adding an api route for Corporation survey
+
+·        Blog {articles} content editor on the dashboard with the api for getting the articles
+
+ 
