@@ -51,7 +51,7 @@
                                                     class="table table-striped table-bordered ordering-print">
                                                     <thead>
                                                     <tr>
-                                                        <th> id</th>
+                                                        <th> {{ __('Request ID') }}</th>
                                                         <th>العميل</th>
                                                         <th>{{ __('Name Of Care Giver') }}</th>
                                                         <th> موبيل</th>
@@ -108,7 +108,7 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th> id</th>
+                                                            <th> {{ __('Request ID') }}</th>
                                                             <th>العميل</th>
                                                             <th>{{ __('Name Of Care Giver') }}</th>
                                                             <th> موبيل</th>
