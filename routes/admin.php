@@ -248,6 +248,11 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin', 'middleware'=>'auth:adm
         Route::get('/out/create/{id}','RequestController@createOut')->name('admin.request.create.out');
         Route::post('/out/update/{id}','RequestController@updateOut')->name('admin.request.update.out');
         // Route::get('/out/status/{id}/{status}','RequestController@statusIN')->name('admin.request.status.in');
+
+        // Lab
+        Route::get('/lab','RequestController@indexLab')->name('admin.request.lab');
+        Route::get('/lab/create/{id}','RequestController@createLab')->name('admin.request.create.lab');
+        Route::post('/lab/update/{id}','RequestController@updateLab')->name('admin.request.update.lab');
         
 //        Route::get('view/{id}','RequestController@view')->name('admin.user.view');
 //        Route::post('update/{id}','RequestController@update')->name('admin.user.update');

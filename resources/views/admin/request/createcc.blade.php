@@ -396,10 +396,14 @@
                                             <option value="3"
                                                     @if($myorder -> type == "3") selected @endif
                                                     @if(old('type') == "3") selected @endif >{{ __('InPatient') }}</option>
+                                            <option value="4"
+                                                    @if($myorder -> type == "4") selected @endif
+                                                    @if(old('type') == "4") selected @endif >{{ __('Lab') }}</option>
                                             @else
                                                 <option value="1" @if (old('type') == "1") selected @endif>{{ __('Emergency Call') }}</option>
                                                 <option value="2" @if (old('type') == "2") selected @endif>{{ __('Out Patient') }}</option>
                                                 <option value="3" @if (old('type') == "3") selected @endif>{{ __('In Patient') }}</option>
+                                                <option value="4" @if (old('type') == "4") selected @endif>{{ __('Lab') }}</option>
                                             @endif
                                         </select>
                                         @error('type')

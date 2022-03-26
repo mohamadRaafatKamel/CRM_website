@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title','In Patient')
-@section('request_in','')
+@section('title',__("Lab"))
+@section('request_lab','')
 @section('content')
 
     <div class="app-content content">
@@ -12,9 +12,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.request.in')}}">  {{ __('In Patient') }} </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.request.lab')}}">  {{ __('Lab') }} </a>
                                 </li>
-                                <li class="breadcrumb-item active">{{ __('View') }}
+                                <li class="breadcrumb-item active">{{ _('View') }}
                                 </li>
                             </ol>
                         </div>
@@ -22,9 +22,6 @@
                 </div>
             </div>
             <div class="content-body">
-
-                  {{-- newwwwwwwwwwwwwwwwwwww --}}
-
                 
 <!-- Basic form layout section start -->
 <section id="horizontal-form-layouts">
@@ -47,17 +44,16 @@
                 @include('admin.include.alerts.errors')
                 <div class="card-content collapse show">
                     <div class="card-body">
+                        
                         <form class="form form-horizontal" 
                         @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
-                            action="{{route('admin.request.update.in', $myorder->id)}}" 
+                            action="{{route('admin.request.update.lab', $myorder->id)}}" method="POST" 
                         @endif
-                            method="POST" enctype="multipart/form-data">
+                            enctype="multipart/form-data">
                                 @csrf
-                        
-                            <div class="form-body">ا
-                                <h4 class="form-section"><i class="ft-user"></i> البيانات الشخصية   </h4>
 
-                            
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i> البيانات الشخصية   </h4>
 
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="user_id">
@@ -65,28 +61,23 @@
                                     </label>
                                     <div class="col-md-6">
                                         <input type="text" id="fullname" readonly
-                                                class="form-control" 
-                                                @if(isset($myorder->fullname))
-                                                    value="{{ $myorder->fullname }}"
-                                                @else
-                                                    value="{{ old('fullname') }}"
-                                                @endif
-                                                placeholder="{{ __('Full Name') }}"
-                                                name="fullname">
+                                        class="form-control"
+                                        @if(isset($myorder->fullname))
+                                             value="{{ $myorder->fullname }}"
+                                        @endif
+                                        placeholder="{{ __('Full Name') }}">
                                     </div>
                                 </div>
-
-
+                                
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="name_caregiver">{{ __('Name Of Care Giver') }}</label>
                                     <div class="col-md-6">
                                         <input type="text" id="name_caregiver" 
-                                                class="form-control"
+                                                class="form-control" readonly
                                                 @if(isset($myorder->name_caregiver))
                                                     value="{{ $myorder->name_caregiver }}"
                                                 @endif
-                                                placeholder="{{ __('Name Of Care Giver') }}"
-                                                name="name_caregiver">
+                                                placeholder="{{ __('Name Of Care Giver') }}" >
                                         @error('name_caregiver')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -202,22 +193,6 @@
                                             @endif 
                                             @if(old('whatapp2') == 1) checked @endif />
                                         <label for="whatapp" class="card-title ml-1"> {{ __('Whatapp') }} </label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="whatsApp_group">{{ __('Name of whatsApp Group') }}</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="whatsApp_group"
-                                                class="form-control"
-                                                @if(isset($myorder->whatsApp_group))
-                                                value="{{ $myorder->whatsApp_group }}"
-                                                @endif
-                                                placeholder="{{ __('Name of whatsApp Group') }}"
-                                                name="whatsApp_group">
-                                        @error('whatsApp_group')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
                                     </div>
                                 </div>
 
@@ -365,15 +340,51 @@
                                     <label class="col-md-2 label-control" for="doctor_id">{{ __('CareHub Doctor') }}</label>
                                     <div class="col-md-6">
                                         <select class="select2 form-control" name="doctor_id" id="doctor_id">
-                                            <option value="">{{ __('CareHub Doctor') }}</option>
+                                            <option value="">{{ __('Choose Doctor Name') }}</option>
                                             @foreach($doctors as $doctor)
                                                 <option value="{{ $doctor->id }}"
                                                         @if(isset($myorder->doctor_id))
                                                         @if($myorder->doctor_id == $doctor->id) selected @endif @endif >
-                                                        {{ $doctor->username }} - {{ $doctor->getDocDegree($doctor->degree) }}</option>
+                                                    {{ $doctor->username }} - {{ $doctor->getDocDegree($doctor->degree) }}</option>
                                             @endforeach
                                         </select>
                                         @error('doctor_id')
+                                        <span class="text-danger">{{$message}}</span>--}}
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="nurse_id">{{ __('Nurse Name') }}</label>
+                                    <div class="col-md-6">
+                                        <select class="select2 form-control" name="nurse_id" id="nurse_id" >
+                                            <option value="">{{ __('Choose Nurse Name') }}</option>
+                                            @foreach($nurses as $nurse)
+                                                <option value="{{ $nurse->id }}"
+                                                        @if(isset($myorder->nurse_id))
+                                                        @if($myorder->nurse_id == $nurse->id) selected @endif @endif >
+                                                    {{ $nurse->username }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('nurse_id')
+                                        <span class="text-danger">{{$message}}</span>--}}
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="driver_id">{{ __('Driver Name') }}</label>
+                                    <div class="col-md-6">
+                                        <select class="select2 form-control" name="driver_id" id="driver_id" >
+                                            <option value="">{{ __('Choose Driver Name') }}</option>
+                                            @foreach($drivers as $driver)
+                                                <option value="{{ $driver->id }}"
+                                                        @if(isset($myorder->driver_id))
+                                                        @if($myorder->driver_id == $driver->id) selected @endif @endif >
+                                                    {{ $driver->username }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('driver_id')
                                         <span class="text-danger">{{$message}}</span>--}}
                                         @enderror
                                     </div>
@@ -418,21 +429,31 @@
                                     </div>
                                 </div>
 
+
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="package_id">{{ __('Package') }}</label>
-                                    <div class="col-md-6">
-                                        <select class="select2 form-control" id="package_id" name="package_id">
-                                            <option value="">-- {{ __('Select') }}  {{ __('Package') }} --</option>
-                                            @foreach($packages as $package)
-                                                <option value="{{ $package->id }}"
-                                                    @if(isset($myorder->package_id))
-                                                        @if($myorder->package_id == $package->id) selected @endif
+                                    <label class="col-md-2 label-control" for="physician">{{ __('Physician') }}</label>
+                                    <div class="col-md-4">
+                                        <select class="select2 form-control" id="physician" name="physician">
+                                            <option value="">-- {{ __('Select') }}  {{ __('Physician') }} --</option>
+                                            @foreach($physicians as $physician)
+                                                <option value="{{ $physician->id }}"
+                                                    @if(isset($myorder->physician))
+                                                        @if($myorder->physician == $physician->id) selected @endif
                                                     @endif
-                                                    @if(old('package_id') == $package->id) selected @endif
-                                                >{{ $package->name_ar}}</option>
+                                                    @if(old('physician') == $physician->id) selected @endif
+                                                >{{ $physician->name}}</option>
                                             @endforeach
                                         </select>
-                                        @error('package_id')
+                                        @error('physician')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" id="physician" 
+                                                class="form-control"
+                                                placeholder="{{ __('Add') }} {{ __('Physician') }}"
+                                                name="physician_new">
+                                        @error('physician_new')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
@@ -447,6 +468,62 @@
                                             value="{{ \App\Models\Admin::getAdminNamebyId($myorder->cc_admin_id) }}"
                                             @endif
                                             placeholder="{{ __('CC Agent') }}"  >
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="opd_admin_id">{{ __('OPD') }}</label>
+                                    <div class="col-md-6">
+                                        <select class="select2 form-control" name="opd_admin_id" id="opd_admin_id">
+                                            <option value=""></option>
+                                            @foreach($opds as $opd)
+                                                <option value="{{ $opd->id }}"
+                                                        @if(isset($myorder->opd_admin_id))
+                                                            @if($myorder->opd_admin_id == $opd->id) selected @endif @endif >
+                                                    {{ $opd->name." [ ".$opd->email." ]"}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('opd_admin_id')
+                                            <span class="text-danger">{{$message}}</span>--}}
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="opd2_admin_id">{{ __('OPD') }} 2</label>
+                                    <div class="col-md-6">
+                                        <select class="select2 form-control" name="opd2_admin_id" id="opd2_admin_id">
+                                            <option value=""></option>
+                                            @foreach($opds as $opd)
+                                                <option value="{{ $opd->id }}"
+                                                        @if(isset($myorder->opd2_admin_id))
+                                                            @if($myorder->opd2_admin_id == $opd->id) selected @endif @endif >
+                                                    {{ $opd->name." [ ".$opd->email." ]"}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('opd2_admin_id')
+                                            <span class="text-danger">{{$message}}</span>--}}
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="diagnose">{{ __('Diagnose') }}</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="diagnose"
+                                                class="form-control"
+                                                @if(isset($myorder->diagnose))
+                                                value="{{ $myorder->diagnose }}"
+                                                @else
+                                                value="{{ old('diagnose') }}"
+                                                @endif
+                                                placeholder="{{ __('Diagnose') }}"
+                                                name="diagnose">
+                                        @error('diagnose')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -468,22 +545,6 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="bed_number">{{ __('Bed Number') }}</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="bed_number"
-                                                class="form-control"
-                                                @if(isset($myorder->bed_number))
-                                                value="{{ $myorder->bed_number }}"
-                                                @endif
-                                                placeholder="{{ __('Bed Number') }}"
-                                                name="bed_number">
-                                        @error('bed_number')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label class="col-md-2 label-control" for="symptoms">{{ __('Symptoms') }}</label>
                                     <div class="col-md-6">
                                         <textarea id="symptoms" placeholder="{{ __('Symptoms') }}" 
@@ -495,79 +556,61 @@
                                     </div>
                                 </div>
 
-                                <h4 class="form-section"><i class="ft-paperclip"></i> بيانات الاقامه</h4>
-
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="date_in">{{ __('Date In') }}</label>
+                                    <label class="col-md-2 label-control" for="feedback">{{ __('Feedback') }}</label>
                                     <div class="col-md-6">
-                                        <input type="date" id="date_in"
-                                               class="form-control"
-                                               @if(isset($myorder->date_in))
-                                                    value="{{ $myorder->date_in }}"
-                                               @else
-                                                    value="{{ old('date_in') }}"
-                                               @endif
-                                               @if($myorder->date_in== null)
-                                                    name="date_in"
-                                               @else
-                                                    readonly
-                                               @endif
-                                               placeholder="{{ __('Date In') }}" >
-                                        @error('date_in')
+                                        <textarea id="feedback" placeholder="{{ __('Feedback') }}" 
+                                                class="form-control" name="feedback"
+                                                >@if(isset($myorder->feedback)){{ $myorder->feedback }}@endif</textarea>
+                                        @error('feedback')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="date_out">{{ __('Date Out') }}</label>
+                                    <label class="col-md-2 label-control" for="doc_note">{{ __('Doctor Notes') }}</label>
                                     <div class="col-md-6">
-                                        <input type="date" id="date_out"
-                                               class="form-control"
+                                        <textarea id="doc_note" placeholder="{{ __('Doctor Notes') }}" 
+                                                class="form-control" name="doc_note"
+                                                >@if(isset($myorder->doc_note)){{ $myorder->doc_note }}@endif</textarea>
+                                        @error('doc_note')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="reason_cancel">{{ __('Cancellation reasone') }}</label>
+                                    <div class="col-md-6">
+                                        <textarea id="reason_cancel" placeholder="{{ __('Cancellation reasone') }}" 
+                                                class="form-control" name="reason_cancel"
+                                                >@if(isset($myorder->reason_cancel)){{ $myorder->reason_cancel }}@endif</textarea>
+                                        @error('reason_cancel')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="end_service_date">{{ __('End of Service Date') }}</label>
+                                    <div class="col-md-6">
+                                        <input type="date" id="end_service_date" class="form-control"
+                                               @if(isset($myorder->end_service_date))
+                                                    value="{{ $myorder->end_service_date }}"
+                                               @endif
+                                               placeholder="{{ __('End of Service Date') }}" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="date_out">{{ __('Request End Date') }}</label>
+                                    <div class="col-md-6">
+                                        <input type="date" id="date_out" readonly class="form-control"
                                                @if(isset($myorder->date_out))
-                                               value="{{ $myorder->date_out }}"
-                                               @else
-                                               value="{{ old('date_out') }}"
+                                                    value="{{ $myorder->date_out }}"
                                                @endif
-                                               @if($myorder->date_in== null || $myorder->date_out != null)
-                                                    readonly
-                                               @else
-                                                    name="date_in"
-                                               @endif
-                                               placeholder="{{ __('Date Out') }}"
-                                               name="date_out">
-                                        @error('date_out')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                               
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="Long">{{ __('Long') }}</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="Long" readonly
-                                            class="form-control"
-                                            @if(isset($long))
-                                            value="{{ $long }}"
-                                            @endif
-                                            placeholder="{{ __('Long') }}">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="reason_out">{{ __('Reason Out') }}</label>
-                                    <div class="col-md-6">
-                                        <textarea id="reason_out" placeholder="{{ __('Reason Out') }}" 
-                                                class="form-control" 
-                                                @if($myorder->date_out != null)
-                                                    readonly
-                                               @else
-                                                    name="reason_out"
-                                               @endif
-                                                >@if(isset($myorder->reason_out)){{ $myorder->reason_out }}@else {{ old('reason_out') }} @endif</textarea>
-                                        @error('reason_out')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
+                                               placeholder="{{ __('Request End Date') }}" >
                                     </div>
                                 </div>
 
@@ -607,12 +650,46 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="bill_serial">{{ __('Bill Serial Number') }}</label>
+                                    <div class="col-md-4">
+                                        <input type="text" id="real_cost"
+                                               class="form-control"
+                                               @if(isset($myorder->bill_serial))
+                                               value="{{ $myorder->bill_serial }}"
+                                               @endif
+                                               placeholder="{{ __('Bill Serial Number') }}"
+                                               name="bill_serial">
+                                        @error('bill_serial')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="checkbox"  value="1" name="pay_or_not"
+                                               id="pay_or_not"
+                                               class="switchery" data-color="success"
+
+                                               @if($myorder->pay_or_not  == 1 ) checked @endif
+                                        />
+                                        <label for="pay_or_not"
+                                               class="card-title ml-1">{{ __('Pay') }} </label>
+
+                                        @error('pay_or_not')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                
+
+
 
                             </div>
+
                             @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="la la-check-square-o"></i> {{ __('Save') }}
+                                         {{ __('Save') }}
                                     </button>
                                 </div>
                             @endif
@@ -625,119 +702,6 @@
 </section>
 <!-- // Basic form layout section end -->
 
-
-                <!-- Call section start -->
-                <section id="basic-form-layouts">
-                    <div class="row match-height">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"><b> <i class="ft-phone"></i> {{ __('Calls') }} </b> </h4>
-                                    <a class="heading-elements-toggle"><i
-                                            class="la la-ellipsis-v font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        <ul class="list-inline mb-0">
-                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="card-content collapse show">
-                                    <div class="card-body">
-
-                                            <div class="form-body">
-                                                
-                                                
-                                                @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
-                                                <div class="row">
-
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="time"> {{ __('Time') }} </label>
-                                                            <input type="datetime-local" id="time"
-                                                                   class="form-control"
-                                                                   placeholder="{{ __('Time') }} "
-                                                                   {{-- value="{{ $datenaw }}" --}}
-                                                                   name="time">
-                                                            @error('time')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="Note"> {{ __('Note') }} </label>
-                                                            <textarea id="note" class="form-control" placeholder=" {{ __('Note') }}" 
-                                                                name="note"></textarea>
-                                                            @error('note')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                   
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label style=" height: 49px;"> </label>
-                                                            <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
-                                                                <i class="la la-plus"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label style=" height: 49px;"> </label>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @endif
-
-                                                    @if (isset($calls))
-                                                    @if (count($calls) > 0)
-                                                    <div class="row">
-                                                        <table class="table table-striped table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th> الاجنت</th>
-                                                                    <th>القسم</th>
-                                                                    <th> وقت المكالمه</th>
-                                                                    <th> ملحوظة</th>
-                                                                    <th> وقت الادخال</th>
-                                                                    <th> </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            @foreach ($calls as $call)
-                                                                <tr>
-                                                                    <td>{{ \App\Models\Admin::getAdminNamebyId($call->admin_id)  }}</td>
-                                                                    <td>{{ \App\Models\RequestCall::getDepartment($call->department) }}</td>
-                                                                    <td>{{ $call->call_time }}</td>
-                                                                    <td>{{ $call->note }}</td>
-                                                                    <td>{{ $call->created_at }}</td>
-                                                                    <td>
-                                                                        <a href="{{route('admin.call.delete',$call->id)}}" class="btn btn-danger" ><i class="ft-trash-2"></i></a>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    @endif
-                                                    @endif
-                                                
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                {{-- section Call End --}}
 
                 <!-- Action section start -->
                 <section id="basic-form-layouts">
@@ -760,7 +724,9 @@
                                     <div class="card-body">
 
                                             <div class="form-body">
-                                            @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
+
+                                                @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
+
                                                 <div class="row">
 
                                                     <div class="col-md-4">
@@ -769,7 +735,7 @@
                                                             <select class="select2 form-control" name="service_id" id="service_id"> 
                                                                 <option value="">-- {{ __('Select') }} {{ __('Service') }} --</option>
                                                                 @foreach($serves as $serve)
-                                                                    <option value="{{ $serve->id }}"> [ {{ $serve->price}} ] {{ $serve->name_ar}}</option>
+                                                                    <option value="{{ $serve->id }}"> {{ $serve->name_ar}}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('service_id')
@@ -836,7 +802,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endif
+
+                                                @endif
                                                 
                                                     @if (isset($actions))
                                                     @if (count($actions) > 0)
@@ -871,6 +838,7 @@
                                                             @endforeach
                                                             </tbody>
                                                         </table>
+
                                                         @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
                                                         <div class="form-actions">
                                                
@@ -886,6 +854,7 @@
                 
                                                         </div>
                                                         @endif
+
                                                     </div>
                                                     @endif
                                                     @endif
@@ -898,6 +867,122 @@
                     </div>
                 </section>
                 {{-- section Action End --}}
+
+                <!-- section Call start -->
+                <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title" id="basic-layout-form"><b> <i class="ft-phone"></i> {{ __('Calls') }} </b> </h4>
+                                    <a class="heading-elements-toggle"><i
+                                            class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse">
+                                    <div class="card-body">
+
+                                            <div class="form-body">
+                                                
+                                                
+                                                @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
+                                                <div class="row">
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="time"> {{ __('Time') }} </label>
+                                                            <input type="datetime-local" id="time"
+                                                                   class="form-control"
+                                                                   placeholder="{{ __('Time') }} "
+                                                                   {{-- value="{{ $datenaw }}" --}}
+                                                                   name="time">
+                                                            @error('time')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="Note"> {{ __('Note') }} </label>
+                                                            <textarea id="note" class="form-control" placeholder=" {{ __('Note') }}" 
+                                                                name="note"></textarea>
+                                                            @error('note')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                   
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label style=" height: 49px;"> </label>
+                                                            <button type="submit" class="btn btn-primary" name="btn" value="saveAndNew">
+                                                                <i class="la la-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <label style=" height: 49px;"> </label>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                @endif
+                                                
+                                                    @if (isset($calls))
+                                                    @if (count($calls) > 0)
+                                                    <div class="row">
+                                                        <table class="table table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th> الاجنت</th>
+                                                                    <th>القسم</th>
+                                                                    <th> وقت المكالمه</th>
+                                                                    <th> ملحوظة</th>
+                                                                    <th> وقت الادخال</th>
+                                                                    <th> </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @foreach ($calls as $call)
+                                                                <tr>
+                                                                    <td>{{ \App\Models\Admin::getAdminNamebyId($call->admin_id)  }}</td>
+                                                                    <td>{{ \App\Models\RequestCall::getDepartment($call->department) }}</td>
+                                                                    <td>{{ $call->call_time }}</td>
+                                                                    <td>{{ $call->note }}</td>
+                                                                    <td>{{ $call->created_at }}</td>
+                                                                    <td>
+                                                                        @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
+                                                                            <a href="{{route('admin.call.delete',$call->id)}}" class="btn btn-danger" ><i class="ft-trash-2"></i></a>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    @endif
+                                                    @endif
+                                                
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {{-- section Call End --}}
 
                 @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
                 <section id="basic-form-layouts">
@@ -921,180 +1006,28 @@
                                         <div class="form-actions">
                                                
                                             <button type="submit" name="btn" value="done" class="btn btn-success">
-                                                <i class="la la-check-square-o"></i> {{ __('DONE') }}
+                                                 {{ __('DONE') }}
                                             </button>
 
                                             <button type="submit" name="btn" value="hold" class="btn btn-warning">
-                                                <i class="la la-check-square-o"></i> {{ __('Hold') }}
+                                                 {{ __('Hold') }}
                                             </button>
-                                          
+                                            
                                             <button type="submit" name="btn" value="cancel" class="btn btn-danger">
-                                                <i class="la la-check-square-o"></i> {{ __('Cancel') }}
+                                                 {{ __('Cancel') }}
                                             </button>
 
                                         </div>
-                                    </form>
+                                           
                                     </div>
                                 </div>
+                            </form>
                             </div>
                         </div>
                     </div>
                 </section>
                 <!-- // Basic form layout section end -->
                 @endif
-
-
-                <!-- Basic form layout section start -->
-                <section id="basic-form-layouts">
-                    <div class="row match-height">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"><b> <i class="ft-phone"></i> {{ __('Nurse') }} </b> </h4>
-                                    <a class="heading-elements-toggle"><i
-                                            class="la la-ellipsis-v font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        <ul class="list-inline mb-0">
-                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="card-content collapse show">
-                                    <div class="card-body">
-
-                                            <div class="form-body">
-                                                
-                                                @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
-                                            <form class="form" action="{{route('admin.sheet.store', $myorder->id)}}" 
-                                                method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                
-                                                
-                                                <div class="row">
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="shift_date"> {{ __('Date') }} <span style="color: #ff4961;">*</span></label>
-                                                            <input type="date" id="shift_date" 
-                                                                   class="form-control"  value="{{ $datenaw }}"
-                                                                   placeholder="{{ __('Date') }} "
-                                                                   name="shift_date">
-                                                            @error('shift_date')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="nurse_id">{{ __('Nurse Name') }} <span style="color: #ff4961;">*</span></label>
-                                                            <select class="select2 form-control" name="nurse_id" id="nurse_id" required >
-                                                                <option value="">{{ __('Choose Nurse Name') }}</option>
-                                                                @foreach($nurses as $nurse)
-                                                                    <option value="{{ $nurse->id }}"
-                                                                            @if(isset($myorder->nurse_id))
-                                                                                @if($myorder->nurse_id == $nurse->id) selected @endif 
-                                                                                @if(old('nurse_id') == $myorder->nurse_id) selected @endif
-                                                                            @endif
-                                                                    >
-                                                                        {{ $nurse->username }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('nurse_id')
-                                                            <span class="text-danger">{{$message}}</span>--}}
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="shift_type"> {{ __('Type Sheft') }} <span style="color: #ff4961;">*</span></label>
-                                                            <select name="shift_type" id="shift_type" required
-                                                                    class="form-control @error('shift_type') is-invalid @enderror">
-                                                                <option value=""></option>
-                                                                <option value="1" @if(old('shift_type') == '1') selected @endif>{{ __('Long Sheft') }}</option>
-                                                                <option value="2" @if(old('shift_type') == '2') selected @endif>{{ __('Night') }}</option>
-                                                            </select>
-                                                            @error('shift_type')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="issues"> {{ __('Customer Issues') }} <span style="color: #ff4961;">*</span></label>
-                                                            <textarea id="issues" class="form-control" placeholder=" {{ __('Customer Issues') }}"  
-                                                                name="issues">{{ old('issues') }}</textarea>
-                                                            @error('issues')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                
-
-                                                <div class="form-actions">
-                                               
-                                                    <button type="submit" name="btn" value="nurseSheet" class="btn btn-success">
-                                                        <i class="la la-check-square-o"></i> {{ __('Add Nurse Only') }}
-                                                    </button>
-    
-                                                </div>
-                                                @endif
-
-                                                @if (isset($sheets))
-                                                    @if (count($sheets) > 0)
-                                                    <div class="row">
-                                                        <table class="table table-striped table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th> {{ __('Date') }}</th>
-                                                                    <th> {{ __('Nurse Name') }}</th>
-                                                                    <th> {{ __('Type Sheft') }}</th>
-                                                                    <th> {{ __('Customer Issues') }} </th>
-                                                                    <th> </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            @foreach ($sheets as $sheet)
-                                                                <tr>
-                                                                    <td>{{ $sheet->shift_date }}</td>
-                                                                    <td>{{ \App\Models\User::getUserName($sheet->nurse_id)  }}</td>
-                                                                    <td>{{ \App\Models\NurseSheet::getType($sheet->shift_type) }}</td>
-                                                                    <td>{{ $sheet->issues }}</td>
-                                                                    <td>
-                                                                        @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
-                                                                            <a href="{{route('admin.sheet.delete',$sheet->id)}}" class="btn btn-danger" ><i class="ft-trash-2"></i></a>
-                                                                        @endif
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    @endif
-                                                    @endif
-
-                                            </div>
-
-
-                                            
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- // Basic form layout section end -->
-
-
             </div>
         </div>
     </div>
@@ -1102,6 +1035,10 @@
 @endsection
 
 @section('script')
+
+{{-- <script src="{{asset('assets/admin/vendors/js/forms/repeater/jquery.repeater.min.js')}}" type="text/javascript"></script> --}}
+{{-- <script src="{{asset('assets/admin/js/scripts/forms/form-repeater.js')}}" type="text/javascript"></script> --}}
+
     <script>
         jQuery(document).ready(function ($) {
 
@@ -1164,6 +1101,26 @@
                 });
             });
 
+            // $('#governorate_id').change(function () {
+            //     var govern = $('#governorate_id').val();
+            //     if(govern !== null && govern !== ""){
+            //         getCitySelect(govern);
+            //     }
+            // });
+
+            // Physician
+            function referralPhysician(){
+                let phy = $('#physician').val();
+                if(phy !== null && phy !== ""){
+                    $('#physician_dev').hide();
+                }else{
+                    $('#physician_dev').show();
+                }
+            }
+            referralPhysician();
+            $('#physician').change(function () {
+                referralPhysician();
+            });
         });
     </script>
 @endsection

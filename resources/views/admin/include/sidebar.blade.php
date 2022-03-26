@@ -18,9 +18,9 @@
                     ><a class="menu-item" href="{{route('admin.request.cc')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Request') }}</span>
-                            <span class="badge badge badge-info badge-pill float-right mr-2">
+                            {{-- <span class="badge badge badge-info badge-pill float-right mr-2">
                                 {{App\Models\Requests::where('status_cc','!=',4)->where('type','!=',1)->count()}}
-                            </span>
+                            </span> --}}
                         </a>
                     </li>
                     @endif
@@ -30,9 +30,9 @@
                     ><a class="menu-item" href="{{route('admin.request.emergency')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All Emergency') }}</span>
-                            <span class="badge badge badge-info badge-pill float-right mr-2">
+                            {{-- <span class="badge badge badge-info badge-pill float-right mr-2">
                                 {{App\Models\Requests::where('status_cc','!=',4)->where('type',1)->count()}}
-                            </span>
+                            </span> --}}
                         </a>
                     </li>
                     @endif
@@ -42,24 +42,36 @@
                     ><a class="menu-item" href="{{route('admin.request.out')}}"   
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All OutPatient') }}</span>
-                            <span class="badge badge badge-info badge-pill float-right mr-2">
+                            {{-- <span class="badge badge badge-info badge-pill float-right mr-2">
                                 {{App\Models\Requests::where('type',2)->where('status_cc',4)->where('status_in_out','!=',4)->count()}}
-                            </span>
+                            </span> --}}
                         </a>
                     </li>
                     @endif
+
                     @if(\App\Models\Role::havePremission(['request_in']))
                     <li
                     @if(View::hasSection('request_in')) class="active" @endif
                     ><a class="menu-item" href="{{route('admin.request.in')}}"  
                            data-i18n="nav.dash.ecommerce">
                             <span class="menu-title" data-i18n="nav.dash.main">{{ __('All InPatient') }}</span>
-                            <span class="badge badge badge-info badge-pill float-right mr-2">
+                            {{-- <span class="badge badge badge-info badge-pill float-right mr-2">
                                 {{App\Models\Requests::where('type',3)->where('status_cc',4)->where('status_in_out','!=',4)->count()}}
-                            </span>
+                            </span> --}}
                         </a>
                     </li>
                     @endif
+
+                    @if(\App\Models\Role::havePremission(['request_lab']))
+                    <li
+                    @if(View::hasSection('request_lab')) class="active" @endif
+                    ><a class="menu-item" href="{{route('admin.request.lab')}}"  
+                        data-i18n="nav.dash.ecommerce">
+                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Lab') }}</span>
+                    </a>
+                    </li>
+                    @endif
+
                 </ul>
             </li>
             @endif

@@ -293,13 +293,14 @@ class RequestController extends Controller
         $myorder = Requests::select()->find($req);
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $actions = RequestAction::select()->where('request_id',$req)->get();
+        $medicalTypes = MedicalType::select()->get();
         $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
         
 
-        return view('admin.request.createem',compact('users','actions','usersReferrals','doctors','nurses','companys','referrals','physicians','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
+        return view('admin.request.createem',compact('users','medicalTypes','actions','usersReferrals','doctors','nurses','companys','referrals','physicians','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
     }
 
     public function storeEM(Request $request)
@@ -526,12 +527,13 @@ class RequestController extends Controller
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $sheets = NurseSheet::select()->where('request_id',$req)->get();
         $actions = RequestAction::select()->where('request_id',$req)->get();
+        $medicalTypes = MedicalType::select()->get();
         $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
         
-        return view('admin.request.createin',compact('datenaw','long','actions','usersReferrals','users','nurses','sheets','packages','companys','referrals','calls','governorates','specialtys','serves','myorder','doctors'));
+        return view('admin.request.createin',compact('datenaw','medicalTypes','long','actions','usersReferrals','users','nurses','sheets','packages','companys','referrals','calls','governorates','specialtys','serves','myorder','doctors'));
     }
 
     public function updateIN(Request $request, $id)
@@ -652,12 +654,13 @@ class RequestController extends Controller
         $referrals = Referral::getAllReferral();
         $calls = RequestCall::select()->where('request_id',$req)->get();
         $actions = RequestAction::select()->where('request_id',$req)->get();
+        $medicalTypes = MedicalType::select()->get();
         $usersReferrals= [];
         if(isset($myorder->user_id)){
             $usersReferrals = UsersReferral::getReferral($myorder->user_id);
         }
         
-        return view('admin.request.createout',compact('users','usersReferrals','actions','opds','drivers','companys','referrals','calls','governorates','physicians','specialtys','serves','myorder','doctors','nurses'));
+        return view('admin.request.createout',compact('users','medicalTypes','usersReferrals','actions','opds','drivers','companys','referrals','calls','governorates','physicians','specialtys','serves','myorder','doctors','nurses'));
     }
 
     public function updateOut(Request $request, $id)
@@ -665,6 +668,7 @@ class RequestController extends Controller
         if(! Role::havePremission(['request_out']))
             return redirect()->route('admin.dashboard');
       
+            // dd($request->Feedback);
         try {
             $data = Requests::find($id);
             if (!$data) {
@@ -719,14 +723,6 @@ class RequestController extends Controller
                 }
             }
 
-            // Referral
-            if(isset($request->referral_id)){
-                if(count($request->referral_id) > 0){
-                    UsersReferral::setReferral($request->user_id, $request->referral_id);
-                    $request->request->remove('referral_id');
-                }
-            }
-
             // add call
             if ($request->has('time') || $request->has('note') ){
                 if($request->note != "" || $request->time != ""){
@@ -747,6 +743,121 @@ class RequestController extends Controller
             return redirect()->route('admin.request.out')->with(['success'=>'تم الحفظ']);
         }catch (\Exception $ex){
             return redirect()->route('admin.request.out')->with(['error'=>'يوجد خطء']);
+        }
+    }
+
+    //  LAB 
+    public function indexLab()
+    {
+        if(! Role::havePremission(['request_lab']))
+            return redirect()->route('admin.dashboard');
+        $requests = Requests::selection()->where('type',4)->where('status_cc',4)->paginate(PAGINATION_COUNT);
+        return view('admin.request.indexlab', compact('requests'));
+    }
+
+    public function createLab($req)
+    {
+        if(! Role::havePremission(['request_lab']))
+            return redirect()->route('admin.dashboard');
+
+        $myorder = Requests::select()->find($req);
+        if (!isset($myorder->id)) {
+            return redirect()->route('admin.request.lab')->with(['error' => '  غير موجوده']);
+        }
+        $opds = Admin::select()->where('permission', Auth::user()->permission )->get();
+        $doctors = User::select('users.id','users.username','doctor_info.degree')->doctor()->Verification()->
+                        leftJoin('doctor_info', 'users.id', '=', 'doctor_info.user_id')->get();
+        $nurses = User::select()->nurse()->get();
+        $drivers = User::select()->driver()->get();
+        $serves = Service::select()->active()->get();
+        $specialtys = Specialty::select()->active()->get();
+        $users = User::select()->get();
+        $physicians = Physician::select()->get();
+        $governorates = Governorate::select()->get();
+        $companys = CompanyInfo::select()->get();
+        $referrals = Referral::getAllReferral();
+        $calls = RequestCall::select()->where('request_id',$req)->get();
+        $actions = RequestAction::select()->where('request_id',$req)->get();
+        $medicalTypes = MedicalType::select()->get();
+        $usersReferrals= [];
+        if(isset($myorder->user_id)){
+            $usersReferrals = UsersReferral::getReferral($myorder->user_id);
+        }
+        
+        return view('admin.request.createlab',compact('users','medicalTypes','usersReferrals','actions','opds','drivers','companys','referrals','calls','governorates','physicians','specialtys','serves','myorder','doctors','nurses'));
+    }
+
+    public function updateLab(Request $request, $id)
+    {
+        if(! Role::havePremission(['request_lab']))
+            return redirect()->route('admin.dashboard');
+      
+        try {
+            $data = Requests::find($id);
+            if (!$data) {
+                return redirect()->route('admin.request.create.lab')->with(['error' => '  غير موجوده']);
+            }
+
+            // opd
+            if($data->opd_admin_id == null)
+                $request->request->add(['opd_admin_id' =>  Auth::user()->id]);
+
+            if($request->btn == "done"){
+                $request->request->add(['status_in_out' => 4]);
+                $request->request->add(['date_out' => date("Y-m-d")]);
+            }elseif($request->btn == "hold")
+                $request->request->add(['status_in_out' => 2]);
+            elseif($request->btn == "cancel")
+                $request->request->add(['status_in_out' => 5]);
+            // elseif($request->btn == "approve")
+            //     $request->request->add(['status_in_out' => 6]);
+
+            if (!$request->has('covid19'))
+                $request->request->add(['covid19' => 0]);
+            if (!$request->has('pay_or_not'))
+                $request->request->add(['pay_or_not' => 0]);
+            if (!$request->has('whatapp'))
+                $request->request->add(['whatapp' => 0]);
+            if (!$request->has('whatapp2'))
+                $request->request->add(['whatapp2' => 0]);
+
+            // Action
+            if(isset($request->service_id)){
+                $btn = null;
+                if(isset($request->actionbtn)){
+                    if($request->actionbtn == 'takeit') $btn = 1;
+                    if($request->actionbtn == 'nottakeit') $btn = 0;
+                }
+                $this->AddAction($request->action_date,$request->service_id,$id,$request->state,$btn);
+                $request->request->remove('service_id');
+                $request->request->remove('state');
+                $request->request->remove('action_date');
+            }
+
+            if(isset($request->actionbox) && isset($request->actionbtn)){
+                $this->ChangeAction($request->actionbox,$request->actionbtn);
+            }
+
+            // add call
+            if ($request->has('time') || $request->has('note') ){
+                if($request->note != "" || $request->time != ""){
+                    $this->AddCall($request->time, $request->note, $id, '2');
+                }
+            }
+
+            $request->request->add(['admin_id_in_out' =>  Auth::user()->id]);
+
+            Log::setLog('update','request',$id,"",$request->except(['_token']) );
+
+            $data->update($request->except(['_token']));
+
+            if($request->btn == "saveAndNew" || isset($request->actionbtn))
+                return redirect()->route('admin.request.create.lab',$id)->with(['success'=>'تم الحفظ']);
+
+
+            return redirect()->route('admin.request.lab')->with(['success'=>'تم الحفظ']);
+        }catch (\Exception $ex){
+            return redirect()->route('admin.request.lab')->with(['error'=>'يوجد خطء']);
         }
     }
  

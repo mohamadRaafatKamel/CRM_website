@@ -138,13 +138,22 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="covid19">{{ __('Covid-19') }}</label>
+                                    <label class="col-md-2 label-control" for="medical_type_id">{{ __('Medical Type') }}</label>
                                     <div class="col-md-6">
-                                        <input type="checkbox"  value="1" name="covid19" id="covid19"
-                                               class="switchery" data-color="success"
-                                               @if($myorder->covid19  == 1 ) checked @endif  />
-                                        @error('covid19')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <select class="select2 form-control" name="medical_type_id" id="medical_type_id" >
+                                            <option value="">-- {{ __('Medical Type') }} --</option>
+                                            @foreach($medicalTypes as $medicalType)
+                                                <option value="{{ $medicalType->id }}"
+                                                        @if(isset($myorder->medical_type_id))
+                                                            @if($myorder->medical_type_id == $medicalType->id) selected @endif 
+                                                        @endif 
+                                                        @if(old('medical_type_id') == $medicalType->id) selected @endif >
+                                                    {{ $medicalType->getMyName()}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('medical_type_id')
+                                            <span class="text-danger">{{$message}}</span>--}}
                                         @enderror
                                     </div>
                                 </div>
