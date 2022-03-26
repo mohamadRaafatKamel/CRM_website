@@ -70,7 +70,7 @@ class Service extends Model
 
     public static function getPrice($pl, $id)
     {
-        if($pl == 0){
+        if($pl == 0 || $pl == null){
             $pl = PriceList::getMainPL();
         }
         $data = PriceListInfo::select('price')->where('service_id',$id)->where('price_list_id',$pl)->first();

@@ -128,23 +128,6 @@ class RequestController extends Controller
                 }
             }
 
-             // Action
-             if(isset($request->service_id)){
-                $btn = null;
-                if(isset($request->actionbtn)){
-                    if($request->actionbtn == 'takeit') $btn = 1;
-                    if($request->actionbtn == 'nottakeit') $btn = 0;
-                }
-                $this->AddAction($request->action_date,$request->service_id,$req->id,$request->state,$btn);
-                $request->request->remove('service_id');
-                $request->request->remove('state');
-                $request->request->remove('action_date');
-            }
-
-            if(isset($request->actionbox) && isset($request->actionbtn)){
-                $this->ChangeAction($request->actionbox,$request->actionbtn);
-            }
-
             // add call
             if ($request->has('time') || $request->has('note') ){
                 if($request->note != "" || $request->time != ""){
@@ -180,29 +163,10 @@ class RequestController extends Controller
 
         try {
 
-            if (!$request->has('covid19'))
-                $request->request->add(['covid19' => 0]);
             if (!$request->has('whatapp'))
                 $request->request->add(['whatapp' => 0]);
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
-
-              // Action
-            if(isset($request->service_id)){
-                $btn = null;
-                if(isset($request->actionbtn)){
-                    if($request->actionbtn == 'takeit') $btn = 1;
-                    if($request->actionbtn == 'nottakeit') $btn = 0;
-                }
-                $this->AddAction($request->action_date,$request->service_id,$id,$request->state,$btn);
-                $request->request->remove('service_id');
-                $request->request->remove('state');
-                $request->request->remove('action_date');
-            }
-
-            if(isset($request->actionbox) && isset($request->actionbtn)){
-                $this->ChangeAction($request->actionbox,$request->actionbtn);
-            }
 
             // Referral
             if(isset($request->referral_id)){
@@ -409,6 +373,14 @@ class RequestController extends Controller
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
+            // PriceList 
+            if( isset($request->medical_type_id) || isset($request->corporate_id) ){
+                $pl_ID = PriceList::getPriceList($request->medical_type_id,$request->corporate_id);
+            }else{
+                $pl_ID = null;
+            }
+            $request->request->add(['price_list_id' =>  $pl_ID ]);
+            
             // Action
             if(isset($request->service_id)){
                 $btn = null;
@@ -416,7 +388,8 @@ class RequestController extends Controller
                     if($request->actionbtn == 'takeit') $btn = 1;
                     if($request->actionbtn == 'nottakeit') $btn = 0;
                 }
-                $this->AddAction($request->action_date,$request->service_id,$id,$request->state,$btn);
+
+                $this->AddAction($request->action_date, $request->service_id, $id, $request->state, $pl_ID, $btn);
                 $request->request->remove('service_id');
                 $request->request->remove('state');
                 $request->request->remove('action_date');
@@ -424,14 +397,6 @@ class RequestController extends Controller
 
             if(isset($request->actionbox) && isset($request->actionbtn)){
                 $this->ChangeAction($request->actionbox,$request->actionbtn);
-            }
-
-            // Referral
-            if(isset($request->referral_id)){
-                if(count($request->referral_id) > 0){
-                    UsersReferral::setReferral($request->user_id, $request->referral_id);
-                    $request->request->remove('referral_id');
-                }
             }
 
             // Add Physician
@@ -575,6 +540,14 @@ class RequestController extends Controller
                 $request->request->add(['whatapp2' => 0]);
 
             
+            // PriceList 
+            if( isset($request->medical_type_id) || isset($request->corporate_id) ){
+                $pl_ID = PriceList::getPriceList($request->medical_type_id,$request->corporate_id);
+            }else{
+                $pl_ID = null;
+            }
+            $request->request->add(['price_list_id' =>  $pl_ID ]);
+            
             // Action
             if(isset($request->service_id)){
                 $btn = null;
@@ -582,18 +555,11 @@ class RequestController extends Controller
                     if($request->actionbtn == 'takeit') $btn = 1;
                     if($request->actionbtn == 'nottakeit') $btn = 0;
                 }
-                $this->AddAction($request->action_date,$request->service_id,$id,$request->state,$btn);
+
+                $this->AddAction($request->action_date, $request->service_id, $id, $request->state, $pl_ID, $btn);
                 $request->request->remove('service_id');
                 $request->request->remove('state');
                 $request->request->remove('action_date');
-            }
-
-            // Referral
-            if(isset($request->referral_id)){
-                if(count($request->referral_id) > 0){
-                    UsersReferral::setReferral($request->user_id, $request->referral_id);
-                    $request->request->remove('referral_id');
-                }
             }
 
             if(isset($request->actionbox) && isset($request->actionbtn)){
@@ -686,11 +652,8 @@ class RequestController extends Controller
                 $request->request->add(['status_in_out' => 2]);
             elseif($request->btn == "cancel")
                 $request->request->add(['status_in_out' => 5]);
-            // elseif($request->btn == "approve")
-            //     $request->request->add(['status_in_out' => 6]);
-
-            if (!$request->has('covid19'))
-                $request->request->add(['covid19' => 0]);
+            
+                
             if (!$request->has('pay_or_not'))
                 $request->request->add(['pay_or_not' => 0]);
             if (!$request->has('whatapp'))
@@ -698,6 +661,14 @@ class RequestController extends Controller
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
+            // PriceList 
+            if( isset($request->medical_type_id) || isset($request->corporate_id) ){
+                $pl_ID = PriceList::getPriceList($request->medical_type_id,$request->corporate_id);
+            }else{
+                $pl_ID = null;
+            }
+            $request->request->add(['price_list_id' =>  $pl_ID ]);
+            
             // Action
             if(isset($request->service_id)){
                 $btn = null;
@@ -705,7 +676,8 @@ class RequestController extends Controller
                     if($request->actionbtn == 'takeit') $btn = 1;
                     if($request->actionbtn == 'nottakeit') $btn = 0;
                 }
-                $this->AddAction($request->action_date,$request->service_id,$id,$request->state,$btn);
+
+                $this->AddAction($request->action_date, $request->service_id, $id, $request->state, $pl_ID, $btn);
                 $request->request->remove('service_id');
                 $request->request->remove('state');
                 $request->request->remove('action_date');
@@ -821,6 +793,14 @@ class RequestController extends Controller
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
+            // PriceList 
+            if( isset($request->medical_type_id) || isset($request->corporate_id) ){
+                $pl_ID = PriceList::getPriceList($request->medical_type_id,$request->corporate_id);
+            }else{
+                $pl_ID = null;
+            }
+            $request->request->add(['price_list_id' =>  $pl_ID ]);
+            
             // Action
             if(isset($request->service_id)){
                 $btn = null;
@@ -828,7 +808,8 @@ class RequestController extends Controller
                     if($request->actionbtn == 'takeit') $btn = 1;
                     if($request->actionbtn == 'nottakeit') $btn = 0;
                 }
-                $this->AddAction($request->action_date,$request->service_id,$id,$request->state,$btn);
+
+                $this->AddAction($request->action_date, $request->service_id, $id, $request->state, $pl_ID, $btn);
                 $request->request->remove('service_id');
                 $request->request->remove('state');
                 $request->request->remove('action_date');
@@ -926,7 +907,7 @@ class RequestController extends Controller
         }
     }
 
-    public function AddAction($date, $serv, $reqid, $state, $btn = null)
+    public function AddAction($date, $serv, $reqid, $state, $pl_ID, $btn = null)
     {
         $action = new RequestAction();
         if (isset($date)){
@@ -939,7 +920,7 @@ class RequestController extends Controller
             $action->state = $state;
         $action->request_id = $reqid;
         $action->service_id = $serv;
-        $action->price = Service::getPrice(0, $serv);
+        $action->price = Service::getPrice($pl_ID, $serv);
         
         $action->admin_id  = Auth::user()->id;
         $action->save();

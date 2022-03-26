@@ -1045,7 +1045,14 @@
             // service Price
             $('#service_id').change(function () {
                 let service_id = $("#service_id option:selected").val();
+                let medical_type_id = $("#medical_type_id option:selected").val();
+                let corporate_id = $("#corporate_id option:selected").val();
                 let price_list_id= 0;
+                console.log(service_id);
+                console.log(medical_type_id);
+                console.log(corporate_id);
+                console.log(price_list_id);
+                
                 let _token = '{{ csrf_token() }}';
                 $.ajax({
                     url: "{{ route('ajax.service.get.price') }}",
@@ -1053,6 +1060,8 @@
                     dataType: 'json',
                     data:{
                         service_id :service_id,
+                        medical_type_id :medical_type_id,
+                        corporate_id :corporate_id,
                         price_list_id :price_list_id,
                         _token: _token
                     },

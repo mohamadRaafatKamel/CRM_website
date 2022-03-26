@@ -44,10 +44,12 @@ class PriceList extends Model
     public static function getPriceList($medType, $company)
     {
         if($company == null && $medType == null){
-            return "0";
+            return PriceList::getMainPL();
         }
         if($company != null && $medType != null){
-            return PriceList::getMainPL();
+            $type = MedicalType::select()->find($medType);
+            if(isset($type->id))
+                return $type->price_list_id;
         }
         if($company == null && $medType != null){
             $type = MedicalType::select()->find($medType);
