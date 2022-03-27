@@ -121,6 +121,18 @@ else
                                                                    class="card-title ml-1">{{ __('All InPatient') }} </label>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="request_lab" name="role_info[]"
+                                                                   id="request_lab" {{ $readonly }}
+                                                                   @if(isset($myRoleInfo['request_lab']) and $myRoleInfo['request_lab'] == '1')
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="request_lab"
+                                                                   class="card-title ml-1">{{ __('Lab') }} </label>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <label><strong> {{ __('Users') }} </strong></label>

@@ -341,81 +341,6 @@
                                 <h4 class="form-section"><i class="ft-paperclip"></i> بيانات الخدمه</h4>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="specialty_id">{{ __('Specialty') }}</label>
-                                    <div class="col-md-6">
-                                        <select class="select2 form-control" id="specialty_id" name="specialty_id">
-                                            <option value="">-- {{ __('Select') }} {{ __('Specialty') }} -- </option>
-                                            {{-- <option value="2">222</option> --}}
-                                            @foreach($specialtys as $specialty)
-                                                <option value="{{ $specialty->id }}"
-                                                    @if(isset($myorder->specialty_id))
-                                                        @if($myorder->specialty_id == $specialty->id) selected @endif
-                                                    @endif
-                                                    @if(old('specialty_id') == $specialty->id) selected @endif
-                                                >{{ $specialty->name_ar}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('specialty_id')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="doctor_id">{{ __('CareHub Doctor') }}</label>
-                                    <div class="col-md-6">
-                                        <select class="select2 form-control" name="doctor_id" id="doctor_id">
-                                            <option value="">{{ __('Choose Doctor Name') }}</option>
-                                            @foreach($doctors as $doctor)
-                                                <option value="{{ $doctor->id }}"
-                                                        @if(isset($myorder->doctor_id))
-                                                        @if($myorder->doctor_id == $doctor->id) selected @endif @endif >
-                                                    {{ $doctor->username }} - {{ $doctor->getDocDegree($doctor->degree) }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('doctor_id')
-                                        <span class="text-danger">{{$message}}</span>--}}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="nurse_id">{{ __('Nurse Name') }}</label>
-                                    <div class="col-md-6">
-                                        <select class="select2 form-control" name="nurse_id" id="nurse_id" >
-                                            <option value="">{{ __('Choose Nurse Name') }}</option>
-                                            @foreach($nurses as $nurse)
-                                                <option value="{{ $nurse->id }}"
-                                                        @if(isset($myorder->nurse_id))
-                                                        @if($myorder->nurse_id == $nurse->id) selected @endif @endif >
-                                                    {{ $nurse->username }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('nurse_id')
-                                        <span class="text-danger">{{$message}}</span>--}}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="driver_id">{{ __('Driver Name') }}</label>
-                                    <div class="col-md-6">
-                                        <select class="select2 form-control" name="driver_id" id="driver_id" >
-                                            <option value="">{{ __('Choose Driver Name') }}</option>
-                                            @foreach($drivers as $driver)
-                                                <option value="{{ $driver->id }}"
-                                                        @if(isset($myorder->driver_id))
-                                                        @if($myorder->driver_id == $driver->id) selected @endif @endif >
-                                                    {{ $driver->username }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('driver_id')
-                                        <span class="text-danger">{{$message}}</span>--}}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label class="col-md-2 label-control" for="referral_id">{{ __('Referral') }}</label>
                                     <div class="col-md-6">
                                         <select class="select2 form-control" id="referral_id" disabled multiple>
@@ -497,6 +422,77 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="diagnose">{{ __('Diagnose') }}</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="diagnose"
+                                                class="form-control"
+                                                @if(isset($myorder->diagnose))
+                                                value="{{ $myorder->diagnose }}"
+                                                @else
+                                                value="{{ old('diagnose') }}"
+                                                @endif
+                                                placeholder="{{ __('Diagnose') }}"
+                                                name="diagnose">
+                                        @error('diagnose')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="code_zone_patient_id">{{ __('Code Zone Patient ID') }}</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="code_zone_patient_id" class="form-control"
+                                                @if(isset($myorder->code_zone_patient_id))
+                                                value="{{ $myorder->code_zone_patient_id }}"
+                                                @else
+                                                value="{{ old('code_zone_patient_id') }}"
+                                                @endif
+                                                placeholder="{{ __('Code Zone Patient ID') }}"
+                                                name="code_zone_patient_id">
+                                        @error('code_zone_patient_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row"> 
+                                    <label class="col-md-2 label-control" for="symptoms">{{ __('Symptoms') }}</label>
+                                    <div class="col-md-6">
+                                        <textarea id="symptoms" placeholder="{{ __('Symptoms') }}" 
+                                                class="form-control" name="symptoms"
+                                                >@if(isset($myorder->symptoms)){{ $myorder->symptoms }}@else {{ old('symptoms') }} @endif</textarea>
+                                        @error('symptoms')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="feedback">{{ __('Feedback') }}</label>
+                                    <div class="col-md-6">
+                                        <textarea id="feedback" placeholder="{{ __('Feedback') }}" 
+                                                class="form-control" name="feedback"
+                                                >@if(isset($myorder->feedback)){{ $myorder->feedback }}@endif</textarea>
+                                        @error('feedback')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="doc_note">{{ __('Doctor Notes') }}</label>
+                                    <div class="col-md-6">
+                                        <textarea id="doc_note" placeholder="{{ __('Doctor Notes') }}" 
+                                                class="form-control" name="doc_note"
+                                                >@if(isset($myorder->doc_note)){{ $myorder->doc_note }}@endif</textarea>
+                                        @error('doc_note')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-md-2 label-control" for="opd_admin_id">{{ __('OPD') }}</label>
                                     <div class="col-md-6">
                                         <select class="select2 form-control" name="opd_admin_id" id="opd_admin_id">
@@ -535,72 +531,76 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="diagnose">{{ __('Diagnose') }}</label>
+                                    <label class="col-md-2 label-control" for="specialty_id">{{ __('Specialty') }}</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="diagnose"
-                                                class="form-control"
-                                                @if(isset($myorder->diagnose))
-                                                value="{{ $myorder->diagnose }}"
-                                                @else
-                                                value="{{ old('diagnose') }}"
-                                                @endif
-                                                placeholder="{{ __('Diagnose') }}"
-                                                name="diagnose">
-                                        @error('diagnose')
+                                        <select class="select2 form-control" id="specialty_id" name="specialty_id">
+                                            <option value="">-- {{ __('Select') }} {{ __('Specialty') }} -- </option>
+                                            {{-- <option value="2">222</option> --}}
+                                            @foreach($specialtys as $specialty)
+                                                <option value="{{ $specialty->id }}"
+                                                    @if(isset($myorder->specialty_id))
+                                                        @if($myorder->specialty_id == $specialty->id) selected @endif
+                                                    @endif
+                                                    @if(old('specialty_id') == $specialty->id) selected @endif
+                                                >{{ $specialty->name_ar}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('specialty_id')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="code_zone_patient_id">{{ __('Code Zone Patient ID') }}</label>
+                                    <label class="col-md-2 label-control" for="doctor_id">{{ __('CareHub Doctor') }}</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="code_zone_patient_id" class="form-control"
-                                                @if(isset($myorder->code_zone_patient_id))
-                                                value="{{ $myorder->code_zone_patient_id }}"
-                                                @else
-                                                value="{{ old('code_zone_patient_id') }}"
-                                                @endif
-                                                placeholder="{{ __('Code Zone Patient ID') }}"
-                                                name="code_zone_patient_id">
-                                        @error('code_zone_patient_id')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <select class="select2 form-control" name="doctor_id" id="doctor_id">
+                                            <option value="">{{ __('Choose Doctor Name') }}</option>
+                                            @foreach($doctors as $doctor)
+                                                <option value="{{ $doctor->id }}"
+                                                        @if(isset($myorder->doctor_id))
+                                                        @if($myorder->doctor_id == $doctor->id) selected @endif @endif >
+                                                    {{ $doctor->username }} - {{ $doctor->getDocDegree($doctor->degree) }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('doctor_id')
+                                        <span class="text-danger">{{$message}}</span>--}}
                                         @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="symptoms">{{ __('Symptoms') }}</label>
+                                    <label class="col-md-2 label-control" for="nurse_id">{{ __('Nurse Name') }}</label>
                                     <div class="col-md-6">
-                                        <textarea id="symptoms" placeholder="{{ __('Symptoms') }}" 
-                                                class="form-control" name="symptoms"
-                                                >@if(isset($myorder->symptoms)){{ $myorder->symptoms }}@else {{ old('symptoms') }} @endif</textarea>
-                                        @error('symptoms')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <select class="select2 form-control" name="nurse_id" id="nurse_id" >
+                                            <option value="">{{ __('Choose Nurse Name') }}</option>
+                                            @foreach($nurses as $nurse)
+                                                <option value="{{ $nurse->id }}"
+                                                        @if(isset($myorder->nurse_id))
+                                                        @if($myorder->nurse_id == $nurse->id) selected @endif @endif >
+                                                    {{ $nurse->username }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('nurse_id')
+                                        <span class="text-danger">{{$message}}</span>--}}
                                         @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="feedback">{{ __('Feedback') }}</label>
+                                    <label class="col-md-2 label-control" for="driver_id">{{ __('Driver Name') }}</label>
                                     <div class="col-md-6">
-                                        <textarea id="feedback" placeholder="{{ __('Feedback') }}" 
-                                                class="form-control" name="feedback"
-                                                >@if(isset($myorder->feedback)){{ $myorder->feedback }}@endif</textarea>
-                                        @error('feedback')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="doc_note">{{ __('Doctor Notes') }}</label>
-                                    <div class="col-md-6">
-                                        <textarea id="doc_note" placeholder="{{ __('Doctor Notes') }}" 
-                                                class="form-control" name="doc_note"
-                                                >@if(isset($myorder->doc_note)){{ $myorder->doc_note }}@endif</textarea>
-                                        @error('doc_note')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <select class="select2 form-control" name="driver_id" id="driver_id" >
+                                            <option value="">{{ __('Choose Driver Name') }}</option>
+                                            @foreach($drivers as $driver)
+                                                <option value="{{ $driver->id }}"
+                                                        @if(isset($myorder->driver_id))
+                                                        @if($myorder->driver_id == $driver->id) selected @endif @endif >
+                                                    {{ $driver->username }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('driver_id')
+                                        <span class="text-danger">{{$message}}</span>--}}
                                         @enderror
                                     </div>
                                 </div>
@@ -617,23 +617,6 @@
                                 </div>
 
                                 <h4 class="form-section"><i class="ft-paperclip"></i> بيانات التكلفه</h4>
-
-                                <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="expectation_cost">{{ __('Expectation Cost') }}</label>
-                                    <div class="col-md-6">
-                                        <input type="number" id="expectation_cost" class="form-control"
-                                                @if(isset($myorder->expectation_cost))
-                                                value="{{ $myorder->expectation_cost }}"
-                                                @else
-                                                value="{{ old('expectation_cost') }}"
-                                                @endif
-                                                placeholder="{{ __('Expectation Cost') }}"
-                                                name="expectation_cost">
-                                        @error('expectation_cost')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
 
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="real_cost">{{ __('Real Cost') }}</label>
@@ -732,7 +715,7 @@
                                                             <select class="select2 form-control" name="service_id" id="service_id"> 
                                                                 <option value="">-- {{ __('Select') }} {{ __('Service') }} --</option>
                                                                 @foreach($serves as $serve)
-                                                                    <option value="{{ $serve->id }}"> [ {{ $serve->price}} ] {{ $serve->name_ar}}</option>
+                                                                    <option value="{{ $serve->id }}">{{ $serve->name_ar}}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('service_id')

@@ -87,13 +87,21 @@ class ServiceImport implements ToModel, WithStartRow, WithCustomCsvSettings
             // dd($validator->errors());
             return null;
         }
+        if($row[3] == 'in')
+            $type = 1;
+        elseif($row[3] == 'out')
+            $type = 2;
+        elseif($row[3] == 'lab')
+            $type = 3;
+        else
+            $type = null;
 
         try {
             return new Service([
                 'name_en'     => $row[0],
                 'name_ar'    => $row[1],
                 'category_id'    => Category::getIDformNameEN($row[2]),
-                'type' => ($row[3] == 'in')? 1 : 2 ,
+                'type' => $type ,
                 'site' => ($row[4] == 'site')? 1 : 0 ,
                 'admin_id' =>  Auth::user()->id
             ]);

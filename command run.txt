@@ -16,11 +16,7 @@ Task
 
 ·        Changing some field labels :
 
-اللقب: الاسم الثالث
-
 زرار تحديث : يتم تغييره الى حفظ في كل الشاشات
-
-
 
 
 ·  Adding type validations on the following fields :
@@ -65,58 +61,42 @@ o   Sorting the request data in the table with the above date field
 
 ·        Applying the template of the email notification that Anas has sent to you
 
-·        Making a route api for other type of join us
-
 ·        Show the number of previous request from the patient in callcenter and outpatient and in patient { all request details pages}
 
-·       
 
-·        Adding an api route for Corporation survey
-
-
- ****** Appling windows notification feature *******
+  Appling windows notification feature 
 ***
 
 ·        Blog {articles} content editor on the dashboard with the api for getting the articles
 
+Adding an api route for Corporation survey
+
+Making a route api for other type of join us
+
+
+·        Changing some field labels :
+
+اللقب: الاسم الثالث
  
 
 
 //////// 2nd List ////////////////////////////////////////////
 
-Carehub logo, title and dashboard name
-
 ·        Moving the cost fields to the bottom of the request
 
 ·        Removing one of the following buttons on adding new request حفظ الكل \ حفظ
 
-·        Adding a field for outpatient to enter the end of service date “تاريخ تنفيذ الاجراء “ if not exist and place it at the bottom after real cost field
-
-·        Removing "التكلفة المتوقعة من خدمات الخارحي"
-
-·        Arranging the medical section in outpatient request detail’s field in this order:
-
-o       الاعراض
-
-o       التشخيص الطبي
-التعليق الطبي
-الخطة العلاجية
-
-o       Opd                
-
-o       Opd2  
-
-o       التخصص
-
-o       اسم الطبيب الزائر (طبيب كيرهب)
-
-o       اسم مساعد التمريض (خانة جديدة)
-
-o       اسم الممرض
-
-o       اسم السائق
+·        Adding a field for outpatient to enter the end of service date “تاريخ تنفيذ الاجراء “ 
+if not exist and place it at the bottom after real cost field
+ 
 
 ·        Making sure that all drop-down lists do filter the disabled options from option list
-
 Like: services , contracts , referrals , regions and any other drop-list
 
+
+//////
+
+Carehub logo, title and dashboard name
+
+Arranging the medical section in outpatient request detail’s field in this order:
+    اسم مساعد التمريض (خانة جديدة)  
