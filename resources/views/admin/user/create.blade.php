@@ -98,16 +98,16 @@
                                             </div>
                                             <div class="form-actions">
                                                 <button type="submit" class="btn btn-primary" name="btn" value="1">
-                                                    <i class="la la-check-square-o"></i> {{ __('Patient') }}
+                                                    {{ __('Patient') }}
                                                 </button>
                                                 <button type="submit" class="btn btn-primary" name="btn" value="2">
-                                                    <i class="la la-check-square-o"></i> {{ __('Doctor') }}
+                                                     {{ __('Doctor') }}
                                                 </button>
                                                 <button type="submit" class="btn btn-primary" name="btn" value="4">
-                                                    <i class="la la-check-square-o"></i> {{ __('Nurse') }}
+                                                     {{ __('Nurse') }}
                                                 </button>
                                                 <button type="submit" class="btn btn-primary" name="btn" value="5">
-                                                    <i class="la la-check-square-o"></i> {{ __('Driver') }}
+                                                     {{ __('Driver') }}
                                                 </button>
                                             </div>
                                         </form>

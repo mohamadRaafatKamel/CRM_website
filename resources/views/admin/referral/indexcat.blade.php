@@ -67,7 +67,7 @@
                                                     </div>
                                                     <div class="col-md-2">
                                                         <button type="submit" name="btn" value="nurseSheet" class="btn btn-success">
-                                                            <i class="la la-check-square-o"></i> {{ __('Add') }}
+                                                             {{ __('Add') }}
                                                         </button>
                                                     </div>
                                                 </div>

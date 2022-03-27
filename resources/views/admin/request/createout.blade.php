@@ -709,7 +709,7 @@
                             @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="la la-check-square-o"></i> {{ __('Save') }}
+                                         {{ __('Save') }}
                                     </button>
                                 </div>
                             @endif
@@ -862,10 +862,10 @@
                                                         <div class="form-actions">
                                                
                                                             <button type="submit" name="actionbtn" value="takeit" class="btn btn-success">
-                                                                <i class="la la-check-square-o"></i> {{ __('Take It') }}
+                                                                 {{ __('Take It') }}
                                                             </button>
                                                             <button type="submit" name="actionbtn" value="nottakeit" class="btn btn-warning">
-                                                                <i class="la la-check-square-o"></i> {{ __('Not Take It') }}
+                                                                 {{ __('Not Take It') }}
                                                             </button>
                                                             <button type="submit" name="actionbtn" value="delete" class="btn btn-danger">
                                                                 <i class="ft-trash-2"></i> {{ __('Delete') }}
@@ -1025,18 +1025,15 @@
                                         <div class="form-actions">
                                                
                                             <button type="submit" name="btn" value="done" class="btn btn-success">
-                                                <i class="la la-check-square-o"></i> {{ __('DONE') }}
+                                                {{ __('DONE') }}
                                             </button>
 
                                             <button type="submit" name="btn" value="hold" class="btn btn-warning">
-                                                <i class="la la-check-square-o"></i> {{ __('Hold') }}
+                                                {{ __('Hold') }}
                                             </button>
-                                            {{-- <button type="submit" name="btn" value="approve" class="btn btn-warning">
-                                                <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
-                                            </button> --}}
-
+                                            
                                             <button type="submit" name="btn" value="cancel" class="btn btn-danger">
-                                                <i class="la la-check-square-o"></i> {{ __('Cancel') }}
+                                                {{ __('Cancel') }}
                                             </button>
 
                                         </div>

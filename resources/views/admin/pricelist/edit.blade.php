@@ -117,10 +117,10 @@ else
                                                 <div class="form-actions">
                                                     
                                                     <a href="{{ route('admin.pricelist') }}" class="btn btn-warning">
-                                                        <i class="la la-check-square-o"></i> تراجع
+                                                         تراجع
                                                     </a>
                                                     <button type="submit" class="btn btn-primary">
-                                                        <i class="la la-check-square-o"></i>  {{ __('Save') }}
+                                                          {{ __('Save') }}
                                                     </button>
                                                 </div>
                                             @endif
@@ -192,7 +192,7 @@ else
 
                                             <div class="form-group row">
                                                 <button type="button" class="btn btn-primary" id="btnRoll">
-                                                    <i class="la la-check-square-o"></i> {{ __('New') }}
+                                                     {{ __('New') }}
                                                 </button>
                                             </div>
                                             
@@ -276,7 +276,7 @@ else
 
                                             <div class="form-group row">
                                                 <button type="button" class="btn btn-primary" id="btnSrv">
-                                                    <i class="la la-check-square-o"></i> {{ __('New') }}
+                                                     {{ __('New') }}
                                                 </button>
                                             </div>
 
@@ -335,7 +335,7 @@ else
 
                                             <div class="form-group row">
                                                 <button type="button" class="btn btn-primary" id="btnPack">
-                                                    <i class="la la-check-square-o"></i> {{ __('New') }}
+                                                     {{ __('New') }}
                                                 </button>
                                             </div>
 

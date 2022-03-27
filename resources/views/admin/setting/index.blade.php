@@ -89,12 +89,8 @@
 
 
                                             <div class="form-actions">
-{{--                                                <button type="button" class="btn btn-warning mr-1"--}}
-{{--                                                        onclick="history.back();">--}}
-{{--                                                    <i class="ft-x"></i> تراجع--}}
-{{--                                                </button>--}}
                                                 <button type="submit" value="socialMedia" name="btn" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i>  تحديث
+                                                      {{ __('Save') }}
                                                 </button>
                                             </div>
                                         </form>
@@ -165,12 +161,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-actions">
-{{--                                                <button type="button" class="btn btn-warning mr-1"--}}
-{{--                                                        onclick="history.back();">--}}
-{{--                                                    <i class="ft-x"></i> تراجع--}}
-{{--                                                </button>--}}
                                                 <button type="submit" value="sliderImg" name="btn" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i>  تحديث
+                                                    {{ __('Save') }}
                                                 </button>
                                             </div>
                                         </form>
@@ -272,7 +264,7 @@
 
                                             <div class="form-actions">
                                                 <button type="submit" value="Links" name="btn" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i>  تحديث
+                                                    {{ __('Save') }}
                                                 </button>
                                             </div>
                                         </form>

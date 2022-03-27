@@ -688,11 +688,11 @@
                                 <div class="form-actions">
                                     @if (isset($myorder->id) && $myorder->id != 0)
                                         <button type="submit" class="btn btn-primary" name="embtn" value="1">
-                                            <i class="la la-check-square-o"></i> {{ __('Update') }}
+                                             {{ __('Update') }}
                                         </button>
                                     @else
                                         <button type="submit" class="btn btn-primary" name="embtn" value="1">
-                                            <i class="la la-check-square-o"></i> {{ __('Save') }}
+                                             {{ __('Save') }}
                                         </button>
                                     @endif
                                     
@@ -841,10 +841,10 @@
                                                         <div class="form-actions">
                                                
                                                             <button type="submit" name="actionbtn" value="takeit" class="btn btn-success">
-                                                                <i class="la la-check-square-o"></i> {{ __('Take It') }}
+                                                                 {{ __('Take It') }}
                                                             </button>
                                                             <button type="submit" name="actionbtn" value="nottakeit" class="btn btn-warning">
-                                                                <i class="la la-check-square-o"></i> {{ __('Not Take It') }}
+                                                                 {{ __('Not Take It') }}
                                                             </button>
                                                             <button type="submit" name="actionbtn" value="delete" class="btn btn-danger">
                                                                 <i class="ft-trash-2"></i> {{ __('Delete') }}
@@ -1004,25 +1004,25 @@
                                                         
                                                         
                                                         <button type="submit" name="btn" value="done" class="btn btn-success">
-                                                            <i class="la la-check-square-o"></i> {{ __('DONE') }}
+                                                             {{ __('DONE') }}
                                                         </button>
 
                                                         <button type="submit" name="btn" value="hold" class="btn btn-warning">
-                                                            <i class="la la-check-square-o"></i> {{ __('Hold') }}
+                                                             {{ __('Hold') }}
                                                         </button>
                                                         <button type="submit" name="btn" value="approve" class="btn btn-warning">
-                                                            <i class="la la-check-square-o"></i> {{ __('Hold to Approve') }}
+                                                             {{ __('Hold to Approve') }}
                                                         </button>
 
                                                         <button type="submit" name="btn" value="cancel" class="btn btn-danger">
-                                                            <i class="la la-check-square-o"></i> {{ __('Cancel') }}
+                                                             {{ __('Cancel') }}
                                                         </button>
                                                     </div>
                                                 @endif
                                             @else
                                                 <div class="form-actions">
                                                     <button type="submit" class="btn btn-primary">
-                                                        <i class="la la-check-square-o"></i> {{ __('Save All') }}
+                                                         {{ __('Save All') }}
                                                     </button>
                                                 </div>
                                             @endif

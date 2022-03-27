@@ -199,12 +199,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-actions">
-{{--                                                <button type="button" class="btn btn-warning mr-1"--}}
-{{--                                                        onclick="history.back();">--}}
-{{--                                                    <i class="ft-x"></i> تراجع--}}
-{{--                                                </button>--}}
                                                 <button type="submit" class="btn btn-primary" name="btn" value="GeneralInfo">
-                                                    <i class="la la-check-square-o"></i> تحديث
+                                                    {{ __('Save') }}
                                                 </button>
                                             </div>
                                         </form>
@@ -431,12 +427,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-actions">
-                                                {{--                                                <button type="button" class="btn btn-warning mr-1"--}}
-                                                {{--                                                        onclick="history.back();">--}}
-                                                {{--                                                    <i class="ft-x"></i> تراجع--}}
-                                                {{--                                                </button>--}}
                                                 <button type="submit" class="btn btn-primary" name="btn" value="Generalcontact">
-                                                    <i class="la la-check-square-o"></i> تحديث
+                                                    {{ __('Save') }}
                                                 </button>
                                             </div>
                                         </form>
@@ -548,7 +540,7 @@
                                             </div>
                                             <div class="form-actions">
                                                 <button type="submit" class="btn btn-primary" name="btn" value="GeneralInfo">
-                                                    <i class="la la-check-square-o"></i> تحديث
+                                                    {{ __('Save') }}
                                                 </button>
                                             </div>
                                         </form>
@@ -751,12 +743,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-actions">
-                                                {{--                                                <button type="button" class="btn btn-warning mr-1"--}}
-                                                {{--                                                        onclick="history.back();">--}}
-                                                {{--                                                    <i class="ft-x"></i> تراجع--}}
-                                                {{--                                                </button>--}}
                                                 <button type="submit" class="btn btn-primary" name="btn" value="Doctor">
-                                                    <i class="la la-check-square-o"></i> تحديث
+                                                    {{ __('Save') }}
                                                 </button>
                                             </div>
                                         </form>
