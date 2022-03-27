@@ -70,10 +70,10 @@
                                                         <td>
                                                             <a href="{{route('admin.service.edit',['id'=> $data->id ])}}" >{{$data ->id}}</a>
                                                         </td>
-                                                        <td>{{$data -> name_en}}</td>
-                                                        <td>{{$data -> name_ar}}</td>
-                                                        <td>{{$data -> description}}</td>
-                                                        <td>{{ __(\App\Models\Service::getServiceType($data -> type)) }}</td>
+                                                        <td>{{$data ->name_en}}</td>
+                                                        <td>{{$data ->name_ar}}</td>
+                                                        <td>{{$data ->description}}</td>
+                                                        <td>{{$data ->getMyType() }}</td>
                                                         <td>
                                                             @if($data -> image != null)
                                                                 <img width="50px" height="50px" src="../{{$data -> image}}">

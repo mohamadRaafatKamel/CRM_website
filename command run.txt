@@ -18,22 +18,16 @@ report lab
 
 
 
-·        Changing some field labels :
-
-زرار تحديث : يتم تغييره الى حفظ في كل الشاشات
-
-
 ·  Adding type validations on the following fields :
 
 o   Phone number : accept only number strings
 
 o   Name : accept only Arabic characters , numbers and symbols are not allowed
 
-o   Age : accept number string
+
+
 
 ·        Adding search for patient feature like the following design:
-
-·        Remove check box icon from save button on request detail
 
 ·        Changing the type of Input Region {المنطقة}   to drop list {select between regions}
 

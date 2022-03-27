@@ -86,8 +86,10 @@ else
                                                         <div class="form-group">
                                                             <label for="type"> {{ __('Type') }} </label>
                                                             <select name="type" class="form-control" id="type" {{ $readonly }} required>
+                                                                <option value="">-- {{ __('Type') }} --</option>
                                                                 <option value="1" @if($datas -> type == '1') selected @endif>{{ __("InPatient") }}</option>
                                                                 <option value="2" @if($datas -> type == '2') selected @endif>{{ __("OutPatient") }}</option>
+                                                                <option value="3" @if($datas -> type == '3') selected @endif>{{ __("Lab") }}</option>
                                                             </select>
                                                             @error('type')
                                                             <span class="text-danger">{{$message}}</span>
@@ -195,10 +197,10 @@ else
                                                 <div class="form-actions">
                                                     <button type="button" class="btn btn-warning mr-1"
                                                             onclick="history.back();">
-                                                         تراجع
+                                                          {{ __('Back') }}
                                                     </button>
                                                     <button type="submit" class="btn btn-primary">
-                                                          تحديث
+                                                          {{ __('Save') }}
                                                     </button>
                                                 </div>
                                             @endif

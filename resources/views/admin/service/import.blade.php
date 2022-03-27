@@ -51,7 +51,7 @@
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i> البيانات   </h4>
 
-                                                <p class="text-center">Please import file as Eng name , Ar name, Category Eng name, in or out, site or notsite </p>
+                                                <p class="text-center">Please import file as Eng name , Ar name, Category Eng name, in or out or lab, site or notsite </p>
 
                                                 <div class="form-group row">
                                                     <label class="col-md-2 label-control" for="name">{{ __('Add File') }} </label>

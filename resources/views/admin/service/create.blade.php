@@ -83,8 +83,10 @@
                                                         <div class="form-group">
                                                             <label for="type"> {{ __('Type') }} </label>
                                                             <select name="type" class="form-control" id="type" required>
+                                                                <option value="">-- {{ __('Type') }} --</option>
                                                                 <option value="1">{{ __("InPatient") }}</option>
                                                                 <option value="2">{{ __("OutPatient") }}</option>
+                                                                <option value="3">{{ __("Lab") }}</option>
                                                             </select>
                                                             @error('type')
                                                             <span class="text-danger">{{$message}}</span>

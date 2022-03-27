@@ -133,7 +133,7 @@ class ServiceController extends Controller
         try {
             $data = Service::find($id);
             if (!$data) {
-                return redirect()->route('admin.service.edit', $id)->with(['error' => '  غير موجوده']);
+                return redirect()->route('admin.service.edit', $id)->with(['error' => ' غير موجوده']);
             }
 
             if (!$request->has('disabled'))

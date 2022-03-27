@@ -54,10 +54,6 @@ class RequestController extends Controller
         date_default_timezone_set('Africa/Cairo');
         $datenaw = date("Y-m-d")."T".date("H:i:s");
 
-        $doctors = User::select('users.id','users.username','doctor_info.degree')->doctor()->Verification()->
-                        leftJoin('doctor_info', 'users.id', '=', 'doctor_info.user_id')->get();
-        $nurses = User::select()->nurse()->get();
-        $serves = Service::select()->active()->get();
         $specialtys = Specialty::select()->active()->get();
         $users = User::select()->get();
         $governorates = Governorate::select()->get();
@@ -77,7 +73,7 @@ class RequestController extends Controller
         }
         
 
-        return view('admin.request.createcc',compact('users','medicalTypes','actions','usersReferrals','doctors','nurses','companys','referrals','physicians','packages','calls','governorates','citys','specialtys','serves','myorder','datenaw'));
+        return view('admin.request.createcc',compact('users','medicalTypes','actions','usersReferrals','companys','referrals','physicians','packages','calls','governorates','citys','specialtys','myorder','datenaw'));
     }
 
     public function store(Request $request)
@@ -245,7 +241,7 @@ class RequestController extends Controller
         $doctors = User::select('users.id','users.username','doctor_info.degree')->doctor()->Verification()->
                         leftJoin('doctor_info', 'users.id', '=', 'doctor_info.user_id')->get();
         $nurses = User::select()->nurse()->get();
-        $serves = Service::select()->active()->get();
+        $serves = Service::select()->active()->notlab()->get();
         $specialtys = Specialty::select()->active()->get();
         $users = User::select()->get();
         $governorates = Governorate::select()->get();
@@ -482,7 +478,7 @@ class RequestController extends Controller
         $doctors = User::select('users.id','users.username','doctor_info.degree')->doctor()->Verification()->
                         leftJoin('doctor_info', 'users.id', '=', 'doctor_info.user_id')->get();
         $nurses = User::select()->nurse()->get();
-        $serves = Service::select()->active()->get();
+        $serves = Service::select()->active()->notlab()->get();
         $specialtys = Specialty::select()->active()->get();
         $users = User::select()->get();
         $companys = CompanyInfo::select()->get();
@@ -611,7 +607,7 @@ class RequestController extends Controller
                         leftJoin('doctor_info', 'users.id', '=', 'doctor_info.user_id')->get();
         $nurses = User::select()->nurse()->get();
         $drivers = User::select()->driver()->get();
-        $serves = Service::select()->active()->get();
+        $serves = Service::select()->active()->notlab()->get();
         $specialtys = Specialty::select()->active()->get();
         $users = User::select()->get();
         $physicians = Physician::select()->get();
@@ -741,7 +737,7 @@ class RequestController extends Controller
                         leftJoin('doctor_info', 'users.id', '=', 'doctor_info.user_id')->get();
         $nurses = User::select()->nurse()->get();
         $drivers = User::select()->driver()->get();
-        $serves = Service::select()->active()->get();
+        $serves = Service::select()->active()->lab()->get();
         $specialtys = Specialty::select()->active()->get();
         $users = User::select()->get();
         $physicians = Physician::select()->get();

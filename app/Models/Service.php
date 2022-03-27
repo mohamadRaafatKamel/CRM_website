@@ -32,8 +32,20 @@ class Service extends Model
         return $query -> where('disabled',0);
     }
 
+    public function scopeLab($query){
+        return $query -> where('type',3);
+    }
+
+    public function scopeNotlab($query){
+        return $query -> where('type','!=',3);
+    }
+
     public function getActive(){
         return   $this -> disabled == 0 ? 'مفعل'  : 'غير مفعل';
+    }
+
+    public function getMyType(){
+        return $this->getServiceType($this->type) ;
     }
 
     public static function getName($id)
@@ -84,13 +96,16 @@ class Service extends Model
     {
         switch ($type){
             case 1:
-                return "InPatient";
+                return __('InPatient');
                 break;
             case 2:
-                return "OutPatient";
+                return __('OutPatient');
+                break;
+            case 3:
+                return __('Lab');
                 break;
         }
-//        return 0;
+       return "_";
     }
 
 }
