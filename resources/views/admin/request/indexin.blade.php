@@ -57,8 +57,7 @@
                                                         <th> موبيل</th>
                                                         <th>{{ __('Adress') }}</th>
                                                         <th>{{ __('Consultant') }}</th>
-                                                        <th>{{ __('Package') }}</th>
-                                                        <th> {{ __('Date') }}</th>
+                                                        <th> {{ __('Schedule') }}</th>
                                                         <th> الحاله</th>
                                                     </tr>
                                                     </thead>
@@ -92,8 +91,7 @@
                                                                     ?>
                                                                 </td>
                                                                 <td>{{\App\Models\User::getDocName($request->doctor_id) }}</td>
-                                                                <td>{{\App\Models\Package::getName($request->package_id) }}</td>
-                                                                <td>{{$request ->created_at}}</td>
+                                                                <td>{{$request ->schedule_date}}</td>
                                                                 <td>
                                                                     <span class="badge {{ \App\Models\Requests::getStateColor($request ->status_in_out) }}">
                                                                         {{ \App\Models\Requests::getRequestState($request -> status_in_out) }}
@@ -114,8 +112,7 @@
                                                             <th> موبيل</th>
                                                             <th>{{ __('Adress') }}</th>
                                                             <th>{{ __('Consultant') }}</th>
-                                                            <th>{{ __('Package') }}</th>
-                                                            <th> {{ __('Date') }}</th>
+                                                            <th> {{ __('Schedule') }}</th>
                                                             <th> الحاله</th>
                                                         </tr>
                                                     </tfoot>

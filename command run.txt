@@ -12,7 +12,9 @@ php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" -
 Task 
 //////////////////////////////////////////////////////////////
 
-·        Upload pricelist sheet to the database and disable the old services
+report out
+
+report lab
 
 ·        Changing some field labels :
 
@@ -29,15 +31,7 @@ o   Age : accept number string
 
 ·        Adding search for patient feature like the following design:
 
- 
-
 ·        Remove check box icon from save button on request detail
-
- 
-
-·        Adding a field for cancelation reasons (سبب الالغاء
-
- 
 
 ·        Changing the type of Input Region {المنطقة}   to drop list {select between regions}
 
@@ -49,13 +43,6 @@ Nomination rate from 1 to 10
 Speed of services overall (V.fast - Fast - Normal - Slow - V.slow)		
 
 
-*
-·        Adding a feature to schedule a request by the following steps:
-
-o   Adding a field for request date and it is by default the date of  today
-
-o   Sorting the request data in the table with the above date field
-*
 
 ·        View the patient id number in requests to search for
 
@@ -65,7 +52,9 @@ o   Sorting the request data in the table with the above date field
 
 
   Appling windows notification feature 
-***
+
+
+////////
 
 ·        Blog {articles} content editor on the dashboard with the api for getting the articles
 

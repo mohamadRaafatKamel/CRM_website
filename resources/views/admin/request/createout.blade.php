@@ -606,6 +606,45 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="reason_cancel">{{ __('Cancellation reasone') }}</label>
+                                    <div class="col-md-6">
+                                        <textarea id="reason_cancel" placeholder="{{ __('Cancellation reasone') }}" 
+                                                class="form-control" name="reason_cancel"
+                                                >@if(isset($myorder->reason_cancel)){{ $myorder->reason_cancel }}@endif</textarea>
+                                        @error('reason_cancel')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="schedule_date">{{ __('Schedule') }}</label>
+                                    <div class="col-md-6">
+                                        <input type="date" id="schedule_date" class="form-control"
+                                               @if(isset($myorder->schedule_date))
+                                                    value="{{ $myorder->schedule_date }}"
+                                               @endif
+                                               name = "schedule_date" value ="{{date('Y-m-d')}}"
+                                               min="{{date('Y-m-d')}}" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="end_service_date">{{ __('End of Service Date') }}</label>
+                                    <div class="col-md-6">
+                                        <input type="date" id="end_service_date" class="form-control"
+                                               @if(isset($myorder->end_service_date))
+                                                    value="{{ $myorder->end_service_date }}"
+                                               @endif
+                                               @if(isset($myorder->schedule_date))
+                                                    min="{{ $myorder->schedule_date }}"
+                                               @endif
+                                               name= "end_service_date"
+                                               placeholder="{{ __('End of Service Date') }}" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-md-2 label-control" for="date_out">{{ __('Request End Date') }}</label>
                                     <div class="col-md-6">
                                         <input type="date" id="date_out" readonly class="form-control"
@@ -1031,10 +1070,10 @@
                 let medical_type_id = $("#medical_type_id option:selected").val();
                 let corporate_id = $("#corporate_id option:selected").val();
                 let price_list_id= 0;
-                console.log(service_id);
-                console.log(medical_type_id);
-                console.log(corporate_id);
-                console.log(price_list_id);
+                // console.log(service_id);
+                // console.log(medical_type_id);
+                // console.log(corporate_id);
+                // console.log(price_list_id);
                 
                 let _token = '{{ csrf_token() }}';
                 $.ajax({

@@ -48,7 +48,7 @@
                                         <div class="table-responsive">
                                             
                                                 <table
-                                                    class="table table-striped table-bordered ordering-print">
+                                                    class="table table-striped table-bordered ordering-col7-print">
                                                     <thead>
                                                     <tr>
                                                         <th> {{ __('Request ID') }}</th>
@@ -56,7 +56,8 @@
                                                         <th> موبيل</th>
                                                         <th> موبيل</th>
                                                         <th> نوع الزياره</th>
-                                                        <th> {{ __('Date') }}</th>
+                                                        <th> {{ __('CC Agent') }}</th>
+                                                        <th> {{ __('Schedule') }}</th>
                                                         <th> الحاله</th>
                                                     </tr>
                                                     </thead>
@@ -80,7 +81,8 @@
                                                                 <td>{{$request -> phone}}</td>
                                                                 <td>{{$request -> phone2 }}</td>
                                                                 <td>{{ __(\App\Models\Requests::getRequestType($request -> type)) }}</td>
-                                                                <td>{{$request -> created_at}}</td>
+                                                                <td>{{$request ->getCreateBy($request ->created_by)}}</td>
+                                                                <td>{{$request -> schedule_date}}</td>
                                                                 <td>
                                                                     <span class="badge {{ \App\Models\Requests::getStateColor($request ->status_cc) }}">
                                                                         {{ \App\Models\Requests::getRequestState($request -> status_cc) }}
@@ -100,7 +102,8 @@
                                                             <th> موبيل</th>
                                                             <th> موبيل</th>
                                                             <th> نوع الزياره</th>
-                                                            <th> {{ __('Date') }}</th>
+                                                            <th> {{ __('CC Agent') }}</th>
+                                                            <th> {{ __('Schedule') }}</th>
                                                             <th> الحاله</th>
                                                         </tr>
                                                     </tfoot>

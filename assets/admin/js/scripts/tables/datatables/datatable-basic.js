@@ -57,6 +57,38 @@ tableSearching.columns().every( function () {
     } ); 
 } );
 
+
+// Col7 
+
+// Setup - add a text input to each footer cell
+$('.ordering-col7-print tfoot th').each( function () {
+    var title = $(this).text();
+    $(this).html( '<input type="text" placeholder="'+title+'" />' );
+} );
+
+var tableSearching =$('.ordering-col7-print').DataTable( {
+    "order": [[ 6, "asc" ]],
+    dom: 'Bfrtip',
+    buttons: [
+        'excel', 'pdf', 'print'
+    ]
+} );
+// Button style
+$('.buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+
+// Apply the search
+tableSearching.columns().every( function () {
+    var that = this;
+
+    $( 'input', this.footer() ).on( 'keyup change', function () {
+        if ( that.search() !== this.value ) {
+            that
+                .search( this.value )
+                .draw();
+        }
+    } ); 
+} );
+
 /***************************************************************
 *       js of Individual column searching (text inputs)        *
 ***************************************************************/

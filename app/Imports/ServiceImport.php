@@ -71,7 +71,7 @@ class ServiceImport implements ToModel, WithStartRow, WithCustomCsvSettings
             ],
             '3' => [
                 'required',
-                Rule::in(['in', 'out']),
+                Rule::in(['in', 'out', 'lab']),
             ],
             '4' => [
                 'required',

@@ -48,7 +48,7 @@
                                         <div class="table-responsive">
                                             
                                                 <table
-                                                    class="table table-striped table-bordered ordering-print">
+                                                    class="table table-striped table-bordered ordering-col7-print">
                                                     <thead>
                                                     <tr>
                                                         <th> {{ __('Request ID') }}</th>
@@ -57,7 +57,7 @@
                                                         <th> موبيل</th>
                                                         <th> {{ __('Real Cost') }}</th>
                                                         <th> OPD</th>
-                                                        <th> {{ __('Date') }}</th>
+                                                        <th> {{ __('Schedule') }}</th>
                                                         <th> الحاله</th>
                                                     </tr>
                                                     </thead>
@@ -83,7 +83,7 @@
                                                                 <td>{{$request -> phone2 }}</td>
                                                                 <td>{{$request -> real_cost }}</td>
                                                                 <td>{{ \App\Models\Admin::getAdminNamebyId($request ->opd_admin_id ) }}</td>
-                                                                <td>{{$request -> created_at}}</td>
+                                                                <td>{{$request -> schedule_date}}</td>
                                                                 <td>
                                                                     <span class="badge {{ \App\Models\Requests::getStateColor($request ->status_in_out) }}">
                                                                         {{ \App\Models\Requests::getRequestState($request -> status_in_out) }}
@@ -101,7 +101,7 @@
                                                             <th> موبيل</th>
                                                             <th> {{ __('Real Cost') }}</th>
                                                             <th> OPD</th>
-                                                            <th> {{ __('Date') }}</th>
+                                                            <th> {{ __('Schedule') }}</th>
                                                             <th> الحاله</th>
                                                         </tr>
                                                     </tfoot>
