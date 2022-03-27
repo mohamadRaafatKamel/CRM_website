@@ -12,11 +12,11 @@ php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" -
 Task 
 //////////////////////////////////////////////////////////////
 
-report out
+Report in
 
-report lab
+Report lab
 
-
+filter by schedule date on Report
 
 ·  Adding type validations on the following fields :
 
@@ -24,23 +24,18 @@ o   Phone number : accept only number strings
 
 o   Name : accept only Arabic characters , numbers and symbols are not allowed
 
-
-
-
 ·        Adding search for patient feature like the following design:
+·        View the patient id number in requests to search for
 
 ·        Changing the type of Input Region {المنطقة}   to drop list {select between regions}
 
-
-- CRM 		
+- CRM Order Survay:		
 Nurse Evaluation from 1 to 5	
 Result date	Average of satisfaction %	
 Nomination rate from 1 to 10	
 Speed of services overall (V.fast - Fast - Normal - Slow - V.slow)		
 
 
-
-·        View the patient id number in requests to search for
 
 ·        Applying the template of the email notification that Anas has sent to you
 
@@ -49,27 +44,9 @@ Speed of services overall (V.fast - Fast - Normal - Slow - V.slow)
 
   Appling windows notification feature 
 
-
-////////
-
-·        Blog {articles} content editor on the dashboard with the api for getting the articles
-
-Adding an api route for Corporation survey
-
-Making a route api for other type of join us
-
-
-·        Changing some field labels :
-
-اللقب: الاسم الثالث
- 
-
-
-//////// 2nd List ////////////////////////////////////////////
+  //////// 2nd List ////////////////////////////////////////////
 
 ·        Moving the cost fields to the bottom of the request
-
-·        Removing one of the following buttons on adding new request حفظ الكل \ حفظ
 
 ·        Adding a field for outpatient to enter the end of service date “تاريخ تنفيذ الاجراء “ 
 if not exist and place it at the bottom after real cost field
@@ -79,9 +56,19 @@ if not exist and place it at the bottom after real cost field
 Like: services , contracts , referrals , regions and any other drop-list
 
 
-//////
+//////// 1st list 
+Confirm about : 
+- Blog {articles} content editor on the dashboard with the api for getting the articles
+- Changing some field labels :
+  اللقب: الاسم الثالث
+  الاسم الرابع
+ 
 
-Carehub logo, title and dashboard name
-
-Arranging the medical section in outpatient request detail’s field in this order:
-    اسم مساعد التمريض (خانة جديدة)  
+More Info about :
+1st list
+- Adding an api route for Corporation survey
+- Making a route api for other type of join us
+2nd lest
+- Carehub logo, title and dashboard name
+- Arranging the medical section in outpatient request detail’s field in this order:
+    اسم مساعد التمريض (خانة جديدة) 

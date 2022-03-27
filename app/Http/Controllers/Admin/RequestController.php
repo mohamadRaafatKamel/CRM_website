@@ -95,8 +95,6 @@ class RequestController extends Controller
 
         try {
 
-            if (!$request->has('covid19'))
-                $request->request->add(['covid19' => 0]);
             if (!$request->has('whatapp'))
                 $request->request->add(['whatapp' => 0]);
             if (!$request->has('whatapp2'))
@@ -109,20 +107,22 @@ class RequestController extends Controller
                     $request->request->add(['physician' => $phyID ]);
                 }
             }
+
+            if($request->btn == "done"){
+                $request->request->add(['status_cc' => 4]);
+                if($request->type == '2')
+                    $this->requestMail($request, "InPatient");
+                if($request->type == '3')
+                    $this->requestMail($request, "OutPatient");
+            }else{
+                $request->request->add(['status_cc' =>  '2']);
+            }
              
             $request->request->add(['cc_admin_id' =>  Auth::user()->id]);
             $request->request->add(['created_by' =>  Auth::user()->id]);
-            $request->request->add(['status_cc' =>  '2']);
+
             $req = Requests::create($request->except(['_token']));
             Log::setLog('create','request',$req->id,"","");
-
-            // Referral
-            if(isset($request->referral_id)){
-                if(count($request->referral_id) > 0){
-                    UsersReferral::setReferral($request->user_id, $request->referral_id);
-                    $request->request->remove('referral_id');
-                }
-            }
 
             // add call
             if ($request->has('time') || $request->has('note') ){
@@ -282,13 +282,22 @@ class RequestController extends Controller
 
         try {
 
-            if (!$request->has('covid19'))
-                $request->request->add(['covid19' => 0]);
+            
             if (!$request->has('whatapp'))
                 $request->request->add(['whatapp' => 0]);
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
             
+            if($request->btn == "done"){
+                $request->request->add(['status_cc' => 4]);
+                if($request->type == '2')
+                    $this->requestMail($request, "InPatient");
+                if($request->type == '3')
+                    $this->requestMail($request, "OutPatient");
+            }else{
+                $request->request->add(['status_cc' =>  '2']);
+            }
+
             // Add Physician
             if (!$request->has('physician') || $request->physician == null ){
                 if ( $request->has('physician_new')){
@@ -298,17 +307,9 @@ class RequestController extends Controller
             }
             $request->request->add(['cc_admin_id' =>  Auth::user()->id]);
             $request->request->add(['created_by' =>  Auth::user()->id]);
-            $request->request->add(['status_cc' =>  '2']);
+            
             $req = Requests::create($request->except(['_token']));
             Log::setLog('create','request',$req->id,"","");
-
-            // Referral
-            if(isset($request->referral_id)){
-                if(count($request->referral_id) > 0){
-                    UsersReferral::setReferral($request->user_id, $request->referral_id);
-                    $request->request->remove('referral_id');
-                }
-            }
 
             // Action
             if(isset($request->service_id)){

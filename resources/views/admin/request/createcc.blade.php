@@ -838,9 +838,9 @@
                                                 @endif
                                             @else
                                                 <div class="form-actions">
-                                                    <button type="submit" class="btn btn-primary">
-                                                         {{ __('Save All') }}
-                                                    </button>
+                                                    <button type="submit" name="btn" value="done" class="btn btn-success">
+                                                        {{ __('DONE') }}
+                                                   </button>
                                                 </div>
                                             @endif
                                         </form>
