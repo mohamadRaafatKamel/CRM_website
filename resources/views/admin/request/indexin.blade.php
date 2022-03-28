@@ -48,7 +48,7 @@
                                         <div class="table-responsive">
                                             
                                                 <table
-                                                    class="table table-striped table-bordered ordering-print">
+                                                    class="table table-striped table-bordered ordering-col7-print">
                                                     <thead>
                                                     <tr>
                                                         <th> {{ __('Request ID') }}</th>
@@ -58,6 +58,7 @@
                                                         <th>{{ __('Adress') }}</th>
                                                         <th>{{ __('Consultant') }}</th>
                                                         <th> {{ __('Schedule') }}</th>
+                                                        <th> {{ __('Date') }}</th>
                                                         <th> الحاله</th>
                                                     </tr>
                                                     </thead>
@@ -92,6 +93,7 @@
                                                                 </td>
                                                                 <td>{{\App\Models\User::getDocName($request->doctor_id) }}</td>
                                                                 <td>{{$request ->schedule_date}}</td>
+                                                                <td>{{$request ->created_at}}</td>
                                                                 <td>
                                                                     <span class="badge {{ \App\Models\Requests::getStateColor($request ->status_in_out) }}">
                                                                         {{ \App\Models\Requests::getRequestState($request -> status_in_out) }}
@@ -113,6 +115,7 @@
                                                             <th>{{ __('Adress') }}</th>
                                                             <th>{{ __('Consultant') }}</th>
                                                             <th> {{ __('Schedule') }}</th>
+                                                            <th> {{ __('Date') }}</th>
                                                             <th> الحاله</th>
                                                         </tr>
                                                     </tfoot>

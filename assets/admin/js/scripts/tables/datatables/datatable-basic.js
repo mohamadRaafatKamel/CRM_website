@@ -67,7 +67,7 @@ $('.ordering-col7-print tfoot th').each( function () {
 } );
 
 var tableSearching =$('.ordering-col7-print').DataTable( {
-    "order": [[ 6, "asc" ]],
+    "order": [[ 6, "desc" ]],
     dom: 'Bfrtip',
     buttons: [
         'excel', 'pdf', 'print'
