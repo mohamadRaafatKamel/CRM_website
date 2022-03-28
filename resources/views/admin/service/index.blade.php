@@ -45,7 +45,7 @@
                                     <div class="card-body card-dashboard">
                                         @if(\App\Models\Role::havePremission(['serves_cr']))
                                         <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.service.create') }}"><i class="ft-plus"></i>&nbsp; {{ __('Create') }}</a>
-                                        <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.service.import') }}"><i class="ft-plus"></i>&nbsp; {{ __('Import') }}</a>
+                                        {{-- <a class="btn btn-primary mb-2 mr15" href="{{ route('admin.service.import') }}"><i class="ft-plus"></i>&nbsp; {{ __('Import') }}</a> --}}
                                         @endif
                                         <div class="table-responsive">
                                         <table

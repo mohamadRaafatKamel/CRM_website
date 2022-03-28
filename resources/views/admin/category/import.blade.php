@@ -57,7 +57,8 @@
                                                     <label class="col-md-2 label-control" for="name">{{ __('Add File') }} </label>
                                                     <div class="col-md-6">
                                                         <input type="file" value="" id="csvfile"
-                                                                class="form-control" required
+                                                                class="form-control" required 
+                                                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                                                 name="csvfile">
                                                         @error('csvfile')
                                                         <span class="text-danger">{{$message}}</span>

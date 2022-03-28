@@ -18,37 +18,37 @@ Report lab
 
 filter by schedule date on Report
 
-·  Adding type validations on the following fields :
-
-o   Phone number : accept only number strings
-
-o   Name : accept only Arabic characters , numbers and symbols are not allowed
-
 ·        Adding search for patient feature like the following design:
 ·        View the patient id number in requests to search for
 
-·        Changing the type of Input Region {المنطقة}   to drop list {select between regions}
+*******
+- Applying the template of the email notification that Anas has sent to you
 
-- CRM Order Survay:		
+- Changing the type of Input Region {المنطقة}   to drop list {select between regions}
+
+·  Adding type validations on the following fields : ***
+
+o   Phone number : accept only number strings ***
+
+o   Name : accept only Arabic characters , numbers and symbols are not allowed ***
+
+- CRM Order Survay:		 ***
 Nurse Evaluation from 1 to 5	
 Result date	Average of satisfaction %	
 Nomination rate from 1 to 10	
-Speed of services overall (V.fast - Fast - Normal - Slow - V.slow)		
+Speed of services overall (V.fast - Fast - Normal - Slow - V.slow)	
 
+Show the number of previous request from the patient in callcenter and outpatient and in patient { all request details pages} ***
+*********
+Appling windows notification feature 
+*********
 
-
-·        Applying the template of the email notification that Anas has sent to you
-
-·        Show the number of previous request from the patient in callcenter and outpatient and in patient { all request details pages}
-
-
-  Appling windows notification feature 
 
   //////// 2nd List ////////////////////////////////////////////
 
-·        Moving the cost fields to the bottom of the request
+·  Moving the cost fields to the bottom of the request
 
-·        Adding a field for outpatient to enter the end of service date “تاريخ تنفيذ الاجراء “ 
+· Adding a field for outpatient to enter the end of service date “تاريخ تنفيذ الاجراء “ 
 if not exist and place it at the bottom after real cost field
  
 

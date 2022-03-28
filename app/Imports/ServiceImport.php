@@ -14,6 +14,7 @@ use Illuminate\Validation\Rule;
 class ServiceImport implements ToModel, WithStartRow, WithCustomCsvSettings
 {
     public $errors = [];
+    public $errorRow = [];
     private $row = 3;
 
     /**
@@ -83,6 +84,7 @@ class ServiceImport implements ToModel, WithStartRow, WithCustomCsvSettings
 
         
         if ($validator->fails()) {
+            $this->errorRow[] = $row;
             $this->errors[] = $validator->errors();
             // dd($validator->errors());
             return null;

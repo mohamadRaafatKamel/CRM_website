@@ -88,7 +88,7 @@ class ServiceController extends Controller
             $validator = new ServiceImport();
             Excel::import($validator, request()->file('csvfile'));
 
-            // dd($validator->errors);
+            // dd($validator->errorRow);
             if (count($validator->errors)) {
                 // $errors = [];
                 // foreach ($validator->errors as $key => $error) {

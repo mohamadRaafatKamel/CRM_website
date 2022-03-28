@@ -73,7 +73,7 @@ class CategoryController extends Controller
             'csvfile'=>"required|mimes:xlsx",
         ],[ 'mimes'=>"Must Excel",'required'=>"Required" ]);
 
-        try{
+        // try{
             $validator = new CategoryImport();
             Excel::import($validator, request()->file('csvfile'));
 
@@ -86,14 +86,15 @@ class CategoryController extends Controller
         
                 return redirect()->route('admin.category')->with('error', count($validator->errors).'rows incorrect data');
                 // return redirect()->back()->with('error', 'row number ' . implode(',', $errors) . ' contain incorrect data');
-            } elseif (!$validator->isValidFile) {
+            } else{
                 return redirect()->route('admin.category')->with(['success'=>'تم الحفظ']);
             }
 
             //     return redirect()->route('admin.category')->with(['success'=>'تم الحفظ']);
-        }catch (\Exception $ex){
-            return redirect()->route('admin.category.import')->with(['error'=>"Try other time"]);
-        }
+            
+        // }catch (\Exception $ex){
+        //     return redirect()->route('admin.category.import')->with(['error'=>"Try other time"]);
+        // }
     }
 
     public function edit($id)
