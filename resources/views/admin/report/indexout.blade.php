@@ -41,9 +41,50 @@
                                 @include('admin.include.alerts.success')
                                 @include('admin.include.alerts.errors')
 
-                                <div class="card-content collapse show">
+                                
 
+                                <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
+                                        @if (isset($erorrMsg))
+                                            <div class="alert alert-danger text-center" role="alert">
+                                                <p>{{ $erorrMsg }} </p>
+                                            </div>
+                                        @endif
+                                        <form class="form form-horizontal" action="{{route('admin.report.out')}}" method="GET" >
+                                            <div class="form-group row">
+                                                <div class="col-md-3">
+                                                    <label>{{ __('Type') }} </label>
+                                                    <select name="type" id="type" class="form-control">
+                                                        <option value="">{{ __('All') }}</option>
+                                                        <option value="1" @if(isset($_GET['type'])) @if ($_GET['type'] == "1") selected @endif @endif >
+                                                            {{ __('Emergency Call') }}</option>
+                                                        <option value="2" @if(isset($_GET['type'])) @if ($_GET['type'] == "2") selected @endif @endif >
+                                                            {{ __('Out Patient') }}</option>
+                                                        <option value="3" @if(isset($_GET['type'])) @if ($_GET['type'] == "3") selected @endif @endif >
+                                                            {{ __('In Patient') }}</option>
+                                                        <option value="4" @if(isset($_GET['type'])) @if ($_GET['type'] == "4") selected @endif @endif >
+                                                            {{ __('Lab') }}</option>    
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>{{ __('Date From') }} </label>
+                                                    <input type="date" @if(isset($_GET['date_from'])) value="{{ $_GET['date_from'] }}" @endif 
+                                                        class="form-control" placeholder="{{ __('From') }}" name="date_from">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>{{ __('Date To') }} </label>
+                                                    <input type="date" @if(isset($_GET['date_to'])) value="{{ $_GET['date_to'] }}" @endif 
+                                                        class="form-control" placeholder="{{ __('To') }}" name="date_to">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button type="submit" class="btn btn-primary" style="margin-top:30px">
+                                                        {{ __('Search') }}
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+
                                         <div class="table-responsive">
                                                 <table
                                                     class="table table-striped table-bordered ordering-print">
@@ -51,6 +92,8 @@
                                                     <tr>
                                                         <th>{{ __('Created at') }}</th>
                                                         <th>{{ __('Request End Date') }}</th>
+                                                        <th>{{ __('Schedule') }}</th>
+                                                        <th>{{ __('Type') }}</th>
                                                         <th>الاسم</th>
                                                         <th>القائم بالرعاية</th>
                                                         <th>الهاتف</th>
@@ -82,6 +125,8 @@
                                                             <tr>
                                                                 <th>{{$request->created_at}}</th>
                                                                 <th>{{$request->date_out}}</th>
+                                                                <th>{{$request->schedule_date}}</th>
+                                                                <td>{{$request->getMyType()}}</td>
                                                                 <td>{{$request->fullname}}</td>
                                                                 <td>{{$request->name_caregiver}}</td>
                                                                 <td>{{$request->phone}}</td>

@@ -45,6 +45,10 @@ class Requests extends Model
         );
     }
 
+    public function getMyType(){
+        return $this->getRequestType($this->type);
+    }
+
     static public function getRequestType($type)
     {
         switch ($type){
@@ -61,7 +65,7 @@ class Requests extends Model
                 return __("Lab");
                 break;
         }
-        return 0;
+        return "_";
     }
 
     static public function getRequestState($state)

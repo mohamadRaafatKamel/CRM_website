@@ -13,6 +13,7 @@ use App\Models\Role;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\UsersReferral;
+use GuzzleHttp\Psr7\Request;
 
 class ReportController extends Controller
 {
@@ -20,7 +21,32 @@ class ReportController extends Controller
     {
         if(! Role::havePremission(['report_view']))
             return redirect()->route('admin.dashboard');
-        $requests = Requests::selection()->where('type',2)->where('status_cc',4)->paginate(PAGINATION_COUNT);
+
+        $query = Requests::selection()->where('status_cc',4);
+        $requests = [];
+        $usersReferrals= [];
+        $cats =[];
+        if(!empty($_GET)){
+            // Type
+            if(isset($_GET['type']) && $_GET['type'] != "")
+                if($_GET['type'] < 5 && $_GET['type'] > 0)
+                    $query = $query->where('type',$_GET['type']);
+
+            // Schedule date
+            if(isset($_GET['date_from']) && isset($_GET['date_to']) && $_GET['date_from'] != "" && $_GET['date_to'] != "")
+                if($_GET['date_from'] <  $_GET['date_to'] )
+                    $query = $query->whereBetween('schedule_date', [$_GET['date_from'], $_GET['date_to']]);
+                else{
+                    $erorrMsg = "تاريخ من يجب ان يكون قبل الي";
+                    return view('admin.report.indexout', compact('requests','usersReferrals','cats','erorrMsg'));
+                }
+            elseif (isset($_GET['date_from']) && $_GET['date_from'] != "")
+                $query = $query->whereDate('schedule_date','>',$_GET['date_from']);
+            elseif (isset($_GET['date_to']) && $_GET['date_to'] != "")
+                $query = $query->whereDate('schedule_date','<',$_GET['date_to']);
+        }
+        
+        $requests = $query->paginate(PAGINATION_COUNT);
         
         if(count($requests) > 0){
             foreach($requests as $request){
@@ -65,7 +91,6 @@ class ReportController extends Controller
                 if(isset($request->city_id)) $addrss .= $request->city_id;
                 $request->adress = $addrss;
                 // Referral
-                $usersReferrals= [];
                 if(isset($request->user_id)){
                     $usersReferrals = $this->reportReferral(UsersReferral::getReferral($request->user_id));
                 }
