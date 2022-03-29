@@ -45,6 +45,34 @@
 
                                     <div class="card-body card-dashboard">
                                         <a class="btn btn-danger mb-2 mr15" href="{{ route('admin.request.out') }}"><i class="ft-refresh-cw"></i>&nbsp; {{ __('ReLoad') }}</a>
+                                        
+                                        <form class="form form-horizontal" action="{{route('admin.request.out')}}" method="GET" >
+                                            <div class="form-group row">
+                                                <div class="col-md-3">
+                                                    <label>{{ __('State') }} </label>
+                                                    <select name="state" id="state" class="form-control">
+                                                        <option value="">{{ __('All') }}</option>
+                                                        <option value="1" @if(isset($_GET['state'])) @if ($_GET['state'] == "1") selected @endif @endif >
+                                                            {{ __('New Request') }}</option>
+                                                        <option value="2" @if(isset($_GET['state'])) @if ($_GET['state'] == "2") selected @endif @endif >
+                                                            {{ __('Hold') }}</option>
+                                                        <option value="6" @if(isset($_GET['state'])) @if ($_GET['state'] == "6") selected @endif @endif >
+                                                            {{ __('Hold to Approve') }}</option>
+                                                        <option value="4" @if(isset($_GET['state'])) @if ($_GET['state'] == "4") selected @endif @endif >
+                                                            {{ __('DONE') }}</option>
+                                                        <option value="5" @if(isset($_GET['state'])) @if ($_GET['state'] == "5") selected @endif @endif >
+                                                            {{ __('Cancel') }}</option>    
+                                                    </select>
+                                                </div>
+                                                
+                                                <div class="col-md-3">
+                                                    <button type="submit" class="btn btn-primary" style="margin-top:30px">
+                                                        {{ __('Search') }}
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </form>
                                         <div class="table-responsive">
                                             
                                                 <table

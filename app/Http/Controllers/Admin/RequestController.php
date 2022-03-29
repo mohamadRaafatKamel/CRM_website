@@ -40,7 +40,17 @@ class RequestController extends Controller
     {
         if(! Role::havePremission(['request_all']))
             return redirect()->route('admin.dashboard');
-        $requests = Requests::selection()->paginate(PAGINATION_COUNT);
+
+        $query = Requests::selection();
+        if(empty($_GET)){
+            $_GET['state'] = 2;
+        }
+        // State
+        if(isset($_GET['state']) && $_GET['state'] != "")
+            if($_GET['state'] < 7 && $_GET['state'] > 0 && $_GET['state'] != 3)
+                $query = $query->where('status_cc',$_GET['state']);
+        
+        $requests = $query->paginate(PAGINATION_COUNT);
         return view('admin.request.indexcc', compact('requests'));
     }
 
@@ -224,7 +234,17 @@ class RequestController extends Controller
     {
         if(! Role::havePremission(['request_emergency']))
             return redirect()->route('admin.dashboard');
-        $requests = Requests::selection()->where('type',1)->paginate(PAGINATION_COUNT);
+
+        $query = Requests::selection()->where('type',1);
+        if(empty($_GET)){
+            $_GET['state'] = 2;
+        }
+        // State
+        if(isset($_GET['state']) && $_GET['state'] != "")
+            if($_GET['state'] < 7 && $_GET['state'] > 0 && $_GET['state'] != 3)
+                $query = $query->where('status_cc',$_GET['state']);
+        
+        $requests = $query->paginate(PAGINATION_COUNT);
         return view('admin.request.indexem', compact('requests'));
     }
 
@@ -448,7 +468,17 @@ class RequestController extends Controller
     {
         if(! Role::havePremission(['request_in']))
             return redirect()->route('admin.dashboard');
-        $requests = Requests::selection()->where('type',3)->where('status_cc',4)->paginate(PAGINATION_COUNT);
+
+        $query = Requests::selection()->where('type',3)->where('status_cc',4);
+        if(empty($_GET)){
+            $_GET['state'] = 2;
+        }
+        // State
+        if(isset($_GET['state']) && $_GET['state'] != "")
+            if($_GET['state'] < 7 && $_GET['state'] > 0 && $_GET['state'] != 3)
+                $query = $query->where('status_in_out',$_GET['state']);
+        
+        $requests = $query->paginate(PAGINATION_COUNT);
         return view('admin.request.indexin', compact('requests'));
     }
 
@@ -590,7 +620,17 @@ class RequestController extends Controller
     {
         if(! Role::havePremission(['request_out']))
             return redirect()->route('admin.dashboard');
-        $requests = Requests::selection()->where('type',2)->where('status_cc',4)->paginate(PAGINATION_COUNT);
+
+        $query = Requests::selection()->where('type',2)->where('status_cc',4);
+        if(empty($_GET)){
+            $_GET['state'] = 2;
+        }
+        // State
+        if(isset($_GET['state']) && $_GET['state'] != "")
+            if($_GET['state'] < 7 && $_GET['state'] > 0 && $_GET['state'] != 3)
+                $query = $query->where('status_in_out',$_GET['state']);
+        
+        $requests = $query->paginate(PAGINATION_COUNT);
         return view('admin.request.indexout', compact('requests'));
     }
 
@@ -720,7 +760,17 @@ class RequestController extends Controller
     {
         if(! Role::havePremission(['request_lab']))
             return redirect()->route('admin.dashboard');
-        $requests = Requests::selection()->where('type',4)->where('status_cc',4)->paginate(PAGINATION_COUNT);
+        
+        $query = Requests::selection()->where('type',4)->where('status_cc',4);
+        if(empty($_GET)){
+            $_GET['state'] = 2;
+        }
+        // State
+        if(isset($_GET['state']) && $_GET['state'] != "")
+            if($_GET['state'] < 7 && $_GET['state'] > 0 && $_GET['state'] != 3)
+                $query = $query->where('status_in_out',$_GET['state']);
+        
+        $requests = $query->paginate(PAGINATION_COUNT);
         return view('admin.request.indexlab', compact('requests'));
     }
 
