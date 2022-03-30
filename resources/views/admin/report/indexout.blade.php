@@ -128,6 +128,7 @@
                                                     <tr>
                                                         <th>{{ __('Created at') }}</th>
                                                         <th>{{ __('Request End Date') }}</th>
+                                                        <th>{{ __('End of Service Date') }}</th>
                                                         <th>{{ __('Schedule') }}</th>
                                                         <th>{{ __('Type') }}</th>
                                                         <th>الاسم</th>
@@ -163,6 +164,7 @@
                                                             <tr>
                                                                 <th>{{$request->created_at}}</th>
                                                                 <th>{{$request->date_out}}</th>
+                                                                <th>{{$request->end_service_date}}</th>
                                                                 <th>{{$request->schedule_date}}</th>
                                                                 <td>{{$request->getMyType()}}</td>
                                                                 <td>{{$request->fullname}}</td>
