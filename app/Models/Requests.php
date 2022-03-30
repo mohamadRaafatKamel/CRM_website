@@ -128,6 +128,11 @@ class Requests extends Model
             return "Web User";
         elseif($user == "WebGuest")
             return "Web Guest";
+            
+        if($user == "AppUser")
+            return "App User";
+        elseif($user == "AppGuest")
+            return "App Guest";
         else{
             $admin = Admin::select()->find($user);
             if(isset($admin->name))
