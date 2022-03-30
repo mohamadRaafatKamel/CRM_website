@@ -43,7 +43,7 @@ class RequestController extends Controller
 
         $query = Requests::selection();
         if(empty($_GET)){
-            $_GET['state'] = 2;
+            $_GET['state'] = 1;
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
@@ -209,6 +209,8 @@ class RequestController extends Controller
                 $request->request->add(['status_cc' => 5]);
             elseif($request->btn == "approve")
                 $request->request->add(['status_cc' => 6]);
+            elseif($request->btn == "follow")
+                $request->request->add(['status_cc' => 7]);
 
             // add call
             if ($request->has('time') || $request->has('note') ){
@@ -237,7 +239,7 @@ class RequestController extends Controller
 
         $query = Requests::selection()->where('type',1);
         if(empty($_GET)){
-            $_GET['state'] = 2;
+            $_GET['state'] = 1;
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
@@ -443,6 +445,8 @@ class RequestController extends Controller
                 $request->request->add(['status_cc' => 5]);
             elseif($request->btn == "approve")
                 $request->request->add(['status_cc' => 6]);
+            elseif($request->btn == "follow")
+                $request->request->add(['status_cc' => 7]);
 
             // add call
             if ($request->has('time') || $request->has('note') ){
@@ -471,7 +475,7 @@ class RequestController extends Controller
 
         $query = Requests::selection()->where('type',3)->where('status_cc',4);
         if(empty($_GET)){
-            $_GET['state'] = 2;
+            $_GET['state'] = 1;
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
@@ -560,6 +564,8 @@ class RequestController extends Controller
                 $request->request->add(['status_in_out' => 5]);
             // elseif($request->btn == "approve")
             //     $request->request->add(['status_in_out' => 6]);
+            elseif($request->btn == "follow")
+                $request->request->add(['status_in_out' => 7]);
 
             if (!$request->has('whatapp'))
                 $request->request->add(['whatapp' => 0]);
@@ -623,7 +629,7 @@ class RequestController extends Controller
 
         $query = Requests::selection()->where('type',2)->where('status_cc',4);
         if(empty($_GET)){
-            $_GET['state'] = 2;
+            $_GET['state'] = 1;
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
@@ -689,7 +695,8 @@ class RequestController extends Controller
                 $request->request->add(['status_in_out' => 2]);
             elseif($request->btn == "cancel")
                 $request->request->add(['status_in_out' => 5]);
-            
+            elseif($request->btn == "follow")
+                $request->request->add(['status_in_out' => 7]);
                 
             if (!$request->has('pay_or_not'))
                 $request->request->add(['pay_or_not' => 0]);
@@ -763,7 +770,7 @@ class RequestController extends Controller
         
         $query = Requests::selection()->where('type',4)->where('status_cc',4);
         if(empty($_GET)){
-            $_GET['state'] = 2;
+            $_GET['state'] = 1;
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
@@ -830,6 +837,8 @@ class RequestController extends Controller
                 $request->request->add(['status_in_out' => 5]);
             // elseif($request->btn == "approve")
             //     $request->request->add(['status_in_out' => 6]);
+            elseif($request->btn == "follow")
+                $request->request->add(['status_in_out' => 7]);
 
             if (!$request->has('covid19'))
                 $request->request->add(['covid19' => 0]);

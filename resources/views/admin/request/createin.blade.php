@@ -962,7 +962,9 @@
                                             <button type="submit" name="btn" value="hold" class="btn btn-warning">
                                                  {{ __('Hold') }}
                                             </button>
-                                          
+                                            <button type="submit" name="btn" value="follow" class="btn btn-warning">
+                                                {{ __('Following') }}
+                                            </button>
                                             <button type="submit" name="btn" value="cancel" class="btn btn-danger">
                                                  {{ __('Cancel') }}
                                             </button>

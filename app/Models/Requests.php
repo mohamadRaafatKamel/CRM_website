@@ -80,6 +80,9 @@ class Requests extends Model
             case 6:
                 return __('Hold to Approve') ;
                 break;
+            case 7:
+                return __('Following') ;
+                break;
             case 4:
                 return __('DONE') ;
                 break;
@@ -100,6 +103,9 @@ class Requests extends Model
                 return 'badge-warning';
                 break;
             case 6:
+                return 'badge-warning';
+                break;
+            case 7:
                 return 'badge-warning';
                 break;
             case 4:

@@ -67,6 +67,24 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-3">
+                                                    <label>{{ __('State') }} </label>
+                                                    <select name="state" id="state" class="form-control">
+                                                        <option value="">{{ __('All') }}</option>
+                                                        <option value="1" @if(isset($_GET['state'])) @if ($_GET['state'] == "1") selected @endif @endif >
+                                                            {{ __('New Request') }}</option>
+                                                        <option value="2" @if(isset($_GET['state'])) @if ($_GET['state'] == "2") selected @endif @endif >
+                                                            {{ __('Hold') }}</option>
+                                                        <option value="6" @if(isset($_GET['state'])) @if ($_GET['state'] == "6") selected @endif @endif >
+                                                            {{ __('Hold to Approve') }}</option>
+                                                        <option value="7" @if(isset($_GET['state'])) @if ($_GET['state'] == "7") selected @endif @endif >
+                                                            {{ __('Following') }}</option>
+                                                        <option value="4" @if(isset($_GET['state'])) @if ($_GET['state'] == "4") selected @endif @endif >
+                                                            {{ __('DONE') }}</option>
+                                                        <option value="5" @if(isset($_GET['state'])) @if ($_GET['state'] == "5") selected @endif @endif >
+                                                            {{ __('Cancel') }}</option>    
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
                                                     <label>{{ __('Date From') }} </label>
                                                     <input type="date" @if(isset($_GET['date_from'])) value="{{ $_GET['date_from'] }}" @endif 
                                                         class="form-control" placeholder="{{ __('From') }}" name="date_from">

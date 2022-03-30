@@ -58,6 +58,8 @@
                                                             {{ __('Hold') }}</option>
                                                         <option value="6" @if(isset($_GET['state'])) @if ($_GET['state'] == "6") selected @endif @endif >
                                                             {{ __('Hold to Approve') }}</option>
+                                                        <option value="7" @if(isset($_GET['state'])) @if ($_GET['state'] == "7") selected @endif @endif >
+                                                            {{ __('Following') }}</option>
                                                         <option value="4" @if(isset($_GET['state'])) @if ($_GET['state'] == "4") selected @endif @endif >
                                                             {{ __('DONE') }}</option>
                                                         <option value="5" @if(isset($_GET['state'])) @if ($_GET['state'] == "5") selected @endif @endif >
