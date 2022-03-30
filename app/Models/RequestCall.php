@@ -43,7 +43,7 @@ class RequestCall extends Model
         }
         return 0;
     }
-
+    
     public static function getCallsTime($id)
     {
         try{

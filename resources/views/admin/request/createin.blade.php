@@ -513,9 +513,10 @@
                                         <input type="date" id="schedule_date" class="form-control"
                                                @if(isset($myorder->schedule_date))
                                                     value="{{ $myorder->schedule_date }}"
+                                                @else
+                                                min="{{date('Y-m-d')}}" 
                                                @endif
-                                               value = "{{date('Y-m-d')}}"
-                                               placeholder="{{ __('Schedule') }}" >
+                                               name = "schedule_date" value ="{{date('Y-m-d')}}" >
                                     </div>
                                 </div>
 

@@ -49,6 +49,10 @@ class Requests extends Model
         return $this->getRequestType($this->type);
     }
 
+    public function getMyCalls(){
+        return RequestCall::getCallsTime($this->id);
+    }
+
     static public function getRequestType($type)
     {
         switch ($type){

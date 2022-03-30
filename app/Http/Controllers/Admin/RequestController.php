@@ -47,7 +47,7 @@ class RequestController extends Controller
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
-            if($_GET['state'] < 7 && $_GET['state'] > 0 && $_GET['state'] != 3)
+            if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
                 $query = $query->where('status_cc',$_GET['state']);
         
         $requests = $query->paginate(PAGINATION_COUNT);
@@ -243,7 +243,7 @@ class RequestController extends Controller
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
-            if($_GET['state'] < 7 && $_GET['state'] > 0 && $_GET['state'] != 3)
+            if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
                 $query = $query->where('status_cc',$_GET['state']);
         
         $requests = $query->paginate(PAGINATION_COUNT);
@@ -479,7 +479,7 @@ class RequestController extends Controller
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
-            if($_GET['state'] < 7 && $_GET['state'] > 0 && $_GET['state'] != 3)
+            if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
                 $query = $query->where('status_in_out',$_GET['state']);
         
         $requests = $query->paginate(PAGINATION_COUNT);
@@ -633,7 +633,7 @@ class RequestController extends Controller
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
-            if($_GET['state'] < 7 && $_GET['state'] > 0 && $_GET['state'] != 3)
+            if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
                 $query = $query->where('status_in_out',$_GET['state']);
         
         $requests = $query->paginate(PAGINATION_COUNT);
@@ -774,7 +774,7 @@ class RequestController extends Controller
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
-            if($_GET['state'] < 7 && $_GET['state'] > 0 && $_GET['state'] != 3)
+            if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
                 $query = $query->where('status_in_out',$_GET['state']);
         
         $requests = $query->paginate(PAGINATION_COUNT);

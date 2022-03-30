@@ -32,18 +32,44 @@ class ReportController extends Controller
                 if($_GET['type'] < 5 && $_GET['type'] > 0)
                     $query = $query->where('type',$_GET['type']);
 
+            // State
+            if(isset($_GET['state']) && $_GET['state'] != "")
+                if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
+                    $query = $query->where('status_in_out',$_GET['state']);
+
             // Schedule date
-            if(isset($_GET['date_from']) && isset($_GET['date_to']) && $_GET['date_from'] != "" && $_GET['date_to'] != "")
-                if($_GET['date_from'] <  $_GET['date_to'] )
+            if(isset($_GET['date_from']) && isset($_GET['date_to']) && $_GET['date_from'] != "" && $_GET['date_to'] != ""){
+                if($_GET['date_from'] <  $_GET['date_to'] ){
+                    if(isset($_GET['date']))
+                        // not all date
+                        if($_GET['date'] != ""){
+                            if($_GET['date'] == "Schedule")
+                                $query = $query->whereBetween('schedule_date', [$_GET['date_from'], $_GET['date_to']]);
+                            elseif($_GET['date'] == "ServiceEnd")
+                                $query = $query->whereBetween('end_service_date', [$_GET['date_from'], $_GET['date_to']]);
+                            elseif($_GET['date'] == "RequestEnd")
+                                $query = $query->whereBetween('date_out', [$_GET['date_from'], $_GET['date_to']]);
+                            elseif($_GET['date'] == "Created")
+                                $query = $query->whereBetween('created_at', [$_GET['date_from'], $_GET['date_to']]);
+                        }else{
+                            $query = $query->whereBetween('schedule_date', [$_GET['date_from'], $_GET['date_to']]);
+                            $query = $query->whereBetween('end_service_date', [$_GET['date_from'], $_GET['date_to']]);
+                            $query = $query->whereBetween('date_out', [$_GET['date_from'], $_GET['date_to']]);
+                            $query = $query->whereBetween('created_at', [$_GET['date_from'], $_GET['date_to']]);
+                        }
                     $query = $query->whereBetween('schedule_date', [$_GET['date_from'], $_GET['date_to']]);
-                else{
+                }else{
                     $erorrMsg = "تاريخ من يجب ان يكون قبل الي";
                     return view('admin.report.indexout', compact('requests','usersReferrals','cats','erorrMsg'));
                 }
-            elseif (isset($_GET['date_from']) && $_GET['date_from'] != "")
-                $query = $query->whereDate('schedule_date','>',$_GET['date_from']);
-            elseif (isset($_GET['date_to']) && $_GET['date_to'] != "")
-                $query = $query->whereDate('schedule_date','<',$_GET['date_to']);
+            }elseif($_GET['date_from'] != "" || $_GET['date_to'] != ""){
+                $erorrMsg = "تاريخ من و الي يجب ادخالهم";
+                return view('admin.report.indexout', compact('requests','usersReferrals','cats','erorrMsg'));
+            }
+            // elseif (isset($_GET['date_from']) && $_GET['date_from'] != "")
+            //     $query = $query->whereDate('schedule_date','>',$_GET['date_from']);
+            // elseif (isset($_GET['date_to']) && $_GET['date_to'] != "")
+            //     $query = $query->whereDate('schedule_date','<',$_GET['date_to']);
         }
         
         $requests = $query->paginate(PAGINATION_COUNT);
@@ -90,6 +116,7 @@ class ReportController extends Controller
                 if(isset($request->adress)) $addrss .= $request->adress.", ";
                 if(isset($request->city_id)) $addrss .= $request->city_id;
                 $request->adress = $addrss;
+                
                 // Referral
                 if(isset($request->user_id)){
                     $usersReferrals = $this->reportReferral(UsersReferral::getReferral($request->user_id));

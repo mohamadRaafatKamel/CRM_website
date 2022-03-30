@@ -52,7 +52,7 @@
                                         @endif
                                         <form class="form form-horizontal" action="{{route('admin.report.out')}}" method="GET" >
                                             <div class="form-group row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <label>{{ __('Type') }} </label>
                                                     <select name="type" id="type" class="form-control">
                                                         <option value="">{{ __('All') }}</option>
@@ -66,7 +66,7 @@
                                                             {{ __('Lab') }}</option>    
                                                     </select>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <label>{{ __('State') }} </label>
                                                     <select name="state" id="state" class="form-control">
                                                         <option value="">{{ __('All') }}</option>
@@ -84,21 +84,39 @@
                                                             {{ __('Cancel') }}</option>    
                                                     </select>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
+                                                    <label>{{ __('Date') }} </label>
+                                                    <select name="date" id="type" class="form-control">
+                                                        <option value="">{{ __('All') }}</option>
+                                                        <option value="Schedule" @if(isset($_GET['date'])) @if ($_GET['date'] == "1") selected @endif @endif >
+                                                            {{ __('Schedule') }}</option>
+                                                        <option value="ServiceEnd" @if(isset($_GET['date'])) @if ($_GET['date'] == "2") selected @endif @endif >
+                                                            {{ __('End of Service Date') }}</option>
+                                                        <option value="RequestEnd" @if(isset($_GET['date'])) @if ($_GET['date'] == "3") selected @endif @endif >
+                                                            {{ __('Request End Date') }}</option>
+                                                        <option value="Created" @if(isset($_GET['date'])) @if ($_GET['date'] == "4") selected @endif @endif >
+                                                            {{ __('Created at') }}</option>    
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
                                                     <label>{{ __('Date From') }} </label>
                                                     <input type="date" @if(isset($_GET['date_from'])) value="{{ $_GET['date_from'] }}" @endif 
                                                         class="form-control" placeholder="{{ __('From') }}" name="date_from">
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <label>{{ __('Date To') }} </label>
                                                     <input type="date" @if(isset($_GET['date_to'])) value="{{ $_GET['date_to'] }}" @endif 
                                                         class="form-control" placeholder="{{ __('To') }}" name="date_to">
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-1">
                                                     <button type="submit" class="btn btn-primary" style="margin-top:30px">
                                                         {{ __('Search') }}
                                                     </button>
                                                 </div>
+                                                {{-- <div class="col-md-1">
+                                                    <a class="btn btn-danger" href="{{ route('admin.request.in') }}">
+                                                        {{ __('Reset') }}</a>
+                                                </div> --}}
                                             </div>
 
                                         </form>
@@ -133,6 +151,8 @@
                                                         <th> {{ __('bill serial number') }}</th>
                                                         <th> {{ __('paid') }}</th>
                                                         <th> {{ __('is codezone') }}</th>
+                                                        <th> {{ __('Call') }}</th>
+
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -170,6 +190,11 @@
                                                                 <td>{{$request->bill_serial}}</td>
                                                                 <th>{{ __($request->pay_or_not)}}</th>
                                                                 <th>{{$request->code_zone_patient_id}}</th>
+                                                                <th>
+                                                                    @foreach ($request->getMyCalls() as $call)
+                                                                        {{ $call }};
+                                                                    @endforeach 
+                                                                </th>
 
                                                             </tr>
                                                         @endforeach
