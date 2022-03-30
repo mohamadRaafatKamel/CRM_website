@@ -126,6 +126,14 @@ class RequestController extends Controller
                 }
             }
 
+            // Referral
+            if(isset($request->referral_id)){
+                if(count($request->referral_id) > 0){
+                    UsersReferral::setReferral($request->user_id, $request->referral_id);
+                    $request->request->remove('referral_id');
+                }
+            }
+
             if($request->btn == "done"){
                 $request->request->add(['status_cc' => 4]);
                 if($request->type == '2')
@@ -335,6 +343,15 @@ class RequestController extends Controller
                     $request->request->add(['physician' => $phyID ]);
                 }
             }
+
+            // Referral
+            if(isset($request->referral_id)){
+                if(count($request->referral_id) > 0){
+                    UsersReferral::setReferral($request->user_id, $request->referral_id);
+                    $request->request->remove('referral_id');
+                }
+            }
+
             $request->request->add(['cc_admin_id' =>  Auth::user()->id]);
             $request->request->add(['created_by' =>  Auth::user()->id]);
             
@@ -432,6 +449,14 @@ class RequestController extends Controller
                     $phyID = $this->AddPhysician( $request->physician_new );
                     $request->request->add(['physician' => $phyID ]);
                     $request->request->remove('physician_new');
+                }
+            }
+
+            // Referral
+            if(isset($request->referral_id)){
+                if(count($request->referral_id) > 0){
+                    UsersReferral::setReferral($request->user_id, $request->referral_id);
+                    $request->request->remove('referral_id');
                 }
             }
 
@@ -580,7 +605,7 @@ class RequestController extends Controller
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
-            
+        
             // PriceList 
             if( isset($request->medical_type_id) || isset($request->corporate_id) ){
                 $pl_ID = PriceList::getPriceList($request->medical_type_id,$request->corporate_id);
