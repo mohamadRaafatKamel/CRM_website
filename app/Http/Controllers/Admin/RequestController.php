@@ -38,6 +38,14 @@ class RequestController extends Controller
     //  CC 
     public function indexCC()
     {
+        //
+        $queryxx = Requests::select()->where('schedule_date',null)->get();
+        foreach($queryxx as $row){
+            if($row->end_service_date != null)
+                $row->update(['schedule_date'=> $row->end_service_date]) ;
+        }
+        dd("done");
+        //
         if(! Role::havePremission(['request_all']))
             return redirect()->route('admin.dashboard');
 
