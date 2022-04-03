@@ -10,6 +10,7 @@ use App\Models\CompanyInfo;
 use App\Models\DoctorInfo;
 use App\Models\DoctorWorkDay;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -52,7 +53,19 @@ class UserController extends Controller
             if (!$user->id) {
                 return response()->json([ 'data'=>['success' => "0", 'error' => "Error User Not Found", 'message' => "Error User Not Found"] ], 400);
             }
-            $user->update($request->except('_token'));
+            if(isset($request->password_old) && isset($request->password_new)){
+                
+                // $users->makeVisible(['address', 'phone_number']);
+                // return $user->password . " *** ".Hash::make($request->password_old);
+                if( (Hash::check($request->password_old, $user->password)) ){
+                    $pass = Hash::make($request->password_new);
+                    unset($request->password_old);
+                    unset($request->password_new);
+                    $user->update(array_merge($request->except(['_token']),['password'=>$pass]));
+                }else
+                    return response()->json([ 'data'=>['success' => "0", 'error' => "make sure from old password", 'message' => "make sure from old password"] ], 400);
+            }else
+                $user->update($request->except('_token'));
             return response()->json([ 'data'=>['success' => "1", 'message' => "Success"] ],200);
         } catch (\Exception $ex) {
             return response()->json([ 'data'=>['success' => "0", 'error' => "Something Error", 'message' => "Error"] ], 400);
