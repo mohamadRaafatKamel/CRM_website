@@ -16,7 +16,7 @@ class RequestsController extends Controller
      */
     public function userRequest(Request $request)
     {
-        $myRequests = Requests::select()->where('user_id', $request->user()->id )->Where('state', '0')->get();
+        $myRequests = Requests::select()->where('user_id', $request->user()->id )->get();
         return(RequestResource::collection($myRequests) )->response()->setStatusCode(200);
     }
 
