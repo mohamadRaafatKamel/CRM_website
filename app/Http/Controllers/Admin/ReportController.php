@@ -52,10 +52,10 @@ class ReportController extends Controller
                             elseif($_GET['date'] == "Created")
                                 $query = $query->whereBetween('created_at', [$_GET['date_from'], $_GET['date_to']]);
                         }else{
-                            $query = $query->whereBetween('schedule_date', [$_GET['date_from'], $_GET['date_to']]);
-                            $query = $query->whereBetween('end_service_date', [$_GET['date_from'], $_GET['date_to']]);
-                            $query = $query->whereBetween('date_out', [$_GET['date_from'], $_GET['date_to']]);
-                            $query = $query->whereBetween('created_at', [$_GET['date_from'], $_GET['date_to']]);
+                            $query = $query->orWhereBetween('schedule_date', [$_GET['date_from'], $_GET['date_to']]);
+                            $query = $query->orWhereBetween('end_service_date', [$_GET['date_from'], $_GET['date_to']]);
+                            $query = $query->orWhereBetween('date_out', [$_GET['date_from'], $_GET['date_to']]);
+                            $query = $query->orWhereBetween('created_at', [$_GET['date_from'], $_GET['date_to']]);
                         }
                     $query = $query->whereBetween('schedule_date', [$_GET['date_from'], $_GET['date_to']]);
                 }else{
