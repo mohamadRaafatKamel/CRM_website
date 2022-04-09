@@ -128,6 +128,17 @@ else
 
                                                 </div>
 
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="note">وصف</label>
+                                                    <div class="col-md-6">
+                                                        <textarea id="note" class="form-control" placeholder="وصف" 
+                                                            name="note">{{$datas -> note}}</textarea>
+                                                        @error('note')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">

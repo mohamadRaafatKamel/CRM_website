@@ -35,7 +35,7 @@ class SpecialtyController extends Controller
         $request->validate([
             'name_en'=>"unique:specialty,name_en",
         ]);
-        try {
+        // try {
             if (!$request->has('disabled'))
                 $request->request->add(['disabled' => 1]);
 
@@ -54,9 +54,9 @@ class SpecialtyController extends Controller
                     return redirect()->route('admin.specialty.create')->with(['success'=>'تم الحفظ']);
         
             return redirect()->route('admin.specialty')->with(['success'=>'تم الحفظ']);
-        }catch (\Exception $ex){
-            return redirect()->route('admin.specialty.create')->with(['error'=>'يوجد خطء']);
-        }
+        // }catch (\Exception $ex){
+        //     return redirect()->route('admin.specialty.create')->with(['error'=>'يوجد خطء']);
+        // }
     }
 
     public function edit($id)
