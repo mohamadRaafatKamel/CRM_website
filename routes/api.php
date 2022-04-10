@@ -28,6 +28,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/specialty/general', 'SpecialtyController@indexGeneral');
         Route::get('/specialty/main', 'SpecialtyController@indexMain');
         Route::get('/specialty/{specialty}', 'SpecialtyController@show');
+        Route::get('/specialty/subspc/serv/{mainid}', 'SpecialtyController@indexSubSpcServ');
 
         // show services
         Route::get('/services', 'ServicesController@index');

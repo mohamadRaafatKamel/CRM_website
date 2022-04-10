@@ -69,4 +69,33 @@ class Specialty extends Model
         return "_";
     }
 
+    public static function getSubSpcServ($id)
+    {
+        $spcs = Specialty::select()->active()->where('parent_id',$id)->get();
+        $data = [];
+        foreach ($spcs as $spc){
+            $srvs = Service::select()->active()->where('specialty_id',$spc->id)->get();
+            $spSer = [];
+            foreach($srvs as $srv){
+                $spSer [] =[
+                    "id" => (string)$srv->id,
+                    "name_ar" => $srv->name_ar,
+                    "name_en" => $srv->name_en,
+                    "description" => $srv->description,
+                ];
+            }
+            $data []= [
+                "id" => (string)$spc->id,
+                "name_ar" => $spc->name_ar,
+                "name_en" => $spc->name_en,
+                "disabled" => (string)$spc->disabled,
+                "image_app" => $spc->image_app,
+                "note" => $spc->note,
+                'service'=>$spSer,
+            ];
+        }
+        
+        return $data;
+    }
+
 }

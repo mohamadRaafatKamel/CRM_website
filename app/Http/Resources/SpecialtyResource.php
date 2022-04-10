@@ -21,6 +21,8 @@ class SpecialtyResource extends JsonResource
             "name_en" => $this->name_en,
             "disabled" => (string)$this->disabled,
             "image" => $this->image,
+            "image_app" => $this->image_app,
+            "note" => $this->note,
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
         ];

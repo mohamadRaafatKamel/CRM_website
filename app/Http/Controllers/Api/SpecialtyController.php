@@ -32,6 +32,12 @@ class SpecialtyController extends Controller
         return (SpecialtyResource::collection(Specialty::Main()->get()) )->response()->setStatusCode(200);
     }
 
+    // sub Specialty and his Service
+    public function indexSubSpcServ($mainId)
+    {
+        return response()->json([ 'data'=>['message'=>"success", 'data'=> Specialty::getSubSpcServ($mainId)] ],200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
