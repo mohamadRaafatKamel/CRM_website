@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Log;
 use App\Models\Role;
 use App\Models\Service;
+use App\Models\Specialty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -27,8 +28,9 @@ class ServiceController extends Controller
         if(! Role::havePremission(['serves_cr']))
             return redirect()->route('admin.dashboard');
 
+        $specialtys = Specialty::select()->active()->get();
         $categorys = Category::selection()->get();
-        return view('admin.service.create',compact('categorys'));
+        return view('admin.service.create',compact('categorys','specialtys'));
     }
 
     public function store(Request $request)
@@ -113,10 +115,11 @@ class ServiceController extends Controller
             return redirect()->route('admin.dashboard');
         $datas = Service::select()->find($id);
         $categorys = Category::selection()->get();
+        $specialtys = Specialty::select()->active()->get();
         if(!$datas){
             return redirect()->route('admin.service')->with(['error'=>"غير موجود"]);
         }
-        return view('admin.service.edit',compact('datas','categorys'));
+        return view('admin.service.edit',compact('datas','categorys','specialtys'));
     }
 
     public function update($id, Request $request)

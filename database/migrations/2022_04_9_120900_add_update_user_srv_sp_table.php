@@ -19,7 +19,7 @@ class AddUpdateUserSrvSpTable extends Migration
 
         Schema::table('specialty', function (Blueprint $table) {
             $table->string('image_app')->after('image')->nullable();
-            $table->string('note')->after('image_app')->nullable();
+            $table->string('note',2500)->after('image_app')->nullable();
         });
 
         Schema::table('service', function (Blueprint $table) {

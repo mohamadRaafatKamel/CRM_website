@@ -50,82 +50,92 @@ else
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         @if ($permissoin)
-                                        <form class="form" action="{{route('admin.specialty.update',$datas -> id)}}" method="POST"
+                                        <form class="form form-horizontal" action="{{route('admin.specialty.update',$datas -> id)}}" method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
                                         @endif
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i> البيانات  </h4>
-                                                <div class="row">
 
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="name_ar">الاسم بالعربي </label>
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> الاسم بالعربي </label>
-                                                            <input type="text" value="{{$datas -> name_ar}}" id="name_ar"
-                                                                   class="form-control" {{ $readonly }}
-                                                                   placeholder="الاسم بالعربي" required
+                                                        <input type="text" value="{{$datas -> name_ar}}" id="name_ar"
+                                                                   class="form-control" required
+                                                                   placeholder="الاسم بالعربي" {{ $readonly }}
                                                                    name="name_ar">
                                                             @error('name_ar')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
-                                                        </div>
                                                     </div>
+                                                </div>
 
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="name_en">الاسم بالانجليزي </label>
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> الاسم بالانجليزي </label>
-                                                            <input type="text" value="{{$datas -> name_en}}" id="name_en"
-                                                                   class="form-control" {{ $readonly }}
-                                                                   placeholder="الاسم بالانجليزي  " required
+                                                        <input type="text" value="{{$datas -> name_en}}" id="name_en"
+                                                                   class="form-control" required {{ $readonly }}
+                                                                   placeholder="الاسم بالانجليزي  "
                                                                    name="name_en">
                                                             @error('name_en')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
-                                                        </div>
                                                     </div>
+                                                </div>
 
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="parent_id">{{ __('Parent') }}</label>
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="parent_id">{{ __('Parent') }}</label>
-                                                            <select class="select2 form-control" name="parent_id"  {{ $readonly }} >
-                                                                <option value="">-- {{ __('Parent') }} --</option>
-                                                                @foreach($generals as $general)
-                                                                    <option @if ($datas -> parent_id == $general->id) selected @endif 
-                                                                        value="{{ $general->id }}">
-                                                                        @if (App::getLocale() == 'ar')
-                                                                            {{ $general->name_ar}}
-                                                                        @else
-                                                                            {{ $general->name_en}}
-                                                                        @endif
-                                                                        
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('specialty_id')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
+                                                        <select class="select2 form-control" name="parent_id"  {{ $readonly }} >
+                                                            <option value="">-- {{ __('Parent') }} --</option>
+                                                            @foreach($generals as $general)
+                                                                <option @if ($datas -> parent_id == $general->id) selected @endif 
+                                                                    value="{{ $general->id }}">
+                                                                    @if (App::getLocale() == 'ar')
+                                                                        {{ $general->name_ar}}
+                                                                    @else
+                                                                        {{ $general->name_en}}
+                                                                    @endif
+                                                                    
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('specialty_id')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
+                                                </div>
 
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="img"> صوره</label>
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="img">  اضف صوره </label>
-                                                            <input type="file" id="img" {{ $readonly }}
-                                                                   class="form-control"
-                                                                   accept="image/*"
-                                                                   name="img">
+                                                        <input type="file" id="img" {{ $readonly }}
+                                                                   class="form-control" accept="image/*" name="img">
                                                             @error('img')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
-                                                        </div>
                                                     </div>
-
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-2">
                                                         @if($datas -> image != null)
                                                             <img width="50px" height="50px" src="../../../{{$datas -> image}}">
                                                         @endif
                                                     </div>
+                                                </div>
 
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="img_app">صوره الابلكيشن</label>
+                                                    <div class="col-md-6">
+                                                        <input type="file" id="img_app" {{ $readonly }}
+                                                                   class="form-control" accept="image/*" name="img_app">
+                                                            @error('img_app')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @if($datas -> image != null)
+                                                            <img width="50px" height="50px" src="../../../{{$datas -> image_app}}">
+                                                        @endif
+                                                    </div>
                                                 </div>
 
                                                 <div class="form-group row">
@@ -139,22 +149,16 @@ else
                                                     </div>
                                                 </div>
 
-                                                <div class="row">
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="note">الحالة</label>
                                                     <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <input type="checkbox"  value="0" name="disabled" {{ $readonly }}
-                                                                   id="switcheryColor4"
-                                                                   class="switchery" data-color="success"
-
-                                                                   @if($datas -> disabled  == 0 ) checked @endif
-                                                            />
-                                                            <label for="switcheryColor4"
-                                                                   class="card-title ml-1">الحالة </label>
-
-                                                            @error('disabled')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
+                                                        <input type="checkbox"  value="0" name="disabled" {{ $readonly }}
+                                                            id="switcheryColor4"
+                                                            class="switchery" data-color="success"
+                                                            @if($datas -> disabled  == 0 ) checked @endif />
+                                                        @error('disabled')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
 

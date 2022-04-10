@@ -45,6 +45,14 @@ class SpecialtyController extends Controller
                 $image->move(public_path('specialty'),$imageName);
                 $request->request->add(['image' =>  "public/specialty/".$imageName ]);
             }
+
+            if ($request->has('img_app')){
+                $image = $request->file('img_app');
+                $imageName = "spc_app_".str_replace(' ', '_', $request->name_en) . ".". $image->extension();
+                $image->move(public_path('specialty'),$imageName);
+                $request->request->add(['image_app' =>  "public/specialty/".$imageName ]);
+            }
+
             $request->request->add(['admin_id' =>  Auth::user()->id ]);
             $spc= Specialty::create($request->except(['_token']));
             Log::setLog('create','specialty',$spc->id,"","");
