@@ -552,48 +552,6 @@
                 </section>
                 <!-- // Account Receiver section end -->
 
-
-                <!-- Change type section start -->
-                <section id="basic-form-layouts">
-                    <div class="row match-height">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-content collapse show">
-                                    <div class="card-body">
-                                        <form class="form" action="{{route('admin.user.update',$user -> id)}}"
-                                              method="POST"
-                                              enctype="multipart/form-data">
-                                            @csrf
-                                                <div class="text-center">
-                                                    @if($user->type != 2)
-                                                        <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'2' ])}}"
-                                                           class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">دكتور</a>
-                                                    @endif
-
-                                                    @if($user->type != 1)
-                                                        <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'1' ])}}"
-                                                           class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">مريض</a>
-                                                    @endif
-
-                                                    @if($user->type != 4)
-                                                        <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'4' ])}}"
-                                                           class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{ __('Nurse') }}</a>
-                                                    @endif
-
-                                                        @if($user->verification != 1)
-                                                            <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'1001' ])}}"
-                                                               class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">تم التحقق</a>
-                                                        @endif
-                                                </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- // Change type section end -->
-
                 <!-- Doctor section start -->
                 @if($user->type == '2')
                     <section id="basic-form-layouts">
@@ -915,6 +873,47 @@
                     <!-- // Work Time section end -->
                 @endif
                 <!-- // Doctor section end -->
+
+                <!-- Change type section start -->
+                <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+                                        <form class="form" action="{{route('admin.user.update',$user -> id)}}"
+                                              method="POST"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                                <div class="text-center">
+                                                    @if($user->type != 2)
+                                                        <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'2' ])}}"
+                                                           class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">دكتور</a>
+                                                    @endif
+
+                                                    @if($user->type != 1)
+                                                        <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'1' ])}}"
+                                                           class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">مريض</a>
+                                                    @endif
+
+                                                    @if($user->type != 4)
+                                                        <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'4' ])}}"
+                                                           class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{ __('Nurse') }}</a>
+                                                    @endif
+
+                                                        @if($user->verification != 1)
+                                                            <a href="{{route('admin.user.type',['id'=> $user->id,'type'=>'1001' ])}}"
+                                                               class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">تم التحقق</a>
+                                                        @endif
+                                                </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- // Change type section end -->
 
 
             </div>

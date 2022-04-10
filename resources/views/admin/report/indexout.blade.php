@@ -1,18 +1,18 @@
 @extends('layouts.admin')
-@section('title', __('Out Patient') )
+@section('title', __('Full Report') )
 @section('report_out','')
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">  {{ __('Out Patient') }} </h3>
+                    <h3 class="content-header-title">  {{ __('Full Report') }} </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item">{{ __('Out Patient') }}</li>
+                                <li class="breadcrumb-item">{{ __('Full Report') }}</li>
                                 
                             </ol>
                         </div>
@@ -26,7 +26,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> {{ __('Out Patient') }} </h4>
+                                    <h4 class="card-title"> {{ __('Full Report') }} </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">

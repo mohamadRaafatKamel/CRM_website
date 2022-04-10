@@ -385,7 +385,7 @@
                     </a>
                     <ul class="menu-content">
                         <li @if(View::hasSection('report_out')) class="active" @endif >
-                            <a class="menu-item" href="{{route('admin.report.out')}}" data-i18n="nav.dash.ecommerce"> {{ __('OutPatient') }} </a>
+                            <a class="menu-item" href="{{route('admin.report.out')}}" data-i18n="nav.dash.ecommerce"> {{ __('Full Report') }} </a>
                         </li>
                     </ul>
                 </li>

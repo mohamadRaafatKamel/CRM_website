@@ -28,7 +28,7 @@ class ServiceController extends Controller
         if(! Role::havePremission(['serves_cr']))
             return redirect()->route('admin.dashboard');
 
-        $specialtys = Specialty::select()->active()->get();
+        $specialtys = Specialty::select()->active()->main()->get();
         $categorys = Category::selection()->get();
         return view('admin.service.create',compact('categorys','specialtys'));
     }
@@ -115,7 +115,7 @@ class ServiceController extends Controller
             return redirect()->route('admin.dashboard');
         $datas = Service::select()->find($id);
         $categorys = Category::selection()->get();
-        $specialtys = Specialty::select()->active()->get();
+        $specialtys = Specialty::select()->active()->main()->get();
         if(!$datas){
             return redirect()->route('admin.service')->with(['error'=>"غير موجود"]);
         }
