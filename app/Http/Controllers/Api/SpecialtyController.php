@@ -35,7 +35,7 @@ class SpecialtyController extends Controller
     // sub Specialty and his Service
     public function indexSubSpcServ($mainId)
     {
-        return response()->json([ 'data'=>['message'=>"success", 'data'=> Specialty::getSubSpcServ($mainId)] ],200);
+        return response()->json([ 'data'=> Specialty::getSubSpcServ($mainId) ],200);
     }
 
     /**
