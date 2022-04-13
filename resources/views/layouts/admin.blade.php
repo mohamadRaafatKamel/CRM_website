@@ -124,6 +124,7 @@
 <script src="{{asset('assets/admin/js/scripts/notify.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/admin/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
 
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <!-- Firbase -->
 
 {{-- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script> --}}

@@ -54,16 +54,15 @@
                             @else
                             action="{{route('admin.request.store')}}" 
                             @endif
-                            method="POST" enctype="multipart/form-data">
+                            method="POST" enctype="multipart/form-data" id="reqform">
                         @else
-                        <form class="form form-horizontal">
+                        <form class="form form-horizontal" id="reqform">
                         @endif
                             @csrf
 
                             <div class="form-body">
                                 <h4 class="form-section"><i class="ft-user"></i> البيانات الشخصية   </h4>
 
-                            
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="user_id">{{ __('Patient Name') }}</label>
                                     <div class="col-md-6">
@@ -660,21 +659,6 @@
 
                             </div>
 
-                            @if(isset($myorder->status_cc) && $myorder->status_cc != 4)
-                                <div class="form-actions">
-                                    @if (isset($myorder->id) && $myorder->id != 0)
-                                        <button type="submit" class="btn btn-primary">
-                                             {{ __('Update') }}
-                                        </button>
-                                    @else
-                                        <button type="submit" class="btn btn-primary">
-                                             {{ __('Save') }}
-                                        </button>
-                                    @endif
-                                    
-                                </div>
-                            @endif
-                        
                     </div>
                 </div>
             </div>
@@ -821,7 +805,7 @@
                                                     <div class="form-actions">
                                                         
                                                         
-                                                        <button type="submit" name="btn" value="done" class="btn btn-success">
+                                                        <button type="submit" name="btn" id="btnDone" value="done" class="btn btn-success">
                                                              {{ __('DONE') }}
                                                         </button>
 
@@ -835,15 +819,26 @@
                                                             {{ __('Following') }}
                                                        </button>
 
-                                                        <button type="submit" name="btn" value="cancel" class="btn btn-danger">
+                                                        <button type="submit" name="btn" id="btnCancel" value="cancel" class="btn btn-danger">
                                                              {{ __('Cancel') }}
                                                         </button>
+
+                                                        <button type="submit" class="btn btn-primary">
+                                                            {{ __('Update') }}
+                                                       </button>
+
                                                     </div>
                                                 @endif
                                             @else
                                                 <div class="form-actions">
-                                                    <button type="submit" name="btn" value="done" class="btn btn-success">
+                                                    <button type="submit" name="btn" id="btnDone" value="done" class="btn btn-success">
                                                         {{ __('DONE') }}
+                                                   </button>
+                                                   <button type="submit" name="btn" value="hold" class="btn btn-warning">
+                                                        {{ __('Hold') }}
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        {{ __('Save') }}
                                                    </button>
                                                 </div>
                                             @endif
@@ -867,7 +862,46 @@
     <script>
         jQuery(document).ready(function ($) {
 
+                  
+            // check mendatory fild when cancel
+            // $('#btnCancel').on('click', function() {
+            //     console.log('ccccccccccccccccccccccccccccccc');
+                
+            // });
             
+            
+
+            $('#reqform').submit(function(event) {
+                
+                // reason_cancel mendatory
+                if(event.originalEvent.submitter.id == "btnCancel"){
+                    event.preventDefault(); // stop submit
+                    if($('#reason_cancel').val() == ''){
+                        alert("Please enter {{ __('Cancellation reasone') }} ")
+                    }else{
+                        $(this).unbind('submit').submit();
+                    }
+                }
+
+                // reason_cancel mendatory
+                if(event.originalEvent.submitter.id == "btnDone"){
+                    event.preventDefault(); // stop submit
+                    if($('#code_zone_patient_id').val() == ''){
+                        alert("Please enter {{ __('Code Zone Patient ID') }} ")
+                    }else{
+                        $(this).unbind('submit').submit();
+                    }
+                }
+
+              
+            })
+
+            // $('#reqform').submit(function(event) {
+            //     event.preventDefault(); 			// Prevents the default submit
+            //     // your code here (not asynchronous)
+            //     console.log('ttt');
+            //     // $(this).unbind('submit').submit(); 	// continue the submit unbind preventDefault
+            // })
 
             $('#user_id').change(function () {
                 $.ajax({

@@ -54,7 +54,7 @@
                             @else
                             action="{{route('admin.request.store.em')}}" 
                             @endif
-                            method="POST" enctype="multipart/form-data">
+                            method="POST" enctype="multipart/form-data" id="reqform">
                         @else
                         <form class="form form-horizontal">
                         @endif
@@ -63,13 +63,38 @@
                             <div class="form-body">
                                 <h4 class="form-section"><i class="ft-user"></i> البيانات الشخصية   </h4>
 
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="user_id">{{ __('Patient Name') }}</label>
+                                    <div class="col-md-6">
+                                        <select class="select2 form-control" name="user_id" id="user_id" 
+                                        @if (isset($myorder->id) && $myorder->id != 0) disabled @endif >
+                                            <option value=""></option>
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}"
+                                                        @if(isset($myorder->user_id))
+                                                            @if($myorder->user_id == $user->id) selected @endif 
+                                                        @endif 
+                                                        @if(old('user_id') == $user->id) selected @endif >
+                                                    {{ $user->username." [ ".$user->phone." ]"}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('user_id')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
                             
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="user_id">
                                         {{ __('Full Name') }}
                                     </label>
                                     <div class="col-md-6">
-                                        <input type="text" id="fullname" readonly
+                                        <input type="text" id="fullname" 
+                                        @if (isset($myorder->id) && $myorder->id != 0) readonly @endif
                                                 class="form-control" 
                                                 @if(isset($myorder->fullname))
                                                     value="{{ $myorder->fullname }}"
@@ -165,7 +190,8 @@
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="phone">{{ __('Phone') }} <span style="color: #ff4961;">*</span></label>
                                     <div class="col-md-2">
-                                        <input type="text" id="phone" readonly
+                                        <input type="text" id="phone" 
+                                        @if (isset($myorder->id) && $myorder->id != 0) readonly @endif
                                             class="form-control"
                                             @if(isset($myorder->phone))
                                             value="{{ $myorder->phone }}"
@@ -324,6 +350,8 @@
                                     </div>
                                 </div>
 
+                                @if (isset($myorder->id) && $myorder->id != 0) 
+
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="adress">{{ __('Address') }} CC</label>
                                     <div class="col-md-6">
@@ -352,6 +380,24 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                @else
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="adress">{{ __('Address') }} </label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="adress"
+                                               class="form-control"
+                                               @if(isset($myorder->adress))
+                                               value="{{ $myorder->adress }}"
+                                               @endif
+                                               placeholder="{{ __('Address') }}" >
+                                    </div>
+                                </div>
+
+                                @endif
+
+                                
 
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="location">{{ __('Location') }}</label>
@@ -422,7 +468,8 @@
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="referral_id">{{ __('Referral') }}</label>
                                     <div class="col-md-6">
-                                        <select class="select2 form-control" id="referral_id" disabled multiple>
+                                        <select class="select2 form-control" id="referral_id" multiple
+                                        @if (isset($myorder->id) && $myorder->id != 0) disabled @endif>
                                             @foreach($referrals as $referral)
                                                 <option value="{{ $referral['id'] }}"
                                                     @if (isset($usersReferrals))
@@ -685,21 +732,6 @@
 
                             </div>
 
-                            @if(isset($myorder->status_cc) && $myorder->status_cc != 4)
-                                <div class="form-actions">
-                                    @if (isset($myorder->id) && $myorder->id != 0)
-                                        <button type="submit" class="btn btn-primary" name="embtn" value="1">
-                                             {{ __('Update') }}
-                                        </button>
-                                    @else
-                                        <button type="submit" class="btn btn-primary" name="embtn" value="1">
-                                             {{ __('Save') }}
-                                        </button>
-                                    @endif
-                                    
-                                </div>
-                            @endif
-                        
                     </div>
                 </div>
             </div>
@@ -1004,7 +1036,7 @@
                                                     <div class="form-actions">
                                                         
                                                         
-                                                        <button type="submit" name="btn" value="done" class="btn btn-success">
+                                                        <button type="submit" name="btn" id="btnDone" value="done" class="btn btn-success">
                                                              {{ __('DONE') }}
                                                         </button>
 
@@ -1017,9 +1049,13 @@
                                                         <button type="submit" name="btn" value="follow" class="btn btn-warning">
                                                             {{ __('Following') }}
                                                         </button>
-                                                        <button type="submit" name="btn" value="cancel" class="btn btn-danger">
+                                                        <button type="submit" name="btn" id="btnCancel" value="cancel" class="btn btn-danger">
                                                              {{ __('Cancel') }}
                                                         </button>
+
+                                                        <button type="submit" class="btn btn-primary">
+                                                            {{ __('Update') }}
+                                                       </button>
                                                     </div>
                                                 @endif
                                             @else
@@ -1027,6 +1063,12 @@
                                                     <button type="submit" name="btn" value="done" class="btn btn-success">
                                                         {{ __('DONE') }}
                                                    </button>
+                                                   <button type="submit" name="btn" value="hold" class="btn btn-warning">
+                                                        {{ __('Hold') }}
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        {{ __('Save') }}
+                                                    </button>
                                                 </div>
                                             @endif
                                         </form>
@@ -1048,6 +1090,31 @@
 @section('script')
     <script>
         jQuery(document).ready(function ($) {
+
+            $('#reqform').submit(function(event) {
+                
+                // reason_cancel mendatory
+                if(event.originalEvent.submitter.id == "btnCancel"){
+                    event.preventDefault(); // stop submit
+                    if($('#reason_cancel').val() == ''){
+                        alert("Please enter {{ __('Cancellation reasone') }} ")
+                    }else{
+                        $(this).unbind('submit').submit();
+                    }
+                }
+
+                // reason_cancel mendatory
+                if(event.originalEvent.submitter.id == "btnDone"){
+                    event.preventDefault(); // stop submit
+                    if($('#code_zone_patient_id').val() == ''){
+                        alert("Please enter {{ __('Code Zone Patient ID') }} ")
+                    }else{
+                        $(this).unbind('submit').submit();
+                    }
+                }
+
+              
+            })
 
             // service Price
             $('#service_id').change(function () {

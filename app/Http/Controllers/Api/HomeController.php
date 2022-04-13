@@ -77,11 +77,18 @@ class HomeController extends Controller
     {
         try {
             $req = new Requests();
+            if(! isset($request->created_by)){
+                if (Auth::guard('api')->check()) {
+                    $req->created_by = "WebUser";
+                }else
+                    $req->created_by = "WebGuest";
+            }else{
+                $req->created_by = $request->created_by;
+            }
+
             if (Auth::guard('api')->check()) {
                 $req->user_id = Auth::guard('api')->user()->id;
-                $req->created_by = "WebUser";
-            }else
-                $req->created_by = "WebGuest";
+            }
             $req->phone = $request->phone;
             $req->specialty_id = $request->specialty_id;
             $req->fullname = $request->fullname;
@@ -100,11 +107,18 @@ class HomeController extends Controller
     {
         try {
             $req = new Requests();
+            if(! isset($request->created_by)){
+                if (Auth::guard('api')->check()) {
+                    $req->created_by = "WebUser";
+                }else
+                    $req->created_by = "WebGuest";
+            }else{
+                $req->created_by = $request->created_by;
+            }
+
             if (Auth::guard('api')->check()) {
                 $req->user_id = Auth::guard('api')->user()->id;
-                $req->created_by = "WebUser";
-            }else
-                $req->created_by = "WebGuest";
+            }
             $req->governorate_id = $request->governorate_id;
             $req->city_id = $request->city_id;
             $req->adress = $request->adress;
@@ -129,16 +143,25 @@ class HomeController extends Controller
     {
         try {
             $req = new Requests();
+            if(! isset($request->created_by)){
+                if (Auth::guard('api')->check()) {
+                    $req->created_by = "WebUser";
+                }else
+                    $req->created_by = "WebGuest";
+            }else{
+                $req->created_by = $request->created_by;
+            }
+
             if (Auth::guard('api')->check()) {
                 $req->user_id = Auth::guard('api')->user()->id;
-                $req->created_by = "WebUser";
-            }else
-                $req->created_by = "WebGuest";
+            }
+            
             $req->governorate_id = $request->governorate_id;
             $req->city_id = $request->city_id;
             $req->adress = $request->adress;
             $req->phone = $request->phone;
             $req->service_id = $request->service_id;
+            $req->specialty_id = $request->specialty_id;
             $req->visit_time_day = $request->visit_time_day;
             $req->visit_time_from = $request->visit_time_from;
             $req->visit_time_to = $request->visit_time_to;

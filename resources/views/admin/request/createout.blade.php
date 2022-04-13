@@ -53,7 +53,7 @@
                         @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
                             action="{{route('admin.request.update.out', $myorder->id)}}" method="POST" 
                         @endif
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" id="reqform">
                                 @csrf
 
                             <div class="form-body">
@@ -1025,7 +1025,7 @@
 
                                         <div class="form-actions">
                                                
-                                            <button type="submit" name="btn" value="done" class="btn btn-success">
+                                            <button type="submit" name="btn" id="btnCancel" value="done" class="btn btn-success">
                                                 {{ __('DONE') }}
                                             </button>
 
@@ -1037,9 +1037,13 @@
                                                 {{ __('Following') }}
                                             </button>
 
-                                            <button type="submit" name="btn" value="cancel" class="btn btn-danger">
+                                            <button type="submit" name="btn" id="btnCancel" value="cancel" class="btn btn-danger">
                                                 {{ __('Cancel') }}
-                                            </button>
+                                           </button>
+
+                                           <button type="submit" class="btn btn-primary">
+                                               {{ __('Update') }}
+                                          </button>
 
                                         </div>
                                            
@@ -1065,6 +1069,31 @@
 
     <script>
         jQuery(document).ready(function ($) {
+
+            $('#reqform').submit(function(event) {
+                
+                // reason_cancel mendatory
+                if(event.originalEvent.submitter.id == "btnCancel"){
+                    event.preventDefault(); // stop submit
+                    if($('#reason_cancel').val() == ''){
+                        alert("Please enter {{ __('Cancellation reasone') }} ")
+                    }else{
+                        $(this).unbind('submit').submit();
+                    }
+                }
+
+                // reason_cancel mendatory
+                if(event.originalEvent.submitter.id == "btnDone"){
+                    event.preventDefault(); // stop submit
+                    if($('#code_zone_patient_id').val() == ''){
+                        alert("Please enter {{ __('Code Zone Patient ID') }} ")
+                    }else{
+                        $(this).unbind('submit').submit();
+                    }
+                }
+
+              
+            })
 
             // service Price
             $('#service_id').change(function () {

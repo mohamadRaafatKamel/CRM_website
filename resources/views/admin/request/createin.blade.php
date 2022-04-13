@@ -51,7 +51,7 @@
                         @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
                             action="{{route('admin.request.update.in', $myorder->id)}}" 
                         @endif
-                            method="POST" enctype="multipart/form-data">
+                            method="POST" enctype="multipart/form-data" id="reqform">
                                 @csrf
                         
                             <div class="form-body">ا
@@ -500,7 +500,7 @@
                                     <div class="col-md-6">
                                         <textarea id="reason_cancel" placeholder="{{ __('Cancellation reasone') }}" 
                                                 class="form-control" name="reason_cancel"
-                                                >@if(isset($myorder->reason_cancel)){{ $myorder->reason_cancel }}@endif</textarea>
+                                                >@if(isset($myorder->reason_cancel)){{$myorder->reason_cancel}}@endif</textarea>
                                         @error('reason_cancel')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -956,7 +956,7 @@
 
                                         <div class="form-actions">
                                                
-                                            <button type="submit" name="btn" value="done" class="btn btn-success">
+                                            <button type="submit" name="btn" id="btnDone" value="done" class="btn btn-success">
                                                  {{ __('DONE') }}
                                             </button>
 
@@ -966,9 +966,13 @@
                                             <button type="submit" name="btn" value="follow" class="btn btn-warning">
                                                 {{ __('Following') }}
                                             </button>
-                                            <button type="submit" name="btn" value="cancel" class="btn btn-danger">
+                                            <button type="submit" name="btn" id="btnCancel" value="cancel" class="btn btn-danger">
                                                  {{ __('Cancel') }}
                                             </button>
+
+                                            <button type="submit" class="btn btn-primary">
+                                                {{ __('Update') }}
+                                           </button>
 
                                         </div>
                                     </form>
@@ -1143,6 +1147,30 @@
     <script>
         jQuery(document).ready(function ($) {
 
+            $('#reqform').submit(function(event) {
+                
+                // reason_cancel mendatory
+                if(event.originalEvent.submitter.id == "btnCancel"){
+                    event.preventDefault(); // stop submit
+                    if($('#reason_cancel').val() == ''){
+                        alert("Please enter {{ __('Cancellation reasone') }} ")
+                    }else{
+                        $(this).unbind('submit').submit();
+                    }
+                }
+
+                // reason_cancel mendatory
+                if(event.originalEvent.submitter.id == "btnDone"){
+                    event.preventDefault(); // stop submit
+                    if($('#code_zone_patient_id').val() == ''){
+                        alert("Please enter {{ __('Code Zone Patient ID') }} ")
+                    }else{
+                        $(this).unbind('submit').submit();
+                    }
+                }
+
+              
+            })
             // service Price
             $('#service_id').change(function () {
                 let service_id = $("#service_id option:selected").val();

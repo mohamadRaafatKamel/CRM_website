@@ -95,22 +95,23 @@ class Specialty extends Model
                     'service'=>$spSer,
                 ];
             }
-        }else{
-            // check if have Service
-            $srvs = Service::select()->active()->where('specialty_id',$id)->get();
-            $spSer = [];
-            foreach($srvs as $srv){
-                $spSer [] =[
-                    "id" => (string)$srv->id,
-                    "name_ar" => $srv->name_ar,
-                    "name_en" => $srv->name_en,
-                    "description" => $srv->description,
-                ];
-            }
-            $data []= [
-                'service'=>$spSer,
-            ];
         }
+        // else{
+        //     // check if have Service
+        //     $srvs = Service::select()->active()->where('specialty_id',$id)->get();
+        //     $spSer = [];
+        //     foreach($srvs as $srv){
+        //         $spSer [] =[
+        //             "id" => (string)$srv->id,
+        //             "name_ar" => $srv->name_ar,
+        //             "name_en" => $srv->name_en,
+        //             "description" => $srv->description,
+        //         ];
+        //     }
+        //     $data []= [
+        //         'service'=>$spSer,
+        //     ];
+        // }
         
         return $data;
     }

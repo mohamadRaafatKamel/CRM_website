@@ -57,7 +57,7 @@
                                                         <div class="form-group">
                                                             
                                                             <input type="text" id="name" 
-                                                                   class="form-control" 
+                                                                   class="form-control" required
                                                                    placeholder="{{ __('Category Name') }} "
                                                                    name="name">
                                                             @error('name')

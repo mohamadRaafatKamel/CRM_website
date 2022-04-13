@@ -38,20 +38,12 @@ class RequestController extends Controller
     //  CC 
     public function indexCC()
     {
-        //
-        // $queryxx = Requests::select()->where('schedule_date',null)->get();
-        // foreach($queryxx as $row){
-        //     if($row->end_service_date != null)
-        //         $row->update(['schedule_date'=> $row->end_service_date]) ;
-        // }
-        // dd("done");
-        //
         if(! Role::havePremission(['request_all']))
             return redirect()->route('admin.dashboard');
 
         $query = Requests::selection();
         if(empty($_GET)){
-            $_GET['state'] = 1;
+            $_GET['state'] = "";
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
@@ -140,6 +132,8 @@ class RequestController extends Controller
                     $this->requestMail($request, "InPatient");
                 if($request->type == '3')
                     $this->requestMail($request, "OutPatient");
+            }elseif($request->btn == "hold"){
+                $request->request->add(['status_cc' => 2]);
             }else{
                 $request->request->add(['status_cc' =>  '2']);
             }
@@ -181,6 +175,20 @@ class RequestController extends Controller
                 $userID = $this->addUser($request->fullname,$request->phone);
                 $request->request->add(['user_id' => $userID ]);
             }
+        }
+
+        // validation cancel
+        if($request->btn == "cancel"){
+            $request->validate([
+                'reason_cancel'=>"required",
+            ]);
+        }
+
+        // validation done
+        if($request->btn == "done"){
+            $request->validate([
+                'code_zone_patient_id'=>"required",
+            ]);
         }
 
         try {
@@ -255,7 +263,7 @@ class RequestController extends Controller
 
         $query = Requests::selection()->where('type',1);
         if(empty($_GET)){
-            $_GET['state'] = 1;
+            $_GET['state'] = "";
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
@@ -508,7 +516,7 @@ class RequestController extends Controller
 
         $query = Requests::selection()->where('type',3)->where('status_cc',4);
         if(empty($_GET)){
-            $_GET['state'] = 1;
+            $_GET['state'] = "";
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
@@ -662,7 +670,7 @@ class RequestController extends Controller
 
         $query = Requests::selection()->where('type',2)->where('status_cc',4);
         if(empty($_GET)){
-            $_GET['state'] = 1;
+            $_GET['state'] = "";
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
@@ -803,7 +811,7 @@ class RequestController extends Controller
         
         $query = Requests::selection()->where('type',4)->where('status_cc',4);
         if(empty($_GET)){
-            $_GET['state'] = 1;
+            $_GET['state'] = "";
         }
         // State
         if(isset($_GET['state']) && $_GET['state'] != "")
