@@ -1100,16 +1100,18 @@
                     if($('#reason_cancel').val() == ''){
                         alert("Please enter {{ __('Cancellation reasone') }} ")
                     }else{
+                        $('#reqform').append("<input type='hidden' name='btn' value='cancel' />");
                         $(this).unbind('submit').submit();
                     }
                 }
 
-                // reason_cancel mendatory
+                // code_zone mendatory
                 if(event.originalEvent.submitter.id == "btnDone"){
                     event.preventDefault(); // stop submit
                     if($('#code_zone_patient_id').val() == ''){
                         alert("Please enter {{ __('Code Zone Patient ID') }} ")
                     }else{
+                        $('#reqform').append("<input type='hidden' name='btn' value='done' />");
                         $(this).unbind('submit').submit();
                     }
                 }

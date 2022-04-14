@@ -115,6 +115,38 @@
                                                     </div>
                                                 </div>
 
+                                                <label><strong> {{ __('Reopen') }} </strong></label>
+                                                <div class="row">
+                                                   
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="req_out_reopen" name="role_info[]"
+                                                                   id="req_out_reopen" 
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="req_out_reopen"
+                                                                   class="card-title ml-1">{{ __('All OutPatient') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="req_in_reopen" name="role_info[]"
+                                                                   id="req_in_reopen" 
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="req_in_reopen"
+                                                                   class="card-title ml-1">{{ __('All InPatient') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="req_lab_reopen" name="role_info[]"
+                                                                   id="req_lab_reopen" 
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="req_lab_reopen"
+                                                                   class="card-title ml-1">{{ __('Lab') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <label><strong> {{ __('Users') }} </strong></label>
                                                 <div class="row">
                                                     <div class="col-md-3">
@@ -231,6 +263,38 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <h4>{{ __('Price List') }}</h4>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="pricelist_view" name="role_info[]"
+                                                                   id="pricelist_view" 
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="pricelist_view"
+                                                                   class="card-title ml-1">{{ __('View') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="pricelist_cr" name="role_info[]"
+                                                                   id="pricelist_cr" 
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="pricelist_cr"
+                                                                   class="card-title ml-1">{{ __('Create') }} </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="checkbox"  value="pricelist_idt" name="role_info[]"
+                                                                   id="pricelist_idt" 
+                                                                   class="switchery" data-color="success"/>
+                                                            <label for="pricelist_idt"
+                                                                   class="card-title ml-1">{{ __('Edit') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
 
                                                 <label><strong> {{ __('Survey') }} </strong></label>
                                                 <div class="row">

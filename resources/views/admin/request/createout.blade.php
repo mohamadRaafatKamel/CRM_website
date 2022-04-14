@@ -1004,7 +1004,7 @@
                 </section>
                 {{-- section Call End --}}
 
-                @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
+
                 <section id="basic-form-layouts">
                     <div class="row match-height">
                         <div class="col-md-12">
@@ -1024,38 +1024,60 @@
                                     <div class="card-body">
 
                                         <div class="form-actions">
-                                               
-                                            <button type="submit" name="btn" id="btnCancel" value="done" class="btn btn-success">
-                                                {{ __('DONE') }}
-                                            </button>
 
-                                            <button type="submit" name="btn" value="hold" class="btn btn-warning">
-                                                {{ __('Hold') }}
-                                            </button>
+                                            @if(isset($myorder->status_in_out) && $myorder->status_in_out != 4)
                                             
-                                            <button type="submit" name="btn" value="follow" class="btn btn-warning">
-                                                {{ __('Following') }}
-                                            </button>
+                                                <button type="submit" name="btn" id="btnDone" value="done" class="btn btn-success">
+                                                    {{ __('DONE') }}
+                                                </button>
 
-                                            <button type="submit" name="btn" id="btnCancel" value="cancel" class="btn btn-danger">
-                                                {{ __('Cancel') }}
-                                           </button>
+                                                @if($myorder->status_in_out != 2)
+                                                    <button type="submit" name="btn" value="hold" class="btn btn-warning">
+                                                        {{ __('Hold') }}
+                                                    </button>
+                                                @endif
 
-                                           <button type="submit" class="btn btn-primary">
-                                               {{ __('Update') }}
-                                          </button>
+                                                @if($myorder->status_in_out != 7)
+                                                    <button type="submit" name="btn" value="follow" class="btn btn-warning">
+                                                        {{ __('Following') }}
+                                                    </button>
+                                                @endif
+
+                                                @if($myorder->status_in_out != 5)
+                                                    <button type="submit" name="btn" id="btnCancel" value="cancel" class="btn btn-danger">
+                                                        {{ __('Cancel') }}
+                                                    </button>
+                                                @endif
+
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Update') }}
+                                                </button>
+
+                                            @endif
+                                        </form>
+    
+                                            @if(isset($myorder->status_in_out) && $myorder->status_in_out == 4)
+                                                @if(\App\Models\Role::havePremission(['req_out_reopen']))
+                                                    <form class="form" action="{{route('admin.request.update.out', $myorder->id)}}" 
+                                                        method="POST">
+                                                        @csrf
+                                                        <button type="submit" name="btn" value="hold" class="btn btn-warning">
+                                                            {{ __('Reopen') }}
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @endif
 
                                         </div>
-                                           
                                     </div>
                                 </div>
-                            </form>
                             </div>
                         </div>
                     </div>
                 </section>
                 <!-- // Basic form layout section end -->
-                @endif
+                
+                
             </div>
         </div>
     </div>
@@ -1063,9 +1085,6 @@
 @endsection
 
 @section('script')
-
-{{-- <script src="{{asset('assets/admin/vendors/js/forms/repeater/jquery.repeater.min.js')}}" type="text/javascript"></script> --}}
-{{-- <script src="{{asset('assets/admin/js/scripts/forms/form-repeater.js')}}" type="text/javascript"></script> --}}
 
     <script>
         jQuery(document).ready(function ($) {
@@ -1078,16 +1097,18 @@
                     if($('#reason_cancel').val() == ''){
                         alert("Please enter {{ __('Cancellation reasone') }} ")
                     }else{
+                        $('#reqform').append("<input type='hidden' name='btn' value='cancel' />");
                         $(this).unbind('submit').submit();
                     }
                 }
 
-                // reason_cancel mendatory
+                // code_zone mendatory
                 if(event.originalEvent.submitter.id == "btnDone"){
                     event.preventDefault(); // stop submit
                     if($('#code_zone_patient_id').val() == ''){
                         alert("Please enter {{ __('Code Zone Patient ID') }} ")
                     }else{
+                        $('#reqform').append("<input type='hidden' name='btn' value='done' />");
                         $(this).unbind('submit').submit();
                     }
                 }
