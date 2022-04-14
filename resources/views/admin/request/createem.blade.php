@@ -93,8 +93,8 @@
                                         {{ __('Full Name') }}
                                     </label>
                                     <div class="col-md-6">
-                                        <input type="text" id="fullname" 
-                                        @if (isset($myorder->id) && $myorder->id != 0) readonly @endif
+                                        <input type="text" id="fullname"  
+                                        @if (isset($myorder->id) && $myorder->id != 0) readonly @else name="fullname" @endif
                                                 class="form-control" 
                                                 @if(isset($myorder->fullname))
                                                     value="{{ $myorder->fullname }}"
@@ -191,7 +191,7 @@
                                     <label class="col-md-2 label-control" for="phone">{{ __('Phone') }} <span style="color: #ff4961;">*</span></label>
                                     <div class="col-md-2">
                                         <input type="text" id="phone" 
-                                        @if (isset($myorder->id) && $myorder->id != 0) readonly @endif
+                                        @if (isset($myorder->id) && $myorder->id != 0) readonly @else name="phone" @endif
                                             class="form-control"
                                             @if(isset($myorder->phone))
                                             value="{{ $myorder->phone }}"
@@ -204,7 +204,8 @@
                                             @enderror
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="checkbox"  value="1" readonly
+                                        <input type="checkbox"  value="1" 
+                                        @if (isset($myorder->id) && $myorder->id != 0) disabled @else name="whatapp" @endif
                                             id="whatapp" class="switchery0" data-color="success"
                                             @if (isset($myorder -> whatapp))
                                             @if($myorder -> whatapp  == 1 ) checked @endif
@@ -384,12 +385,12 @@
                                 @else
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="adress">{{ __('Address') }} </label>
+                                    <label class="col-md-2 label-control" for="adress">{{ __('Address') }} <span style="color: #ff4961;">*</span></label>
                                     <div class="col-md-6">
-                                        <input type="text" id="adress"
-                                               class="form-control"
+                                        <input type="text" id="adress" name="adress"
+                                               class="form-control" required
                                                @if(isset($myorder->adress))
-                                               value="{{ $myorder->adress }}"
+                                                value="{{ $myorder->adress }}"
                                                @endif
                                                placeholder="{{ __('Address') }}" >
                                     </div>
@@ -469,7 +470,7 @@
                                     <label class="col-md-2 label-control" for="referral_id">{{ __('Referral') }}</label>
                                     <div class="col-md-6">
                                         <select class="select2 form-control" id="referral_id" multiple
-                                        @if (isset($myorder->id) && $myorder->id != 0) disabled @endif>
+                                        @if (isset($myorder->id) && $myorder->id != 0) disabled @else name="referral_id[]" @endif>
                                             @foreach($referrals as $referral)
                                                 <option value="{{ $referral['id'] }}"
                                                     @if (isset($usersReferrals))
@@ -688,7 +689,7 @@
                                                @if(isset($myorder->schedule_date))
                                                     min="{{ $myorder->schedule_date }}"
                                                @endif
-                                               name= "end_service_date"
+                                               name="end_service_date"
                                                placeholder="{{ __('End of Service Date') }}" >
                                     </div>
                                 </div>

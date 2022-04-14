@@ -121,11 +121,15 @@ class ReferralController extends Controller
             if (!$data) {
                 return redirect()->route('admin.referral.cat', $id)->with(['error' => '  غير موجوده']);
             }
-            Log::setLog('Delete','referal_cat',$id,$data->name,"");
-            $data->delete();
 
-            return redirect()->route('admin.referral.cat')->with(['success' => 'تم حذف  بنجاح']);
-
+            if(Referral::select()->where('cat_id',$id)->count() > 0){
+                return redirect()->route('admin.referral.cat')->with(['success' => 'لا يمكن مسح هذا القسم لانه مستخدم ']);
+            }else{
+                Log::setLog('Delete','referal_cat',$id,$data->name,"");
+                $data->delete();
+    
+                return redirect()->route('admin.referral.cat')->with(['success' => 'تم حذف  بنجاح']);
+            }
         } catch (\Exception $ex) {
             return redirect()->route('admin.referral.cat')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
         }
