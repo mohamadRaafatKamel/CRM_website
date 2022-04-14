@@ -72,7 +72,7 @@ class ReportController extends Controller
             //     $query = $query->whereDate('schedule_date','<',$_GET['date_to']);
         }
         
-        $requests = $query->paginate(PAGINATION_COUNT);
+        $requests = $query->orderBy('updated_at', 'desc')->paginate(PAGINATION_COUNT);
         
         if(count($requests) > 0){
             foreach($requests as $request){

@@ -50,7 +50,7 @@ class RequestController extends Controller
             if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
                 $query = $query->where('status_cc',$_GET['state']);
         
-        $requests = $query->paginate(PAGINATION_COUNT);
+        $requests = $query->orderBy('updated_at', 'desc')->paginate(PAGINATION_COUNT);
         return view('admin.request.indexcc', compact('requests'));
     }
 
@@ -270,7 +270,7 @@ class RequestController extends Controller
             if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
                 $query = $query->where('status_cc',$_GET['state']);
         
-        $requests = $query->paginate(PAGINATION_COUNT);
+        $requests = $query->orderBy('updated_at', 'desc')->paginate(PAGINATION_COUNT);
         return view('admin.request.indexem', compact('requests'));
     }
 
@@ -523,7 +523,7 @@ class RequestController extends Controller
             if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
                 $query = $query->where('status_in_out',$_GET['state']);
         
-        $requests = $query->paginate(PAGINATION_COUNT);
+        $requests = $query->orderBy('updated_at', 'desc')->paginate(PAGINATION_COUNT);
         return view('admin.request.indexin', compact('requests'));
     }
 
@@ -677,7 +677,7 @@ class RequestController extends Controller
             if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
                 $query = $query->where('status_in_out',$_GET['state']);
         
-        $requests = $query->paginate(PAGINATION_COUNT);
+        $requests = $query->orderBy('updated_at', 'desc')->paginate(PAGINATION_COUNT);
         return view('admin.request.indexout', compact('requests'));
     }
 
@@ -818,7 +818,7 @@ class RequestController extends Controller
             if($_GET['state'] < 8 && $_GET['state'] > 0 && $_GET['state'] != 3)
                 $query = $query->where('status_in_out',$_GET['state']);
         
-        $requests = $query->paginate(PAGINATION_COUNT);
+        $requests = $query->orderBy('updated_at', 'desc')->paginate(PAGINATION_COUNT);
         return view('admin.request.indexlab', compact('requests'));
     }
 

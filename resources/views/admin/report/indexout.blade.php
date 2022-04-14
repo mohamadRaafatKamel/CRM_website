@@ -126,6 +126,7 @@
                                                     class="table table-striped table-bordered ordering-print">
                                                     <thead>
                                                     <tr>
+                                                        <th style="display: none;"></th>
                                                         <th>{{ __('Created at') }}</th>
                                                         <th>{{ __('Request End Date') }}</th>
                                                         <th>{{ __('End of Service Date') }}</th>
@@ -162,6 +163,7 @@
                                                         @if (count($requests) > 0)
                                                         @foreach($requests as $request)
                                                             <tr>
+                                                                <th style="display: none;"></th>
                                                                 <th>{{$request->created_at}}</th>
                                                                 <th>{{$request->date_out}}</th>
                                                                 <th>{{$request->end_service_date}}</th>

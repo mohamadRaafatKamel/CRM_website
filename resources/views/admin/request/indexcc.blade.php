@@ -82,6 +82,7 @@
                                                     class="table table-striped table-bordered ordering-col7-print">
                                                     <thead>
                                                     <tr>
+                                                        <th style="display: none;"></th>
                                                         <th> {{ __('Request ID') }}</th>
                                                         <th>العميل</th>
                                                         <th> موبيل</th>
@@ -98,6 +99,7 @@
                                                     @isset($requests)
                                                         @foreach($requests as $request)
                                                             <tr>
+                                                                <td style="display: none;"></td>
                                                                 <td>
                                                                     <a href="{{route('admin.request.create.cc',['req'=>$request -> id])}}">
                                                                         {{$request -> id}}</a></td>
