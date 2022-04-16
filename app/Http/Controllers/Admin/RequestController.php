@@ -91,6 +91,12 @@ class RequestController extends Controller
         if(! Role::havePremission(['request_all','request_emergency']))
             return redirect()->route('admin.dashboard');
 
+        // add value for WhatApp
+        if (!$request->has('whatapp'))
+            $request->request->add(['whatapp' => 0]);
+        if (!$request->has('whatapp2'))
+            $request->request->add(['whatapp2' => 0]);
+
         // Add User
         if (!$request->has('user_id') || $request->user_id == null ){ 
             if ($request->has('phone')){
@@ -98,17 +104,12 @@ class RequestController extends Controller
                     'phone'=>"unique:users,phone|required",
                     'fullname'=>"required",
                 ]);
-                $userID = $this->addUser($request->fullname,$request->phone);
+                $userID = $this->addUser($request);
                 $request->request->add(['user_id' => $userID ]);
             }
         }
 
         try {
-
-            if (!$request->has('whatapp'))
-                $request->request->add(['whatapp' => 0]);
-            if (!$request->has('whatapp2'))
-                $request->request->add(['whatapp2' => 0]);
 
             // Add Physician
             if (!$request->has('physician') || $request->physician == null ){
@@ -164,6 +165,12 @@ class RequestController extends Controller
     {
         if(! Role::havePremission(['request_all','request_emergency']))
             return redirect()->route('admin.dashboard');
+        
+        // add value for WhatApp
+        if (!$request->has('whatapp'))
+            $request->request->add(['whatapp' => 0]);
+        if (!$request->has('whatapp2'))
+            $request->request->add(['whatapp2' => 0]);
 
         // Add User
         if (!$request->has('user_id') || $request->user_id == null ){ 
@@ -172,7 +179,7 @@ class RequestController extends Controller
                     'phone'=>"unique:users,phone|required",
                     'fullname'=>"required",
                 ]);
-                $userID = $this->addUser($request->fullname,$request->phone);
+                $userID = $this->addUser($request);
                 $request->request->add(['user_id' => $userID ]);
             }
         }
@@ -192,11 +199,6 @@ class RequestController extends Controller
         }
 
         try {
-
-            if (!$request->has('whatapp'))
-                $request->request->add(['whatapp' => 0]);
-            if (!$request->has('whatapp2'))
-                $request->request->add(['whatapp2' => 0]);
 
             // Referral
             if(isset($request->referral_id)){
@@ -314,6 +316,12 @@ class RequestController extends Controller
         if(! Role::havePremission(['request_all','request_emergency']))
             return redirect()->route('admin.dashboard');
 
+        // add value for WhatApp
+        if (!$request->has('whatapp'))
+            $request->request->add(['whatapp' => 0]);
+        if (!$request->has('whatapp2'))
+            $request->request->add(['whatapp2' => 0]);
+
         // Add User
         if (!$request->has('user_id') || $request->user_id == null ){ 
             if ($request->has('phone')){
@@ -321,18 +329,12 @@ class RequestController extends Controller
                     'phone'=>"unique:users,phone|required",
                     'fullname'=>"required",
                 ]);
-                $userID = $this->addUser($request->fullname,$request->phone);
+                $userID = $this->addUser($request);
                 $request->request->add(['user_id' => $userID ]);
             }
         }
 
         try {
-
-            
-            if (!$request->has('whatapp'))
-                $request->request->add(['whatapp' => 0]);
-            if (!$request->has('whatapp2'))
-                $request->request->add(['whatapp2' => 0]);
             
             if($request->btn == "done"){
                 $request->request->add(['status_cc' => 4]);
@@ -404,6 +406,12 @@ class RequestController extends Controller
         if(! Role::havePremission(['request_emergency']))
             return redirect()->route('admin.dashboard');
 
+        // add value for WhatApp
+        if (!$request->has('whatapp'))
+            $request->request->add(['whatapp' => 0]);
+        if (!$request->has('whatapp2'))
+            $request->request->add(['whatapp2' => 0]);
+
         // Add User
         if (!$request->has('user_id') || $request->user_id == null ){ 
             if ($request->has('phone')){
@@ -411,20 +419,16 @@ class RequestController extends Controller
                     'phone'=>"unique:users,phone|required",
                     'fullname'=>"required",
                 ]);
-                $userID = $this->addUser($request->fullname,$request->phone);
+                $userID = $this->addUser($request);
                 $request->request->add(['user_id' => $userID ]);
             }
         }
 
         try {
 
-            if (!$request->has('covid19'))
-                $request->request->add(['covid19' => 0]);
-            if (!$request->has('whatapp'))
-                $request->request->add(['whatapp' => 0]);
-            if (!$request->has('whatapp2'))
-                $request->request->add(['whatapp2' => 0]);
-
+            // if (!$request->has('covid19'))
+            //     $request->request->add(['covid19' => 0]);
+            
             // PriceList 
             if( isset($request->medical_type_id) || isset($request->corporate_id) ){
                 $pl_ID = PriceList::getPriceList($request->medical_type_id,$request->corporate_id);
@@ -578,24 +582,14 @@ class RequestController extends Controller
         if(! Role::havePremission(['request_in']))
             return redirect()->route('admin.dashboard');
 
-        // Add User
-        if (!$request->has('user_id') || $request->user_id == null ){ 
-            if ($request->has('phone')){
-                $request->validate([
-                    'phone'=>"unique:users,phone|required",
-                    'fullname'=>"required",
-                ]);
-                $userID = $this->addUser($request->fullname,$request->phone);
-                $request->request->add(['user_id' => $userID ]);
-            }
-        }
-
         try {
             $data = Requests::find($id);
             if (!$data) {
                 return redirect()->route('admin.request.create.in')->with(['error' => '  غير موجوده']);
             }
 
+            if (!$request->has('whatapp2'))
+            $request->request->add(['whatapp2' => 0]);
 
             if($request->btn == "done")
                 $request->request->add(['status_in_out' => 4]);
@@ -608,12 +602,6 @@ class RequestController extends Controller
             elseif($request->btn == "follow")
                 $request->request->add(['status_in_out' => 7]);
 
-            if (!$request->has('whatapp'))
-                $request->request->add(['whatapp' => 0]);
-            if (!$request->has('whatapp2'))
-                $request->request->add(['whatapp2' => 0]);
-
-        
             // PriceList 
             if( isset($request->medical_type_id) || isset($request->corporate_id) ){
                 $pl_ID = PriceList::getPriceList($request->medical_type_id,$request->corporate_id);
@@ -741,8 +729,8 @@ class RequestController extends Controller
                 
             if (!$request->has('pay_or_not'))
                 $request->request->add(['pay_or_not' => 0]);
-            if (!$request->has('whatapp'))
-                $request->request->add(['whatapp' => 0]);
+            
+                
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
@@ -881,12 +869,9 @@ class RequestController extends Controller
             elseif($request->btn == "follow")
                 $request->request->add(['status_in_out' => 7]);
 
-            if (!$request->has('covid19'))
-                $request->request->add(['covid19' => 0]);
             if (!$request->has('pay_or_not'))
                 $request->request->add(['pay_or_not' => 0]);
-            if (!$request->has('whatapp'))
-                $request->request->add(['whatapp' => 0]);
+            
             if (!$request->has('whatapp2'))
                 $request->request->add(['whatapp2' => 0]);
 
@@ -941,11 +926,25 @@ class RequestController extends Controller
  
     //
 
-    private function AddUser($name, $phone)
+    // private function AddUser($name, $phone)
+    private function AddUser($request)
     {
         $user = new User([
-            'username' => $name,
-            'phone' => $phone,
+            'username' => $request->fullname,
+            'phone' => $request->phone,
+            'mobile' => $request->phone2,
+            'whatapp' => $request->whatapp,
+            'whatapp2' => $request->whatapp2,
+            'age' => $request->age,
+            'gender' => $request->gender,
+            'governorate_id' => $request->governorate_id,
+            'city_id' => $request->city_id,
+            'land_mark' => $request->land_mark,
+            'floor' => $request->floor,
+            'apartment' => $request->apartment,
+            'address' => $request->adress,
+            'location' => $request->location,
+            'code_zone_patient_id' => $request->code_zone_patient_id,
             'type' => '1',
             'quick' => "1",
             'password' => Hash::make(rand(1000000000,9999999999)),
@@ -1127,7 +1126,8 @@ class RequestController extends Controller
         // get records from database
         if($id!=0){
             $arr = User::select('username','address','phone','mobile','gender','code_zone_patient_id','governorate_id','city_id',
-                                'land_mark','floor','apartment','whatapp','whatapp2','birth_date','fname')->find($id);
+                                'land_mark','floor','apartment','age','whatapp','whatapp2','birth_date','location',
+                                'fname')->find($id);
             $arr->fname = UsersReferral::getReferral($id);
         }else{
             $arr['price'] = 0;

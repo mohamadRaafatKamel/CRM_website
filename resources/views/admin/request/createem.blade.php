@@ -1163,13 +1163,13 @@
                         if(response == null){
                             console.log('Not Found');
                         }else {
-                            console.log(response);
+                            // console.log(response);
                             $('#fullname').val(response.username);
-                            if(response.address !== null){
-                                $('#adress').val(response.address);
-                            }
                             $('#phone').val(response.phone);
                             $('#phone2').val(response.mobile);
+                            $('#whatapp').prop( "checked",(response.whatapp)? true : false );
+                            $('#whatapp2').prop( "checked",(response.whatapp2)? true : false );
+                            $('#age').val(response.age);
                             $('#gender').val(response.gender);
                             $('#code_zone_patient_id').val(response.code_zone_patient_id);
                             $('#governorate_id').val(response.governorate_id).change();
@@ -1177,8 +1177,9 @@
                             $('#land_mark').val(response.land_mark);
                             $('#floor').val(response.floor);
                             $('#apartment').val(response.apartment);
-                            $('#whatapp').prop( "checked",(response.whatapp)? true : false );
-                            $('#whatapp2').prop( "checked",(response.whatapp2)? true : false );
+                            $('#adress').val(response.address);
+                            $('#location').val(response.location);
+
                             $('#referral_id').val(response.fname).change();
                         }
                     }

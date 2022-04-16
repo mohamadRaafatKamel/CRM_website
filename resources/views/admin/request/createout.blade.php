@@ -163,7 +163,7 @@
                                             placeholder="{{ __('Phone') }}" >
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="checkbox"  value="1" readonly
+                                        <input type="checkbox"  value="1" disabled
                                             id="whatapp" class="switchery0" data-color="success"
                                             @if (isset($myorder -> whatapp))
                                             @if($myorder -> whatapp  == 1 ) checked @endif
@@ -1161,11 +1161,11 @@
                             console.log('Not Found');
                         }else {
                             $('#fullname').val(response.username);
-                            if(response.address !== null){
-                                $('#adress').val(response.address);
-                            }
                             $('#phone').val(response.phone);
                             $('#phone2').val(response.mobile);
+                            $('#whatapp').prop( "checked",(response.whatapp)? true : false );
+                            $('#whatapp2').prop( "checked",(response.whatapp2)? true : false );
+                            $('#age').val(response.age);
                             $('#gender').val(response.gender);
                             $('#code_zone_patient_id').val(response.code_zone_patient_id);
                             $('#governorate_id').val(response.governorate_id).change();
@@ -1173,8 +1173,9 @@
                             $('#land_mark').val(response.land_mark);
                             $('#floor').val(response.floor);
                             $('#apartment').val(response.apartment);
-                            $('#whatapp').prop( "checked",(response.whatapp)? true : false );
-                            $('#whatapp2').prop( "checked",(response.whatapp2)? true : false );
+                            $('#adress').val(response.address);
+                            $('#location').val(response.location);
+
                             $('#referral_id').val(response.fname).change();
                         }
                     }
