@@ -18,14 +18,34 @@ class ReferalCat extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'admin_id', 'created_at', 'updated_at'
+        'id', 'name', 'parent', 'admin_id', 'created_at', 'updated_at'
     ];
 
     public function  scopeSelection($query){
 
         return $query -> select(
-            'id', 'name', 'admin_id', 'created_at', 'updated_at'
+            'id', 'name', 'parent', 'admin_id', 'created_at', 'updated_at'
         );
     }
+
+    public function scopeParent($query){
+        return $query -> where('parent',null);
+    }
+
+    public function getParent()
+    {
+        return $this->getName($this->parent );
+    }
+
+    public static function getName($id)
+    {
+        $data = ReferalCat::select()->find($id);
+        if(isset($data->id)){
+            return $data['name'];
+        }
+        return "";
+    }
+
+
 
 }

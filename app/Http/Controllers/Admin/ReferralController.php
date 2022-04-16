@@ -93,7 +93,8 @@ class ReferralController extends Controller
             return redirect()->route('admin.dashboard');
 
         $cats = ReferalCat::select()->paginate(PAGINATION_COUNT);
-        return view('admin.referral.indexcat', compact('cats'));
+        $parentCats = ReferalCat::select()->parent()->get();
+        return view('admin.referral.indexcat', compact('cats','parentCats'));
     }
 
     public function refCatStore(Request $request)

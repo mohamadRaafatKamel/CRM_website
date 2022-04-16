@@ -56,7 +56,7 @@
                                                     <div class="col-md-2">
                                                         <label for="name"> {{ __('Category Name') }}</label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             
                                                             <input type="text" id="name" 
@@ -69,6 +69,19 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
+                                                        <label for="name"> {{ __('Category Parent') }}</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <select class="select2 form-control" name="parent">
+                                                            <option value="">-- {{ __('Category Parent') }} --</option>
+                                                            @foreach($parentCats as $parentCat)
+                                                                <option value="{{ $parentCat->id }}">
+                                                                    {{ $parentCat->name}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-1">
                                                         <button type="submit" name="btn" value="nurseSheet" class="btn btn-success">
                                                              {{ __('Add') }}
                                                         </button>
@@ -84,18 +97,24 @@
                                                                 <tr>
                                                                     <th> {{ __('ID') }}</th>
                                                                     <th> {{ __('Category Name') }}</th>
+                                                                    <th> {{ __('Category Parent') }}</th>
                                                                     <th> </th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                             @foreach ($cats as $cat)
                                                                 <tr>
-                                                                    <td>{{ $cat->id }}</td>
-                                                                    <td>{{ $cat->name }}</td>
+                                                                    <td class="id">{{ $cat->id }}</td>
+                                                                    <td class="name">{{ $cat->name }}</td>
+                                                                    <td class="parent">{{ $cat->getParent() }}</td>
                                                                     <td>
                                                                         @if( \App\Models\Role::havePremission(['referral_cat_del']))
                                                                             <a href="{{route('admin.referral.cat.delete',$cat->id)}}" class="btn btn-danger" ><i class="ft-trash-2"></i></a>
                                                                         @endif
+                                                                        
+                                                                        <button type="button" class="btn btn-primary editcatrefrl" value="{{ $cat->id }}" >
+                                                                            {{-- data-toggle="modal" data-target="#editModalCenter"> --}}
+                                                                            <i class="ft-edit"></i></button>
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
@@ -106,6 +125,68 @@
                                                     @endif
 
                                             </div>
+
+
+
+                                            <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModalCenter">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="editModalCenter" tabindex="-1" role="dialog" aria-labelledby="editModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalCenterTitle">{{ __('Edit') }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{-- state body --}}
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name"> {{ __('Category Name') }}</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        
+                        <input type="text" id="name" 
+                            class="form-control" required
+                            placeholder="{{ __('Category Name') }} "
+                            name="name">
+                        @error('name')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name"> {{ __('Category Parent') }}</label>
+                </div>
+                <div class="col-9">
+                    <select class="select2 form-control" name="parent" style="width: 100%;">
+                        <option value="">-- {{ __('Category Parent') }} --</option>
+                        @foreach($parentCats as $parentCat)
+                            <option value="{{ $parentCat->id }}">
+                                {{ $parentCat->name}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                
+            </div>
+        {{-- state body --}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
+          <button type="button" class="btn btn-primary">{{ __('Save') }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
                                             
@@ -121,4 +202,26 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+
+<script>
+    $(document).ready(function(){
+        // Open modal on page load
+        // $("#editModalCenter").modal('show');
+        // $("#editModalCenter").modal('hide');
+
+        // edit
+        $(".editcatrefrl").click(function(){
+            console.log($(this).val() );
+            // ceate json
+            // set val in model
+            // show model
+            $("#editModalCenter").modal('show');
+        });
+    });
+</script>
+
+
 @endsection

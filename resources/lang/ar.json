@@ -259,6 +259,7 @@
     "Referral Category": "اقسام مصدر التحويل",
     "Category": "تصنيفات طبيه",
     "Category Name": "اسم التصنيفات الطبي",
+    "Category Parent": " التصنيفات الرئيسي",
     "Created at": "وقت الانشاء",
     "Code Zone Patient ID": "رقم الملف الطبي على كود زون",
     "Request ID": "رقم الطلب",
@@ -278,8 +279,8 @@
     "Date To": "الي",
     "Full Report": "تقرير شامل",
     "Reopen": "فتح الطلب",
-    "": "",
-    "": "",
+    "Show Result Date": "تاريخ ظهور النتيجة",
+    "Take Sample Date": "تاريخ سحب العينة",
     "": "",
     "": "",
 

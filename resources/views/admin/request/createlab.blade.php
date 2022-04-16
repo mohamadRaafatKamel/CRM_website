@@ -593,7 +593,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="schedule_date">{{ __('Schedule') }}</label>
+                                    <label class="col-md-2 label-control" for="schedule_date">{{ __('Take Sample Date') }}</label>
                                     <div class="col-md-6">
                                         <input type="date" id="schedule_date" class="form-control"
                                                @if(isset($myorder->schedule_date))
@@ -606,7 +606,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="end_service_date">{{ __('End of Service Date') }}</label>
+                                    <label class="col-md-2 label-control" for="end_service_date">{{ __('Show Result Date') }}</label>
                                     <div class="col-md-6">
                                         <input type="date" id="end_service_date" class="form-control"
                                                @if(isset($myorder->end_service_date))
